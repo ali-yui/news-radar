@@ -1,0 +1,63 @@
+name: daily-news
+
+# 北京时间每天 09:00 自动更新（UTC 01:00）；也可在 Actions 页面手动触发
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-news
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 抓取全部数据源并生成数据
+        run: node scripts/fetch-data.mjs
+        env:
+          # 内置 GITHUB_TOKEN，可把 GitHub REST 限流从 60 次/小时提升到 1000 次/小时
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 提交并推送数据
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/daily.json assets/data-bundle.js
+          if git diff --cached --quiet; then
+            echo "本次抓取数据无变化，跳过提交"
+          else
+            git commit -m "chore(data): daily news $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      # 可选：配置 Gitee 私人令牌 secret 后自动同步，供国内网络直接拉取 daily.json
+      # 1. Gitee 新建同名仓库（建议“导入已有仓库”，保持 main 分支一致）
+      # 2. Gitee 头像 → 设置 → 私人令牌，生成勾选 projects 权限的令牌
+      # 3. GitHub 仓库 Settings → Secrets and variables → Actions 新增：
+      #    GITEE_TOKEN（必填）；若仓库路径不是 yuihl/news-radar，再新增 Variables：GITEE_REPO=用户名/仓库名
+      - name: 同步到 Gitee（国内网络，可选）
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+          GITEE_REPO: ${{ vars.GITEE_REPO }}
+        run: |
+          if [ -z "$GITEE_TOKEN" ]; then
+            echo "未配置 GITEE_TOKEN，跳过 Gitee 同步"
+            exit 0
+          fi
+          REPO="${GITEE_REPO:-yuihl/news-radar}"
+          git remote add gitee "https://oauth2:${GITEE_TOKEN}@gitee.com/${REPO}.git"
+          git push gitee main
