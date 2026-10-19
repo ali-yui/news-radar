@@ -1,0 +1,4282 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-19T05:40:18.415Z",
+  "generatedAtBeijing": "2026/10/19 13:40:18",
+  "window": "主展示近24小时，归档保留近7天；热榜数据无精确时间戳",
+  "stats": {
+    "total": 238,
+    "byCategory": {
+      "today": 100,
+      "ai": 120,
+      "ent": 22
+    },
+    "bySource": {
+      "InfoQ中文": 10,
+      "知乎日报": 8,
+      "百度热搜": 30,
+      "百度电影榜": 7,
+      "百度电视剧榜": 3,
+      "36氪": 23,
+      "IT之家": 30,
+      "中新网财经": 9,
+      "中新网社会": 4,
+      "GitHub · morluto/rea": 22,
+      "中新网国际": 5,
+      "Hacker News": 60,
+      "Solidot": 5,
+      "量子位": 1,
+      "B站热门": 8,
+      "GitHub Trending": 13
+    }
+  },
+  "sourceStatus": [
+    {
+      "source": "IT之家",
+      "ok": true,
+      "mode": "rss",
+      "items": 30,
+      "error": null,
+      "at": "2026-10-19T05:40:10.980Z"
+    },
+    {
+      "source": "Solidot",
+      "ok": true,
+      "mode": "rss",
+      "items": 17,
+      "error": null,
+      "at": "2026-10-19T05:40:11.037Z"
+    },
+    {
+      "source": "少数派",
+      "ok": true,
+      "mode": "rss",
+      "items": 10,
+      "error": null,
+      "at": "2026-10-19T05:40:11.216Z"
+    },
+    {
+      "source": "中新网财经",
+      "ok": true,
+      "mode": "rss",
+      "items": 20,
+      "error": null,
+      "at": "2026-10-19T05:40:11.346Z"
+    },
+    {
+      "source": "中新网社会",
+      "ok": true,
+      "mode": "rss",
+      "items": 20,
+      "error": null,
+      "at": "2026-10-19T05:40:11.468Z"
+    },
+    {
+      "source": "中新网国际",
+      "ok": true,
+      "mode": "rss",
+      "items": 20,
+      "error": null,
+      "at": "2026-10-19T05:40:11.503Z"
+    },
+    {
+      "source": "量子位",
+      "ok": true,
+      "mode": "rss",
+      "items": 10,
+      "error": null,
+      "at": "2026-10-19T05:40:11.554Z"
+    },
+    {
+      "source": "InfoQ中文",
+      "ok": true,
+      "mode": "rss",
+      "items": 20,
+      "error": null,
+      "at": "2026-10-19T05:40:11.599Z"
+    },
+    {
+      "source": "trending",
+      "ok": true,
+      "mode": "community-rss",
+      "items": 13,
+      "error": null,
+      "at": "2026-10-19T05:40:12.543Z"
+    },
+    {
+      "source": "github",
+      "ok": true,
+      "mode": "atom",
+      "items": 146,
+      "error": null,
+      "at": "2026-10-19T05:40:16.910Z"
+    },
+    {
+      "source": "hn",
+      "ok": true,
+      "mode": "algolia",
+      "items": 85,
+      "error": null,
+      "at": "2026-10-19T05:40:17.091Z"
+    },
+    {
+      "source": "SegmentFault",
+      "ok": true,
+      "mode": "atom",
+      "items": 18,
+      "error": null,
+      "at": "2026-10-19T05:40:17.591Z"
+    },
+    {
+      "source": "36氪",
+      "ok": true,
+      "mode": "rss",
+      "items": 30,
+      "error": null,
+      "at": "2026-10-19T05:40:17.839Z"
+    },
+    {
+      "source": "36氪快讯",
+      "ok": true,
+      "mode": "rss",
+      "items": 20,
+      "error": null,
+      "at": "2026-10-19T05:40:17.937Z"
+    },
+    {
+      "source": "知乎日报",
+      "ok": true,
+      "mode": "json",
+      "items": 9,
+      "error": null,
+      "at": "2026-10-19T05:40:18.068Z"
+    },
+    {
+      "source": "百度热搜",
+      "ok": true,
+      "mode": "json",
+      "items": 30,
+      "error": null,
+      "at": "2026-10-19T05:40:18.135Z"
+    },
+    {
+      "source": "百度电影榜",
+      "ok": true,
+      "mode": "json",
+      "items": 10,
+      "error": null,
+      "at": "2026-10-19T05:40:18.175Z"
+    },
+    {
+      "source": "百度电视剧榜",
+      "ok": true,
+      "mode": "json",
+      "items": 10,
+      "error": null,
+      "at": "2026-10-19T05:40:18.197Z"
+    },
+    {
+      "source": "B站热门",
+      "ok": true,
+      "mode": "json",
+      "items": 8,
+      "error": null,
+      "at": "2026-10-19T05:40:18.383Z"
+    }
+  ],
+  "errors": [
+    {
+      "source": "github",
+      "stage": "rest",
+      "message": "HTTP 403 rate limit exceeded",
+      "at": "2026-10-19T05:40:11.609Z"
+    },
+    {
+      "source": "github",
+      "stage": "atom:morluto/rea/issues",
+      "message": "HTTP 406 Not Acceptable",
+      "at": "2026-10-19T05:40:13.808Z"
+    }
+  ],
+  "items": [
+    {
+      "id": "n05858daa6675",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "InfoQ中文",
+      "sourceType": "rss",
+      "title": "Cloudflare 推出面向 AI 代理的 CLI，并逐步停用 Wrangler",
+      "url": "https://www.infoq.cn/article/Ddda0DF68laqfoqa4Lju?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-19T11:27:00.000Z",
+      "publishedAtMs": 1792409220000,
+      "summary": "点击查看原文>",
+      "tags": [
+        "开发",
+        "技术"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd026f1dcac9e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "InfoQ中文",
+      "sourceType": "rss",
+      "title": "Gemini 4 Argon：为您解决最棘手的问题",
+      "url": "https://www.infoq.cn/article/LkxBOvOJWmQGMQemUOrX?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-19T11:10:27.000Z",
+      "publishedAtMs": 1792408227000,
+      "summary": "点击查看原文>",
+      "tags": [
+        "开发",
+        "技术"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nfdf82930e818",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "InfoQ中文",
+      "sourceType": "rss",
+      "title": "打造生产级的 Agent｜QCon上海",
+      "url": "https://www.infoq.cn/article/oZHrjYAsXvjOZXRwLt6T?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-19T10:00:00.000Z",
+      "publishedAtMs": 1792404000000,
+      "summary": "点击查看原文>",
+      "tags": [
+        "开发",
+        "技术"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n9ebb45b461d6",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "InfoQ中文",
+      "sourceType": "rss",
+      "title": "OpenCode 2.0 正式发布：一次“重大改造”，旧插件全部报废",
+      "url": "https://www.infoq.cn/article/IK5AWDwovCu5lx3e3mhc?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-19T09:51:45.000Z",
+      "publishedAtMs": 1792403505000,
+      "summary": "点击查看原文>",
+      "tags": [
+        "开发",
+        "技术"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n86b3dad8f1bf",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "InfoQ中文",
+      "sourceType": "rss",
+      "title": "谷歌广告如何将一个开源的 macOS 术语误判为恶意内容并予以暂停",
+      "url": "https://www.infoq.cn/article/UYJ6OSsb7GlDtXoORLxx?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-19T09:20:00.000Z",
+      "publishedAtMs": 1792401600000,
+      "summary": "点击查看原文>",
+      "tags": [
+        "开发",
+        "技术"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ne41909eb7f06",
+      "category": "today",
+      "extraCategories": [],
+      "source": "知乎日报",
+      "sourceType": "json",
+      "title": "年号制度曾在东亚被长期实行，为什么当今除日本以外的其它国家不再使用年号了？",
+      "url": "https://daily.zhihu.com/story/9793342",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "宁南左侯 · 2 分钟阅读",
+      "tags": [
+        "热点",
+        "知乎"
+      ],
+      "hot": true
+    },
+    {
+      "id": "ne3d1db0fdf4d",
+      "category": "today",
+      "extraCategories": [],
+      "source": "知乎日报",
+      "sourceType": "json",
+      "title": "为什么电脑用久了会变得越来越卡顿，其背后的计算机原理是什么？",
+      "url": "https://daily.zhihu.com/story/9793319",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "作者 / LuciusChthollius",
+      "tags": [
+        "热点",
+        "知乎"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nba73bd5a3232",
+      "category": "today",
+      "extraCategories": [],
+      "source": "知乎日报",
+      "sourceType": "json",
+      "title": "我国有哪些成功控制外来入侵生物物种的案例和经验？",
+      "url": "https://daily.zhihu.com/story/9793291",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "作者 / 野狸子",
+      "tags": [
+        "热点",
+        "知乎"
+      ],
+      "hot": true
+    },
+    {
+      "id": "naa0136601bf8",
+      "category": "today",
+      "extraCategories": [],
+      "source": "知乎日报",
+      "sourceType": "json",
+      "title": "历史上谁曾经成功潜入过皇宫？",
+      "url": "https://daily.zhihu.com/story/9793275",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "作者 / 赵学浩",
+      "tags": [
+        "热点",
+        "知乎"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n968b58f290f0",
+      "category": "today",
+      "extraCategories": [],
+      "source": "知乎日报",
+      "sourceType": "json",
+      "title": "水刚咽下去，口渴怎么就缓解了？身体从哪里知道我喝水了？",
+      "url": "https://daily.zhihu.com/story/9793247",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "作者 / 云杉",
+      "tags": [
+        "热点",
+        "知乎"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n72c0ad78d9f4",
+      "category": "today",
+      "extraCategories": [],
+      "source": "知乎日报",
+      "sourceType": "json",
+      "title": "「我」是怎样成为汉语的通行的第一人称的？",
+      "url": "https://daily.zhihu.com/story/9793351",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "陈麟阁 · 13 分钟阅读",
+      "tags": [
+        "热点",
+        "知乎"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n28f4b49d03b9",
+      "category": "today",
+      "extraCategories": [],
+      "source": "知乎日报",
+      "sourceType": "json",
+      "title": "现代有哪些小病，在古代却是绝症？",
+      "url": "https://daily.zhihu.com/story/9793360",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "Mr深水聊医史 · 3 分钟阅读",
+      "tags": [
+        "热点",
+        "知乎"
+      ],
+      "hot": true
+    },
+    {
+      "id": "ndb4ee64b863a",
+      "category": "today",
+      "extraCategories": [],
+      "source": "知乎日报",
+      "sourceType": "json",
+      "title": "瞎扯 · 如何正确地吐槽",
+      "url": "https://daily.zhihu.com/story/9793370",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "VOL.4008",
+      "tags": [
+        "热点",
+        "知乎"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n896184699b89",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "马克龙：法国人怎么能这样对待法国",
+      "url": "https://www.baidu.com/s?wd=%E9%A9%AC%E5%85%8B%E9%BE%99%EF%BC%9A%E6%B3%95%E5%9B%BD%E4%BA%BA%E6%80%8E%E4%B9%88%E8%83%BD%E8%BF%99%E6%A0%B7%E5%AF%B9%E5%BE%85%E6%B3%95%E5%9B%BD",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，法国多地爆发抗议活动，期间出现企业门店遭洗劫、市政厅被烧毁等破坏行为。18日，马克龙发表电视讲话谴责暴力，质问“法国人怎么能这样对待法国”，并表示受损企业将得到帮助，实施破坏的人员必须付出代价。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n51946f587a42",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "女局长被“仙人跳”团伙敲诈19万",
+      "url": "https://www.baidu.com/s?wd=%E5%A5%B3%E5%B1%80%E9%95%BF%E8%A2%AB%E2%80%9C%E4%BB%99%E4%BA%BA%E8%B7%B3%E2%80%9D%E5%9B%A2%E4%BC%99%E6%95%B2%E8%AF%8819%E4%B8%87",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "山东泰安一个以00后为主、含多名在校生的恶势力团伙，一年多实施38起仙人跳，敲诈155万余元。该团伙敲诈一名女局长19万还诈骗1.5万，局长事后被免职。团伙曾诬告三名受害人致其被采取强制措施，现已被起诉，案件庭审完毕尚未宣判。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "na00e9bde68c7",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "“China Haul”火到广交会",
+      "url": "https://www.baidu.com/s?wd=%E2%80%9CChina+Haul%E2%80%9D%E7%81%AB%E5%88%B0%E5%B9%BF%E4%BA%A4%E4%BC%9A",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月16日，外交部发言人毛宁回应“China Haul”（中国购物开箱）走红时称，中国将继续敞开大门，通过双向奔赴的交流，让更多外国朋友了解中国、爱上中国。这两天，“China Haul”火到广交会！外商纷纷组团逛展、体验，“光速”下单，带你一起看硬核开箱现场。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "neec72bf669c5",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "山姆品质暴跌？负责人回应",
+      "url": "https://www.baidu.com/s?wd=%E5%B1%B1%E5%A7%86%E5%93%81%E8%B4%A8%E6%9A%B4%E8%B7%8C%EF%BC%9F%E8%B4%9F%E8%B4%A3%E4%BA%BA%E5%9B%9E%E5%BA%94",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月19日上午，山姆相关负责人回应“山姆品质暴跌”事件，称网传门店倒闭等视频系AI造假，实为不良主体引流牟利。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "ndfe1a0f3e69d",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "微信聊天记录截图 如何当证据使用",
+      "url": "https://www.baidu.com/s?wd=%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E6%88%AA%E5%9B%BE+%E5%A6%82%E4%BD%95%E5%BD%93%E8%AF%81%E6%8D%AE%E4%BD%BF%E7%94%A8",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "微信聊天记录属于法定电子数据，可作为诉讼证据，山西一承揽合同纠纷案便以此定案。证据需满足真实、完整、关联、合法，最好保留手机原始载体。文章讲解微信证据类型、采信标准、转账留证技巧，并提示做好备份，必要时公证存证。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nac24d60cbd75",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "汇源集团严正声明：不再生产汇源果汁",
+      "url": "https://www.baidu.com/s?wd=%E6%B1%87%E6%BA%90%E9%9B%86%E5%9B%A2%E4%B8%A5%E6%AD%A3%E5%A3%B0%E6%98%8E%EF%BC%9A%E4%B8%8D%E5%86%8D%E7%94%9F%E4%BA%A7%E6%B1%87%E6%BA%90%E6%9E%9C%E6%B1%81",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月19日，汇源集团发布声明称，汇源集团不再生产带有“汇源”商标的果汁产品，北京汇源已正式启用“咱家果源”品牌。此前10月13日，“汇源”商标侵权案一审落槌，法院判令汇源集团旗下工厂赔偿9700余万元并停用“汇源”字号。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n9a029a62e037",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "中国留学生身披旭日旗 钧正平发声",
+      "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E7%95%99%E5%AD%A6%E7%94%9F%E8%BA%AB%E6%8A%AB%E6%97%AD%E6%97%A5%E6%97%97+%E9%92%A7%E6%AD%A3%E5%B9%B3%E5%8F%91%E5%A3%B0",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月18日，钧正平针对莫斯科国立大学一名中国留学生当众身披旭日旗一事发声，指出旭日旗是日本军国主义侵略历史的标志性符号，为军国主义张目令人不齿。事发后，在场其他中国留学生第一时间挺身而出，当场制止这一不当行为。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "ne26cceacf19c",
+      "category": "today",
+      "extraCategories": [
+        "ent"
+      ],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "辛芷蕾掉提金鸡奖",
+      "url": "https://www.baidu.com/s?wd=%E8%BE%9B%E8%8A%B7%E8%95%BE%E6%8E%89%E6%8F%90%E9%87%91%E9%B8%A1%E5%A5%96",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月19日，第39届中国电影金鸡奖提名名单公布。威尼斯影后辛芷蕾遗憾掉提，不少网友直呼意外。",
+      "tags": [
+        "热点",
+        "娱乐"
+      ],
+      "hot": true
+    },
+    {
+      "id": "ncc8962047597",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "维密大秀中国超模",
+      "url": "https://www.baidu.com/s?wd=%E7%BB%B4%E5%AF%86%E5%A4%A7%E7%A7%80%E4%B8%AD%E5%9B%BD%E8%B6%85%E6%A8%A1",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "当地时间‌10月18日‌，2026年维密大秀在美国洛杉矶举行。110秒速看2026维密大秀上的中国超模！",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n54d4541af688",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "男子进山找菌子意外发现被困黄牛",
+      "url": "https://www.baidu.com/s?wd=%E7%94%B7%E5%AD%90%E8%BF%9B%E5%B1%B1%E6%89%BE%E8%8F%8C%E5%AD%90%E6%84%8F%E5%A4%96%E5%8F%91%E7%8E%B0%E8%A2%AB%E5%9B%B0%E9%BB%84%E7%89%9B",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，一男子进山寻找菌子，意外发现一头黄牛头部卡在水桶内，男子随后报警求助。目前，被困黄牛已被民警成功解救。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n655dad5b796c",
+      "category": "today",
+      "extraCategories": [
+        "ent"
+      ],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "“肖战演唱会前排门票25万”系谣言",
+      "url": "https://www.baidu.com/s?wd=%E2%80%9C%E8%82%96%E6%88%98%E6%BC%94%E5%94%B1%E4%BC%9A%E5%89%8D%E6%8E%92%E9%97%A8%E7%A5%A825%E4%B8%87%E2%80%9D%E7%B3%BB%E8%B0%A3%E8%A8%80",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，网传肖战演唱会第一排门票售价25万元，引发关注。经核查，系黄牛在无任何票源情况下的恶意炒作。",
+      "tags": [
+        "热点",
+        "娱乐"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nb9b8cc1f2d39",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "河南一村子在荒郊野地安装健身器材",
+      "url": "https://www.baidu.com/s?wd=%E6%B2%B3%E5%8D%97%E4%B8%80%E6%9D%91%E5%AD%90%E5%9C%A8%E8%8D%92%E9%83%8A%E9%87%8E%E5%9C%B0%E5%AE%89%E8%A3%85%E5%81%A5%E8%BA%AB%E5%99%A8%E6%9D%90",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，河南南阳一村子在荒郊野地安装健身器材，因资源浪费引热议。10月16日，有网友发布视频称，这些健身器材似乎没有人使用，视频中常见的全民健身设施周围是树林和荒草。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nfad4c41eb585",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "奚梦瑶维密秀超大蝴蝶翅膀",
+      "url": "https://www.baidu.com/s?wd=%E5%A5%9A%E6%A2%A6%E7%91%B6%E7%BB%B4%E5%AF%86%E7%A7%80%E8%B6%85%E5%A4%A7%E8%9D%B4%E8%9D%B6%E7%BF%85%E8%86%80",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月19日，奚梦瑶迎来个人第7次维密走秀，超大蝴蝶翅膀如仙女下凡。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n7eebc6cf5d2b",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "被曝光后 江苏丹阳连夜通报",
+      "url": "https://www.baidu.com/s?wd=%E8%A2%AB%E6%9B%9D%E5%85%89%E5%90%8E+%E6%B1%9F%E8%8B%8F%E4%B8%B9%E9%98%B3%E8%BF%9E%E5%A4%9C%E9%80%9A%E6%8A%A5",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月18日晚间，江苏省丹阳市市场监督管理局通报：针对央视曝光的防控镜相关问题，我局立即组织执法人员开展现场核查。经查，4家涉事主体违规基本属实，已立案调查。此前，央视报道称，丹阳有商户将批发价30元的镜片标称高科技，手册零售参考价达1980元，任采购商贴牌定价。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n9e319c4e65b4",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "披旭日旗中国留学生鞠躬道歉",
+      "url": "https://www.baidu.com/s?wd=%E6%8A%AB%E6%97%AD%E6%97%A5%E6%97%97%E4%B8%AD%E5%9B%BD%E7%95%99%E5%AD%A6%E7%94%9F%E9%9E%A0%E8%BA%AC%E9%81%93%E6%AD%89",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，莫斯科大学一名中国留学生因在课堂身披旭日旗引发争议，随后发布视频鞠躬道歉，称此举是对祖国和人民的不尊重。10月17日，莫斯科大学中国学生学者联谊会通报称，已启动校内调查，并将公布处理结果。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n96a6eb4b4b9c",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "钟南山一路小跑为球赛开球",
+      "url": "https://www.baidu.com/s?wd=%E9%92%9F%E5%8D%97%E5%B1%B1%E4%B8%80%E8%B7%AF%E5%B0%8F%E8%B7%91%E4%B8%BA%E7%90%83%E8%B5%9B%E5%BC%80%E7%90%83",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，年近九旬的钟南山院士一路小跑为球赛开球，精气神十足。钟南山院士曾多次建议：运动应该像吃饭睡觉一样重要。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "ndf453e8f36c8",
+      "category": "today",
+      "extraCategories": [
+        "ent"
+      ],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "宋佳 金鸡奖",
+      "url": "https://www.baidu.com/s?wd=%E5%AE%8B%E4%BD%B3+%E9%87%91%E9%B8%A1%E5%A5%96",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月19日，第39届中国电影金鸡奖提名名单公布。宋佳凭借《志愿军：浴血和平》提名最佳女主角。",
+      "tags": [
+        "热点",
+        "娱乐"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n877416116f49",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "男子驾车故意与货车并排压速堵路",
+      "url": "https://www.baidu.com/s?wd=%E7%94%B7%E5%AD%90%E9%A9%BE%E8%BD%A6%E6%95%85%E6%84%8F%E4%B8%8E%E8%B4%A7%E8%BD%A6%E5%B9%B6%E6%8E%92%E5%8E%8B%E9%80%9F%E5%A0%B5%E8%B7%AF",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，在泉南高速江西永新段，一辆小汽车故意与货车并排压速堵路。最终，交警对其进行批评教育，并依法对其在高速上低于最低限速行驶的违法行为予以罚款，驾驶证记3分。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n7411e1e2638a",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "大学生生活费到底一个月多少合适",
+      "url": "https://www.baidu.com/s?wd=%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%94%9F%E6%B4%BB%E8%B4%B9%E5%88%B0%E5%BA%95%E4%B8%80%E4%B8%AA%E6%9C%88%E5%A4%9A%E5%B0%91%E5%90%88%E9%80%82",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，“母亲将大一儿子生活费降至2000元”引发热议。事实上，有关“大学生生活费”的问题曾多次引发讨论。调数据显示，42.73%的受访大学生生活费在1500元及以下，51.38%的受访者为1501至2500元。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n5721f4eff7d1",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "陈妤颉称父母已帮她存好奖金",
+      "url": "https://www.baidu.com/s?wd=%E9%99%88%E5%A6%A4%E9%A2%89%E7%A7%B0%E7%88%B6%E6%AF%8D%E5%B7%B2%E5%B8%AE%E5%A5%B9%E5%AD%98%E5%A5%BD%E5%A5%96%E9%87%91",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，亚运冠军陈妤颉接受采访，称父母已帮她存好奖金，现在要买东西花的是爸妈的钱，并表示父母一直很尊重她，把她当独立个体看待。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n49623ca6ebb1",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "囤50台iPhone Duo从赚10万到亏2.5万",
+      "url": "https://www.baidu.com/s?wd=%E5%9B%A450%E5%8F%B0iPhone+Duo%E4%BB%8E%E8%B5%9A10%E4%B8%87%E5%88%B0%E4%BA%8F2.5%E4%B8%87",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "据媒体报道，苹果首款折叠屏iPhone Duo首发溢价行情快速降温。有经销商提前锁定50台首批货源，按照最初约定，50台合计可赚10万元。然而，行情急转直下，按照最新报价，这批货全部出手将直接亏损2.5万元。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n11efd978b309",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "山姆声明：将就“恶意攻击”维权",
+      "url": "https://www.baidu.com/s?wd=%E5%B1%B1%E5%A7%86%E5%A3%B0%E6%98%8E%EF%BC%9A%E5%B0%86%E5%B0%B1%E2%80%9C%E6%81%B6%E6%84%8F%E6%94%BB%E5%87%BB%E2%80%9D%E7%BB%B4%E6%9D%83",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月19日，山姆会员商店发布声明称，近期多个社媒平台集中出现数千条针对山姆的恶意攻击及虚假营销信息。部分账号通过AI生成等方式，将从未上架的商品编造成“山姆下架好物”引流牟利。山姆表示，法务团队已对相关不实内容完成证据固定，并向平台及监管部门投诉举报，后续将依法采取维权行动。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n332dbeb83c1c",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "雷佳音大变样",
+      "url": "https://www.baidu.com/s?wd=%E9%9B%B7%E4%BD%B3%E9%9F%B3%E5%A4%A7%E5%8F%98%E6%A0%B7",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，雷佳音现身网球赛场的线下生图曝光，其造型大变，留着及肩微卷长发并戴着黑框眼镜，一改往日荧幕上的成熟稳重。面对其巨大的形象反差，网友集体破防，调侃其像刘震云并喊话“把陈俊生还回来”，同时不少人猜测该新造型或是为新角色蓄力。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n845d399ba7eb",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "披旭日旗的中国留学生是南京人",
+      "url": "https://www.baidu.com/s?wd=%E6%8A%AB%E6%97%AD%E6%97%A5%E6%97%97%E7%9A%84%E4%B8%AD%E5%9B%BD%E7%95%99%E5%AD%A6%E7%94%9F%E6%98%AF%E5%8D%97%E4%BA%AC%E4%BA%BA",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，一名莫斯科大学的中国留学生在课堂中身披日本军国主义旭日旗的相关画面在网络传播，引发社会广泛关注。据悉，该学生姓陈，江苏南京人，在来到莫斯科学习后多次发表不法言论。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n023aa5f458ec",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "30岁中学女教师因病去世 学生悼念",
+      "url": "https://www.baidu.com/s?wd=30%E5%B2%81%E4%B8%AD%E5%AD%A6%E5%A5%B3%E6%95%99%E5%B8%88%E5%9B%A0%E7%97%85%E5%8E%BB%E4%B8%96+%E5%AD%A6%E7%94%9F%E6%82%BC%E5%BF%B5",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "近日，福建漳州诏安县英才学校女教师吴诗晴因病离世，不少网友与学生发文悼念。学生追忆，吴老师工作认真负责、待人友善，大家为她的离去深感惋惜。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n2ae360619478",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "从K到G再到X 火车的名字为啥总在变",
+      "url": "https://www.baidu.com/s?wd=%E4%BB%8EK%E5%88%B0G%E5%86%8D%E5%88%B0X+%E7%81%AB%E8%BD%A6%E7%9A%84%E5%90%8D%E5%AD%97%E4%B8%BA%E5%95%A5%E6%80%BB%E5%9C%A8%E5%8F%98",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月16日，国铁集团宣布调整全国铁路列车车次编排。新规将K、T字头对应更高速度等级的动车组，并新增X字头，可编排车次数量提升近40%。此次重排旨在解决号段紧张，以适应铁路规模增长及多样化运输需求。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n4f5034064f9f",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "刘雯的翅膀在腰上",
+      "url": "https://www.baidu.com/s?wd=%E5%88%98%E9%9B%AF%E7%9A%84%E7%BF%85%E8%86%80%E5%9C%A8%E8%85%B0%E4%B8%8A",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "刘雯的翅膀在腰上（来源：百度热搜）",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n79d6b6ab2927",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "原武警士官学校正式更名",
+      "url": "https://www.baidu.com/s?wd=%E5%8E%9F%E6%AD%A6%E8%AD%A6%E5%A3%AB%E5%AE%98%E5%AD%A6%E6%A0%A1%E6%AD%A3%E5%BC%8F%E6%9B%B4%E5%90%8D",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月18日，武警警士学院发布消息称，近日举行授旗仪式和揭牌仪式，原武警士官学校正式更名为武警警士学院，成为武警部队唯一一所独立办学的警士院校。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n060e099ea17a",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "中国留学生披旭日旗引众怒 细节曝光",
+      "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E7%95%99%E5%AD%A6%E7%94%9F%E6%8A%AB%E6%97%AD%E6%97%A5%E6%97%97%E5%BC%95%E4%BC%97%E6%80%92+%E7%BB%86%E8%8A%82%E6%9B%9D%E5%85%89",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月14日，莫斯科大学中国留学生陈某在课堂上披旭日旗引众怒，他还传播日本军国主义物品，有“精日”倾向。在道歉视频中，他表示自己的行为是出于喜欢日本文化。知情人：他是南京人，曾多次表达支持“台独”。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "ncae1cd4e0b6e",
+      "category": "today",
+      "extraCategories": [
+        "ent"
+      ],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "白鹿曼谷见面会取消 工作室道歉",
+      "url": "https://www.baidu.com/s?wd=%E7%99%BD%E9%B9%BF%E6%9B%BC%E8%B0%B7%E8%A7%81%E9%9D%A2%E4%BC%9A%E5%8F%96%E6%B6%88+%E5%B7%A5%E4%BD%9C%E5%AE%A4%E9%81%93%E6%AD%89",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "10月19日，白鹿工作室发文宣布，鉴于近期相关风险提示，原定于10月25日的WeSpark曼谷见面会取消并向粉丝致歉。此前，众多粉丝已为该活动提前安排行程。工作室承诺，承担符合要求通过官方渠道购票的粉丝在10月24日至26日期间的泰国曼谷往返机票及酒店退改实际损失，材料审核后于30个工作日内发放。",
+      "tags": [
+        "热点",
+        "娱乐"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nb6d2af628734",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "百度电影榜",
+      "sourceType": "json",
+      "title": "功夫女足",
+      "url": "https://baike.baidu.com/item/%E5%8A%9F%E5%A4%AB%E5%A5%B3%E8%B6%B3/68014512?fr=resou",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "周星驰！新作！来了！神级功夫碰撞足球，还是熟悉的喜剧配方，够飞，够癫，含笑量绕足球场好多圈。",
+      "tags": [
+        "电影"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n73d1ecb38b3b",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "百度电影榜",
+      "sourceType": "json",
+      "title": "欢迎来龙餐馆",
+      "url": "https://baike.baidu.com/item/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E9%BE%99%E9%A4%90%E9%A6%86/60346034?fr=resou",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "徐福（沈腾 饰）为养家还债远赴中东中餐馆当厨师，在当地结识了大堂经理马俊生（蒋奇明 饰）。他们以地道中国风味广招八方来客，龙餐馆声名鹊起。",
+      "tags": [
+        "电影"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nb86c707022fc",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "百度电影榜",
+      "sourceType": "json",
+      "title": "蜘蛛侠：崭新之日",
+      "url": "https://baike.baidu.com/item/%E8%9C%98%E8%9B%9B%E4%BE%A0%EF%BC%9A%E5%B4%AD%E6%96%B0%E4%B9%8B%E6%97%A5/65546058?fr=resou",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "彼得•帕克自愿让全世界遗忘自己，转眼已是四年。",
+      "tags": [
+        "电影"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n992d2db60ed8",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "百度电影榜",
+      "sourceType": "json",
+      "title": "年会不能停2！",
+      "url": "https://baike.baidu.com/item/%E5%B9%B4%E4%BC%9A%E4%B8%8D%E8%83%BD%E5%81%9C2%EF%BC%81/67856694?fr=resou",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "两个倒霉蛋“刘马组合”在命运的安排下于“包子铺”相遇，命运扔来一张“无限流体验卡”：只要不成，时间倒带，重回原点。",
+      "tags": [
+        "电影"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n4a9932dd9f14",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "百度电影榜",
+      "sourceType": "json",
+      "title": "逃出绝命街",
+      "url": "https://baike.baidu.com/item/%E9%80%83%E5%87%BA%E7%BB%9D%E5%91%BD%E8%A1%97/67540180?fr=resou",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "一场神秘事件，让橡树街从平静郊区穿越回史前时代，导致恐龙突然惊现人类小区，并开始大肆吃人！",
+      "tags": [
+        "电影"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n0e25d38dbde4",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "百度电影榜",
+      "sourceType": "json",
+      "title": "大唐妖探",
+      "url": "https://baike.baidu.com/item/%E5%A4%A7%E5%94%90%E5%A6%96%E6%8E%A2/65710506?fr=resou",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "喜剧探案合家欢，悬疑奇案欢乐多。2026年原创国产动画巨制！",
+      "tags": [
+        "电影"
+      ],
+      "hot": true
+    },
+    {
+      "id": "ne4833fbcad4e",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "百度电影榜",
+      "sourceType": "json",
+      "title": "去你的岛",
+      "url": "https://baike.baidu.com/item/%E5%8E%BB%E4%BD%A0%E7%9A%84%E5%B2%9B/62800745?fr=resou",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "都市女孩王结香被一只干纸鹤带入奇幻小岛，为逃离此地，她与化身为软萌兔子的失忆前男友殷显结伴踏上闯关冒险的旅途。",
+      "tags": [
+        "电影"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n8fa1e356ca44",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "百度电视剧榜",
+      "sourceType": "json",
+      "title": "非份之罪",
+      "url": "https://baike.baidu.com/item/%E9%9D%9E%E4%BB%BD%E4%B9%8B%E7%BD%AA/63762065?fr=resou",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "讲述重案组探员孟保接连侦破六桩离奇罪案，每起案件皆源于人心失控的贪欲，在一桩桩人性迷局之中拨开层层迷雾，挖掘欲望裹挟之下，普通人一步步走向犯罪深渊的真相故事。",
+      "tags": [
+        "电视剧"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nce4557acef6b",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "百度电视剧榜",
+      "sourceType": "json",
+      "title": "这一秒过火",
+      "url": "https://baike.baidu.com/item/%E8%BF%99%E4%B8%80%E7%A7%92%E8%BF%87%E7%81%AB/65762063?fr=resou",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "讲述了民国乱世中，慕容清峄与任素素因一场相救结下命运牵绊，经历身世错位、家族恩怨和痛心离别；三年后任素素以“方牧兰”之名回归，成为慕容清峄的准大嫂，两人在爱恨纠葛中并肩踏入危局，共赴复仇的故事。",
+      "tags": [
+        "电视剧"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n2a991d646974",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "百度电视剧榜",
+      "sourceType": "json",
+      "title": "天才，女友",
+      "url": "https://baike.baidu.com/item/%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A5%B3%E5%8F%8B/67903610?fr=resou",
+      "publishedAt": "2026-10-19T05:40:10.847Z",
+      "publishedAtMs": 1792388410847,
+      "summary": "讲述了天才少女林知夏携手学霸竹马江逾白从校园到婚纱的披荆斩棘之路。林知夏被保送复旦后，江逾白准备在毕业之旅对她告白，却因母亲卷入诈骗案而遗憾离开。",
+      "tags": [
+        "电视剧"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n2f56845b445f",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "AI辅助筛查有助于糖尿病患者及时接受眼科诊疗",
+      "url": "https://36kr.com/newsflashes/4032367247397507?f=rss",
+      "publishedAt": "2026-10-19T05:36:05.000Z",
+      "publishedAtMs": 1792388165000,
+      "summary": "英国伦敦卫生与热带医学院近日发布公报说，该校参与的一项随机对照试验发现，在糖尿病视网膜病变筛查中引入人工智能（AI）技术，有助缩短从筛查到专科就诊的时间，可帮助更多需要进一步接受眼科诊疗的患者及时就医。（新华社）",
+      "tags": [
+        "36氪",
+        "AI",
+        "快讯"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nb55b35d068b1",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "Secretlab 推出 2026《英雄联盟》全球总决赛主舞台同款 TITAN Evo 电竞椅",
+      "url": "https://www.ithome.com/1/014/771.htm",
+      "publishedAt": "2026-10-19T05:35:24.000Z",
+      "publishedAtMs": 1792388124000,
+      "summary": "IT之家 10 月 19 日消息，Secretlab（圣临）是多项电子竞技赛事的官方电竞椅供应商，自 2019 年来一直与《英雄联盟》电子竞技保持合作。 该品牌近日推出了 2026《英雄联盟》全球总决赛主舞台同款 TITAN Evo 电竞椅。这一型号拥有专属主体涂装， 限量 50 台 ，预估到手价不高于 4,789 元…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ne4c46044416b",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网财经",
+      "sourceType": "rss",
+      "title": "9月一线城市房价环比继续上涨 二三线城市降幅收窄",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-19/10717097.shtml",
+      "publishedAt": "2026-10-19T05:33:30.000Z",
+      "publishedAtMs": 1792388010000,
+      "summary": "中新社北京10月19日电 (记者 庞无忌)随着传统销售旺季到来，9月份中国大中城市房价“止跌企稳、降幅收窄”态势进一步清晰。",
+      "tags": [
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nc1be4aca84c6",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网财经",
+      "sourceType": "rss",
+      "title": "国家统计局谈前三季度GDP增速：符合全年经济预期增长目标",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-19/10717105.shtml",
+      "publishedAt": "2026-10-19T05:28:32.000Z",
+      "publishedAtMs": 1792387712000,
+      "summary": "中新网10月19日电 国新办19日举行新闻发布会，会上，国家统计局新闻发言人、副局长毛盛勇表示前三季度GDP增速符合全年经济预期增长目标。",
+      "tags": [
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nbaee1c2f759e",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网社会",
+      "sourceType": "rss",
+      "title": "河北沧州集中拆除村庄内违规危化品储存罐",
+      "url": "https://www.chinanews.com.cn/sh/2026/10-19/10717113.shtml",
+      "publishedAt": "2026-10-19T05:26:36.000Z",
+      "publishedAtMs": 1792387596000,
+      "summary": "10月18日晚，总台《焦点访谈》栏目曝光河北沧州市东光县“建在村子里的化工厂”有关问题后，河北省安委办派出工作组连夜赶赴沧州市东光县，督促指导问题核查处置。",
+      "tags": [
+        "民生"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ne1bfc67fc0e0",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "建设银行涨超1%，盘中股价创历史新高",
+      "url": "https://36kr.com/newsflashes/4032357623370121?f=rss",
+      "publishedAt": "2026-10-19T05:26:17.000Z",
+      "publishedAtMs": 1792387577000,
+      "summary": "36氪获悉，A股银行板块持续走高，建设银行涨超1%，盘中股价创历史新高。",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nb8e028f929a5",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "鸿海拟收购三菱电机移动50%股权，共同经营汽车设备业务",
+      "url": "https://36kr.com/newsflashes/4032357304439176?f=rss",
+      "publishedAt": "2026-10-19T05:25:58.000Z",
+      "publishedAtMs": 1792387558000,
+      "summary": "10月19日，鸿海宣布，将通过旗下投资管理子公司Lin Yin与三菱电机签订策略联盟，共同经营汽车设备业务。根据合作协议，三菱电机将移转旗下负责汽车设备业务的三菱电机移动50%股权予Lin Yin，未来由双方共同经营三菱电机移动。此次股权移转交易金额预计为1150亿日元（约合7.27亿美元）。根据股权移转协议，标的业务…",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ndb40f4813a27",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(browser): isolate web bundle analysis with bounded partial results",
+      "url": "https://github.com/morluto/rea/commit/9aca543f46085f502dbc5445002e129e5d2974e9",
+      "publishedAt": "2026-10-19T05:22:54.000Z",
+      "publishedAtMs": 1792387374000,
+      "summary": "fix(browser): isolate web bundle analysis with bounded partial results Run inert captured-script analysis in owned children with per-script and aggregate deadli…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n67e17bffd909",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "阿里达摩院孟建熠：玄铁芯片目前已经稳定出货超 60 亿颗",
+      "url": "https://www.ithome.com/1/014/770.htm",
+      "publishedAt": "2026-10-19T05:21:57.000Z",
+      "publishedAtMs": 1792387317000,
+      "summary": "IT之家 10 月 19 日消息，第六届 RISC-V 中国峰会于 10 月 18 日至 20 日在深圳举行。 据科创板日报报道，阿里达摩院首席科学家孟建熠表示：迄今， 玄铁芯片目前已经稳定出货超 60 亿颗。 IT之家注：玄铁是阿里巴巴达摩院旗下 RISC-V 处理器 IP 品牌，包含 C、E、R 等系列。 根据 O…",
+      "tags": [
+        "科技",
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n9c27c317fc21",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "桑坦德银行与英伟达达成三年期合作框架",
+      "url": "https://36kr.com/newsflashes/4032345465131657?f=rss",
+      "publishedAt": "2026-10-19T05:13:55.000Z",
+      "publishedAtMs": 1792386835000,
+      "summary": "桑坦德银行与英伟达达成三年期合作框架，利用英伟达人工智能基础设施构建人工智能能力。（财联社）",
+      "tags": [
+        "36氪",
+        "AI",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "neb3cd7763acc",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "refactor(process): share ownership for isolated analysis workers",
+      "url": "https://github.com/morluto/rea/commit/715d93e954f238e009d9a425b6c430ce131eb51b",
+      "publishedAt": "2026-10-19T05:12:25.000Z",
+      "publishedAtMs": 1792386745000,
+      "summary": "refactor(process): share ownership for isolated analysis workers Separate child and private-root ownership from JavaScript analysis protocols. Retain exact clea…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ncd4614642e44",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网国际",
+      "sourceType": "rss",
+      "title": "加拿大军事基地火灾致4名军人丧生39人受伤",
+      "url": "https://www.chinanews.com.cn/gj/2026/10-19/10717075.shtml",
+      "publishedAt": "2026-10-19T05:10:13.000Z",
+      "publishedAtMs": 1792386613000,
+      "summary": "中新社北京10月19日电 渥太华消息：加拿大西部艾伯塔省韦恩赖特军事基地当地时间17日发生火灾，截至18日造成4人丧生、39人受伤。",
+      "tags": [
+        "军事",
+        "国际"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n32fba8e43d5e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: Roadkill – a zombie car game inspired by the original GTA's driving",
+      "url": "https://games.zabaca.com/games/roadkill/",
+      "publishedAt": "2026-10-19T05:08:53.000Z",
+      "publishedAtMs": 1792386533000,
+      "summary": "Show HN: Roadkill – a zombie car game inspired by the original GTA's driving（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n0ad5477f9040",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网国际",
+      "sourceType": "rss",
+      "title": "沙特与胡塞武装互袭致数十人伤亡",
+      "url": "https://www.chinanews.com.cn/gj/2026/10-19/10717074.shtml",
+      "publishedAt": "2026-10-19T05:08:37.000Z",
+      "publishedAtMs": 1792386517000,
+      "summary": "中新社北京10月19日电 综合消息：沙特阿拉伯与也门胡塞武装当地时间18日对彼此发动袭击，造成数十人伤亡。",
+      "tags": [
+        "军事",
+        "国际"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n9e80e88a52af",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "研究发现：AI 可篡改人类记忆，植入从未发生的虚假事件",
+      "url": "https://www.ithome.com/1/014/768.htm",
+      "publishedAt": "2026-10-19T05:08:13.000Z",
+      "publishedAtMs": 1792386493000,
+      "summary": "IT之家 10 月 19 日消息，据 Washington Post 报道，研究发现，AI 可篡改人类记忆。这项实验一开始准备了 24 张普通照片：婚礼、城市街道、赛跑场景。麻省理工学院媒体实验室教授帕蒂 · 梅斯（Pattie Maes）和同事把这些照片展示给了 200 名受试者。 短暂休息后，一部分人再次看到原图；…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na36b115688e5",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "水月雨发布轻巧豆 Dots 无线降噪耳机：异形球腔体，399 元起",
+      "url": "https://www.ithome.com/1/014/767.htm",
+      "publishedAt": "2026-10-19T05:07:57.000Z",
+      "publishedAtMs": 1792386477000,
+      "summary": "IT之家 10 月 19 日消息，水月雨今日发布轻巧豆 Dots 无线降噪耳机，将于 10 月 20 日 20:00 上架， 售价 399 元起 ： 黑色 / 米色常规款：399 元 粉色特别款：429 元 IT之家获悉，这款新品采用异形球腔体，更好适配不同耳道；搭载 22nm 智能主控，支持多项智能功能，兼顾低功耗与…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n6ed7b48f0d6c",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "高通骁龙 X2 Plus 六核处理器版微软 Surface Pro、Surface Laptop 开启预售",
+      "url": "https://www.ithome.com/1/014/766.htm",
+      "publishedAt": "2026-10-19T05:07:50.000Z",
+      "publishedAtMs": 1792386470000,
+      "summary": "IT之家 10 月 19 日消息，Microsoft（微软）现已启动 基于高通骁龙 X2 Plus 六核处理器 的 Surface Pro, 12 英寸 (第 2 代) 二合一设备、Surface Laptop, 13 英寸 (第 2 代) 笔记本电脑的预售。 Surface Pro, 12 英寸 (第 2 代) 16…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nf6aa4de5928a",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "New website reflects OSI's evolving mission",
+      "url": "https://opensource.org/blog/new-website-reflects-osis-evolving-mission",
+      "publishedAt": "2026-10-19T05:07:36.000Z",
+      "publishedAtMs": 1792386456000,
+      "summary": "New website reflects OSI's evolving mission（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nff2245e1a9b9",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "沐瞳科技向 2000 多名员工每人发 5 克黄金手链，离职员工也有份",
+      "url": "https://www.ithome.com/1/014/765.htm",
+      "publishedAt": "2026-10-19T05:07:25.000Z",
+      "publishedAtMs": 1792386445000,
+      "summary": "IT之家 10 月 19 日消息，沐瞳科技 10 月 16 日发布公告，为纪念《决胜巅峰》（MLBB）十周年， 向员工发放 24K 纯金纪念手链（5 克） ，人手一条。 公告明确“不看段位，不设排位”，即不看绩效、不看职级，刚转正的实习生同样有份。 据披露， 此次发放范围覆盖超 2,000 名员工，总计约 10 公斤黄…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n010bc73d16c9",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "沪深两市成交额突破1万亿",
+      "url": "https://36kr.com/newsflashes/4032339051565448?f=rss",
+      "publishedAt": "2026-10-19T05:07:24.000Z",
+      "publishedAtMs": 1792386444000,
+      "summary": "36氪获悉，沪深两市成交额突破1万亿，较上日此时缩量近70亿。",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nbfa55eabddcc",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网国际",
+      "sourceType": "rss",
+      "title": "乌想要用美“星盾”打击俄纵深？鲁比奥：乌方未获授权",
+      "url": "https://www.chinanews.com.cn/gj/2026/10-19/10717098.shtml",
+      "publishedAt": "2026-10-19T05:07:21.000Z",
+      "publishedAtMs": 1792386441000,
+      "summary": "中新网10月19日电 据卡塔尔半岛电视台报道，美国国务卿鲁比奥日前表示，乌克兰确向美方请求授权使用“星盾”卫星通信系统打击俄罗斯境内纵深目标，不过截至目前乌方未获得相关授权。",
+      "tags": [
+        "军事",
+        "国际"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n72f6fb02341a",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "全国新建商品房待售面积连续7个月下降",
+      "url": "https://36kr.com/newsflashes/4032336113357447?f=rss",
+      "publishedAt": "2026-10-19T05:04:24.000Z",
+      "publishedAtMs": 1792386264000,
+      "summary": "国家统计局的数据显示，9月末，全国新建商品房待售面积74825万平方米，同比下降1.5%。该指标今年以来已经连续7个月下降，且近几个月降幅还在扩大。其中，待售3年以下面积54197万平方米，同比下降5.0%。（证券时报）",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nb57ca782144f",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "马来西亚9月出口同比增长54.5%",
+      "url": "https://36kr.com/newsflashes/4032334511509889?f=rss",
+      "publishedAt": "2026-10-19T05:02:46.000Z",
+      "publishedAtMs": 1792386166000,
+      "summary": "马来西亚9月出口同比增长54.5%，高于市场预期的44.6%，出口增速创2021年4月以来最快；9月进口同比增长52.7%，高于市场预期的43.2%。（财联社）",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ne6bb867cc9dd",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: Trmnl-cards – Turn an XTEINK X4 into a tiny frame for rare cards",
+      "url": "https://github.com/mdnahian/trmnl-cards",
+      "publishedAt": "2026-10-19T04:57:12.000Z",
+      "publishedAtMs": 1792385832000,
+      "summary": "Show HN: Trmnl-cards – Turn an XTEINK X4 into a tiny frame for rare cards（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n37f129a61d8a",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "因阻拦配送机器人，美国费城一女子被警方逮捕",
+      "url": "https://www.ithome.com/1/014/764.htm",
+      "publishedAt": "2026-10-19T04:51:17.000Z",
+      "publishedAtMs": 1792385477000,
+      "summary": "IT之家 10 月 19 日消息，美国费城女子卡罗琳 · 马文（Carolyn Marvin）因阻拦优步配送机器人通行、拒不避让，被警方逮捕并指控行为不检。马文在接受费城 ABC13 电视台采访时表示：“我知道它们正在抢走人类配送员的工作，所以只要见到这些机器人，我就会站在它们前面阻止其前进，以此抗议。” 警方赶到现场…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ndca0e653952a",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Startup Abby Care raises $82M to turn family members into paid caregivers",
+      "url": "https://fortune.com/2026/10/15/startup-abby-care-raises-82-million-to-turn-family-members-into-paid-caregivers/",
+      "publishedAt": "2026-10-19T04:48:20.000Z",
+      "publishedAtMs": 1792385300000,
+      "summary": "Startup Abby Care raises $82M to turn family members into paid caregivers（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nf53832798260",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Verisign .com Domain Name Registry Consumer Class Action",
+      "url": "https://www.hbsslaw.com/cases/verisign-com-domain-name-registry-consumer-class-action",
+      "publishedAt": "2026-10-19T04:40:18.000Z",
+      "publishedAtMs": 1792384818000,
+      "summary": "Verisign .com Domain Name Registry Consumer Class Action（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n352bba76e0ad",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "James Li Investigated Sam Altman for a Year [video]",
+      "url": "https://www.youtube.com/watch?v=2kqAJaMqHo4",
+      "publishedAt": "2026-10-19T04:40:11.000Z",
+      "publishedAtMs": 1792384811000,
+      "summary": "James Li Investigated Sam Altman for a Year [video]（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nb5e7f1e41f92",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "山石网科：将持续扩大ASIC安全产品市场覆盖，深耕高毛利重点行业",
+      "url": "https://36kr.com/newsflashes/4032310166458760?f=rss",
+      "publishedAt": "2026-10-19T04:38:01.000Z",
+      "publishedAtMs": 1792384681000,
+      "summary": "山石网科在2026年半年度业绩说明会上表示，2026年以来，公司ASIC安全产品快速切入国产替代赛道，实现规模化商用落地，成为拉动经营改善的核心驱动力，公司ASIC安全产品展现出较强的市场竞争力，后续公司将持续扩大ASIC安全产品市场覆盖。（证券时报）",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nb01365fc71f0",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网财经",
+      "sourceType": "rss",
+      "title": "供销总社：当前农服行业正向全程综合农业服务加速转型",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-19/10717090.shtml",
+      "publishedAt": "2026-10-19T04:34:35.000Z",
+      "publishedAtMs": 1792384475000,
+      "summary": "中新网10月19日电(记者 谢艺观)“当前，农服行业正由传统单环节服务向全程综合农业服务加速转型，全产业链协同融合已成必然趋势。”近日，中华全国供销合作总社党组成员、理事会副主任徐光洪在第六届全国农业综合服务商大会上如是表示。",
+      "tags": [
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n27fd5fd1fec7",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网财经",
+      "sourceType": "rss",
+      "title": "9月中国原油生产增速加快",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-19/10717089.shtml",
+      "publishedAt": "2026-10-19T04:33:35.000Z",
+      "publishedAtMs": 1792384415000,
+      "summary": "中新社北京10月19日电 (记者 王梦瑶)中国国家统计局19日公布的数据显示，9月份，中国规模以上工业(以下简称规上工业)原煤生产降幅收窄，原油生产增速加快，天然气生产基本稳定。",
+      "tags": [
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n15859dacc68e",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网财经",
+      "sourceType": "rss",
+      "title": "一图读懂中国经济三季报",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-19/10717088.shtml",
+      "publishedAt": "2026-10-19T04:32:31.000Z",
+      "publishedAtMs": 1792384351000,
+      "summary": "一图读懂中国经济三季报（来源：中新网财经）",
+      "tags": [
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n201319ba4597",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(javascript): converge cyclic aliases with explicit projection wid…",
+      "url": "https://github.com/morluto/rea/commit/e4c3d72396bf925a45724ce8b18b238b0d23d787",
+      "publishedAt": "2026-10-19T04:26:54.000Z",
+      "publishedAtMs": 1792384014000,
+      "summary": "fix(javascript): converge cyclic aliases with explicit projection widening Replace initializer-history and full-path enumeration with a finite projection join a…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ndcd36914bf23",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "消息称蔚来 firefly 萤火虫 60kWh 大电池车型 10 月 23 日上市：CLTC 续航 560km，老用户可升级",
+      "url": "https://www.ithome.com/1/014/761.htm",
+      "publishedAt": "2026-10-19T04:26:01.000Z",
+      "publishedAtMs": 1792383961000,
+      "summary": "IT之家 10 月 19 日消息，据易车从相关渠道获悉，蔚来 firefly 萤火虫 60kWh 大电池车型将于 10 月 23 日正式上市。该车搭载宁德时代三元锂电池， CLTC 续航提升至 560km 。官方还表示所有老用户都可以升级。 据IT之家此前报道，蔚来 firefly 萤火虫纯电小车于 2025 年 4 …",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nee2d09d48a9c",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: Yila – A Codex for Scientific Research",
+      "url": "https://yila.ai",
+      "publishedAt": "2026-10-19T04:24:57.000Z",
+      "publishedAtMs": 1792383897000,
+      "summary": "Show HN: Yila – A Codex for Scientific Research（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n6e782f709d59",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "预订价 27.58 万元起，魏牌高山 8 HEV 开启预订",
+      "url": "https://www.ithome.com/1/014/759.htm",
+      "publishedAt": "2026-10-19T04:24:05.000Z",
+      "publishedAtMs": 1792383845000,
+      "summary": "IT之家 10 月 19 日消息，魏牌高山 8 HEV 已开启预订，预订价格 27.58 万元起。新车定位为智能豪华四驱 MPV，核心卖点集中在高阶辅助驾驶、宽适多变空间、混动性能与底盘舒适性等方面，将于今年第四季度上市。 IT之家注意到，官方为高山 8 HEV 提供三电系统终身质保、整车 6 年或 15 万公里保修，…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n555906b4e286",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "消息称大众计划到2030年前冻结薪资",
+      "url": "https://36kr.com/newsflashes/4032296028574342?f=rss",
+      "publishedAt": "2026-10-19T04:23:38.000Z",
+      "publishedAtMs": 1792383818000,
+      "summary": "据《南德意志报》报道援引其看到的内部文件报道，大众汽车计划对全球60万员工中的大部分人员实施薪资冻结，政策持续至2030年。受通胀影响，放弃加薪可能令相关员工实际收入减少约10%。（新浪财经）",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n2251bf2518ad",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Lobste.rs Deactivates \"Vibecoding\" Tag",
+      "url": "https://lobste.rs/s/h0eate/updates_site_guidelines_ai_llm_tags",
+      "publishedAt": "2026-10-19T04:22:20.000Z",
+      "publishedAtMs": 1792383740000,
+      "summary": "Lobste.rs Deactivates \"Vibecoding\" Tag（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nf239316bb21e",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网财经",
+      "sourceType": "rss",
+      "title": "前三季度中国GDP同比增长4.6%",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-19/10717087.shtml",
+      "publishedAt": "2026-10-19T04:19:10.000Z",
+      "publishedAtMs": 1792383550000,
+      "summary": "中新社北京10月19日电 (记者 陈溯)中国国家统计局19日公布的数据显示，今年前三季度，中国国内生产总值(GDP)1071071亿元(人民币，下同)，按不变价格计算，同比增长4.6%。",
+      "tags": [
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n3203103f94c8",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Measuring Intelligence Beyond Human Scale",
+      "url": "https://www.lesswrong.com/posts/avtquSx2PkWsxXW6T/how-to-measure-intelligence-beyond-human-scale",
+      "publishedAt": "2026-10-19T04:17:14.000Z",
+      "publishedAtMs": 1792383434000,
+      "summary": "Measuring Intelligence Beyond Human Scale（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na7316097b255",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "韩国存储双雄股价下跌，致韩国养老金损失1370亿美元",
+      "url": "https://36kr.com/newsflashes/4032289024233864?f=rss",
+      "publishedAt": "2026-10-19T04:16:30.000Z",
+      "publishedAtMs": 1792383390000,
+      "summary": "受三星电子和SK海力士等公司股价下跌的影响，韩国主要养老金基金韩国国民年金基金蒙受了182万亿韩元的损失，约合1370亿美元。（财联社）",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n535777d35b98",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "AI 公司 HUMXN 免费上门修水电、通管道，只为录像收集数据训练 AI 机器人",
+      "url": "https://www.ithome.com/1/014/758.htm",
+      "publishedAt": "2026-10-19T04:11:18.000Z",
+      "publishedAtMs": 1792383078000,
+      "summary": "IT之家 10 月 19 日消息，一家专注于采集真实世界数据的 AI 实验室计划与房主合作，录制技术工人的作业过程，用来训练 AI 机器人。这家名为 HUMXN 的公司表示，将补贴管道、电工、暖通空调、风道清洁以及地毯清洁服务：有需求的居民可以免费获得这类服务，交换条件是允许佩戴“可穿戴采集设备”的人员进入家中开展录制…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n30996e437535",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "iQOO 产品经理邢程（行走的橙子 Q）宣布离职，称依然支持和关注 iQOO",
+      "url": "https://www.ithome.com/1/014/757.htm",
+      "publishedAt": "2026-10-19T04:10:08.000Z",
+      "publishedAtMs": 1792383008000,
+      "summary": "IT之家 10 月 19 日消息，今日午间，iQOO 产品经理邢程（@行走的橙子 Q）发文， 宣布离职 。 IT之家附邢程微博原文如下： 各位酷客朋友们， 我已经离开蓝厂了 ，也想好好跟大家告个别。 iQOO 这些年，有幸负责了多款产品的打造和发布，也参与和见证了很多爆款从想法走向市场的完整过程。 感恩这段经历，更要感…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nc81db9808673",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "ATK 烈空 F1V3 Ultimate+ PC 雾透外壳版鼠标发布：41g 重、PAW3955 MASTER，到手价 319.6 元",
+      "url": "https://www.ithome.com/1/014/756.htm",
+      "publishedAt": "2026-10-19T04:09:59.000Z",
+      "publishedAtMs": 1792382999000,
+      "summary": "IT之家 10 月 19 日消息，ATK 科技今日发布烈空 F1V3 Ultimate+ PC 雾透外壳版鼠标，10 月 20 日 20 点正式开售，原价 376 元， 到手价 319.6 元 。 这款鼠标尺寸为 118.2×62.4×38.8mm，适合中小手；底壳采用镂空结构，重约 41g；采用全新雾透渐变 PC 外…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n4e19c45498dc",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "AI Is Not a Race",
+      "url": "https://www.nitinpai.in/2026/10/19/ai-is-not-a-race",
+      "publishedAt": "2026-10-19T04:01:23.000Z",
+      "publishedAtMs": 1792382483000,
+      "summary": "AI Is Not a Race（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n0534f230b5f2",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "APEC财长会议在港举行，李家超与亚投行行长会面",
+      "url": "https://36kr.com/newsflashes/4032273681683076?f=rss",
+      "publishedAt": "2026-10-19T04:00:54.000Z",
+      "publishedAtMs": 1792382454000,
+      "summary": "香港特区行政长官李家超在社交平台发文称，今天（19日），他在礼宾府与亚洲基础设施投资银行行长邹加怡女士会面，欢迎她率团来港出席2026年亚太经济合作组织财政部长会议。李家超指出，此次是继今年一月后他再次与邹行长见面，香港作为亚投行成员，一直发挥“一国两制”下内联外通的独特优势，协助亚投行推动亚洲基础设施的可持续发展。（…",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n2d33df5bf922",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "A small model with a review loop matches a larger one at 58% of the cost",
+      "url": "https://theopenengine.com/blog/review-loop/",
+      "publishedAt": "2026-10-19T04:00:21.000Z",
+      "publishedAtMs": 1792382421000,
+      "summary": "A small model with a review loop matches a larger one at 58% of the cost（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n672a3f3f2842",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "鸿海、三菱电机将共同经营汽车设备业务，合作打造电动汽车平台",
+      "url": "https://www.ithome.com/1/014/755.htm",
+      "publishedAt": "2026-10-19T04:00:05.000Z",
+      "publishedAtMs": 1792382405000,
+      "summary": "IT之家 10 月 19 日消息，鸿海本月 16 日宣布将同三菱电机正式签订战略联盟，共同经营汽车设备事业。 根据双方签署的协议，三菱电机旗下负责汽车设备事业的 三菱电机移动株式会社将成为鸿海间接持股 50% 的合资企业 。 此次股权移转交易金额预计为 1,150 亿日元 （IT之家注：现汇率约合 48.72 亿元人民…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n963d952aafc7",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "山姆投诉举报恶意攻击及 AI 虚假营销信息：部分账号编造“山姆下架好物”引流牟利",
+      "url": "https://www.ithome.com/1/014/754.htm",
+      "publishedAt": "2026-10-19T03:58:18.000Z",
+      "publishedAtMs": 1792382298000,
+      "summary": "IT之家 10 月 19 日消息，山姆会员商店今日（10 月 19 日）发布声明称，近期多个社交媒体平台集中出现数千条针对山姆的恶意攻击及虚假营销信息。 部分账号通过 AI 生成、拼接素材、伪造采访等方式 ，将从未在山姆上架的洗护、保健品、食品等商品编造成“山姆下架好物”，进行欺骗性营销、引流牟利。 山姆同时表示，公司…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n49b9da01126b",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "六小龄童谈孙悟空、林黛玉 AI 魔改“圣黛 CP”：创意很好玩，但改编不能逾越政策法规和观众红线",
+      "url": "https://www.ithome.com/1/014/753.htm",
+      "publishedAt": "2026-10-19T03:57:11.000Z",
+      "publishedAtMs": 1792382231000,
+      "summary": "IT之家 10 月 19 日消息，据新黄河报道，86 版《西游记》孙悟空饰演者六小龄童昨日现身山东济南，在接受采访时谈及了近日很火的“圣黛 CP”（指孙悟空和林黛玉的跨作品组合）。 他表示，自己在报纸上看到一则介绍， 圣黛 CP 相关内容播放量已经达到 50 亿次 ，这说明了一代又一代观众、读者对名著《西游记》和《红楼…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ne3993034bcc8",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Zepto Scales Customer Support on Databricks and MLflow",
+      "url": "https://www.databricks.com/blog/evaluation-first-ai-agents-how-zepto-scales-customer-support-databricks-and-mlflow",
+      "publishedAt": "2026-10-19T03:52:04.000Z",
+      "publishedAtMs": 1792381924000,
+      "summary": "Zepto Scales Customer Support on Databricks and MLflow（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n52662d149e75",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "腾讯 WorkBuddy 教育公益版上线：全国教师每人每月可领 2000 积分，能连续领 1 年",
+      "url": "https://www.ithome.com/1/014/752.htm",
+      "publishedAt": "2026-10-19T03:49:22.000Z",
+      "publishedAtMs": 1792381762000,
+      "summary": "IT之家 10 月 19 日消息，腾讯 SSV（可持续社会价值事业部）今日宣布，WorkBuddy 教育公益版正式上线，面向全国教师开放。 开通账号后， 全国老师每人每月可领 2000 积分，能连续领 12 个月 。不挑地区，不限学段。 据介绍，腾讯 SSV 与 WorkBuddy 团队制作了专门给老师用的 AI 教学…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n64897c274ba0",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "半日主力资金加仓电子板块，抛售房地产板块",
+      "url": "https://36kr.com/newsflashes/4032261350429060?f=rss",
+      "publishedAt": "2026-10-19T03:48:21.000Z",
+      "publishedAtMs": 1792381701000,
+      "summary": "主力资金早间净流入电子、银行、通信等板块，净流出房地产、农林牧渔等板块。具体到个股来看，亨通光电、九阳股份、寒武纪获净流入14.37亿元、9.02亿元、8.81亿元。净流出方面，闽东电力、中际旭创、金健米业遭抛售6.44亿元、6.24亿元、3.55亿元。（第一财经）",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nf17327595694",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Who lives without a car in the Bay Area",
+      "url": "https://maxmautner.com/2026/10/16/sf-car-free.html",
+      "publishedAt": "2026-10-19T03:47:28.000Z",
+      "publishedAtMs": 1792381648000,
+      "summary": "Who lives without a car in the Bay Area（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n2982049223fa",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "国家统计局：“人工智能+”行动有力带动了新兴领域的投资和出口",
+      "url": "https://36kr.com/newsflashes/4032259745632905?f=rss",
+      "publishedAt": "2026-10-19T03:46:43.000Z",
+      "publishedAtMs": 1792381603000,
+      "summary": "10月19日，国家统计局新闻发言人、国民经济综合统计司负责人王冠华在国新办新闻发布会上表示，前三季度“人工智能+”行动有力带动了新兴领域的投资和出口。人工智能的应用拓展带动了产业链上下游持续投资扩产。如前三季度电子电路制造业、集成电路制造业、信息服务业投资分别增长了58.7%、14.2%和20.2%。在“两新”政策支持…",
+      "tags": [
+        "36氪",
+        "AI",
+        "快讯"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nabf8ded66e71",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Remade.Wiki",
+      "url": "https://remade.wiki/",
+      "publishedAt": "2026-10-19T03:45:25.000Z",
+      "publishedAtMs": 1792381525000,
+      "summary": "Remade.Wiki（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n060d19caa70d",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Dead German Guys",
+      "url": "https://blog.coredump.cx/p/dead-german-guys",
+      "publishedAt": "2026-10-19T03:45:10.000Z",
+      "publishedAtMs": 1792381510000,
+      "summary": "Dead German Guys（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ndbb9daf544be",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网财经",
+      "sourceType": "rss",
+      "title": "A股午评：超3800只个股飘绿，沪指收涨，深指、创业板指收跌",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-19/10717079.shtml",
+      "publishedAt": "2026-10-19T03:44:42.000Z",
+      "publishedAtMs": 1792381482000,
+      "summary": "A股午评：超3800只个股飘绿，沪指收涨，深指、创业板指收跌；石化、银行、航天军工上涨，房地产、农业、半导体下跌",
+      "tags": [
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n630593a55742",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "斯巴鲁公布软件定义汽车计划：开发周期缩短约 40%，与 AMD 联合开发集成 ECU",
+      "url": "https://www.ithome.com/1/014/750.htm",
+      "publishedAt": "2026-10-19T03:44:29.000Z",
+      "publishedAtMs": 1792381469000,
+      "summary": "IT之家 10 月 19 日消息，据路透社报道，斯巴鲁于当地时间上周日公布了一项计划，将在本十年后半段推出软件定义汽车（SDV），并把整车开发周期缩短约 40%，以此加快新车型投放速度。 这家日本车企在位于东京北部佐野市的研发中心举办了战略说明会，表示会在全系车型逐步搭载全新自研的集成电子控制单元（ECU）。 斯巴鲁称…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd2eb2eef5a0f",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "电影《八仙！》提名第 39 届中国电影金鸡奖最佳动画片，累计票房已破 20 亿",
+      "url": "https://www.ithome.com/1/014/749.htm",
+      "publishedAt": "2026-10-19T03:44:18.000Z",
+      "publishedAtMs": 1792381458000,
+      "summary": "IT之家 10 月 19 日消息，国产动画电影《八仙！》今日官宣 影片提名了第 39 届中国电影金鸡奖最佳动画片 。 IT之家查询获悉， 目前本片累计票房已破 20 亿 ，位列中国影史国产动画电影票房第三（仅次于两部《哪吒之魔童》系列电影）。 IT之家小伙伴记得用 最会买购买电影票 ，享受折扣价的同时还可以获得返利，预…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd6a338fa174c",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "ID-COOLING 机箱 FLOW 500 预售：M-ATX 兼容，到手 269~389 元",
+      "url": "https://www.ithome.com/1/014/748.htm",
+      "publishedAt": "2026-10-19T03:41:56.000Z",
+      "publishedAtMs": 1792381316000,
+      "summary": "IT之家 10 月 19 日消息，ID-COOLING（酷凛）现已启动机箱新品 FLOW 500 的预售。该产品包括 4 个款式， 到手价在 269~389 元区间 。 FLOW 500 是一款 5 扩展槽的电源前置结构 M-ATX 侧透机箱，采用免工具拆卸设计，三维 435×242×350 (mm)，体积近 37L。…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n3c1bc6b469c3",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "快狗打车拟 1 元出售中国内地业务，并更名“GOGO 科技”",
+      "url": "https://www.ithome.com/1/014/747.htm",
+      "publishedAt": "2026-10-19T03:39:45.000Z",
+      "publishedAtMs": 1792381185000,
+      "summary": "IT之家 10 月 19 日消息，快狗打车控股有限公司 10 月 16 日发布公告， 宣布拟以人民币 1.00 元出售全资附属公司 GGEx Holdings Limited 全部已发行股本 ，并建议将公司中文名称由“快狗打车控股有限公司”更改为“GOGO 科技”。 出售完成后， 集团将不再以“快狗打车”品牌在中国内地…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n652273cb156e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "OpenAI大举招募人才加码机器人研发",
+      "url": "https://36kr.com/newsflashes/4032252553695617?f=rss",
+      "publishedAt": "2026-10-19T03:39:24.000Z",
+      "publishedAtMs": 1792381164000,
+      "summary": "从“用大模型给机器人当大脑”到进一步向机器人硬件、控制系统和制造环节延伸，OpenAI正在加码机器人研发。截至10月19日，OpenAI在官网发布了19个与“Robotics”相关的职位招聘信息，涵盖机器人控制系统、电气工程、执行器、电机设计、制造、数据系统等多个方向。OpenAI在官网表示，这支机器人团队希望开发能够…",
+      "tags": [
+        "36氪",
+        "AI",
+        "快讯"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n85a41bd5b7ba",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "If you want to make a bajillion dollars, solve agent identity",
+      "url": "https://12gramsofcarbon.com/p/agentics-agent-identity-is-a-really",
+      "publishedAt": "2026-10-19T03:39:07.000Z",
+      "publishedAtMs": 1792381147000,
+      "summary": "If you want to make a bajillion dollars, solve agent identity（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na51236063019",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(process): retain snapshot handles and partial read outcomes",
+      "url": "https://github.com/morluto/rea/commit/9af0b6113c81803f88ec7d242e8fabaaa5d7f1f3",
+      "publishedAt": "2026-10-19T03:37:41.000Z",
+      "publishedAtMs": 1792381061000,
+      "summary": "fix(process): retain snapshot handles and partial read outcomes",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n84b8be9ee618",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Gaming's all‑digital future doesn't include Sonic the Hedgehog 3 and Pikmin 2",
+      "url": "https://sethmlarson.dev/gaming-all-digital-future-and-creative-constraint",
+      "publishedAt": "2026-10-19T03:35:57.000Z",
+      "publishedAtMs": 1792380957000,
+      "summary": "Gaming's all‑digital future doesn't include Sonic the Hedgehog 3 and Pikmin 2（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n72b90f4120c1",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "研究人员开发 AI 系统：可通过 Wi‑Fi 信号识别隐藏手枪",
+      "url": "https://www.ithome.com/1/014/738.htm",
+      "publishedAt": "2026-10-19T03:32:53.000Z",
+      "publishedAtMs": 1792380773000,
+      "summary": "IT之家 10 月 19 日消息，瑞典国防研究局（FOI）的一组 AI 研究人员开发出一套 AI 系统，能够利用 Wi‑Fi 信号识别隐藏的手枪，可以作为可见光摄像头、笨重金属探测器之外的非侵入式替代方案。相关论文于 10 月 13 日发布在 arXiv 平台，这套名为 WiFireNet 的系统，通过分析物体对环境 …",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n1fcc80df82ee",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "A股三大指数午间休盘涨跌不一，工商银行再创新高",
+      "url": "https://36kr.com/newsflashes/4032246149452422?f=rss",
+      "publishedAt": "2026-10-19T03:32:53.000Z",
+      "publishedAtMs": 1792380773000,
+      "summary": "36氪获悉，A股三大指数午间休盘涨跌不一，沪指涨0.16%，深成指跌0.18%，创业板指跌1.07%；石油化工、家电、银行板块领涨，九阳股份涨超6%，新凤鸣涨超3%，工商银行涨超1%再创新高；水产、CRO、教育板块下挫，百洋股份跌停，昭衍新药跌超9%，全通教育跌超3%。",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nb929470ede52",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Designing LLM failover as a route change, not a retry loop",
+      "url": "https://modelflare-blog.static.hf.space/model-groups-and-failover.html",
+      "publishedAt": "2026-10-19T03:32:10.000Z",
+      "publishedAtMs": 1792380730000,
+      "summary": "Designing LLM failover as a route change, not a retry loop（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n406fc105bef7",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "豆包刘星回应“国内超一半算力在造爽剧”：字节总算力中，只有约 10% 用于视频生成模型的训练和推理",
+      "url": "https://www.ithome.com/1/014/729.htm",
+      "publishedAt": "2026-10-19T03:30:25.000Z",
+      "publishedAtMs": 1792380625000,
+      "summary": "IT之家 10 月 19 日消息，近日，“国内超一半算力在造爽剧”的话题引发关注。 IT之家注意到，据中文在线在一份“投资者关系活动记录表”中披露，国内 AI Token 消耗 55% 烧在短剧和视频生成，24% 烧在电商广告，真正用于研发的只有 15%。AI 短剧与视频生成的 Token 消耗量已达到软件开发的两倍以…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd7f4b3595020",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网财经",
+      "sourceType": "rss",
+      "title": "哈尔滨机场2026年旅客吞吐量突破2000万人次",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-19/10717069.shtml",
+      "publishedAt": "2026-10-19T03:29:39.000Z",
+      "publishedAtMs": 1792380579000,
+      "summary": "中新网哈尔滨10月19日电 (温天禹 赵雁星)哈尔滨机场于19日对外发布消息，截至10月18日，哈尔滨机场2026年累计运送旅客2005.6万人次，同比增长0.5%，创历史最好成绩，预计全年旅客吞吐量近2500万人次。目前，哈尔滨机场客运吞吐量位列东北地区第一名。",
+      "tags": [
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n4061bfe491f9",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "3家券商、2家基金公司因在境外调研违规行为被采取监管措施",
+      "url": "https://36kr.com/newsflashes/4032236787880583?f=rss",
+      "publishedAt": "2026-10-19T03:23:22.000Z",
+      "publishedAtMs": 1792380202000,
+      "summary": "监管最新通报称，部分基金公司参加证券公司研究所组织的境外调研活动时，存在由证券公司承担专家咨询、调研门票等费用的情形，反映出相关证券公司、基金公司内部控制有效性存在不足；个别基金公司从业人员因私出国旅游的往返机票、酒店等费用由证券公司支付。针对此情况，监管部门已依法从严对存在不配合检查情形的G1证券公司采取监管谈话的监…",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n0ca1c560e7df",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "监管要求券商、基金调研费用不得用交易佣金转移支付，不得以分仓派点变相补偿",
+      "url": "https://36kr.com/newsflashes/4032236223681152?f=rss",
+      "publishedAt": "2026-10-19T03:22:47.000Z",
+      "publishedAtMs": 1792380167000,
+      "summary": "监管最新向券商、基金公司发布通报称，部分券商存在替基金公司承担境外调研费用的违规乱象。针对此情况，监管重申，券商、基金公司应遵守相关要求：一是严守交易费用管理规定，不得使用交易佣金转移支付应由自身支付的专家咨询、调研中介、会议、门票、机票、住宿等费用，不得通过提高佣金分成比例、增加分仓派点、承诺交易量等方式变相补偿；二…",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na4b2ab48963a",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网社会",
+      "sourceType": "rss",
+      "title": "2027年北京高考报名25日开始",
+      "url": "https://www.chinanews.com.cn/sh/2026/10-19/10717065.shtml",
+      "publishedAt": "2026-10-19T03:21:57.000Z",
+      "publishedAtMs": 1792380117000,
+      "summary": "今天，北京教育考试院发布《关于做好北京市2027年普通高等学校招生报名工作的通知》，明确北京市2027年普通高等学校招生报名工作将于2026年10月25日开始。",
+      "tags": [
+        "民生"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n92936843c1c5",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "Pulsar 推出 eS Xlite 趴握鼠标：VAXEE 参与研发，1199 元",
+      "url": "https://www.ithome.com/1/014/728.htm",
+      "publishedAt": "2026-10-19T03:21:28.000Z",
+      "publishedAtMs": 1792380088000,
+      "summary": "IT之家 10 月 19 日消息，韩国外设品牌 Pulsar 现已发售 eS Xlite 鼠标。这一型号 由 Pulsar 与 VAXEE 联合开发 ，采用面向趴握的腰身收窄、中高拱背右手人体工学模具，售价 1,199 元人民币。 eS Xlite 三维 123.5 × 66.3 × 42.1 (mm)，起始质量 51…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n9f7367fb2823",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "看图找新品：何刚预热华为全新形态路由器，X2 Pro 造型似书籍",
+      "url": "https://www.ithome.com/1/014/727.htm",
+      "publishedAt": "2026-10-19T03:21:12.000Z",
+      "publishedAtMs": 1792380072000,
+      "summary": "IT之家 10 月 19 日消息，华为终端 BG CEO 何刚发布了一道“猜谜游戏”，将一款新品藏在了今天分享的照片里。他透露， 最近团队做了一款全新形态的路由器，很快就会和大家见面 。 IT之家注意到，在图片中的书架上，隐藏有一款印有“X2 Pro”的物件，其外观采用木纹设计，形态似书籍， 同时顶部还有“MESH”标…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n8e207ce676c8",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "沐曦股份 2026 年三季度归母净利润 5.87 亿元 ~7.17 亿元，同比扭亏为盈",
+      "url": "https://www.ithome.com/1/013/627.htm",
+      "publishedAt": "2026-10-19T03:19:21.000Z",
+      "publishedAtMs": 1792379961000,
+      "summary": "IT之家 10 月 15 日消息，沐曦股份今日发布 2026 年三季度（2026 年 1 月～2026 年 9 月）业绩预告报告： 营业总收入 ：25.41 亿元 ~31.06 亿元，同比 105.6%~151.29% 归母净利润 ：5.87 亿元 ~7.17 亿元，同比扭亏为盈 扣非净利润 ：2.23 亿元 ~3.0…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n287df87ebcc2",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "The most powerful and free local AI note taking app I've ever used",
+      "url": "https://github.com/seacen/meetcap",
+      "publishedAt": "2026-10-19T03:18:58.000Z",
+      "publishedAtMs": 1792379938000,
+      "summary": "The most powerful and free local AI note taking app I've ever used（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na1f235741b52",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网财经",
+      "sourceType": "rss",
+      "title": "建设银行发布“健养安”养老金融新产品 探索金融与养老服务深度融合",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-19/10717060.shtml",
+      "publishedAt": "2026-10-19T03:18:31.000Z",
+      "publishedAtMs": 1792379911000,
+      "summary": "重阳节前夕，中国建设银行在南京举办“岁岁重阳”第三届“健养安”养老金融产品服务发布会，集中发布养老金融创新产品与服务，展示金融支持养老事业和养老产业发展的新进展。建设银行副行长纪志宏出席活动并致辞。",
+      "tags": [
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n1c49989527ff",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "国家统计局：规模以上制造业人工智能技术重点场景应用普及率超过1/3",
+      "url": "https://36kr.com/newsflashes/4032231927779719?f=rss",
+      "publishedAt": "2026-10-19T03:18:25.000Z",
+      "publishedAtMs": 1792379905000,
+      "summary": "国家统计局新闻发言人、副局长毛盛勇19日在国新办新闻发布会上表示，目前全国已累计建成5.6万余家基础、9000余家先进级、500余家卓越级智能工厂，规模以上制造业人工智能技术重点场景应用普及率超过了1/3。（新华财经）",
+      "tags": [
+        "36氪",
+        "AI",
+        "快讯"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n6d6182a44221",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "MIT 研发柔性形状感知薄片，可用于 VR、游戏和康复治疗",
+      "url": "https://www.ithome.com/1/014/725.htm",
+      "publishedAt": "2026-10-19T03:18:20.000Z",
+      "publishedAtMs": 1792379900000,
+      "summary": "IT之家 10 月 19 日消息，麻省理工学院（MIT）工程师研发出一款柔软可穿戴的形状感知薄片，能够自主追踪自身形变，可用于游戏控制、虚拟现实以及物理康复治疗等场景。这项技术利用光纤追踪薄片本身的三维形态，实验室测试中误差控制在 0.5 厘米以内。团队成员、MIT 机械工程研究生余启凡（Qifan Yu，音译）表示，…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n0e49d9a8f9f8",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网社会",
+      "sourceType": "rss",
+      "title": "把问题摆在台面上 市民“小建议”助力城市“大发展”",
+      "url": "https://www.chinanews.com.cn/sh/2026/10-19/10717055.shtml",
+      "publishedAt": "2026-10-19T03:14:46.000Z",
+      "publishedAtMs": 1792379686000,
+      "summary": "日常生活中，例如居民区的一些建设细节，科技创新的体制机制，可能大家都会有一些想法和建议，也希望得到有关部门的重视。在上海，人民建议征集机制，让市民只要有想法、有点子都能向有关部门提。",
+      "tags": [
+        "民生"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n25be1f6e585e",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网国际",
+      "sourceType": "rss",
+      "title": "日美军演引争议：近6万人集结、多国首参演，日本民众忧虑难消",
+      "url": "https://www.chinanews.com.cn/gj/2026/10-19/10717054.shtml",
+      "publishedAt": "2026-10-19T03:14:06.000Z",
+      "publishedAtMs": 1792379646000,
+      "summary": "中新网10月19日电 综合日媒报道，日本和美国19日在日本多地开展“利剑27”大规模联合军演，演习持续至29日，此次军演引发日本国内广泛担忧与反对。",
+      "tags": [
+        "军事",
+        "国际"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n9d87d1dbf012",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: Stream Reducer – Podcast/Video AI Summarization at Scale",
+      "url": "https://reducer.xgoose.org/",
+      "publishedAt": "2026-10-19T03:13:48.000Z",
+      "publishedAtMs": 1792379628000,
+      "summary": "Hi I have just open sourced a project https://github.com/hmumixaM/stream-reducer . This project can summarize videos, podcasts, and blog posts at scale. I also …",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n9df8b7344522",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "最新一轮基金投顾资格答辩本周启动，数十家券商分批进行",
+      "url": "https://36kr.com/newsflashes/4032220165444228?f=rss",
+      "publishedAt": "2026-10-19T03:06:27.000Z",
+      "publishedAtMs": 1792379187000,
+      "summary": "最新一轮基金投顾资格申报审核流程进入关键节点。自8月底申报窗口关闭后，券商已陆续接到监管进行基金投顾答辩通知，本周起将分批次进行答辩，答辩券商约数十家。按照流程，监管先对申报材料进行审核，随后组织券商答辩，材料完整性、业务准备充分度和合规记录是审核重点。答辩环节中，不仅看制度文本是否齐备，业务模式、系统能力、人员配置、…",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ne9aefc5116d0",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "尘封 12 年 Cinebench 纪录被打破：英特尔酷睿 i5-4670K 液氮超频至 6.3GHz，跑出 10.8cb",
+      "url": "https://www.ithome.com/1/014/724.htm",
+      "publishedAt": "2026-10-19T03:06:26.000Z",
+      "publishedAtMs": 1792379186000,
+      "summary": "IT之家 10 月 19 日消息，想要体验超频的乐趣，甚至冲击超频世界纪录，并不需要顶配的最新电脑硬件。超频高手卢米（Luumi）就用实际成果证明了这一点：他使用一枚老旧的英特尔酷睿 i5 4670K、容量不大的 DDR3 内存，外加必不可少的一两瓶液氮，拿下了 HWBot 平台一项新的世界纪录。卢米最近刷新了酷睿 i…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n44018f5eca01",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: Simulate an engineering blog, or an idea or an incident",
+      "url": "https://github.com/smarchone/sim-xp",
+      "publishedAt": "2026-10-19T03:05:04.000Z",
+      "publishedAtMs": 1792379104000,
+      "summary": "A new way for engineers to share and build experience. Agents (with a skill) turn any blog, incident or concept into a simulation that brings you closer to real…",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n132b003306e0",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网国际",
+      "sourceType": "rss",
+      "title": "法国官方称近2400人在17日大规模抗议活动中被捕",
+      "url": "https://www.chinanews.com.cn/gj/2026/10-19/10716975.shtml",
+      "publishedAt": "2026-10-19T03:04:06.000Z",
+      "publishedAtMs": 1792379046000,
+      "summary": "中新社巴黎10月19日电 (记者 李洋)法国官方当地时间18日称，近2400人在17日全法大规模游行示威和抗议活动中被捕，近1000名警察和宪兵受伤。",
+      "tags": [
+        "军事",
+        "国际"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nf518ce379258",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "特斯拉声明没有速成车，陶琳称安全稳定可靠、让人安心是最大的豪华",
+      "url": "https://www.ithome.com/1/014/723.htm",
+      "publishedAt": "2026-10-19T03:03:49.000Z",
+      "publishedAtMs": 1792379029000,
+      "summary": "IT之家 10 月 19 日消息，特斯拉官方今日发文，称特斯拉没有“速成车”。 特斯拉官方表示，特斯拉拥有完整的直营体系（覆盖买车、提车、用车、修车、换车），没有 4S 店，销售、交付、客服、技师全是自家人，大品牌 + 完整的直营体系正是消费者放心买、安心用的最大底气。 IT之家注意到，特斯拉公司副总裁陶琳随后转发该博…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nc0ce9ff63f23",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "长鑫科技股价大跌近 9% 最低报 41 元，创上市首日以来新低",
+      "url": "https://www.ithome.com/1/014/722.htm",
+      "publishedAt": "2026-10-19T03:03:13.000Z",
+      "publishedAtMs": 1792378993000,
+      "summary": "IT之家 10 月 19 日消息，A 股市场存储芯片股今日（10 月 19 日）开盘普跌，其中， 长鑫科技大跌近 9%，最低报 41 元，股价创上市首日以来新低 。 消息面上，长鑫科技上周五晚公告称，预计 2026 年前三季度归属于上市公司股东的净利润为 1310.00 亿元-1325.00 亿元，同比扭亏为盈。 从单…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na1901c3b0c04",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "海韵 CORE v3 GX 电源上市：750W 金牌 7 年质保，499 元",
+      "url": "https://www.ithome.com/1/014/721.htm",
+      "publishedAt": "2026-10-19T03:02:55.000Z",
+      "publishedAtMs": 1792378975000,
+      "summary": "IT之家 10 月 19 日消息，海韵 (Seasonic) 现已在电商平台上架新一代“游戏酷核”电源 CORE v3 GX。此次先行发售的是 750W 版本，售价 499 元。 CORE v3 GX 系列采用 140mm 标准长度的 ATX 外形规格，配备镀锡纯铜压纹全模组线材。其 符合 ATX12V 3.1、PCI…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd20015efae2e",
+      "category": "today",
+      "extraCategories": [],
+      "source": "中新网社会",
+      "sourceType": "rss",
+      "title": "人不见虎豹 诸山皆虎豹",
+      "url": "https://www.chinanews.com.cn/sh/2026/10-19/10717052.shtml",
+      "publishedAt": "2026-10-19T02:58:30.000Z",
+      "publishedAtMs": 1792378710000,
+      "summary": "探访东北虎豹国家公园",
+      "tags": [
+        "民生"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd4cd852ccce1",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(process): preserve cleanup ownership through retries and close",
+      "url": "https://github.com/morluto/rea/commit/974487f00f2d68912c7c2c9e033a2760a343a82e",
+      "publishedAt": "2026-10-19T02:52:55.000Z",
+      "publishedAtMs": 1792378375000,
+      "summary": "fix(process): preserve cleanup ownership through retries and close Carry historical cleanup reports with the exact lease that can confirm release. Bind originat…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n92c4602ecaad",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "聚焦在轨服务，要打造太空机器人集群，「国宇星辰」完成近亿元A轮融资｜36氪首发",
+      "url": "https://36kr.com/p/4032195238482313?f=rss",
+      "publishedAt": "2026-10-19T02:43:02.000Z",
+      "publishedAtMs": 1792377782000,
+      "summary": "文 | 阿至 商业航天的叙事，正在从“把卫星送上天”过渡至“卫星上天后”怎么管、怎么运营。 除了组网建设加速，一个直观的信号是，低轨星座的补网压力也正在逼近。根据NASA戈达德航天中心此前发布的研究数据，2020至2024年间，有583颗星链卫星从极低地球轨道坠落。而为了防止失控与碰撞，卫星的主动变轨和避让动作也变得愈…",
+      "tags": [
+        "36氪",
+        "AI"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nabfdeb351e48",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "MapQuest lets you track Flock cameras",
+      "url": "https://mashable.com/tech/mapquest-fusers-can-find-nearby-flock-cameras",
+      "publishedAt": "2026-10-19T02:13:11.000Z",
+      "publishedAtMs": 1792375991000,
+      "summary": "MapQuest lets you track Flock cameras（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nf6aea7f9d342",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Botline, a mailbox for AI agents from different vendors",
+      "url": "https://github.com/sabotage-dev/botline",
+      "publishedAt": "2026-10-19T02:09:57.000Z",
+      "publishedAtMs": 1792375797000,
+      "summary": "Botline, a mailbox for AI agents from different vendors（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd263d70f59aa",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(electron): preserve callback ownership through listener removal",
+      "url": "https://github.com/morluto/rea/commit/dfe8378cf5a727e3d93d47a5986233175c6ef898",
+      "publishedAt": "2026-10-19T01:51:04.000Z",
+      "publishedAtMs": 1792374664000,
+      "summary": "fix(electron): preserve callback ownership through listener removal Keep canonical callback ownership independent of writable raw-listener metadata. Resolve the…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ncad2a8e72bfb",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "AI Agents Trading Stocks While You Sleep? Charles Schwab's CEO Is Skeptical",
+      "url": "https://www.wsj.com/tech/ai/ai-agents-trading-stocks-while-you-sleep-charles-schwabs-ceo-is-skeptical-3ff1b5c3",
+      "publishedAt": "2026-10-19T01:37:48.000Z",
+      "publishedAtMs": 1792373868000,
+      "summary": "AI Agents Trading Stocks While You Sleep? Charles Schwab's CEO Is Skeptical（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n32c2423c4e1a",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(process): gate launch and retain cancellation provenance",
+      "url": "https://github.com/morluto/rea/commit/d6ca7b3f20a273823c50d6253f0b6f34f3876f53",
+      "publishedAt": "2026-10-19T01:14:00.000Z",
+      "publishedAtMs": 1792372440000,
+      "summary": "fix(process): gate launch and retain cancellation provenance Check cancellation at the PTY execution boundary after executable sampling and descriptor cleanup s…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na18a5440a71d",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(mcp): preserve procedure aliases and complete name ambiguity",
+      "url": "https://github.com/morluto/rea/commit/d3627b10382b0f28b12cad1543634e165470b29a",
+      "publishedAt": "2026-10-19T00:54:23.000Z",
+      "publishedAtMs": 1792371263000,
+      "summary": "fix(mcp): preserve procedure aliases and complete name ambiguity Derive address suggestions separately from name uniqueness across every validated inventory row…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nf94399a41d53",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: Local-first macOS video recorder and editor with MCP support",
+      "url": "https://github.com/TriHerm/cutmark",
+      "publishedAt": "2026-10-19T00:52:54.000Z",
+      "publishedAtMs": 1792371174000,
+      "summary": "Show HN: Local-first macOS video recorder and editor with MCP support（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n71816426fb52",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Reliable web access for AI agents and automation workflows",
+      "url": "https://ninatechllc.com/",
+      "publishedAt": "2026-10-19T00:46:38.000Z",
+      "publishedAtMs": 1792370798000,
+      "summary": "Reliable web access for AI agents and automation workflows（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n1d85ebfcf8d0",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(setup): treat empty APPDATA as unset for VS Code, Trae and Devin …",
+      "url": "https://github.com/morluto/rea/commit/273bb662763406662b4c061887397e9e5f27aa4d",
+      "publishedAt": "2026-10-19T00:45:04.000Z",
+      "publishedAtMs": 1792370704000,
+      "summary": "fix(setup): treat empty APPDATA as unset for VS Code, Trae and Devin (#5126)",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd1217b6befe5",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(reference)!: preserve symlink races and root failure facts",
+      "url": "https://github.com/morluto/rea/commit/6296fdf560f1ac4aa55985558edaa98300aacdbc",
+      "publishedAt": "2026-10-19T00:36:53.000Z",
+      "publishedAtMs": 1792370213000,
+      "summary": "fix(reference)!: preserve symlink races and root failure facts Classify replacement EINVAL at the readlink syscall so the reader and importer retain sibling obs…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nc232be87635a",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(process)!: retain partial filesystem snapshot observations",
+      "url": "https://github.com/morluto/rea/commit/c85b44e1b14851c54e65327a4807f79ad5cd5a61",
+      "publishedAt": "2026-10-19T00:34:39.000Z",
+      "publishedAtMs": 1792370079000,
+      "summary": "fix(process)!: retain partial filesystem snapshot observations Keep expected readlink and follow-up lstat failures as typed entry omissions, including the obser…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ncb15fddee0f8",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: A free MCP server for facts LLMs get wrong (time zones, holidays, FX)",
+      "url": "https://apistack.online/mcp",
+      "publishedAt": "2026-10-19T00:20:09.000Z",
+      "publishedAtMs": 1792369209000,
+      "summary": "Show HN: A free MCP server for facts LLMs get wrong (time zones, holidays, FX)（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n7d8646003bdb",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "8点1氪丨iPhone Duo溢价暴跌至3000元；多家A股科技龙头公司宣布计划回购；王自如称想与罗永浩和解",
+      "url": "https://36kr.com/p/4032044521558403?f=rss",
+      "publishedAt": "2026-10-19T00:10:05.000Z",
+      "publishedAtMs": 1792368605000,
+      "summary": "今日热点导览 DeepSeek新模型Token消耗降超五成 燃油车在中国市场销售占比首次跌破三分之一 特斯拉将发布财报，SpaceX将公布上市后的第二份财报 Swisse“抗糖丸”被检出铅超标，官方客服：相关批次未进入中国销售 港股结算机制生变：“T+2”将改为“T+1”，2028年下半年完成 TOP3大新闻 iPho…",
+      "tags": [
+        "36氪",
+        "AI"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nfdc53abe0063",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(investigation): scope automatic unknowns to result Evidence",
+      "url": "https://github.com/morluto/rea/commit/95c8f57aa2eafab4c8d7d43482b33ceefaf96b16",
+      "publishedAt": "2026-10-19T00:02:03.000Z",
+      "publishedAtMs": 1792368123000,
+      "summary": "fix(investigation): scope automatic unknowns to result Evidence Construct automatic unknown identity once at the application boundary. Validate the original que…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n98a6202ab123",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(domain): preserve partial reference comparison facts",
+      "url": "https://github.com/morluto/rea/commit/92dadf93344296516b960487d2f49c0f67e246fa",
+      "publishedAt": "2026-10-18T23:45:34.000Z",
+      "publishedAtMs": 1792367134000,
+      "summary": "fix(domain): preserve partial reference comparison facts Own endpoint identity and per-edge kind knowledge in one parsed reference representation. Preserve exac…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n1c954a7fdd4a",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: Hybro – an open interoperability engine for AI agents",
+      "url": "https://github.com/hybroai/hybro",
+      "publishedAt": "2026-10-18T23:41:45.000Z",
+      "publishedAtMs": 1792366905000,
+      "summary": "I built an open interoperability engine for AI agents. Connect your favorite agents and harnesses. Work together. Appreciate for any feedback.",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n4d902a6f13f5",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(uninstall): retain per-file partial outcomes",
+      "url": "https://github.com/morluto/rea/commit/559af3d3ff4b0236d468e80788c82d5a85b102da",
+      "publishedAt": "2026-10-18T23:22:01.000Z",
+      "publishedAtMs": 1792365721000,
+      "summary": "fix(uninstall): retain per-file partial outcomes Preserve configuration paths and constituent actions independently of aggregate status. Derive summaries from a…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n3476c97a9960",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(native): preserve partial call reference evidence",
+      "url": "https://github.com/morluto/rea/commit/a80575c73652d8b43d7340654a48bd20a4eb966d",
+      "publishedAt": "2026-10-18T23:12:44.000Z",
+      "publishedAtMs": 1792365164000,
+      "summary": "fix(native): preserve partial call reference evidence Retain provider-reported call sites and raw classification independently of generic reference flags. Keep …",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ne8f0f55955bc",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "docs(manifest): align plan with top-level body parsing",
+      "url": "https://github.com/morluto/rea/commit/fdaffe21cc03ed9a46c69ba057b1d89947b72b83",
+      "publishedAt": "2026-10-18T23:08:20.000Z",
+      "publishedAtMs": 1792364900000,
+      "summary": "docs(manifest): align plan with top-level body parsing",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na9416acdf1a0",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "feat(analysis-view): project an environment manifest from web network…",
+      "url": "https://github.com/morluto/rea/commit/291059adb4dabc768f91d9da0ba93007d7ab6822",
+      "publishedAt": "2026-10-18T23:07:37.000Z",
+      "publishedAtMs": 1792364857000,
+      "summary": "feat(analysis-view): project an environment manifest from web network captures (#4954) * feat(analysis-view): project an environment manifest from web network c…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n7dd0dd3a1ff0",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "InfoQ中文",
+      "sourceType": "rss",
+      "title": "Meta 联手苹果推出全美最强开源模型，编码基测输给智谱、Kimi",
+      "url": "https://www.infoq.cn/article/EuYOPRUBAeBgBGBu5ktk?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-18T23:01:33.000Z",
+      "publishedAtMs": 1792364493000,
+      "summary": "点击查看原文>",
+      "tags": [
+        "开发",
+        "技术"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nfaab9a411d28",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "InfoQ中文",
+      "sourceType": "rss",
+      "title": "17岁 Kimi 架构核心参与者离职，确认将赴湾区，下一站引发猜想",
+      "url": "https://www.infoq.cn/article/UdT804ujpGxrv0pQfxv2?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-18T22:58:03.000Z",
+      "publishedAtMs": 1792364283000,
+      "summary": "点击查看原文>",
+      "tags": [
+        "开发",
+        "技术"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nde70bef4718b",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(native): retain partial call routes and omitted sites",
+      "url": "https://github.com/morluto/rea/commit/65884350ff3373f2adc7337c1945eeb54334693f",
+      "publishedAt": "2026-10-18T22:48:14.000Z",
+      "publishedAtMs": 1792363694000,
+      "summary": "fix(native): retain partial call routes and omitted sites Separate enumeration outcome from retained facts in the native call-route owner. Keep every available …",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n1d4ee627416e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "2x Tesla p100s, q6_k quant, Qwen 3.8 27B ~60tps",
+      "url": "https://github.com/Kmic-68/llama.cpp",
+      "publishedAt": "2026-10-18T22:47:56.000Z",
+      "publishedAtMs": 1792363676000,
+      "summary": "2x Tesla p100s, q6_k quant, Qwen 3.8 27B ~60tps（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd5e209c96f64",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "fix(uninstall): preflight repeated registration ownership",
+      "url": "https://github.com/morluto/rea/commit/22ddd820143b0ce455756b24acf60ed251286622",
+      "publishedAt": "2026-10-18T22:32:14.000Z",
+      "publishedAtMs": 1792362734000,
+      "summary": "fix(uninstall): preflight repeated registration ownership Read shadowed registrations from the effective JSONC syntax tree before any client is changed. Share t…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n95c28814a425",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Tkmd – A local CLI task manager and MCP server with AI agent review gates`",
+      "url": "https://github.com/ktreharrison/tkmd",
+      "publishedAt": "2026-10-18T22:27:30.000Z",
+      "publishedAtMs": 1792362450000,
+      "summary": "Tkmd – A local CLI task manager and MCP server with AI agent review gates`（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "neccd23bfc43c",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "test(contracts): align plist and UI finalization regressions",
+      "url": "https://github.com/morluto/rea/commit/d1adc607952472b6db87d1fe5af4ba241f759f6e",
+      "publishedAt": "2026-10-18T22:22:32.000Z",
+      "publishedAtMs": 1792362152000,
+      "summary": "test(contracts): align plist and UI finalization regressions Update public-boundary expectations after the explicit XML unknown-scalar and native UI deadline pr…",
+      "tags": [
+        "GitHub",
+        "Commit",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nfc4a7301ab3c",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Ask HN: Is Agentic Coding really faster?",
+      "url": "https://news.ycombinator.com/item?id=50145991",
+      "publishedAt": "2026-10-18T22:08:05.000Z",
+      "publishedAtMs": 1792361285000,
+      "summary": "I am trying to get a grasp of what we can do with agents. I am an avid user of agentic coding. But somehow I think I code faster by hand (by IDEs I mean). I've …",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n09387690e06b",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: WhatsApp MCP running free on Cloudflare",
+      "url": "https://github.com/finereli/whatsapp-mcp",
+      "publishedAt": "2026-10-18T21:36:10.000Z",
+      "publishedAtMs": 1792359370000,
+      "summary": "I wanted my humble Claude on mobile to access my WhatsApp messages but the only options I could find either required WhatsApp Business or an actual server to ru…",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ne46d287cf6ce",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "California and Louisiana have US's highest poverty rates when tied to COL",
+      "url": "https://www.axios.com/2026/10/18/american-poverty-map-states-california-louisiana",
+      "publishedAt": "2026-10-18T21:34:41.000Z",
+      "publishedAtMs": 1792359281000,
+      "summary": "California and Louisiana have US's highest poverty rates when tied to COL（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n74d5d070ddf5",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "MCP events: who writes the first prompt now?",
+      "url": "https://timeline.differentiated.io/guides/mcp-events",
+      "publishedAt": "2026-10-18T19:57:50.000Z",
+      "publishedAtMs": 1792353470000,
+      "summary": "MCP events: who writes the first prompt now?（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n34fd921c129e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Neurastheniacc: LLM-based C->WASM compiler you didn't need",
+      "url": "https://github.com/vivshaw/neurastheniacc",
+      "publishedAt": "2026-10-18T19:20:47.000Z",
+      "publishedAtMs": 1792351247000,
+      "summary": "Neurastheniacc: LLM-based C->WASM compiler you didn't need（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n0fc2ef0ddd8d",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Follow the Money Database – See who funds your congressperson",
+      "url": "https://helyn.com/follow-the-money",
+      "publishedAt": "2026-10-18T19:17:52.000Z",
+      "publishedAtMs": 1792351072000,
+      "summary": "Follow the Money Database – See who funds your congressperson（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n10d5060d4ad6",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Flock camera locations revealed on MapQuest's new Surveillance Layer",
+      "url": "https://www.tomshardware.com/software/maps/flock-camera-locations-revealed-on-mapquests-new-surveillance-layer-users-can-now-see-placement-and-direction-of-known-license-plate-readers-from-multiple-companies",
+      "publishedAt": "2026-10-18T19:16:14.000Z",
+      "publishedAtMs": 1792350974000,
+      "summary": "Flock camera locations revealed on MapQuest's new Surveillance Layer（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n157286a08112",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Trustbut checks if an AI agent's new tests fail without its change",
+      "url": "https://github.com/isAlmogK/trustbut",
+      "publishedAt": "2026-10-18T19:07:31.000Z",
+      "publishedAtMs": 1792350451000,
+      "summary": "Trustbut checks if an AI agent's new tests fail without its change（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n6974c1bad652",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: A World 3D globe where kids collect birds",
+      "url": "https://www.birdsaroundworld.com/",
+      "publishedAt": "2026-10-18T18:37:10.000Z",
+      "publishedAtMs": 1792348630000,
+      "summary": "Yesterday I saw a super interesting project around maps for kids that reminded me something: my little one and I love maps. My kid, who's 9yo, wants to be an or…",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n34fd0e143c6c",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Three strategies for protecting human spaces from bots",
+      "url": "https://jilltxt.net/three-strategies-for-protecting-human-spaces-from-bots-inspired-by-ai-agent-velvet-vales-email-to-the-aoir-mailing-list/",
+      "publishedAt": "2026-10-18T18:04:05.000Z",
+      "publishedAtMs": 1792346645000,
+      "summary": "Three strategies for protecting human spaces from bots（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n36d360acf125",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: I recreated Contra in a custom NES game engine (NOT an emulator)",
+      "url": "https://news.ycombinator.com/item?id=50143302",
+      "publishedAt": "2026-10-18T17:35:03.000Z",
+      "publishedAtMs": 1792344903000,
+      "summary": "Here's a demo video I recorded for a friend that I decided to repost. Sorry for the terrible sound quality and my cough -- hope it's mostly understandable. http…",
+      "tags": [
+        "Hacker News",
+        "AI agent",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n457eb44cc092",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Agentic Scientist, Orchestrator for Automated Scientific (Co-)Discovery",
+      "url": "https://github.com/SakanaAI/AI-Scientist-v3",
+      "publishedAt": "2026-10-18T16:56:44.000Z",
+      "publishedAtMs": 1792342604000,
+      "summary": "Agentic Scientist, Orchestrator for Automated Scientific (Co-)Discovery（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd797d088175e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Ghidra and CBMC = Assembly Model Checker",
+      "url": "https://www.philipzucker.com/asmc_cpp/",
+      "publishedAt": "2026-10-18T16:53:15.000Z",
+      "publishedAtMs": 1792342395000,
+      "summary": "Ghidra and CBMC = Assembly Model Checker（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP",
+        "Ghidra"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ned2e817a738e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "The Radxa Linkr – A KVM for Your AI Agent",
+      "url": "https://taoofmac.com/space/reviews/2026/10/18/1646",
+      "publishedAt": "2026-10-18T16:45:33.000Z",
+      "publishedAtMs": 1792341933000,
+      "summary": "The Radxa Linkr – A KVM for Your AI Agent（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent",
+        "JADX"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nfc79f92358d7",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Brown Fat Can Be Beneficial and Blood Pressure Meds Could Activate It",
+      "url": "https://www.sciencealert.com/brown-fat-can-be-beneficial-for-the-body-and-a-blood-pressure-drug-could-turn-it-on",
+      "publishedAt": "2026-10-18T16:42:56.000Z",
+      "publishedAtMs": 1792341776000,
+      "summary": "Brown Fat Can Be Beneficial and Blood Pressure Meds Could Activate It（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n0c5a4aaf93ab",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: Firmendaten: Parsed balance sheets for every Austrian company",
+      "url": "https://firmendaten.researchly.at/bilanzen/vergleichen",
+      "publishedAt": "2026-10-18T16:41:14.000Z",
+      "publishedAtMs": 1792341674000,
+      "summary": "Ever since January 2025 the Austrian Ministry of Justice has made the Firmenbuch public (and free!) as part of the EUs Open Data Directive. Firmendaten builds o…",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n0ad7cca77198",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Tell HN: I picked up knitting while waiting for my AI agent to complete",
+      "url": "https://news.ycombinator.com/item?id=50142650",
+      "publishedAt": "2026-10-18T16:39:46.000Z",
+      "publishedAtMs": 1792341586000,
+      "summary": "Any new hobbies you are willing to share that AI made you start?",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n66712c940ae6",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: HedgePick – nine AI agents that argue against your stock thesis",
+      "url": "https://hedgepick.com/",
+      "publishedAt": "2026-10-18T16:33:43.000Z",
+      "publishedAtMs": 1792341223000,
+      "summary": "Show HN: HedgePick – nine AI agents that argue against your stock thesis（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n6d59883bb7ec",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Vertick – built with DominoKit and agentic AI",
+      "url": "https://dominokit.com/vertick/",
+      "publishedAt": "2026-10-18T16:23:10.000Z",
+      "publishedAtMs": 1792340590000,
+      "summary": "Vertick – built with DominoKit and agentic AI（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n0e2417305e44",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "The Problem with C++ Safety: Why \"It Works\" Isn't Good Enough",
+      "url": "https://www.modernescpp.com/index.php/cpp-and-memory-safety-part-1/",
+      "publishedAt": "2026-10-18T16:10:59.000Z",
+      "publishedAtMs": 1792339859000,
+      "summary": "The Problem with C++ Safety: Why \"It Works\" Isn't Good Enough（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n577a2e09115a",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Replacing an LLM judge with a deterministic model: 9.2x faster, 4.5x cheaper",
+      "url": "https://medium.com/@gbenga-awodokun/building-clinical-ai-agents-with-langchain-and-jev-decision-healthcare-trustworthy-ai-lab-v2-1b81e271f1c9",
+      "publishedAt": "2026-10-18T16:07:52.000Z",
+      "publishedAtMs": 1792339672000,
+      "summary": "Replacing an LLM judge with a deterministic model: 9.2x faster, 4.5x cheaper（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nff6788ca2b99",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "InfoQ中文",
+      "sourceType": "rss",
+      "title": "Cloudflare 修复了容器中的跨租户数据泄露问题",
+      "url": "https://www.infoq.cn/article/YmllSwKbZXY0bcVjjw70?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-18T16:00:00.000Z",
+      "publishedAtMs": 1792339200000,
+      "summary": "点击查看原文>",
+      "tags": [
+        "开发",
+        "技术"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n333651b14602",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Built a task tracker for teams that hate project management",
+      "url": "https://turtletask.app/",
+      "publishedAt": "2026-10-18T15:22:00.000Z",
+      "publishedAtMs": 1792336920000,
+      "summary": "Built a task tracker for teams that hate project management（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n7481fe11226e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Solidot",
+      "sourceType": "rss",
+      "title": "指纹显示秦始皇兵马俑的制作者有男有女有儿童",
+      "url": "https://www.solidot.org/story?sid=85643",
+      "publishedAt": "2026-10-18T15:14:58.000Z",
+      "publishedAtMs": 1792336498000,
+      "summary": "考古学家长期以来认为秦始皇兵马俑全是由成年男性工匠制作的。但俑上的指纹显示，男性、女性甚至儿童都参与了这项宏大工程。秦始皇帝陵博物院的考古学家从同一发掘坑内的 36 尊兵马俑上提取出 91 枚指纹，其中 12 枚指纹被认为是个别人留下的重复指纹而剔除。研究人员分析了剩下的 79 枚指纹，它们分布在兵马俑的各个部位——头…",
+      "tags": [
+        "科技行业",
+        "安全"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nb0bd315f6892",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Websites are closing their doors to AI agents",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web",
+      "publishedAt": "2026-10-18T14:58:10.000Z",
+      "publishedAtMs": 1792335490000,
+      "summary": "Websites are closing their doors to AI agents（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent",
+        "热门"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n85afc636e544",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Solidot",
+      "sourceType": "rss",
+      "title": "退休教授因阻止 Uber Eats 机器人送货被捕",
+      "url": "https://www.solidot.org/story?sid=85642",
+      "publishedAt": "2026-10-18T14:43:08.000Z",
+      "publishedAtMs": 1792334588000,
+      "summary": "宾夕法尼亚大学 78 岁的荣休教授 Marvin 本周因拒绝给 Uber Eats 的送货机器人让路而被捕。她表示自己记不得多少次挡住机器人的路了，称自己在进行抗议，旨在反对“为增加自身利润而用机器人取代人类送货员的企业”。Marvin 说，她在现场停留了“相当长一段时间”，警察过来要求她让路，让机器人完成送货任务。在…",
+      "tags": [
+        "科技行业",
+        "安全"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n3239a21a0aaa",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: TaskPocket, a to-do app with an MCP server instead of built-in AI",
+      "url": "https://taskpocket.io/",
+      "publishedAt": "2026-10-18T14:39:55.000Z",
+      "publishedAtMs": 1792334395000,
+      "summary": "Show HN: TaskPocket, a to-do app with an MCP server instead of built-in AI（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n8993d52ca43c",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Anthropic's proposed AI safety bill only kicks in if 50 deaths or $1B in damages",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropics-proposed-ai-safety-bill-only-kicks-in-if-50-deaths-or-usd1-billion-in-damages-are-on-the-line-proposal-would-effectively-make-the-commerce-department-the-only-agency-capable-of-stopping-an-ai-model",
+      "publishedAt": "2026-10-18T14:30:27.000Z",
+      "publishedAtMs": 1792333827000,
+      "summary": "Anthropic's proposed AI safety bill only kicks in if 50 deaths or $1B in damages（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent",
+        "热门"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd54dac1386f9",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Coding Agents Build For The Grader They Imagine, Not The User",
+      "url": "https://joinhandshake.com/research/ai/deepswe-reward-hacking/",
+      "publishedAt": "2026-10-18T14:28:33.000Z",
+      "publishedAtMs": 1792333713000,
+      "summary": "Coding Agents Build For The Grader They Imagine, Not The User（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n799fdf9139f9",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Solidot",
+      "sourceType": "rss",
+      "title": "内核开发者递交代码无需声明是否 AI 辅助编写",
+      "url": "https://www.solidot.org/story?sid=85641",
+      "publishedAt": "2026-10-18T14:28:17.000Z",
+      "publishedAtMs": 1792333697000,
+      "summary": "Linux 邮件列表中的一则消息披露，2026 年 10 月 8 日捷克布拉格举行的维护者峰会（Maintainers Summit）达成了一项重大决策：向内核提交代码时，无需再使用“Assisted-by”标签。这意味着内核开发者递交代码无需声明是否 AI 辅助编写。Linux 作者 Linus Torvalds 认…",
+      "tags": [
+        "科技行业",
+        "安全"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n0b8d8c5665cc",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Solidot",
+      "sourceType": "rss",
+      "title": "Meta 新增条款允许其抓取客户内容并用于训练 AI",
+      "url": "https://www.solidot.org/story?sid=85640",
+      "publishedAt": "2026-10-18T14:10:15.000Z",
+      "publishedAtMs": 1792332615000,
+      "summary": "Meta 修改了其商业服务条款，新条款将于 2026 年 10 月 30 日生效。新增条款赋予了 Meta 一项权利，允许它使用自动化软件抓取客户内容，将其用于改进包括 AI 模型在内的公司产品。所谓的自动化软件包括了网页抓取工具、机器人、爬虫及用户智能体。News/Media Alliance 总裁 Danielle…",
+      "tags": [
+        "科技行业",
+        "安全"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n22b9b1366c8a",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Securities Class Action Filed Against Duolingo, Inc",
+      "url": "https://www.businesswire.com/news/home/20261008399415/en/Securities-Class-Action-Filed-Against-Duolingo-Inc.-DUOL-Investors-Encouraged-to-Contact-Kirby-McInerney-LLP",
+      "publishedAt": "2026-10-18T13:26:49.000Z",
+      "publishedAtMs": 1792330009000,
+      "summary": "Securities Class Action Filed Against Duolingo, Inc（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "MCP"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n4dc926fa2e5d",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: MeetCap – Free on-device meeting transcription your AI agent can run",
+      "url": "https://meetcap.seacen.dev/",
+      "publishedAt": "2026-10-18T13:21:48.000Z",
+      "publishedAtMs": 1792329708000,
+      "summary": "MeetCap records your meetings, transcribes them on your computer, and works with your AI agent in both directions. Your agent can run it. In Claude Code, Codex …",
+      "tags": [
+        "Hacker News",
+        "AI agent"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n87fc039b9114",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "量子位",
+      "sourceType": "rss",
+      "title": "VAST开源实时世界模型EdenLive！单消费级显卡、720P超24FPS",
+      "url": "https://www.qbitai.com/2026/10/504136.html",
+      "publishedAt": "2026-10-18T11:49:49.000Z",
+      "publishedAtMs": 1792324189000,
+      "summary": "让人人都能自由创造并体验可交互世界",
+      "tags": [
+        "AI",
+        "人工智能"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n05a9f1a5d3d1",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "InfoQ中文",
+      "sourceType": "rss",
+      "title": "“AI+终端”时代的萌芽：大模型在终端领域的探索和量产落地｜QCon上海",
+      "url": "https://www.infoq.cn/article/qZPH971CbfHkaCfgG0cb?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-18T10:00:00.000Z",
+      "publishedAtMs": 1792317600000,
+      "summary": "点击查看原文>",
+      "tags": [
+        "开发",
+        "技术"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na1a3bfe4c420",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "InfoQ中文",
+      "sourceType": "rss",
+      "title": "Aspire 13.6 新增持久化仪表盘遥测功能，并支持第一方 Java 和 Rust 托管",
+      "url": "https://www.infoq.cn/article/4BUR4DmMxSBxyzYh6Fxz?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-18T09:17:00.000Z",
+      "publishedAtMs": 1792315020000,
+      "summary": "点击查看原文>",
+      "tags": [
+        "开发",
+        "技术"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nf7ccf90984a7",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "B站热门",
+      "sourceType": "json",
+      "title": "🐧谁的大吉他最好玩!?🐧",
+      "url": "https://b23.tv/BV19jnG6kEHT",
+      "publishedAt": "2026-10-18T08:35:55.000Z",
+      "publishedAtMs": 1792312555000,
+      "summary": "娱乐粉丝创作 · UP主 川崎仁仁菜：你的灵媒..不，你的大吉他最好玩。对不起祥子，我已经会唱没有键盘的春日影了.. 灵感菇：BV1uue36iEDn",
+      "tags": [
+        "B站",
+        "娱乐粉丝创作"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nffd09502375c",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "老板们不再把钱交给VC了",
+      "url": "https://36kr.com/p/4031081236042116?f=rss",
+      "publishedAt": "2026-10-18T07:55:27.000Z",
+      "publishedAtMs": 1792310127000,
+      "summary": "家办，正在成为中国一级市场上冉冉升起的一股新势力。 作者 陶辉东 编辑 王庆武 不知道你有没有注意到，“家办”这两个字今年越来越频繁的出现在融资通稿里。 2月，千寻智能完成近20亿融资，投资方名单中明确列出了“明荟投资（汇川技术董事长朱兴明家办）”。 5月，Zenbot 宣布完成近亿元人民币天使轮，联合领投的是“长盈精…",
+      "tags": [
+        "36氪",
+        "AI"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n068db6076d95",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "发布 rea-agents: v6.7.0",
+      "url": "https://github.com/morluto/rea/releases/tag/rea-agents-6.7.0",
+      "publishedAt": "2026-10-18T07:46:33.000Z",
+      "publishedAtMs": 1792309593000,
+      "summary": "6.7.0 (2026-10-18) Highlights Client configuration edits follow the duplicate-member semantics used by MCP clients. Changes Includes the 6.6.0 changes and migra…",
+      "tags": [
+        "GitHub",
+        "Release",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n566907260cf3",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "JAXA is about to perform a Phobos sample return mission",
+      "url": "https://www.science.org/content/article/audacious-space-heist-japan-aims-bring-home-bits-martian-moon",
+      "publishedAt": "2026-10-18T06:40:55.000Z",
+      "publishedAtMs": 1792305655000,
+      "summary": "JAXA is about to perform a Phobos sample return mission（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "JADX"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n27a529bcd16d",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "anthropics/claude-plugins-official",
+      "url": "https://github.com/anthropics/claude-plugins-official",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "Official, Anthropic-managed directory of high quality Claude Code Plugins. https://code.claude.com/docs/en/plugins Claude Code Plugins Directory A curated direc…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n85d27d4cf28c",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "MadsLorentzen/ai-job-search",
+      "url": "https://github.com/MadsLorentzen/ai-job-search",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n3d5750badb05",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "affaan-m/ECC",
+      "url": "https://github.com/affaan-m/ECC",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor …",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n9f35c67b8a33",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "HKUDS/CLI-Anything",
+      "url": "https://github.com/HKUDS/CLI-Anything",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/ https://clianything.cc/ CLI-Anything: Making ALL Software Agent-Native Toda…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na696909645d4",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "K-Dense-AI/scientific-agent-skills",
+      "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 250,000+ scientists worldwide. 177 ready-to-use validated skills plus 1…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n3e4e826efb5a",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "akitaonrails/ai-memory",
+      "url": "https://github.com/akitaonrails/ai-memory",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors Long-term memory for AI coding agents. Quit Claude…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n10ef9f644514",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "android/skills",
+      "url": "https://github.com/android/skills",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "Android skills Android skills are a dedicated repository of AI-optimized, modular instructions and resources, to help agents better understand and execute speci…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nf566bf16b9f8",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "stablyai/orca",
+      "url": "https://github.com/stablyai/orca",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "Orca is the place for working with a fleet of agents (e.g. Grok Bot, Claude Code). Run any coding agent with your own subscription. Available on desktop, mobile…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nb18b533efd4d",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "anthropics/claude-code",
+      "url": "https://github.com/anthropics/claude-code",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining c…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd029666a53b3",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "debpalash/VoiceStudio",
+      "url": "https://github.com/debpalash/VoiceStudio",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation i…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ncc9f1eb225d6",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "anomalyco/opencode",
+      "url": "https://github.com/anomalyco/opencode",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "The open source coding agent. https://opencode.ai The open source AI coding agent. English | 简体中文 | 繁體中文 | 한국어 | Deutsch | Español | Français | Italiano | Dansk…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n528ceb67be45",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "ruvnet/ruflo",
+      "url": "https://github.com/ruvnet/ruflo",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive m…",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n09acd700b81d",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "xerj-org/xerj",
+      "url": "https://github.com/xerj-org/xerj",
+      "publishedAt": "2026-10-18T05:18:23.000Z",
+      "publishedAtMs": 1792300703000,
+      "summary": "XERJ is the new way for AI to search data. Its autoindex capability activates agents to know your data without the token waste of grep (1974 tool). One command …",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n55e4e915994d",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "B站热门",
+      "sourceType": "json",
+      "title": "【特摄吐槽】谁家漫画给贝利亚加吻戏？",
+      "url": "https://b23.tv/BV1LCnM6BEZV",
+      "publishedAt": "2026-10-18T04:00:00.000Z",
+      "publishedAtMs": 1792296000000,
+      "summary": "特摄 · UP主 不语の说笑人：下期好想做铠六啊…… ∠( ᐛ 」∠)_ 喜欢视频的话还请点一下三连关注！！！",
+      "tags": [
+        "B站",
+        "特摄"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nf87e39ff111e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "发布 rea-agents: v6.6.0",
+      "url": "https://github.com/morluto/rea/releases/tag/rea-agents-6.6.0",
+      "publishedAt": "2026-10-18T03:40:29.000Z",
+      "publishedAtMs": 1792294829000,
+      "summary": "6.6.0 (2026-10-18) Highlights Add Kuna as a caller-supplied static-analysis provider. Query selected JavaScript facts and multiple APK locale tables without rep…",
+      "tags": [
+        "GitHub",
+        "Release",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nf0c42fdf1553",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "B站热门",
+      "sourceType": "json",
+      "title": "长乐夜未央丨全新主题区域「未央城」即将上线",
+      "url": "https://b23.tv/BV186Jq6uEFu",
+      "publishedAt": "2026-10-18T03:00:00.000Z",
+      "publishedAtMs": 1792292400000,
+      "summary": "影视剪辑 · UP主 燕云十六声官方：这是一片令江湖里无数人魂牵梦萦的乐土。这里有天下最好最稀有的珍宝、最妙最神奇的享乐——只要你付得起价码，心有所求，皆可“得到”。 10月23日，全新主题区域「未央城」将正式开启。从杭州码头出发，游侠将循着故交的蛛丝马迹来到此处，展开一段光怪陆离、波谲云诡的旅途。 富贵便无忧，富贵乡…",
+      "tags": [
+        "B站",
+        "影视剪辑"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n1351a3a7ae90",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "B站热门",
+      "sourceType": "json",
+      "title": "赵本山携手象牙山巨头们激情演唱《Uptown Funk》",
+      "url": "https://b23.tv/BV1T8J66CEEu",
+      "publishedAt": "2026-10-18T03:00:00.000Z",
+      "publishedAtMs": 1792292400000,
+      "summary": "鬼畜剧场 · UP主 小朱佩琪66：AI生成视频，仅供娱乐 音频：BV1E1421t7QB",
+      "tags": [
+        "B站",
+        "鬼畜剧场"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nb7089bad4657",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "前华为车BU世界模型基模负责人创业，杭州具身大脑公司获近亿元融资｜硬氪首发",
+      "url": "https://36kr.com/p/4025325566054529?f=rss",
+      "publishedAt": "2026-10-18T01:30:00.000Z",
+      "publishedAtMs": 1792287000000,
+      "summary": "作者｜黄楠 编辑｜袁斯来 硬氪获悉，具身大脑公司「格物通智」已完成近亿元天使轮融资，投资方包括匹克投资、鸿富资产、杭州资本、杭州人才集团、某省级具身产投及多家头部上市公司。资金将主要用于物理反演世界模型的大规模预训练与技术迭代、硬件与本体构建等，加快人才引进和规模扩充，并推进多个场景PoC验证和真实数据采集。Maple…",
+      "tags": [
+        "36氪",
+        "AI"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nb2c31048d8a9",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "I got a C&D 1h after reverse engineering Serum 2 into an Open Source alternative",
+      "url": "https://twitter.com/fabioroma/status/2111542692459033049",
+      "publishedAt": "2026-10-17T19:42:19.000Z",
+      "publishedAtMs": 1792266139000,
+      "summary": "I got a C&D 1h after reverse engineering Serum 2 into an Open Source alternative（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "reverse engineering"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n9e7bfc6feb06",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "B站热门",
+      "sourceType": "json",
+      "title": "熊出没最巅峰的一个系列，四季篇",
+      "url": "https://b23.tv/BV1WXJq6cE7Y",
+      "publishedAt": "2026-10-17T16:36:41.000Z",
+      "publishedAtMs": 1792255001000,
+      "summary": "影视剪辑 · UP主 阿鱼AIGC-：",
+      "tags": [
+        "B站",
+        "影视剪辑"
+      ],
+      "hot": true
+    },
+    {
+      "id": "nd45f00848560",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Solidot",
+      "sourceType": "rss",
+      "title": "游戏逆向工程网站宣布关闭因为 AI 让反编译游戏变得非常容易",
+      "url": "https://www.solidot.org/story?sid=85638",
+      "publishedAt": "2026-10-17T15:55:34.000Z",
+      "publishedAtMs": 1792252534000,
+      "summary": "协作游戏逆向工程网站 decomp.dev 宣布将关闭，管理员称 AI 让游戏反编译变得快且易于操作，基于人工的社区协作模式实际上已经瓦解，无法再区分哪些项目是以人工为主导的，哪些是由 AI 完成的。decomp.dev 管理员 Encounter 在官网声明中表示，从历史上看，匹配反编译一直是极其困难且耗时的任务，即…",
+      "tags": [
+        "科技行业",
+        "安全"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n40aec1f0b8ed",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "B站热门",
+      "sourceType": "json",
+      "title": "枪手携2500发弹药血洗商场！警员孤身迎战，80米外击毙！",
+      "url": "https://b23.tv/BV1dCJe6zEgv",
+      "publishedAt": "2026-10-17T11:00:00.000Z",
+      "publishedAtMs": 1792234800000,
+      "summary": "影视杂谈 · UP主 红蓝守护者：观众老爷好~今天我们将报道~美国德克萨斯州的《加西亚案》~请注意~我们制作这类影片是为了教育、警示、科普法律知识~请勿效仿和学习影片中的任何违法犯罪行为~ 本视频影像来源于依法公开的执法记录资料，属公共记录范畴 内容基于公开资料进行案件事实还原与法律程序分析 本视频不针对当事人作出评价…",
+      "tags": [
+        "B站",
+        "影视杂谈"
+      ],
+      "hot": true
+    },
+    {
+      "id": "naec8e1b73d1b",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "B站热门",
+      "sourceType": "json",
+      "title": "“这才是许愿池真正的意义，每一枚硬币都藏着人间善意”",
+      "url": "https://b23.tv/BV16GJv6SEeE",
+      "publishedAt": "2026-10-17T06:56:02.000Z",
+      "publishedAtMs": 1792220162000,
+      "summary": "音乐综合 · UP主 醉心日推音乐：00：00 III 05：52 Luvsic+夜，萤火虫和你 08：05 Collapsing World 11：15 Eutopia 16：08 The truth that you leave 19：51 You 25：40 Time is broken 28：39 snowfa…",
+      "tags": [
+        "B站",
+        "音乐综合"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n87fd68ca9e56",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "B站热门",
+      "sourceType": "json",
+      "title": "『复活局合集』死去的声音突然攻击我.",
+      "url": "https://b23.tv/BV19vJt6DE4k",
+      "publishedAt": "2026-10-16T12:56:17.000Z",
+      "publishedAtMs": 1792155377000,
+      "summary": "音乐综合 · UP主 星空上-音符：给个三连，好运连连！",
+      "tags": [
+        "B站",
+        "音乐综合"
+      ],
+      "hot": true
+    }
+  ]
+}
