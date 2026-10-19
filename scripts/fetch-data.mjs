@@ -605,22 +605,69 @@ async function fetchNews() {
 
 /* ============================ 6. GitHub Trending RSS ============================ */
 
+// Trending 榜单数据（日/周/月）随 daily.json 一并下发，App 无需直连 github.io
+const trendingLists = { daily: [], weekly: [], monthly: [], fetchedAt: null };
+// 镜像顺序：jsDelivr（国内可达）→ GitHub Pages 直连
+const TRENDING_PERIODS = ['daily', 'weekly', 'monthly'];
+const TRENDING_MIRRORS = [
+  (p) => `https://cdn.jsdelivr.net/gh/mshibanami/GitHubTrendingRSS@gh-pages/${p}/all.xml`,
+  (p) => `https://mshibanami.github.io/GitHubTrendingRSS/${p}/all.xml`,
+];
+
+function parseTrendingList(xml, cap) {
+  const out = [];
+  for (const e of parseFeed(xml)) {
+    const name = (e.title || '').trim();
+    if (!/^[\w.-]+\/[\w.-]+$/.test(name)) continue;
+    const [owner, repo] = name.split('/');
+    const desc = (e.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160);
+    out.push({ rank: out.length + 1, owner, repo, desc,
+      url: e.link || `https://github.com/${name}` });
+    if (out.length >= cap) break;
+  }
+  return out;
+}
+
+async function fetchTrendingFeed(period) {
+  let lastErr = '';
+  for (const mirror of TRENDING_MIRRORS) {
+    const u = mirror(period);
+    const r = await fetchWithRetry(u, { timeout: 15000 }, 'trending');
+    if (r.ok && /<rss|<feed/.test(r.body)) {
+      const list = parseTrendingList(r.body, period === 'daily' ? 25 : 50);
+      if (list.length) {
+        if (period !== 'daily') trackSource(`trending:${period}`, true, u.includes('jsdelivr') ? 'jsdelivr' : 'github-io', list.length);
+        return { list, mode: u.includes('jsdelivr') ? 'jsdelivr' : 'github-io' };
+      }
+    } else {
+      lastErr = r.error?.message || '非 RSS 返回';
+    }
+  }
+  if (period !== 'daily') trackSource(`trending:${period}`, false, 'jsdelivr+github-io', 0, lastErr || '全部不可用');
+  return { list: [], mode: null, error: lastErr };
+}
+
 async function fetchTrending() {
   if (skipped('TRENDING')) return;
-  const url = 'https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml';
-  const r = await fetchWithRetry(url, { timeout: 12000 }, 'trending');
+  const [d, w, m] = await Promise.all(TRENDING_PERIODS.map(fetchTrendingFeed));
+  trendingLists.daily = d.list;
+  trendingLists.weekly = w.list;
+  trendingLists.monthly = m.list;
+  trendingLists.fetchedAt = new Date().toISOString();
+
   let count = 0;
-  if (r.ok && /<rss|<feed/.test(r.body)) {
-    for (const e of parseFeed(r.body).slice(0, 25)) {
-      add({ category: 'ai', source: 'GitHub Trending', sourceType: 'rss',
-        title: e.title, url: e.link, date: e.date, excerpt: e.content,
-        tags: ['GitHub', 'Trending', '开源'] });
-      count++;
-    }
-    trackSource('trending', count > 0, 'community-rss', count);
+  for (const t of d.list.slice(0, 25)) {
+    add({ category: 'ai', source: 'GitHub Trending', sourceType: 'rss',
+      title: `${t.owner}/${t.repo}${t.desc ? '：' + t.desc : ''}`, url: t.url,
+      date: new Date(), excerpt: t.desc,
+      tags: ['GitHub', 'Trending', '开源'] });
+    count++;
+  }
+  if (count > 0) {
+    trackSource('trending', true, d.mode || 'community-rss', count);
   } else {
     // 降级：GitHub 搜索 API（REST 可用时）
-    recordError('trending', 'rss', r.error?.message || '不可用');
+    recordError('trending', 'rss', d.error || '日榜镜像均不可用');
     const since = new Date(NOW_MS - 2 * DAY).toISOString().slice(0, 10);
     const data = await getJson(
       `https://api.github.com/search/repositories?q=created:>${since}&sort=stars&order=desc&per_page=20`,
@@ -843,6 +890,7 @@ async function main() {
     sourceStatus,
     errors,
     items: final,
+    trending: trendingLists,
   };
 
   await mkdir(dirname(OUT_JSON), { recursive: true });

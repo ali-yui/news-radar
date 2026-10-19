@@ -118,6 +118,7 @@
     if (!validPayload(payload)) return false;
     state.data = payload;
     save(K.cache, payload);
+    if (window.Trending && window.Trending.setEmbedded) window.Trending.setEmbedded(payload.trending || null);
     renderUpdated();
     renderList();
     renderSourceStatus();
