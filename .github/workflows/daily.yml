@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: 检出仓库
         uses: actions/checkout@v4
+        with:
+          # 完整历史，保证后续向 Gitee 镜像推送时可快进（浅克隆会被拒）
+          fetch-depth: 0
 
       - name: 安装 Node
         uses: actions/setup-node@v4
@@ -60,4 +63,6 @@ jobs:
           fi
           REPO="${GITEE_REPO:-yuihl/news-radar}"
           git remote add gitee "https://oauth2:${GITEE_TOKEN}@gitee.com/${REPO}.git"
+          # 若远端有本端没有的提交（如手动推送），先合并再推；正常情况下直接快进
+          git fetch gitee main && git merge --no-edit -X theirs gitee/main || true
           git push gitee main

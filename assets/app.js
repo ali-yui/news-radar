@@ -13,8 +13,9 @@
 
   const TAB_NAMES = { today: '今天', ai: 'AI 圈', ent: '娱乐圈', settings: '设置' };
   const DAY = 86400000;
-  // 内置默认远程数据地址（每行一个，按顺序尝试）：jsDelivr 国内可达，raw.githubusercontent 为备用
+  // 内置默认远程数据地址（每行一个，按顺序尝试）：Gitee 国内最快 → jsDelivr → raw.githubusercontent
   const DEFAULT_REMOTE_URLS = [
+    'https://gitee.com/yuihl/news-radar/raw/main/public/data/daily.json',
     'https://cdn.jsdelivr.net/gh/ali-yui/news-radar@main/public/data/daily.json',
     'https://raw.githubusercontent.com/ali-yui/news-radar/main/public/data/daily.json',
   ].join('\n');
