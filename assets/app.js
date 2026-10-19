@@ -13,6 +13,11 @@
 
   const TAB_NAMES = { today: '今天', ai: 'AI 圈', ent: '娱乐圈', settings: '设置' };
   const DAY = 86400000;
+  // 内置默认远程数据地址（每行一个，按顺序尝试）：jsDelivr 国内可达，raw.githubusercontent 为备用
+  const DEFAULT_REMOTE_URLS = [
+    'https://cdn.jsdelivr.net/gh/ali-yui/news-radar@main/public/data/daily.json',
+    'https://raw.githubusercontent.com/ali-yui/news-radar/main/public/data/daily.json',
+  ].join('\n');
 
   const state = {
     tab: 'today',
@@ -27,7 +32,7 @@
   const defaultSettings = {
     theme: 'system',
     ghToken: '',
-    remoteUrl: '',
+    remoteUrl: DEFAULT_REMOTE_URLS,
     doubaoEnabled: false,
     doubaoEndpoint: '',
     doubaoKey: '',
@@ -137,14 +142,13 @@
     return u + (u.includes('?') ? '&' : '?') + 't=' + Date.now();
   }
 
-  // 数据来源顺序：远程地址（Gitee/Pages，国内网络推荐） → 同目录 daily.json（网页部署） → 内置数据
+  // 数据来源顺序：远程地址（可多个，每行一个，按顺序尝试） → 同目录 daily.json（网页部署） → 内置数据
   async function fetchDaily(opts = {}) {
-    const remote = (settings.remoteUrl || '').trim();
+    const remote = (settings.remoteUrl || '').split(/[\s,，]+/).filter(Boolean);
     const isFile = location.protocol === 'file:';
-    const urls = [];
-    if (remote) urls.push(remote);
+    const urls = [...remote];
     if (!isFile) urls.push('public/data/daily.json');
-    if (!urls.length) return null; // APK 未配置远程地址：静默使用内置数据，不刷错误
+    if (!urls.length) return null; // 无远程地址：静默使用内置数据，不刷错误
     const failures = [];
     for (const u of urls) {
       try {

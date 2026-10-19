@@ -248,6 +248,10 @@ svg { display: block; }
   padding: 0 12px; font-size: 16px; outline: none;
 }
 .field:focus { border-color: var(--accent); }
+textarea.field {
+  height: auto; padding: 10px 12px; line-height: 1.45;
+  resize: vertical; font-family: inherit; word-break: break-all;
+}
 .doubao-fields { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
 .row-between {
   display: flex; align-items: center; justify-content: space-between;

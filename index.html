@@ -110,10 +110,10 @@
 
     <section class="set-card">
       <h2>数据更新</h2>
-      <p class="hint">每天北京时间 09:00 自动更新；手动刷新会实时拉取 GitHub / Hacker News。国内网络下建议填写远程数据地址（Gitee / GitHub Pages 上 daily.json 的完整链接），填写后优先从该地址更新；留空则使用内置数据。</p>
-      <label class="field-label" for="remoteUrl">远程数据地址（daily.json）</label>
-      <input class="field" id="remoteUrl" type="text" placeholder="例如 https://gitee.com/yuihl/news-radar/raw/main/public/data/daily.json" autocomplete="off">
-      <p class="hint" style="margin-top:6px">填写后记得点上方「接口设置」中的「保存设置」。</p>
+      <p class="hint">每天北京时间 09:00 自动更新；手动刷新会实时拉取 GitHub / Hacker News。下方为远程数据地址，已预填默认地址，每行一个、按顺序尝试（jsDelivr 国内优先，raw.githubusercontent 备用）；清空则只用内置数据。</p>
+      <label class="field-label" for="remoteUrl">远程数据地址（daily.json，每行一个）</label>
+      <textarea class="field" id="remoteUrl" rows="3" autocomplete="off"></textarea>
+      <p class="hint" style="margin-top:6px">改完点「保存设置」。也可换成 Gitee 地址，例如 https://gitee.com/yuihl/news-radar/raw/main/public/data/daily.json</p>
       <div class="btn-row" style="margin-top:10px">
         <button class="btn-ghost" id="refreshNow" type="button">立即刷新</button>
         <button class="btn-ghost" id="exportFavs" type="button">导出收藏</button>
