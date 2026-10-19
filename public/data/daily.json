@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generatedAt": "2026-10-19T10:46:31.477Z",
-  "generatedAtBeijing": "2026/10/19 18:46:31",
+  "generatedAt": "2026-10-19T10:50:12.415Z",
+  "generatedAtBeijing": "2026/10/19 18:50:12",
   "window": "主展示近24小时，归档保留近7天；热榜数据无精确时间戳",
   "stats": {
     "total": 300,
     "byCategory": {
       "today": 100,
       "ai": 120,
-      "ent": 84
+      "ent": 85
     },
     "bySource": {
       "36Kr": 2,
@@ -17,16 +17,15 @@
       "百度热搜": 30,
       "百度电影榜": 7,
       "百度电视剧榜": 3,
-      "GitHub · morluto/rea": 30,
       "36氪": 20,
-      "IT之家": 19,
       "Hacker News": 29,
-      "新浪财经": 1,
+      "GitHub · morluto/rea": 30,
+      "IT之家": 20,
+      "新浪财经": 2,
       "中新网社会": 11,
       "中新网财经": 9,
-      "新华网": 4,
+      "新华网": 5,
       "FX News Group": 1,
-      "东方财富": 2,
       "https://tech-insider.org/": 1,
       "AiThority": 1,
       "中新网国际": 1,
@@ -37,20 +36,19 @@
       "InfoQ-CN": 1,
       "新浪新闻_手机新浪网": 6,
       "安全内参": 1,
-      "证券之星": 2,
+      "证券之星": 3,
       "Solidot": 5,
-      "新浪网": 29,
+      "新浪网": 27,
       "少数派": 1,
+      "东方财富": 1,
       "京报网": 1,
       "广州日报新花城": 1,
-      "搜狐": 7,
+      "搜狐": 8,
       "北京市人民政府门户网站": 1,
       "长江网": 1,
       "今日流媒体": 2,
-      "DevOps.com": 1,
       "B站热门": 3,
-      "财联社": 1,
-      "搜狐网": 4,
+      "搜狐网": 3,
       "新华网客户端": 1,
       "中国新闻网": 3,
       "杭州网": 1,
@@ -62,8 +60,8 @@
       "同济大学新闻网": 1,
       "雨果跨境": 1,
       "微博": 1,
+      "Reddit · r/netsec": 1,
       "Pandaily": 1,
-      "Reddit · r/ReverseEngineering": 1,
       "科技行者": 1,
       "ThePaper.cn": 1,
       "电子工程专辑": 1,
@@ -71,13 +69,14 @@
       "CyberSecurityNews": 1,
       "shattered.io": 1,
       "手机新浪网": 1,
-      "机核GCORES": 1,
+      "厦门大学新闻网": 1,
       "潮新闻客户端": 1,
       "潮起网": 1,
       "观点网": 1,
       "深圳新闻网": 1,
       "Business Wire": 1,
-      "科学网—新闻": 1
+      "科学网—新闻": 1,
+      "山东新闻": 1
     }
   },
   "sourceStatus": [
@@ -87,7 +86,7 @@
       "mode": "jsdelivr",
       "items": 17,
       "error": null,
-      "at": "2026-10-19T10:46:07.425Z"
+      "at": "2026-10-19T10:49:51.075Z"
     },
     {
       "source": "trending:monthly",
@@ -95,7 +94,7 @@
       "mode": "jsdelivr",
       "items": 21,
       "error": null,
-      "at": "2026-10-19T10:46:07.548Z"
+      "at": "2026-10-19T10:49:51.326Z"
     },
     {
       "source": "trending",
@@ -103,47 +102,7 @@
       "mode": "jsdelivr",
       "items": 16,
       "error": null,
-      "at": "2026-10-19T10:46:07.548Z"
-    },
-    {
-      "source": "googleNews:today",
-      "ok": true,
-      "mode": "rss",
-      "items": 60,
-      "error": null,
-      "at": "2026-10-19T10:46:08.853Z"
-    },
-    {
-      "source": "googleNews:ai",
-      "ok": true,
-      "mode": "rss",
-      "items": 87,
-      "error": null,
-      "at": "2026-10-19T10:46:08.853Z"
-    },
-    {
-      "source": "bing:ai",
-      "ok": true,
-      "mode": "rss-fallback",
-      "items": 3,
-      "error": null,
-      "at": "2026-10-19T10:46:08.853Z"
-    },
-    {
-      "source": "googleNews:ent",
-      "ok": true,
-      "mode": "rss",
-      "items": 90,
-      "error": null,
-      "at": "2026-10-19T10:46:08.853Z"
-    },
-    {
-      "source": "reddit",
-      "ok": true,
-      "mode": "json+rss",
-      "items": 20,
-      "error": null,
-      "at": "2026-10-19T10:46:08.938Z"
+      "at": "2026-10-19T10:49:51.327Z"
     },
     {
       "source": "IT之家",
@@ -151,7 +110,39 @@
       "mode": "rss",
       "items": 30,
       "error": null,
-      "at": "2026-10-19T10:46:09.228Z"
+      "at": "2026-10-19T10:49:52.513Z"
+    },
+    {
+      "source": "googleNews:today",
+      "ok": true,
+      "mode": "rss",
+      "items": 60,
+      "error": null,
+      "at": "2026-10-19T10:49:52.716Z"
+    },
+    {
+      "source": "googleNews:ai",
+      "ok": true,
+      "mode": "rss",
+      "items": 87,
+      "error": null,
+      "at": "2026-10-19T10:49:52.716Z"
+    },
+    {
+      "source": "bing:ai",
+      "ok": true,
+      "mode": "rss-fallback",
+      "items": 3,
+      "error": null,
+      "at": "2026-10-19T10:49:52.716Z"
+    },
+    {
+      "source": "googleNews:ent",
+      "ok": true,
+      "mode": "rss",
+      "items": 90,
+      "error": null,
+      "at": "2026-10-19T10:49:52.716Z"
     },
     {
       "source": "hn",
@@ -159,7 +150,15 @@
       "mode": "algolia",
       "items": 86,
       "error": null,
-      "at": "2026-10-19T10:46:09.399Z"
+      "at": "2026-10-19T10:49:53.307Z"
+    },
+    {
+      "source": "reddit",
+      "ok": true,
+      "mode": "json+rss",
+      "items": 20,
+      "error": null,
+      "at": "2026-10-19T10:49:53.765Z"
     },
     {
       "source": "Solidot",
@@ -167,15 +166,7 @@
       "mode": "rss",
       "items": 20,
       "error": null,
-      "at": "2026-10-19T10:46:10.574Z"
-    },
-    {
-      "source": "少数派",
-      "ok": true,
-      "mode": "rss",
-      "items": 10,
-      "error": null,
-      "at": "2026-10-19T10:46:11.792Z"
+      "at": "2026-10-19T10:49:54.287Z"
     },
     {
       "source": "github",
@@ -183,7 +174,15 @@
       "mode": "rest",
       "items": 64,
       "error": null,
-      "at": "2026-10-19T10:46:12.069Z"
+      "at": "2026-10-19T10:49:55.384Z"
+    },
+    {
+      "source": "少数派",
+      "ok": true,
+      "mode": "rss",
+      "items": 10,
+      "error": null,
+      "at": "2026-10-19T10:49:55.494Z"
     },
     {
       "source": "中新网财经",
@@ -191,7 +190,7 @@
       "mode": "rss",
       "items": 20,
       "error": null,
-      "at": "2026-10-19T10:46:12.788Z"
+      "at": "2026-10-19T10:49:56.194Z"
     },
     {
       "source": "中新网社会",
@@ -199,7 +198,7 @@
       "mode": "rss",
       "items": 20,
       "error": null,
-      "at": "2026-10-19T10:46:13.041Z"
+      "at": "2026-10-19T10:49:56.207Z"
     },
     {
       "source": "中新网国际",
@@ -207,7 +206,7 @@
       "mode": "rss",
       "items": 20,
       "error": null,
-      "at": "2026-10-19T10:46:13.046Z"
+      "at": "2026-10-19T10:49:56.212Z"
     },
     {
       "source": "量子位",
@@ -215,7 +214,7 @@
       "mode": "rss",
       "items": 10,
       "error": null,
-      "at": "2026-10-19T10:46:14.734Z"
+      "at": "2026-10-19T10:49:58.282Z"
     },
     {
       "source": "InfoQ中文",
@@ -223,7 +222,7 @@
       "mode": "rss",
       "items": 20,
       "error": null,
-      "at": "2026-10-19T10:46:16.425Z"
+      "at": "2026-10-19T10:49:59.761Z"
     },
     {
       "source": "SegmentFault",
@@ -231,7 +230,7 @@
       "mode": "atom",
       "items": 18,
       "error": null,
-      "at": "2026-10-19T10:46:23.020Z"
+      "at": "2026-10-19T10:50:02.143Z"
     },
     {
       "source": "36氪",
@@ -239,7 +238,7 @@
       "mode": "rss",
       "items": 30,
       "error": null,
-      "at": "2026-10-19T10:46:24.799Z"
+      "at": "2026-10-19T10:50:04.709Z"
     },
     {
       "source": "36氪快讯",
@@ -247,7 +246,7 @@
       "mode": "rss",
       "items": 20,
       "error": null,
-      "at": "2026-10-19T10:46:25.641Z"
+      "at": "2026-10-19T10:50:05.547Z"
     },
     {
       "source": "知乎日报",
@@ -255,7 +254,7 @@
       "mode": "json",
       "items": 0,
       "error": null,
-      "at": "2026-10-19T10:46:26.295Z"
+      "at": "2026-10-19T10:50:06.212Z"
     },
     {
       "source": "百度热搜",
@@ -263,7 +262,7 @@
       "mode": "json",
       "items": 30,
       "error": null,
-      "at": "2026-10-19T10:46:29.675Z"
+      "at": "2026-10-19T10:50:10.524Z"
     },
     {
       "source": "百度电影榜",
@@ -271,7 +270,7 @@
       "mode": "json",
       "items": 10,
       "error": null,
-      "at": "2026-10-19T10:46:30.562Z"
+      "at": "2026-10-19T10:50:11.434Z"
     },
     {
       "source": "百度电视剧榜",
@@ -279,7 +278,7 @@
       "mode": "json",
       "items": 10,
       "error": null,
-      "at": "2026-10-19T10:46:30.810Z"
+      "at": "2026-10-19T10:50:11.673Z"
     },
     {
       "source": "B站热门",
@@ -287,7 +286,7 @@
       "mode": "json",
       "items": 13,
       "error": null,
-      "at": "2026-10-19T10:46:31.357Z"
+      "at": "2026-10-19T10:50:12.319Z"
     }
   ],
   "errors": [
@@ -295,73 +294,73 @@
       "source": "reddit",
       "stage": "request",
       "message": "HTTP 403 Blocked",
-      "at": "2026-10-19T10:46:07.500Z"
+      "at": "2026-10-19T10:49:51.446Z"
     },
     {
       "source": "reddit",
       "stage": "request",
       "message": "HTTP 403 Blocked",
-      "at": "2026-10-19T10:46:07.503Z"
+      "at": "2026-10-19T10:49:51.448Z"
     },
     {
       "source": "reddit",
       "stage": "request",
       "message": "HTTP 403 Blocked",
-      "at": "2026-10-19T10:46:07.511Z"
+      "at": "2026-10-19T10:49:51.453Z"
     },
     {
       "source": "reddit",
       "stage": "request",
       "message": "HTTP 403 Blocked",
-      "at": "2026-10-19T10:46:07.514Z"
+      "at": "2026-10-19T10:49:51.455Z"
     },
     {
       "source": "reddit",
       "stage": "request",
       "message": "HTTP 403 Blocked",
-      "at": "2026-10-19T10:46:07.519Z"
+      "at": "2026-10-19T10:49:51.467Z"
     },
     {
       "source": "googleNews",
       "stage": "Ghidra JADX",
       "message": "空结果",
-      "at": "2026-10-19T10:46:07.942Z"
+      "at": "2026-10-19T10:49:51.817Z"
     },
     {
       "source": "reddit",
       "stage": "request",
       "message": "HTTP 403 Blocked",
-      "at": "2026-10-19T10:46:08.176Z"
+      "at": "2026-10-19T10:49:52.108Z"
     },
     {
       "source": "reddit",
       "stage": "request",
       "message": "HTTP 403 Blocked",
-      "at": "2026-10-19T10:46:08.426Z"
+      "at": "2026-10-19T10:49:52.343Z"
     },
     {
       "source": "reddit",
       "stage": "request",
       "message": "HTTP 403 Blocked",
-      "at": "2026-10-19T10:46:08.433Z"
+      "at": "2026-10-19T10:49:52.346Z"
     },
     {
       "source": "reddit",
       "stage": "request",
       "message": "HTTP 403 Blocked",
-      "at": "2026-10-19T10:46:08.447Z"
+      "at": "2026-10-19T10:49:52.350Z"
     },
     {
       "source": "reddit",
       "stage": "request",
       "message": "HTTP 403 Blocked",
-      "at": "2026-10-19T10:46:08.461Z"
+      "at": "2026-10-19T10:49:52.410Z"
     },
     {
       "source": "知乎日报",
       "stage": "request",
       "message": "fetch failed",
-      "at": "2026-10-19T10:46:26.295Z"
+      "at": "2026-10-19T10:50:06.212Z"
     }
   ],
   "items": [
@@ -487,258 +486,6 @@
       "hot": false
     },
     {
-      "id": "nc7a5c5291abf",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "semantica-agi/semantica：&lt;p&gt;Graph-Native Infrastructure for Context and Accountable AI Systems&lt;/p&gt;&lt;hr&gt;&lt;div align=&quot;center&quot;&gt; &lt;img src=&quot;https://ra",
-      "url": "https://github.com/semantica-agi/semantica",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "Graph-Native Infrastructure for Context and Accountable AI Systems <img src=\"https://ra",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n474b60ee14a3",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "msitarzewski/agency-agents：&lt;p&gt;A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a",
-      "url": "https://github.com/msitarzewski/agency-agents",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n3b81a10791a8",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "NanmiCoder/MediaCrawler：&lt;p&gt;小红书笔记 | 评论爬虫、抖音视频 | 评论爬虫、快手视频 | 评论爬虫、B 站视频 ｜ 评论爬虫、微博帖子 ｜ 评论爬虫、百度贴吧帖子 ｜ 百度贴吧评论回复爬虫 | 知乎问答文章｜评论爬虫&lt;/p&gt;&lt;hr&gt;&lt;h1&gt;🔥 MediaCrawler - 自媒体平台爬虫",
-      "url": "https://github.com/NanmiCoder/MediaCrawler",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "小红书笔记 | 评论爬虫、抖音视频 | 评论爬虫、快手视频 | 评论爬虫、B 站视频 ｜ 评论爬虫、微博帖子 ｜ 评论爬虫、百度贴吧帖子 ｜ 百度贴吧评论回复爬虫 | 知乎问答文章｜评论爬虫 🔥 MediaCrawler - 自媒体平台爬虫",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "ne34e9cf351c3",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "addyosmani/agent-skills：&lt;p&gt;Production-grade engineering skills for AI coding agents.&lt;/p&gt;&lt;hr&gt;&lt;h1&gt;Agent Skills&lt;/h1&gt; &lt;p&gt;&lt;strong&gt;Production-grade",
-      "url": "https://github.com/addyosmani/agent-skills",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "Production-grade engineering skills for AI coding agents. Agent Skills Production-grade",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n60cea2f7079e",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "paperclipai/paperclip：&lt;p&gt;The open-source app everyone uses to manage agents at work&lt;/p&gt;&lt;hr&gt;&lt;p align=&quot;center&quot;&gt; &lt;img src=&quot;https://raw.githubus",
-      "url": "https://github.com/paperclipai/paperclip",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "The open-source app everyone uses to manage agents at work <img src=\"https://raw.githubus",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "ncc82e8c4124e",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "PrimeIntellect-ai/prime-agent：&lt;p&gt;A self-improving RLM agent for coding workflows and long-running autonomous tasks.&lt;/p&gt;&lt;hr&gt;&lt;p align=&quot;center&quot;&gt; &lt;a href=&qu",
-      "url": "https://github.com/PrimeIntellect-ai/prime-agent",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "A self-improving RLM agent for coding workflows and long-running autonomous tasks. <a href=&qu",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n3bfe5da57a74",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "LadybirdBrowser/ladybird：&lt;p&gt;Truly independent web browser&lt;/p&gt;&lt;hr&gt;&lt;h1&gt;Ladybird&lt;/h1&gt; &lt;p&gt;&lt;a href=&quot;https://ladybird.org&quot;&gt;Ladybird&lt;/a&g",
-      "url": "https://github.com/LadybirdBrowser/ladybird",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "Truly independent web browser Ladybird Ladybird</a&g",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nc16247688c44",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "ruvnet/RuView：&lt;p&gt;π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel o",
-      "url": "https://github.com/ruvnet/RuView",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel o",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n45b75ffc2196",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "danielmiessler/LifeOS：&lt;p&gt;⛰️A General Hill-climbing AI harness that helps you move from Current State to Ideal State in both Life and Work.&lt;/p&gt;&lt;hr&gt;&lt;p align=&quot;",
-      "url": "https://github.com/danielmiessler/LifeOS",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "⛰️A General Hill-climbing AI harness that helps you move from Current State to Ideal State in both Life and Work. <p align=\"",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n10775ca8b609",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "firecrawl/firecrawl：&lt;p&gt;The context API to search, scrape, and interact with the web at scale. 🔥&lt;/p&gt;&lt;hr&gt;&lt;h3 align=&quot;center&quot;&gt; &lt;a name=&quot;readm",
-      "url": "https://github.com/firecrawl/firecrawl",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "The context API to search, scrape, and interact with the web at scale. 🔥 <a name=\"readm",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n583e5a038879",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "TauricResearch/TradingAgents：&lt;p&gt;TradingAgents: Multi-Agents LLM Financial Trading Framework&lt;/p&gt;&lt;hr&gt;&lt;p align=&quot;center&quot;&gt; &lt;img src=&quot;https://raw.githubu",
-      "url": "https://github.com/TauricResearch/TradingAgents",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "TradingAgents: Multi-Agents LLM Financial Trading Framework <img src=\"https://raw.githubu",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nec0a56bc8724",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "google-deepmind/weathernext：&lt;h1&gt;WeatherNext&lt;/h1&gt; &lt;h2&gt;WeatherNext 2&lt;/h2&gt; &lt;p&gt;This repo contains the code for WeatherNext 2 (WN2), the global, medium-range atmos",
-      "url": "https://github.com/google-deepmind/weathernext",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "WeatherNext WeatherNext 2 This repo contains the code for WeatherNext 2 (WN2), the global, medium-range atmos",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nd63428755084",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "vitali87/code-graph-rag：&lt;p&gt;The ultimate RAG for your monorepo. Query, understand, and edit multi-language codebases with the power of AI and knowledge graphs&lt;/p&gt;&lt;hr&gt;&",
-      "url": "https://github.com/vitali87/code-graph-rag",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "The ultimate RAG for your monorepo. Query, understand, and edit multi-language codebases with the power of AI and knowledge graphs &",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n8a76fe30f2bc",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub Trending",
-      "sourceType": "rss",
-      "title": "pingdotgg/t3code：&lt;h1&gt;T3 Code&lt;/h1&gt; &lt;p&gt;T3 Code is an &quot;agent harness control surface&quot;. It enables control of the agents on your machine with a best-in-c",
-      "url": "https://github.com/pingdotgg/t3code",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
-      "summary": "T3 Code T3 Code is an \"agent harness control surface\". It enables control of the agents on your machine with a best-in-c",
-      "tags": [
-        "GitHub",
-        "Trending",
-        "开源"
-      ],
-      "hot": false
-    },
-    {
       "id": "n683db36fdd45",
       "category": "ai",
       "extraCategories": [],
@@ -746,8 +493,8 @@
       "sourceType": "rss",
       "title": "Comfy-Org/ComfyUI：&lt;p&gt;The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.&lt;/p&gt;&lt;hr&gt;&lt;div align=&quot;center&quot;&gt",
       "url": "https://github.com/Comfy-Org/ComfyUI",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
+      "publishedAt": "2026-10-19T10:49:51.327Z",
+      "publishedAtMs": 1792406991327,
       "summary": "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface. <div align=\"center\"&gt",
       "tags": [
         "GitHub",
@@ -764,9 +511,261 @@
       "sourceType": "rss",
       "title": "opa334/Dopamine：&lt;p&gt;Dopamine is a semi-untethered jailbreak for iOS 15 to 26(.0.1)&lt;/p&gt;&lt;hr&gt;&lt;img src=&quot;https://github.com/opa334/Dopamine/assets/52459150/",
       "url": "https://github.com/opa334/Dopamine",
-      "publishedAt": "2026-10-19T10:46:07.548Z",
-      "publishedAtMs": 1792406767548,
+      "publishedAt": "2026-10-19T10:49:51.327Z",
+      "publishedAtMs": 1792406991327,
       "summary": "Dopamine is a semi-untethered jailbreak for iOS 15 to 26(.0.1) <img src=\"https://github.com/opa334/Dopamine/assets/52459150/",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nc7a5c5291abf",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "semantica-agi/semantica：&lt;p&gt;Graph-Native Infrastructure for Context and Accountable AI Systems&lt;/p&gt;&lt;hr&gt;&lt;div align=&quot;center&quot;&gt; &lt;img src=&quot;https://ra",
+      "url": "https://github.com/semantica-agi/semantica",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "Graph-Native Infrastructure for Context and Accountable AI Systems <img src=\"https://ra",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n474b60ee14a3",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "msitarzewski/agency-agents：&lt;p&gt;A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a",
+      "url": "https://github.com/msitarzewski/agency-agents",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n3b81a10791a8",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "NanmiCoder/MediaCrawler：&lt;p&gt;小红书笔记 | 评论爬虫、抖音视频 | 评论爬虫、快手视频 | 评论爬虫、B 站视频 ｜ 评论爬虫、微博帖子 ｜ 评论爬虫、百度贴吧帖子 ｜ 百度贴吧评论回复爬虫 | 知乎问答文章｜评论爬虫&lt;/p&gt;&lt;hr&gt;&lt;h1&gt;🔥 MediaCrawler - 自媒体平台爬虫",
+      "url": "https://github.com/NanmiCoder/MediaCrawler",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "小红书笔记 | 评论爬虫、抖音视频 | 评论爬虫、快手视频 | 评论爬虫、B 站视频 ｜ 评论爬虫、微博帖子 ｜ 评论爬虫、百度贴吧帖子 ｜ 百度贴吧评论回复爬虫 | 知乎问答文章｜评论爬虫 🔥 MediaCrawler - 自媒体平台爬虫",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ne34e9cf351c3",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "addyosmani/agent-skills：&lt;p&gt;Production-grade engineering skills for AI coding agents.&lt;/p&gt;&lt;hr&gt;&lt;h1&gt;Agent Skills&lt;/h1&gt; &lt;p&gt;&lt;strong&gt;Production-grade",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "Production-grade engineering skills for AI coding agents. Agent Skills Production-grade",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n60cea2f7079e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "paperclipai/paperclip：&lt;p&gt;The open-source app everyone uses to manage agents at work&lt;/p&gt;&lt;hr&gt;&lt;p align=&quot;center&quot;&gt; &lt;img src=&quot;https://raw.githubus",
+      "url": "https://github.com/paperclipai/paperclip",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "The open-source app everyone uses to manage agents at work <img src=\"https://raw.githubus",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "ncc82e8c4124e",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "PrimeIntellect-ai/prime-agent：&lt;p&gt;A self-improving RLM agent for coding workflows and long-running autonomous tasks.&lt;/p&gt;&lt;hr&gt;&lt;p align=&quot;center&quot;&gt; &lt;a href=&qu",
+      "url": "https://github.com/PrimeIntellect-ai/prime-agent",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "A self-improving RLM agent for coding workflows and long-running autonomous tasks. <a href=&qu",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n3bfe5da57a74",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "LadybirdBrowser/ladybird：&lt;p&gt;Truly independent web browser&lt;/p&gt;&lt;hr&gt;&lt;h1&gt;Ladybird&lt;/h1&gt; &lt;p&gt;&lt;a href=&quot;https://ladybird.org&quot;&gt;Ladybird&lt;/a&g",
+      "url": "https://github.com/LadybirdBrowser/ladybird",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "Truly independent web browser Ladybird Ladybird</a&g",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nc16247688c44",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "ruvnet/RuView：&lt;p&gt;π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel o",
+      "url": "https://github.com/ruvnet/RuView",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel o",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n45b75ffc2196",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "danielmiessler/LifeOS：&lt;p&gt;⛰️A General Hill-climbing AI harness that helps you move from Current State to Ideal State in both Life and Work.&lt;/p&gt;&lt;hr&gt;&lt;p align=&quot;",
+      "url": "https://github.com/danielmiessler/LifeOS",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "⛰️A General Hill-climbing AI harness that helps you move from Current State to Ideal State in both Life and Work. <p align=\"",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n10775ca8b609",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "firecrawl/firecrawl：&lt;p&gt;The context API to search, scrape, and interact with the web at scale. 🔥&lt;/p&gt;&lt;hr&gt;&lt;h3 align=&quot;center&quot;&gt; &lt;a name=&quot;readm",
+      "url": "https://github.com/firecrawl/firecrawl",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "The context API to search, scrape, and interact with the web at scale. 🔥 <a name=\"readm",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n583e5a038879",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "TauricResearch/TradingAgents：&lt;p&gt;TradingAgents: Multi-Agents LLM Financial Trading Framework&lt;/p&gt;&lt;hr&gt;&lt;p align=&quot;center&quot;&gt; &lt;img src=&quot;https://raw.githubu",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "TradingAgents: Multi-Agents LLM Financial Trading Framework <img src=\"https://raw.githubu",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nec0a56bc8724",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "google-deepmind/weathernext：&lt;h1&gt;WeatherNext&lt;/h1&gt; &lt;h2&gt;WeatherNext 2&lt;/h2&gt; &lt;p&gt;This repo contains the code for WeatherNext 2 (WN2), the global, medium-range atmos",
+      "url": "https://github.com/google-deepmind/weathernext",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "WeatherNext WeatherNext 2 This repo contains the code for WeatherNext 2 (WN2), the global, medium-range atmos",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nd63428755084",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "vitali87/code-graph-rag：&lt;p&gt;The ultimate RAG for your monorepo. Query, understand, and edit multi-language codebases with the power of AI and knowledge graphs&lt;/p&gt;&lt;hr&gt;&",
+      "url": "https://github.com/vitali87/code-graph-rag",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "The ultimate RAG for your monorepo. Query, understand, and edit multi-language codebases with the power of AI and knowledge graphs &",
+      "tags": [
+        "GitHub",
+        "Trending",
+        "开源"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n8a76fe30f2bc",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub Trending",
+      "sourceType": "rss",
+      "title": "pingdotgg/t3code：&lt;h1&gt;T3 Code&lt;/h1&gt; &lt;p&gt;T3 Code is an &quot;agent harness control surface&quot;. It enables control of the agents on your machine with a best-in-c",
+      "url": "https://github.com/pingdotgg/t3code",
+      "publishedAt": "2026-10-19T10:49:51.326Z",
+      "publishedAtMs": 1792406991326,
+      "summary": "T3 Code T3 Code is an \"agent harness control surface\". It enables control of the agents on your machine with a best-in-c",
       "tags": [
         "GitHub",
         "Trending",
@@ -782,8 +781,8 @@
       "sourceType": "json",
       "title": "身披旭日旗中国留学生或被开除遣返",
       "url": "https://www.baidu.com/s?wd=%E8%BA%AB%E6%8A%AB%E6%97%AD%E6%97%A5%E6%97%97%E4%B8%AD%E5%9B%BD%E7%95%99%E5%AD%A6%E7%94%9F%E6%88%96%E8%A2%AB%E5%BC%80%E9%99%A4%E9%81%A3%E8%BF%94",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "近日，莫斯科国立大学历史系校方口头承诺将涉事中国留学生陈某某开除遣返，校方已启动调查。此前，陈某某于10月1日国庆节当天的课堂身披日本旭日旗，10月7日携带并宣扬“台独”旗帜。10月14日课上他再次披旭日旗，推搡并用日语辱骂阻拦同学，引发众怒。",
       "tags": [
         "热点",
@@ -799,8 +798,8 @@
       "sourceType": "json",
       "title": "中纪委连打三“虎”",
       "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E7%BA%AA%E5%A7%94%E8%BF%9E%E6%89%93%E4%B8%89%E2%80%9C%E8%99%8E%E2%80%9D",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "10月19日，中央纪委国家监委网站连发三份通报。自然资源部原党组成员张建龙、社保基金会原党组成员王文灵、中国人保原副总裁俞小平因严重违纪违法被处分。其中，张建龙、俞小平被开除党籍，王文灵被双开。三人均涉嫌受贿犯罪，违纪违法所得被收缴，并移送检察机关依法审查起诉。‌‌",
       "tags": [
         "热点",
@@ -816,9 +815,94 @@
       "sourceType": "json",
       "title": "全年粮食有望再获丰收",
       "url": "https://www.baidu.com/s?wd=%E5%85%A8%E5%B9%B4%E7%B2%AE%E9%A3%9F%E6%9C%89%E6%9C%9B%E5%86%8D%E8%8E%B7%E4%B8%B0%E6%94%B6",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "国家统计局副局长毛盛勇19日在国新办新闻发布会上说，今年全国夏粮早稻产量合计17904万吨，比上年增加78万吨，增长0.4%。秋粮生产形势良好，全年粮食有望再获丰收。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n2b8840121b5c",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "法国女子趁乱零元购 丈夫夺走归还",
+      "url": "https://www.baidu.com/s?wd=%E6%B3%95%E5%9B%BD%E5%A5%B3%E5%AD%90%E8%B6%81%E4%B9%B1%E9%9B%B6%E5%85%83%E8%B4%AD+%E4%B8%88%E5%A4%AB%E5%A4%BA%E8%B5%B0%E5%BD%92%E8%BF%98",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "近日，法国多地爆发数十万人抗议，烧车焚楼、洗劫奢侈品店。法国一女子趁乱“零元购”，其丈夫发现后一把夺走赃物，主动将物品还回。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n50ea463bbb1e",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "全国降温进程图",
+      "url": "https://www.baidu.com/s?wd=%E5%85%A8%E5%9B%BD%E9%99%8D%E6%B8%A9%E8%BF%9B%E7%A8%8B%E5%9B%BE",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "近期，我国冷空气一波接一波。19日，共有6个省会、直辖市、首府气温创今年下半年来新低。明后天，受新一股冷空气影响，北方多地及西南地区至江南一带降温明显，北方气温或大面积创新低。中国天气网推出全国降温进程图，看看哪里气温猛降需添衣。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "na4212d28f231",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "汉庭快捷“欢聚六人房”走红",
+      "url": "https://www.baidu.com/s?wd=%E6%B1%89%E5%BA%AD%E5%BF%AB%E6%8D%B7%E2%80%9C%E6%AC%A2%E8%81%9A%E5%85%AD%E4%BA%BA%E6%88%BF%E2%80%9D%E8%B5%B0%E7%BA%A2",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "10月18日，记者了解到，汉庭快捷部分门店设有“欢聚六人房”，全国仅少数城市存在，华住会客服回应称无法直接查询全国房源。此前，有网友发帖称入住时发现该房型，价格200元左右，直呼像“美丽豪华大宿舍”，建议全国推广。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n567cd870eb18",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "把房子降到150万 好卖多了",
+      "url": "https://www.baidu.com/s?wd=%E6%8A%8A%E6%88%BF%E5%AD%90%E9%99%8D%E5%88%B0150%E4%B8%87+%E5%A5%BD%E5%8D%96%E5%A4%9A%E4%BA%86",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "10月19日，居民购房贷款贴息政策落地后，杭州部分二手房业主将房价降至150万元以内，以符合贴息条件、吸引买家。数据显示，杭州面积120平方米以内、总价150万元以内的二手房成交占比由9月的32%升至10月以来的35.1%。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "ne23f34d5505a",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "张伟丽再晒妆后视频",
+      "url": "https://www.baidu.com/s?wd=%E5%BC%A0%E4%BC%9F%E4%B8%BD%E5%86%8D%E6%99%92%E5%A6%86%E5%90%8E%E8%A7%86%E9%A2%91",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "近日，格斗女王张伟丽晒出妆后视频，模样温婉动人，尽显甜妹气质。此前她的粉发造型反差感拉满，赛场之上霸气强悍的她，在生活中展现截然不同的模样，强烈的风格反差引发众多网友热议。",
       "tags": [
         "热点",
         "民生"
@@ -835,29 +919,12 @@
       "sourceType": "json",
       "title": "法国三条血管齐崩",
       "url": "https://www.baidu.com/s?wd=%E6%B3%95%E5%9B%BD%E4%B8%89%E6%9D%A1%E8%A1%80%E7%AE%A1%E9%BD%90%E5%B4%A9",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "席琳·迪翁巴黎演唱会的华丽现场，与法国多地街头骚乱火光形成强烈反差。财政高负债、物价飞涨、海外支撑体系崩塌三重危机显现，政坛各派系互相甩锅，优雅表象下的深层社会矛盾被彻底撕开。",
       "tags": [
         "热点",
         "娱乐"
-      ],
-      "hot": true
-    },
-    {
-      "id": "n9751872d5acd",
-      "category": "today",
-      "extraCategories": [],
-      "source": "百度热搜",
-      "sourceType": "json",
-      "title": "星巴克 消费入座",
-      "url": "https://www.baidu.com/s?wd=%E6%98%9F%E5%B7%B4%E5%85%8B+%E6%B6%88%E8%B4%B9%E5%85%A5%E5%BA%A7",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "近日，有星巴克店员称全国门店将于10月20日起实施“消费入座”新规。门店将摆放提示牌，建议消费者购买产品后入座，但并非一刀切，孕妇、外卖员等有休息需求者可免消费进店。此前，今年7月天津一星巴克曾因放置“消费入座”牌引发关注。",
-      "tags": [
-        "热点",
-        "民生"
       ],
       "hot": true
     },
@@ -869,77 +936,9 @@
       "sourceType": "json",
       "title": "没有桥板 那就“飞”过去",
       "url": "https://www.baidu.com/s?wd=%E6%B2%A1%E6%9C%89%E6%A1%A5%E6%9D%BF+%E9%82%A3%E5%B0%B1%E2%80%9C%E9%A3%9E%E2%80%9D%E8%BF%87%E5%8E%BB",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "没有桥板 那就“飞”过去（来源：百度热搜）",
-      "tags": [
-        "热点",
-        "民生"
-      ],
-      "hot": true
-    },
-    {
-      "id": "n567cd870eb18",
-      "category": "today",
-      "extraCategories": [],
-      "source": "百度热搜",
-      "sourceType": "json",
-      "title": "把房子降到150万 好卖多了",
-      "url": "https://www.baidu.com/s?wd=%E6%8A%8A%E6%88%BF%E5%AD%90%E9%99%8D%E5%88%B0150%E4%B8%87+%E5%A5%BD%E5%8D%96%E5%A4%9A%E4%BA%86",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "10月19日，居民购房贷款贴息政策落地后，杭州部分二手房业主将房价降至150万元以内，以符合贴息条件、吸引买家。数据显示，杭州面积120平方米以内、总价150万元以内的二手房成交占比由9月的32%升至10月以来的35.1%。",
-      "tags": [
-        "热点",
-        "民生"
-      ],
-      "hot": true
-    },
-    {
-      "id": "ne23f34d5505a",
-      "category": "today",
-      "extraCategories": [],
-      "source": "百度热搜",
-      "sourceType": "json",
-      "title": "张伟丽再晒妆后视频",
-      "url": "https://www.baidu.com/s?wd=%E5%BC%A0%E4%BC%9F%E4%B8%BD%E5%86%8D%E6%99%92%E5%A6%86%E5%90%8E%E8%A7%86%E9%A2%91",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "近日，格斗女王张伟丽晒出妆后视频，模样温婉动人，尽显甜妹气质。此前她的粉发造型反差感拉满，赛场之上霸气强悍的她，在生活中展现截然不同的模样，强烈的风格反差引发众多网友热议。",
-      "tags": [
-        "热点",
-        "民生"
-      ],
-      "hot": true
-    },
-    {
-      "id": "n9e319c4e65b4",
-      "category": "today",
-      "extraCategories": [],
-      "source": "百度热搜",
-      "sourceType": "json",
-      "title": "披旭日旗中国留学生鞠躬道歉",
-      "url": "https://www.baidu.com/s?wd=%E6%8A%AB%E6%97%AD%E6%97%A5%E6%97%97%E4%B8%AD%E5%9B%BD%E7%95%99%E5%AD%A6%E7%94%9F%E9%9E%A0%E8%BA%AC%E9%81%93%E6%AD%89",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "近日，莫斯科大学一名中国留学生因在课堂身披旭日旗引发争议，随后发布视频鞠躬道歉，称此举是对祖国和人民的不尊重。10月17日，莫斯科大学中国学生学者联谊会通报称，已启动校内调查，并将公布处理结果。",
-      "tags": [
-        "热点",
-        "民生"
-      ],
-      "hot": true
-    },
-    {
-      "id": "n411e2677b9b2",
-      "category": "today",
-      "extraCategories": [],
-      "source": "百度热搜",
-      "sourceType": "json",
-      "title": "部分研究生不用撰写学位论文",
-      "url": "https://www.baidu.com/s?wd=%E9%83%A8%E5%88%86%E7%A0%94%E7%A9%B6%E7%94%9F%E4%B8%8D%E7%94%A8%E6%92%B0%E5%86%99%E5%AD%A6%E4%BD%8D%E8%AE%BA%E6%96%87",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "近日，部分研究生不用撰写学位论文，国务院学位办：首批拟在翻译、农业、临床医学、会计、艺术5个专业学位类别先行先试。",
       "tags": [
         "热点",
         "民生"
@@ -954,9 +953,43 @@
       "sourceType": "json",
       "title": "新疆一5A景区出售工程抵账票？不实",
       "url": "https://www.baidu.com/s?wd=%E6%96%B0%E7%96%86%E4%B8%805A%E6%99%AF%E5%8C%BA%E5%87%BA%E5%94%AE%E5%B7%A5%E7%A8%8B%E6%8A%B5%E8%B4%A6%E7%A5%A8%EF%BC%9F%E4%B8%8D%E5%AE%9E",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "近日，网传新疆喀什地区泽普金湖杨景区可低价购工程抵账票，引发关注。经核查，系虚假宣传信息。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n9e319c4e65b4",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "披旭日旗中国留学生鞠躬道歉",
+      "url": "https://www.baidu.com/s?wd=%E6%8A%AB%E6%97%AD%E6%97%A5%E6%97%97%E4%B8%AD%E5%9B%BD%E7%95%99%E5%AD%A6%E7%94%9F%E9%9E%A0%E8%BA%AC%E9%81%93%E6%AD%89",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "近日，莫斯科大学一名中国留学生因在课堂身披旭日旗引发争议，随后发布视频鞠躬道歉，称此举是对祖国和人民的不尊重。10月17日，莫斯科大学中国学生学者联谊会通报称，已启动校内调查，并将公布处理结果。",
+      "tags": [
+        "热点",
+        "民生"
+      ],
+      "hot": true
+    },
+    {
+      "id": "n8524a195cb41",
+      "category": "today",
+      "extraCategories": [],
+      "source": "百度热搜",
+      "sourceType": "json",
+      "title": "李小冉前夫徐佳宁成被执行人",
+      "url": "https://www.baidu.com/s?wd=%E6%9D%8E%E5%B0%8F%E5%86%89%E5%89%8D%E5%A4%AB%E5%BE%90%E4%BD%B3%E5%AE%81%E6%88%90%E8%A2%AB%E6%89%A7%E8%A1%8C%E4%BA%BA",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "10月19日，李小冉前夫徐佳宁及霍尔果斯市外一海传媒新增被执行人信息，执行标的达2111万，由霍尔果斯市人民法院受理。",
       "tags": [
         "热点",
         "民生"
@@ -973,8 +1006,8 @@
       "sourceType": "json",
       "title": "离婚4年后男子发现9岁儿子非亲生",
       "url": "https://www.baidu.com/s?wd=%E7%A6%BB%E5%A9%9A4%E5%B9%B4%E5%90%8E%E7%94%B7%E5%AD%90%E5%8F%91%E7%8E%B09%E5%B2%81%E5%84%BF%E5%AD%90%E9%9D%9E%E4%BA%B2%E7%94%9F",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "据悉，一男子与结发妻子复婚半年，生下儿子。两人再次离婚4年后，男子发现9岁儿子非亲生。",
       "tags": [
         "热点",
@@ -983,16 +1016,16 @@
       "hot": true
     },
     {
-      "id": "n2b8840121b5c",
+      "id": "n91c6bf534b9d",
       "category": "today",
       "extraCategories": [],
       "source": "百度热搜",
       "sourceType": "json",
-      "title": "法国女子趁乱零元购 丈夫夺走归还",
-      "url": "https://www.baidu.com/s?wd=%E6%B3%95%E5%9B%BD%E5%A5%B3%E5%AD%90%E8%B6%81%E4%B9%B1%E9%9B%B6%E5%85%83%E8%B4%AD+%E4%B8%88%E5%A4%AB%E5%A4%BA%E8%B5%B0%E5%BD%92%E8%BF%98",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "近日，法国多地爆发数十万人抗议，烧车焚楼、洗劫奢侈品店。法国一女子趁乱“零元购”，其丈夫发现后一把夺走赃物，主动将物品还回。",
+      "title": "田曦薇摘面具神级镜头",
+      "url": "https://www.baidu.com/s?wd=%E7%94%B0%E6%9B%A6%E8%96%87%E6%91%98%E9%9D%A2%E5%85%B7%E7%A5%9E%E7%BA%A7%E9%95%9C%E5%A4%B4",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "近日，田曦薇在《嫁金》中摘面具镜头被评好绝。角色在堪称鸿门宴的寿宴上冷静自持、拆解圈套，最终在舞蹈高潮揭下面具，完成漂亮的逆风翻盘。该场景脸蛋惊艳且冲击力十足，被评堪比当年《甄嬛传》的惊鸿舞。",
       "tags": [
         "热点",
         "民生"
@@ -1007,8 +1040,8 @@
       "sourceType": "json",
       "title": "网友高铁上偶遇114岁老人独自乘车",
       "url": "https://www.baidu.com/s?wd=%E7%BD%91%E5%8F%8B%E9%AB%98%E9%93%81%E4%B8%8A%E5%81%B6%E9%81%87114%E5%B2%81%E8%80%81%E4%BA%BA%E7%8B%AC%E8%87%AA%E4%B9%98%E8%BD%A6",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "近日，有网友乘坐高铁时偶遇一位114岁老人。老人耳不聋、眼不花，与乘客对答如流，还能熟练使用智能手机。",
       "tags": [
         "热点",
@@ -1017,16 +1050,16 @@
       "hot": true
     },
     {
-      "id": "n50ea463bbb1e",
+      "id": "na9b51625b190",
       "category": "today",
       "extraCategories": [],
       "source": "百度热搜",
       "sourceType": "json",
-      "title": "全国降温进程图",
-      "url": "https://www.baidu.com/s?wd=%E5%85%A8%E5%9B%BD%E9%99%8D%E6%B8%A9%E8%BF%9B%E7%A8%8B%E5%9B%BE",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "近期，我国冷空气一波接一波。19日，共有6个省会、直辖市、首府气温创今年下半年来新低。明后天，受新一股冷空气影响，北方多地及西南地区至江南一带降温明显，北方气温或大面积创新低。中国天气网推出全国降温进程图，看看哪里气温猛降需添衣。",
+      "title": "奚美娟回应辛芷蕾掉提金鸡奖",
+      "url": "https://www.baidu.com/s?wd=%E5%A5%9A%E7%BE%8E%E5%A8%9F%E5%9B%9E%E5%BA%94%E8%BE%9B%E8%8A%B7%E8%95%BE%E6%8E%89%E6%8F%90%E9%87%91%E9%B8%A1%E5%A5%96",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "奚美娟就辛芷蕾未获金鸡奖提名一事作出回应，她肯定辛芷蕾的表演，称其角色抽象受限，影片缺少特写，难以展现微表情。宋佳在《志愿军：浴血和平》角色情绪更直观，两部影片表演要求不同，并非演技有高下。",
       "tags": [
         "热点",
         "民生"
@@ -1041,8 +1074,8 @@
       "sourceType": "json",
       "title": "乒乓球名将王曼昱等3人拟记大功",
       "url": "https://www.baidu.com/s?wd=%E4%B9%92%E4%B9%93%E7%90%83%E5%90%8D%E5%B0%86%E7%8E%8B%E6%9B%BC%E6%98%B1%E7%AD%893%E4%BA%BA%E6%8B%9F%E8%AE%B0%E5%A4%A7%E5%8A%9F",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "10月19日，黑龙江省体育局发布公示，拟推荐王曼昱等3名运动员记大功。此前，在爱知·名古屋亚运会上，王曼昱参加乒乓球3个项目比赛完成个人三金王成就；射击运动员孙瑜浓和自行车运动员孙文涛同样获金牌。为表彰三人在亚运会中的突出贡献，故拟推荐给予记大功。",
       "tags": [
         "热点",
@@ -1051,16 +1084,16 @@
       "hot": true
     },
     {
-      "id": "n8524a195cb41",
+      "id": "n6543ff922c92",
       "category": "today",
       "extraCategories": [],
       "source": "百度热搜",
       "sourceType": "json",
-      "title": "李小冉前夫徐佳宁成被执行人",
-      "url": "https://www.baidu.com/s?wd=%E6%9D%8E%E5%B0%8F%E5%86%89%E5%89%8D%E5%A4%AB%E5%BE%90%E4%BD%B3%E5%AE%81%E6%88%90%E8%A2%AB%E6%89%A7%E8%A1%8C%E4%BA%BA",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "10月19日，李小冉前夫徐佳宁及霍尔果斯市外一海传媒新增被执行人信息，执行标的达2111万，由霍尔果斯市人民法院受理。",
+      "title": "酒店房间装饰画后有楼梯",
+      "url": "https://www.baidu.com/s?wd=%E9%85%92%E5%BA%97%E6%88%BF%E9%97%B4%E8%A3%85%E9%A5%B0%E7%94%BB%E5%90%8E%E6%9C%89%E6%A5%BC%E6%A2%AF",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "18日，邓女士反映凌晨入住武汉一酒店时，发现房间装饰画后暗藏空间及楼梯，退房后在平台写下差评。随后酒店方致歉，解释该处实为放热水器的地方，未提前告知是疏忽，已加装防护措施整改。",
       "tags": [
         "热点",
         "民生"
@@ -1075,8 +1108,8 @@
       "sourceType": "json",
       "title": "真人版“胡闹厨房” 还能火多久",
       "url": "https://www.baidu.com/s?wd=%E7%9C%9F%E4%BA%BA%E7%89%88%E2%80%9C%E8%83%A1%E9%97%B9%E5%8E%A8%E6%88%BF%E2%80%9D+%E8%BF%98%E8%83%BD%E7%81%AB%E5%A4%9A%E4%B9%85",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "近日，源自泰国清迈的真人版“胡闹厨房”走红国内多地，主打采摘食材、亲手制作泰餐的沉浸式料理体验，依靠强社交、易打卡出片收获年轻人喜爱。但项目存在玩法单一、复购弱、管理混乱等问题，还存在用火安全隐患，能否长久发展仍有待观察。",
       "tags": [
         "热点",
@@ -1085,16 +1118,16 @@
       "hot": true
     },
     {
-      "id": "na4212d28f231",
+      "id": "n497b571c4563",
       "category": "today",
       "extraCategories": [],
       "source": "百度热搜",
       "sourceType": "json",
-      "title": "汉庭快捷“欢聚六人房”走红",
-      "url": "https://www.baidu.com/s?wd=%E6%B1%89%E5%BA%AD%E5%BF%AB%E6%8D%B7%E2%80%9C%E6%AC%A2%E8%81%9A%E5%85%AD%E4%BA%BA%E6%88%BF%E2%80%9D%E8%B5%B0%E7%BA%A2",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "10月18日，记者了解到，汉庭快捷部分门店设有“欢聚六人房”，全国仅少数城市存在，华住会客服回应称无法直接查询全国房源。此前，有网友发帖称入住时发现该房型，价格200元左右，直呼像“美丽豪华大宿舍”，建议全国推广。",
+      "title": "张雪机车赢1次或许是运气 赢6次呢",
+      "url": "https://www.baidu.com/s?wd=%E5%BC%A0%E9%9B%AA%E6%9C%BA%E8%BD%A6%E8%B5%A21%E6%AC%A1%E6%88%96%E8%AE%B8%E6%98%AF%E8%BF%90%E6%B0%94+%E8%B5%A26%E6%AC%A1%E5%91%A2",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "10月18日，2026赛季世界超级摩托车锦标赛在西班牙赫雷斯落幕。中国制造商张雪机车获WorldSSP组别制造商年度第三，其车手获亚军。此前，张雪机车于2024年4月在重庆成立，在十一个分站里六次登顶。其成功背后，依托重庆完备产业链、核心技术自研及制度供给，实现中国制造在世界赛道突围。",
       "tags": [
         "热点",
         "民生"
@@ -1109,8 +1142,8 @@
       "sourceType": "json",
       "title": "中国农大食堂蛋糕酷似蛤蟆 每块9.9",
       "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E5%86%9C%E5%A4%A7%E9%A3%9F%E5%A0%82%E8%9B%8B%E7%B3%95%E9%85%B7%E4%BC%BC%E8%9B%A4%E8%9F%86+%E6%AF%8F%E5%9D%979.9",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "近日，中国农业大学多名学生发文称，学校食堂的面包坊新推出一款外形酷似“蛤蟆”的小蛋糕，售价为9.9元一块，学生们纷纷到店抢购。",
       "tags": [
         "热点",
@@ -1119,16 +1152,16 @@
       "hot": true
     },
     {
-      "id": "n91c6bf534b9d",
+      "id": "n5a0219bf02b4",
       "category": "today",
       "extraCategories": [],
       "source": "百度热搜",
       "sourceType": "json",
-      "title": "田曦薇摘面具神级镜头",
-      "url": "https://www.baidu.com/s?wd=%E7%94%B0%E6%9B%A6%E8%96%87%E6%91%98%E9%9D%A2%E5%85%B7%E7%A5%9E%E7%BA%A7%E9%95%9C%E5%A4%B4",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "近日，田曦薇在《嫁金》中摘面具镜头被评好绝。角色在堪称鸿门宴的寿宴上冷静自持、拆解圈套，最终在舞蹈高潮揭下面具，完成漂亮的逆风翻盘。该场景脸蛋惊艳且冲击力十足，被评堪比当年《甄嬛传》的惊鸿舞。",
+      "title": "中国正扮演两个超级角色",
+      "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E6%AD%A3%E6%89%AE%E6%BC%94%E4%B8%A4%E4%B8%AA%E8%B6%85%E7%BA%A7%E8%A7%92%E8%89%B2",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "10月19日，国家统计局公布，2026年前三季度GDP达1071071亿元，外贸表现亮眼。货物进出口总额399399亿元，同比增长18.8%，出口、进口双双上涨。兼具超级卖家与超级买家双重身份，正是中国经济韧性的硬核底气。",
       "tags": [
         "热点",
         "民生"
@@ -1145,8 +1178,8 @@
       "sourceType": "json",
       "title": "盛艾敬眼泪洗不白父母欠薪345万",
       "url": "https://www.baidu.com/s?wd=%E7%9B%9B%E8%89%BE%E6%95%AC%E7%9C%BC%E6%B3%AA%E6%B4%97%E4%B8%8D%E7%99%BD%E7%88%B6%E6%AF%8D%E6%AC%A0%E8%96%AA345%E4%B8%87",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "近日，13岁中国女孩盛艾敬在韩国出道当日，其父母名下公司被曝累计欠薪345万元，已遭法院强制执行。“盛艾敬下班状态差、哭了”“父母欠薪还花钱送她去韩国出道” 等话题引发热议。盛艾敬的眼泪，没法抹去父母欠薪这件事，失去诚信的星途很难走长远。",
       "tags": [
         "热点",
@@ -1155,16 +1188,16 @@
       "hot": true
     },
     {
-      "id": "na9b51625b190",
+      "id": "n86c1731f900f",
       "category": "today",
       "extraCategories": [],
       "source": "百度热搜",
       "sourceType": "json",
-      "title": "奚美娟回应辛芷蕾掉提金鸡奖",
-      "url": "https://www.baidu.com/s?wd=%E5%A5%9A%E7%BE%8E%E5%A8%9F%E5%9B%9E%E5%BA%94%E8%BE%9B%E8%8A%B7%E8%95%BE%E6%8E%89%E6%8F%90%E9%87%91%E9%B8%A1%E5%A5%96",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "奚美娟就辛芷蕾未获金鸡奖提名一事作出回应，她肯定辛芷蕾的表演，称其角色抽象受限，影片缺少特写，难以展现微表情。宋佳在《志愿军：浴血和平》角色情绪更直观，两部影片表演要求不同，并非演技有高下。",
+      "title": "暴力骚乱蔓延至整个欧洲",
+      "url": "https://www.baidu.com/s?wd=%E6%9A%B4%E5%8A%9B%E9%AA%9A%E4%B9%B1%E8%94%93%E5%BB%B6%E8%87%B3%E6%95%B4%E4%B8%AA%E6%AC%A7%E6%B4%B2",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "近日，法国爆发多年来最严重骚乱，超2000人被捕，至少2人死亡。马克龙表态称施暴者须付出代价，承诺推具体应对方案。目前骚乱已蔓延至葡萄牙、意大利等欧洲多国。",
       "tags": [
         "热点",
         "民生"
@@ -1179,8 +1212,8 @@
       "sourceType": "json",
       "title": "优衣库难觅79元、99元基础款",
       "url": "https://www.baidu.com/s?wd=%E4%BC%98%E8%A1%A3%E5%BA%93%E9%9A%BE%E8%A7%8579%E5%85%83%E3%80%8199%E5%85%83%E5%9F%BA%E7%A1%80%E6%AC%BE",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "10月，换季购衣季，记者探访杭州优衣库门店发现，曾以“性价比之王”著称的优衣库79元、99元基础款正逐步下架，取而代之的是149元、199元设计款，100元以下商品大多仅剩童装。",
       "tags": [
         "热点",
@@ -1189,16 +1222,16 @@
       "hot": true
     },
     {
-      "id": "n6543ff922c92",
+      "id": "n3def806cdc9e",
       "category": "today",
       "extraCategories": [],
       "source": "百度热搜",
       "sourceType": "json",
-      "title": "酒店房间装饰画后有楼梯",
-      "url": "https://www.baidu.com/s?wd=%E9%85%92%E5%BA%97%E6%88%BF%E9%97%B4%E8%A3%85%E9%A5%B0%E7%94%BB%E5%90%8E%E6%9C%89%E6%A5%BC%E6%A2%AF",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "18日，邓女士反映凌晨入住武汉一酒店时，发现房间装饰画后暗藏空间及楼梯，退房后在平台写下差评。随后酒店方致歉，解释该处实为放热水器的地方，未提前告知是疏忽，已加装防护措施整改。",
+      "title": "广州一村每人发3.65元补偿款",
+      "url": "https://www.baidu.com/s?wd=%E5%B9%BF%E5%B7%9E%E4%B8%80%E6%9D%91%E6%AF%8F%E4%BA%BA%E5%8F%913.65%E5%85%83%E8%A1%A5%E5%81%BF%E6%AC%BE",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "近日，广州番禺区化龙镇潭山村一则关于发放生态公益林补偿款的通知引发网络热议。通知显示，该村已将上级下拨的13927.2元补偿款发放给3826名股东，每人3.65元。当地回应：属实，无论多少均按程序公示。",
       "tags": [
         "热点",
         "民生"
@@ -1213,8 +1246,8 @@
       "sourceType": "json",
       "title": "旅法游客现状：不知所措、吓到尖叫",
       "url": "https://www.baidu.com/s?wd=%E6%97%85%E6%B3%95%E6%B8%B8%E5%AE%A2%E7%8E%B0%E7%8A%B6%EF%BC%9A%E4%B8%8D%E7%9F%A5%E6%89%80%E6%8E%AA%E3%80%81%E5%90%93%E5%88%B0%E5%B0%96%E5%8F%AB",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "近日，法国多地爆发骚乱，在当地的旅法游客陷入慌乱，面对紧张局势不知所措，不少游客被街头传来的爆炸声吓得尖叫。",
       "tags": [
         "热点",
@@ -1223,19 +1256,21 @@
       "hot": true
     },
     {
-      "id": "n67eeb7b7a107",
+      "id": "n278c3b0f5a5c",
       "category": "today",
-      "extraCategories": [],
+      "extraCategories": [
+        "ent"
+      ],
       "source": "百度热搜",
       "sourceType": "json",
-      "title": "央行将推动出台一系列措施 有何作用",
-      "url": "https://www.baidu.com/s?wd=%E5%A4%AE%E8%A1%8C%E5%B0%86%E6%8E%A8%E5%8A%A8%E5%87%BA%E5%8F%B0%E4%B8%80%E7%B3%BB%E5%88%97%E6%8E%AA%E6%96%BD+%E6%9C%89%E4%BD%95%E4%BD%9C%E7%94%A8",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "2026金融街论坛年会于19日下午开幕，央行行长潘功胜宣布即将推出五项政策举措。用于稳定债市流动性、实现存类机构流动性全覆盖、打通债券市场、开放外汇市场、构建服务三大科创中心的科技金融体系。",
+      "title": "维密大秀变了",
+      "url": "https://www.baidu.com/s?wd=%E7%BB%B4%E5%AF%86%E5%A4%A7%E7%A7%80%E5%8F%98%E4%BA%86",
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
+      "summary": "当地时间10月18日，2026年维密大秀在洛杉矶登场。本届大秀推出新天使选拔节目并邀请粉丝参与，将大秀延展为持续数月的内容项目。此次变化反映出维密正试图通过全民参与和粉丝经营，重新建立与年轻消费者的关系，寻找品牌转型窗口。",
       "tags": [
         "热点",
-        "民生"
+        "娱乐"
       ],
       "hot": true
     },
@@ -1249,46 +1284,12 @@
       "sourceType": "json",
       "title": "网红王扁摆摊被袭击 曾模仿王源出圈",
       "url": "https://www.baidu.com/s?wd=%E7%BD%91%E7%BA%A2%E7%8E%8B%E6%89%81%E6%91%86%E6%91%8A%E8%A2%AB%E8%A2%AD%E5%87%BB+%E6%9B%BE%E6%A8%A1%E4%BB%BF%E7%8E%8B%E6%BA%90%E5%87%BA%E5%9C%88",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "10月18日，网红王扁在重庆观音桥摆摊遭持械袭击一事引发关注。事发于17日晚9时许，王扁被一男子持锤击打头部约10分钟，一粉丝阻拦亦受伤。随后王扁挣脱逃离送医，肇事男子被民警抓获。此前，王扁因模仿明星王源引发争议。",
       "tags": [
         "热点",
         "娱乐"
-      ],
-      "hot": true
-    },
-    {
-      "id": "n497b571c4563",
-      "category": "today",
-      "extraCategories": [],
-      "source": "百度热搜",
-      "sourceType": "json",
-      "title": "张雪机车赢1次或许是运气 赢6次呢",
-      "url": "https://www.baidu.com/s?wd=%E5%BC%A0%E9%9B%AA%E6%9C%BA%E8%BD%A6%E8%B5%A21%E6%AC%A1%E6%88%96%E8%AE%B8%E6%98%AF%E8%BF%90%E6%B0%94+%E8%B5%A26%E6%AC%A1%E5%91%A2",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "10月18日，2026赛季世界超级摩托车锦标赛在西班牙赫雷斯落幕。中国制造商张雪机车获WorldSSP组别制造商年度第三，其车手获亚军。此前，张雪机车于2024年4月在重庆成立，在十一个分站里六次登顶。其成功背后，依托重庆完备产业链、核心技术自研及制度供给，实现中国制造在世界赛道突围。",
-      "tags": [
-        "热点",
-        "民生"
-      ],
-      "hot": true
-    },
-    {
-      "id": "n21c11c45fa08",
-      "category": "today",
-      "extraCategories": [],
-      "source": "百度热搜",
-      "sourceType": "json",
-      "title": "欧洲多国爆发示威 法国2000多人被捕",
-      "url": "https://www.baidu.com/s?wd=%E6%AC%A7%E6%B4%B2%E5%A4%9A%E5%9B%BD%E7%88%86%E5%8F%91%E7%A4%BA%E5%A8%81+%E6%B3%95%E5%9B%BD2000%E5%A4%9A%E4%BA%BA%E8%A2%AB%E6%8D%95",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
-      "summary": "法国内政部长努内兹18日称，在17日抗议活动期间全法有2000多人被捕。17日，法国及意大利、葡萄牙、比利时等欧洲多国爆发示威，抗议生活成本高企等问题。分析称，能源价格上涨加重民众负担，折射欧洲治理困境。",
-      "tags": [
-        "热点",
-        "民生"
       ],
       "hot": true
     },
@@ -1300,8 +1301,8 @@
       "sourceType": "json",
       "title": "功夫女足",
       "url": "https://baike.baidu.com/item/%E5%8A%9F%E5%A4%AB%E5%A5%B3%E8%B6%B3/68014512?fr=resou",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "周星驰！新作！来了！神级功夫碰撞足球，还是熟悉的喜剧配方，够飞，够癫，含笑量绕足球场好多圈。",
       "tags": [
         "电影"
@@ -1316,8 +1317,8 @@
       "sourceType": "json",
       "title": "欢迎来龙餐馆",
       "url": "https://baike.baidu.com/item/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E9%BE%99%E9%A4%90%E9%A6%86/60346034?fr=resou",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "徐福（沈腾 饰）为养家还债远赴中东中餐馆当厨师，在当地结识了大堂经理马俊生（蒋奇明 饰）。他们以地道中国风味广招八方来客，龙餐馆声名鹊起。",
       "tags": [
         "电影"
@@ -1332,8 +1333,8 @@
       "sourceType": "json",
       "title": "蜘蛛侠：崭新之日",
       "url": "https://baike.baidu.com/item/%E8%9C%98%E8%9B%9B%E4%BE%A0%EF%BC%9A%E5%B4%AD%E6%96%B0%E4%B9%8B%E6%97%A5/65546058?fr=resou",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "彼得•帕克自愿让全世界遗忘自己，转眼已是四年。",
       "tags": [
         "电影"
@@ -1348,8 +1349,8 @@
       "sourceType": "json",
       "title": "年会不能停2！",
       "url": "https://baike.baidu.com/item/%E5%B9%B4%E4%BC%9A%E4%B8%8D%E8%83%BD%E5%81%9C2%EF%BC%81/67856694?fr=resou",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "两个倒霉蛋“刘马组合”在命运的安排下于“包子铺”相遇，命运扔来一张“无限流体验卡”：只要不成，时间倒带，重回原点。",
       "tags": [
         "电影"
@@ -1364,8 +1365,8 @@
       "sourceType": "json",
       "title": "逃出绝命街",
       "url": "https://baike.baidu.com/item/%E9%80%83%E5%87%BA%E7%BB%9D%E5%91%BD%E8%A1%97/67540180?fr=resou",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "一场神秘事件，让橡树街从平静郊区穿越回史前时代，导致恐龙突然惊现人类小区，并开始大肆吃人！",
       "tags": [
         "电影"
@@ -1380,8 +1381,8 @@
       "sourceType": "json",
       "title": "大唐妖探",
       "url": "https://baike.baidu.com/item/%E5%A4%A7%E5%94%90%E5%A6%96%E6%8E%A2/65710506?fr=resou",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "喜剧探案合家欢，悬疑奇案欢乐多。2026年原创国产动画巨制！",
       "tags": [
         "电影"
@@ -1396,8 +1397,8 @@
       "sourceType": "json",
       "title": "去你的岛",
       "url": "https://baike.baidu.com/item/%E5%8E%BB%E4%BD%A0%E7%9A%84%E5%B2%9B/62800745?fr=resou",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "都市女孩王结香被一只干纸鹤带入奇幻小岛，为逃离此地，她与化身为软萌兔子的失忆前男友殷显结伴踏上闯关冒险的旅途。",
       "tags": [
         "电影"
@@ -1412,8 +1413,8 @@
       "sourceType": "json",
       "title": "非份之罪",
       "url": "https://baike.baidu.com/item/%E9%9D%9E%E4%BB%BD%E4%B9%8B%E7%BD%AA/63762065?fr=resou",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "讲述重案组探员孟保接连侦破六桩离奇罪案，每起案件皆源于人心失控的贪欲，在一桩桩人性迷局之中拨开层层迷雾，挖掘欲望裹挟之下，普通人一步步走向犯罪深渊的真相故事。",
       "tags": [
         "电视剧"
@@ -1428,8 +1429,8 @@
       "sourceType": "json",
       "title": "这一秒过火",
       "url": "https://baike.baidu.com/item/%E8%BF%99%E4%B8%80%E7%A7%92%E8%BF%87%E7%81%AB/65762063?fr=resou",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "讲述了民国乱世中，慕容清峄与任素素因一场相救结下命运牵绊，经历身世错位、家族恩怨和痛心离别；三年后任素素以“方牧兰”之名回归，成为慕容清峄的准大嫂，两人在爱恨纠葛中并肩踏入危局，共赴复仇的故事。",
       "tags": [
         "电视剧"
@@ -1444,13 +1445,175 @@
       "sourceType": "json",
       "title": "天才，女友",
       "url": "https://baike.baidu.com/item/%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A5%B3%E5%8F%8B/67903610?fr=resou",
-      "publishedAt": "2026-10-19T10:46:06.907Z",
-      "publishedAtMs": 1792406766907,
+      "publishedAt": "2026-10-19T10:49:50.897Z",
+      "publishedAtMs": 1792406990897,
       "summary": "讲述了天才少女林知夏携手学霸竹马江逾白从校园到婚纱的披荆斩棘之路。林知夏被保送复旦后，江逾白准备在毕业之旅对她告白，却因母亲卷入诈骗案而遗憾离开。",
       "tags": [
         "电视剧"
       ],
       "hot": true
+    },
+    {
+      "id": "n16575f516ec0",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "证监会发布《违规转让证券案件行政处罚实施规则》",
+      "url": "https://36kr.com/newsflashes/4032675000504706?f=rss",
+      "publishedAt": "2026-10-19T10:49:08.000Z",
+      "publishedAtMs": 1792406948000,
+      "summary": "36氪获悉，2026年10月19日，中国证监会发布了《违规转让证券案件行政处罚实施规则》，自2026年12月1日起施行。其中提出，规范“违规转让证券”的认定。明确《证券法》第一百八十六条规定的“转让证券”“在限制转让期内转让证券”“转让股票不符合法律、行政法规和国务院证券监督管理机构规定”的内涵、具体情形，以及一致行动…",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n314fae776c6d",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "首批主动ETF正式获批，场内主动投资开启新篇章",
+      "url": "https://36kr.com/newsflashes/4032673833505409?f=rss",
+      "publishedAt": "2026-10-19T10:47:57.000Z",
+      "publishedAtMs": 1792406877000,
+      "summary": "36氪获悉，近日，深交所首批9只主动ETF正式获中国证监会批复，境内ETF市场迎来重要创新突破，这是深化投融资综合改革、吸引中长期资金入市、推动公募基金高质量发展的重要举措。首批产品充分发挥管理人投研优势与特色，聚焦均衡、价值、红利等稳健型投资策略，有助于为投资者提供更加多元的资产配置选择，引导资金更加有效地配置优质投…",
+      "tags": [
+        "36氪",
+        "AI",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n700af3192e50",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Scientists Find a 'Ghostly Green' Star, and That's Not the Only Crazy Color",
+      "url": "https://www.cnet.com/science/space/white-dwarf-star-color-variability/",
+      "publishedAt": "2026-10-19T10:47:48.000Z",
+      "publishedAtMs": 1792406868000,
+      "summary": "Scientists Find a 'Ghostly Green' Star, and That's Not the Only Crazy Color（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nebfefa001a3f",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "[Bug] JEB CLI schema drift loses field-specific correction guidance",
+      "url": "https://github.com/morluto/rea/issues/5234",
+      "publishedAt": "2026-10-19T10:47:47.000Z",
+      "publishedAtMs": 1792406867000,
+      "summary": "[Bug] JEB CLI schema drift loses field-specific correction guidance（来源：GitHub · morluto/rea）",
+      "tags": [
+        "GitHub",
+        "Issue",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "nac56564b9031",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "[Bug] inspect-dart-aot advertises ABI strings that request validation rejects",
+      "url": "https://github.com/morluto/rea/issues/5217",
+      "publishedAt": "2026-10-19T10:47:44.000Z",
+      "publishedAtMs": 1792406864000,
+      "summary": "[Bug] inspect-dart-aot advertises ABI strings that request validation rejects（来源：GitHub · morluto/rea）",
+      "tags": [
+        "GitHub",
+        "Issue",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n7797e23d69ad",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "GitHub · morluto/rea",
+      "sourceType": "github",
+      "title": "[Bug] Explicit ABI selection rejects a label reported and inspectable by default",
+      "url": "https://github.com/morluto/rea/issues/5219",
+      "publishedAt": "2026-10-19T10:47:38.000Z",
+      "publishedAtMs": 1792406858000,
+      "summary": "[Bug] Explicit ABI selection rejects a label reported and inspectable by default（来源：GitHub · morluto/rea）",
+      "tags": [
+        "GitHub",
+        "Issue",
+        "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n2f7b4a715813",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "How AI is creating a lopsided US economy",
+      "url": "https://www.abc.net.au/news/2026-10-19/ai-stock-market-concentration-data/107261078",
+      "publishedAt": "2026-10-19T10:47:37.000Z",
+      "publishedAtMs": 1792406857000,
+      "summary": "How AI is creating a lopsided US economy（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n82d86f32d9f8",
+      "category": "today",
+      "extraCategories": [],
+      "source": "36氪",
+      "sourceType": "rss",
+      "title": "小米汽车增程器专利获授权，可减少纵置或横置时的占用空间",
+      "url": "https://36kr.com/newsflashes/4032667396592261?f=rss",
+      "publishedAt": "2026-10-19T10:47:21.000Z",
+      "publishedAtMs": 1792406841000,
+      "summary": "36氪获悉，据天眼查显示，小米汽车科技有限公司申请的“增程器、动力总成及车辆”实用新型专利于10月16日获授权，目前处于有效状态，申请日为2025年10月27日。专利摘要记载，该增程器将发动机与电机总成并排布置，发电机与电机控制器则沿平行于发动机轴线的方向排列。该布局可以至少不额外增加增程器沿发动机轴线方向的尺寸：发动…",
+      "tags": [
+        "36氪",
+        "商业科技",
+        "快讯",
+        "金融"
+      ],
+      "hot": false
+    },
+    {
+      "id": "na4eb83dc4097",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Hacker News",
+      "sourceType": "hn",
+      "title": "Show HN: CanaryGuard – A <0.1ms deterministic AI prompt firewall with $5 bounty",
+      "url": "https://canaryguard-402.onrender.com/bounty.html",
+      "publishedAt": "2026-10-19T10:46:14.000Z",
+      "publishedAtMs": 1792406774000,
+      "summary": "Show HN: CanaryGuard – A <0.1ms deterministic AI prompt firewall with $5 bounty（来源：Hacker News）",
+      "tags": [
+        "Hacker News",
+        "REA"
+      ],
+      "hot": false
     },
     {
       "id": "n27dd4e392455",
@@ -1575,24 +1738,6 @@
       "tags": [
         "电影",
         "GoogleNews"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nebfefa001a3f",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub · morluto/rea",
-      "sourceType": "github",
-      "title": "[Bug] JEB CLI schema drift loses field-specific correction guidance",
-      "url": "https://github.com/morluto/rea/issues/5234",
-      "publishedAt": "2026-10-19T10:40:29.000Z",
-      "publishedAtMs": 1792406429000,
-      "summary": "[Bug] JEB CLI schema drift loses field-specific correction guidance（来源：GitHub · morluto/rea）",
-      "tags": [
-        "GitHub",
-        "Issue",
-        "rea"
       ],
       "hot": false
     },
@@ -1850,7 +1995,7 @@
       "url": "https://www.ithome.com/1/014/990.htm",
       "publishedAt": "2026-10-19T10:27:15.000Z",
       "publishedAtMs": 1792405635000,
-      "summary": "IT之家 10 月 19 日消息，梅赛德斯-奔驰与英伟达今日宣布，双方将深化战略合作， 共同推动下一代辅助驾驶系统的开发 。 此次合作将融合梅赛德斯-奔驰的汽车工程技术、安全领域的积累及 MB.OS 操作系统，与英伟达的加速计算和 AI 技术。 梅赛德斯-奔驰的 MB.OS 操作系统支持新增驾驶功能和空中下载（OTA）…",
+      "summary": "IT之家 10 月 19 日消息，梅赛德斯-奔驰与英伟达 16 日发布公告，双方将深化战略合作， 共同推动下一代辅助驾驶系统的开发 。 此次合作将融合梅赛德斯-奔驰的汽车工程技术、安全领域的积累及 MB.OS 操作系统，与英伟达的加速计算和 AI 技术。 梅赛德斯-奔驰的 MB.OS 操作系统支持新增驾驶功能和空中下载…",
       "tags": [
         "科技"
       ],
@@ -2157,23 +2302,6 @@
       "tags": [
         "Hacker News",
         "REA"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n7e67e0083218",
-      "category": "today",
-      "extraCategories": [],
-      "source": "东方财富",
-      "sourceType": "googleNews",
-      "title": "赛分科技：预计前三季度归母净利润同比增长70%-80%",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5kTVktNmRXNGdhanhIQkFiWWFObXRhVHhvWjRhSGRZWEFhOWlPenBtVVFra2poSmYxSnh2YUF4eXgxcHY2ZVBVZUJtWWRCUzdjeE0wOTBDWGNJOVZxNmFXLXJmcDhxdw?oc=5",
-      "publishedAt": "2026-10-19T10:16:18.000Z",
-      "publishedAtMs": 1792404978000,
-      "summary": "赛分科技：预计前三季度归母净利润同比增长70%-80% 东方财富",
-      "tags": [
-        "科技",
-        "GoogleNews"
       ],
       "hot": false
     },
@@ -2712,25 +2840,6 @@
       "hot": false
     },
     {
-      "id": "nec0fd0238959",
-      "category": "today",
-      "extraCategories": [],
-      "source": "36氪",
-      "sourceType": "rss",
-      "title": "台积电熊本产出计划变更，二厂改产3nm并下调产能",
-      "url": "https://36kr.com/newsflashes/4032613094297993?f=rss",
-      "publishedAt": "2026-10-19T09:54:04.000Z",
-      "publishedAtMs": 1792403644000,
-      "summary": "日本经济产业省于2026年10月16日认定了台积电及其日本子公司JASM（Japan Advanced Semiconductor Manufacturing）就熊本第二工厂提交的生产计划变更。变更后的计划中，将力争在2028年12月之前开始生产3nm工艺逻辑半导体。计划产能为月产6000片（按300mm晶圆换算），预…",
-      "tags": [
-        "36氪",
-        "商业科技",
-        "快讯",
-        "金融"
-      ],
-      "hot": false
-    },
-    {
       "id": "n454da3b8d787",
       "category": "ent",
       "extraCategories": [],
@@ -2883,25 +2992,6 @@
       "hot": false
     },
     {
-      "id": "n78e6e319f697",
-      "category": "today",
-      "extraCategories": [],
-      "source": "36氪",
-      "sourceType": "rss",
-      "title": "立航科技：拟转让恒升力讯5%股权并增资375万元",
-      "url": "https://36kr.com/newsflashes/4032607403184776?f=rss",
-      "publishedAt": "2026-10-19T09:47:18.000Z",
-      "publishedAtMs": 1792403238000,
-      "summary": "36氪获悉，立航科技公告，公司拟向恒升力讯员工持股平台瑞合呈业转让恒升力讯75万元注册资本，占总股本5%，转让价款为269.25万元；恒升力讯拟新增注册资本375万元，由瑞合呈业以1076.25万元认购。公司董事会已于2026年10月19日审议通过相关议案，转让及增资协议尚未签署。完成后，公司持有恒升力讯52%股权，恒…",
-      "tags": [
-        "36氪",
-        "商业科技",
-        "快讯",
-        "金融"
-      ],
-      "hot": false
-    },
-    {
       "id": "n9f78782fbd64",
       "category": "today",
       "extraCategories": [],
@@ -2965,25 +3055,6 @@
       "tags": [
         "Hacker News",
         "REA"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n107665f9821a",
-      "category": "today",
-      "extraCategories": [],
-      "source": "36氪",
-      "sourceType": "rss",
-      "title": "国家外汇局：推动外汇市场开放发展，扩大证券公司结售汇业务试点",
-      "url": "https://36kr.com/newsflashes/4032613141484167?f=rss",
-      "publishedAt": "2026-10-19T09:46:13.000Z",
-      "publishedAtMs": 1792403173000,
-      "summary": "10月19日，中国人民银行副行长、国家外汇局局长朱鹤新在参加2026金融街论坛年会开幕式时表示，推动外汇市场开放发展，扩大证券公司结售汇业务试点，支持金融机构做好企业特别是中小企业汇率风险管理服务，提升跨境服务能力，更好支持离债金融市场协同发展，促进人民币国际化。（证券时报）",
-      "tags": [
-        "36氪",
-        "商业科技",
-        "快讯",
-        "金融"
       ],
       "hot": false
     },
@@ -3112,9 +3183,9 @@
       "publishedAtMs": 1792402800000,
       "summary": "华人00后做“本地Muse”，被硅谷AI圈疯抢，a16z和Anthropic都投了 新浪网",
       "tags": [
-        "AI Agent",
+        "AI Agent 框架",
         "GoogleNews",
-        "AI Agent 框架"
+        "AI Agent"
       ],
       "hot": false
     },
@@ -3187,23 +3258,6 @@
       "hot": false
     },
     {
-      "id": "n6cdd6d352c35",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "Hacker News",
-      "sourceType": "hn",
-      "title": "How to save the UK taxpayer £130M a year (by switching to Linux)",
-      "url": "https://aeturrell.com/blog/posts/the-case-for-public-sector-os/",
-      "publishedAt": "2026-10-19T09:34:08.000Z",
-      "publishedAtMs": 1792402448000,
-      "summary": "How to save the UK taxpayer £130M a year (by switching to Linux)（来源：Hacker News）",
-      "tags": [
-        "Hacker News",
-        "REA"
-      ],
-      "hot": false
-    },
-    {
       "id": "n6b43c39acab2",
       "category": "today",
       "extraCategories": [],
@@ -3233,40 +3287,6 @@
       "summary": "新华社北京10月19日电(记者刘开雄、熊琳)中国人民银行副行长、国家外汇管理局局长朱鹤新10月19日在2026金融街论坛年会开幕式上表示，近期，在存量政策提质增效基础上，国家外汇局拟集中推出一批增量措施：一是推出经常项目便利化一揽子政策，更好满足外贸企业多样化结算需求。二是推出优化资本项目外汇管理一揽子政策，更好满足企…",
       "tags": [
         "金融"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nbafa370aa021",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "Hacker News",
-      "sourceType": "hn",
-      "title": "Stop Vibe Coding. Enter Guide Coding. A VSCode Extension",
-      "url": "https://marketplace.visualstudio.com/items?itemName=novian.guide-coding",
-      "publishedAt": "2026-10-19T09:32:13.000Z",
-      "publishedAtMs": 1792402333000,
-      "summary": "Stop Vibe Coding. Enter Guide Coding. A VSCode Extension（来源：Hacker News）",
-      "tags": [
-        "Hacker News",
-        "REA"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n3dbb21721d8e",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "Hacker News",
-      "sourceType": "hn",
-      "title": "Calls to phase out plastics in cemetery rejected",
-      "url": "https://www.bbc.co.uk/news/articles/cwm23zjqgvvvo",
-      "publishedAt": "2026-10-19T09:31:42.000Z",
-      "publishedAtMs": 1792402302000,
-      "summary": "Calls to phase out plastics in cemetery rejected（来源：Hacker News）",
-      "tags": [
-        "Hacker News",
-        "REA"
       ],
       "hot": false
     },
@@ -3639,6 +3659,22 @@
       "hot": false
     },
     {
+      "id": "n6aa288621fc2",
+      "category": "today",
+      "extraCategories": [],
+      "source": "IT之家",
+      "sourceType": "rss",
+      "title": "美国造车新势力 Rivian 推出点到点辅助驾驶，年底开放测试",
+      "url": "https://www.ithome.com/1/014/934.htm",
+      "publishedAt": "2026-10-19T09:13:45.000Z",
+      "publishedAtMs": 1792401225000,
+      "summary": "IT之家 10 月 19 日消息，据汽车媒体 Motor1 今天报道，美国造车新势力 Rivian 最近启动自动驾驶早期体验计划，邀请小部分车主体验点对点辅助驾驶功能。 IT之家从原报道获悉，所有订阅 Autonomy+ 付费服务的第二代 R1 或 R2 车主均可申请加入计划。Rivian 正按计划推进开发工作，目标年…",
+      "tags": [
+        "科技"
+      ],
+      "hot": false
+    },
+    {
       "id": "n153227225199",
       "category": "ai",
       "extraCategories": [],
@@ -3673,18 +3709,18 @@
       "hot": false
     },
     {
-      "id": "n41bee7a3a9de",
-      "category": "ent",
+      "id": "nfffafe87c43e",
+      "category": "today",
       "extraCategories": [],
-      "source": "新浪网",
+      "source": "证券之星",
       "sourceType": "googleNews",
-      "title": "官宣！一大批明星空降无锡！",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE16QlpBR1VtLUlnTXhXbUhLcHBmZUNkN0dpRHVFbjByY1FULTJ3ZHRqR2R0bFFNR21EcXBFQWVCMFFjQ2t4M3VPbThscEJhQ2tLTG5EN2dCWks1UEFudEpBNW9wRXAxUHd6eWRxV2labw?oc=5",
-      "publishedAt": "2026-10-19T09:11:00.000Z",
-      "publishedAtMs": 1792401060000,
-      "summary": "官宣！一大批明星空降无锡！ 新浪网",
+      "title": "公允价值变动致净利大跌97%，民生健康增收不增利_蓝鲸财经_媒体广场_财经",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5xWk5pVE16dE5ac0tnTWZzMXNTc1hscl9MSXROUHVTY2dMY2g2b0l0QVBlbkVkUWFVeWs5U2Y0T0dpd0RfbDBKTklYdk9INUktWm1mNkpRN0xkOTljTENLTw?oc=5",
+      "publishedAt": "2026-10-19T09:11:11.000Z",
+      "publishedAtMs": 1792401071000,
+      "summary": "公允价值变动致净利大跌97%，民生健康增收不增利_蓝鲸财经_媒体广场_财经 证券之星",
       "tags": [
-        "明星",
+        "民生",
         "GoogleNews"
       ],
       "hot": false
@@ -3703,24 +3739,6 @@
       "tags": [
         "娱乐",
         "GoogleNews"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n7797e23d69ad",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub · morluto/rea",
-      "sourceType": "github",
-      "title": "[Bug] Explicit ABI selection rejects a label reported and inspectable by default",
-      "url": "https://github.com/morluto/rea/issues/5219",
-      "publishedAt": "2026-10-19T09:07:51.000Z",
-      "publishedAtMs": 1792400871000,
-      "summary": "[Bug] Explicit ABI selection rejects a label reported and inspectable by default（来源：GitHub · morluto/rea）",
-      "tags": [
-        "GitHub",
-        "Issue",
-        "rea"
       ],
       "hot": false
     },
@@ -3755,23 +3773,6 @@
       "summary": "500多米“无感健身步道”成网红打卡点！杨浦把这些健身“黑科技”送到市民身边 搜狐",
       "tags": [
         "娱乐",
-        "GoogleNews"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nec6c87c146b4",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "DevOps.com",
-      "sourceType": "googleNews",
-      "title": "OpenCode Breach Puts Spotlight on AI Distillation Threats",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQM1d1RFFMNkNiTTBKdmtleWRMSlhuOTVjWnRzcDJscEtTbjFQRm1vNEYzaE9STE1uRG54V2FjSV80S0lSeXhRNTNNZTJ4OFpJMUxvUXFsb3UycnpsQjlRc3BuZVNuRGRsMU9jdXF3TFYzcWpMT0tCYVJmc1E0cVVQODR3?oc=5",
-      "publishedAt": "2026-10-19T09:03:16.000Z",
-      "publishedAtMs": 1792400596000,
-      "summary": "OpenCode Breach Puts Spotlight on AI Distillation Threats DevOps.com",
-      "tags": [
-        "AI coding agent",
         "GoogleNews"
       ],
       "hot": false
@@ -3876,41 +3877,6 @@
         "GitHub",
         "Issue",
         "rea"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nac56564b9031",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub · morluto/rea",
-      "sourceType": "github",
-      "title": "[Bug] inspect-dart-aot advertises ABI strings that request validation rejects",
-      "url": "https://github.com/morluto/rea/issues/5217",
-      "publishedAt": "2026-10-19T08:53:51.000Z",
-      "publishedAtMs": 1792400031000,
-      "summary": "[Bug] inspect-dart-aot advertises ABI strings that request validation rejects（来源：GitHub · morluto/rea）",
-      "tags": [
-        "GitHub",
-        "Issue",
-        "rea"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nf9b1be8bb2b5",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "财联社",
-      "sourceType": "googleNews",
-      "title": "AI浪潮下最讽刺一幕：苹果不争，故天下莫能与之争？",
-      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1TSXJLMmxMbjRzLTByLVdBbTZVN3lWRmtPTGdHLUtZVlJLM2J3T2xCS0hGb1hpVDdzVGttWWx2emxSeS1lTVpSTw?oc=5",
-      "publishedAt": "2026-10-19T08:44:05.000Z",
-      "publishedAtMs": 1792399445000,
-      "summary": "AI浪潮下最讽刺一幕：苹果不争，故天下莫能与之争？ 财联社",
-      "tags": [
-        "人工智能",
-        "GoogleNews"
       ],
       "hot": false
     },
@@ -4462,23 +4428,6 @@
       "hot": false
     },
     {
-      "id": "n8f4bb2a5b578",
-      "category": "ent",
-      "extraCategories": [],
-      "source": "新浪新闻_手机新浪网",
-      "sourceType": "googleNews",
-      "title": "当老海报与新力量同台：一场青年电影周开幕式如何连接百年光影",
-      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1oay0wSW0zTWhlREFZdHdoRkIyM25uZ202SUhxQmwzMkE2eHN2a2V2endvYXZKVXFueWpDMEhlRnQyS1F6QlJfbjRBRW9GR0tYV2dsN3FYa0haQmFjWW5YU3JtRXFwcl83cW9PTzN6S25aTUl6clE?oc=5",
-      "publishedAt": "2026-10-19T07:29:00.000Z",
-      "publishedAtMs": 1792394940000,
-      "summary": "当老海报与新力量同台：一场青年电影周开幕式如何连接百年光影 新浪新闻_手机新浪网",
-      "tags": [
-        "电影",
-        "GoogleNews"
-      ],
-      "hot": false
-    },
-    {
       "id": "nb6c9f15ba9c3",
       "category": "ent",
       "extraCategories": [],
@@ -4491,6 +4440,23 @@
       "summary": "快快评｜吴越遭AI假冒带货，别靠明星自己打假 新浪新闻_手机新浪网",
       "tags": [
         "明星",
+        "GoogleNews"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n8f4bb2a5b578",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "新浪新闻_手机新浪网",
+      "sourceType": "googleNews",
+      "title": "当老海报与新力量同台：一场青年电影周开幕式如何连接百年光影",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1oay0wSW0zTWhlREFZdHdoRkIyM25uZ202SUhxQmwzMkE2eHN2a2V2endvYXZKVXFueWpDMEhlRnQyS1F6QlJfbjRBRW9GR0tYV2dsN3FYa0haQmFjWW5YU3JtRXFwcl83cW9PTzN6S25aTUl6clE?oc=5",
+      "publishedAt": "2026-10-19T07:29:00.000Z",
+      "publishedAtMs": 1792394940000,
+      "summary": "当老海报与新力量同台：一场青年电影周开幕式如何连接百年光影 新浪新闻_手机新浪网",
+      "tags": [
+        "电影",
         "GoogleNews"
       ],
       "hot": false
@@ -4509,6 +4475,23 @@
       "tags": [
         "电影",
         "GoogleNews"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n388cdb827a9a",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "Reddit · r/netsec",
+      "sourceType": "reddit",
+      "title": "CVE-2026-108097 Deep Dive: Turning a Drupal Field UI Callback Into RCE",
+      "url": "https://www.reddit.com/r/netsec/comments/1x9q96y/cve2026108097_deep_dive_turning_a_drupal_field_ui/",
+      "publishedAt": "2026-10-19T07:21:07.000Z",
+      "publishedAtMs": 1792394467000,
+      "summary": "submitted by /u/adrian_rt [link] [comments]",
+      "tags": [
+        "Reddit",
+        "r/netsec"
       ],
       "hot": false
     },
@@ -4616,19 +4599,19 @@
       "hot": false
     },
     {
-      "id": "nb0dac62d2e9a",
-      "category": "ai",
+      "id": "nb62bf96bf7f4",
+      "category": "ent",
       "extraCategories": [],
-      "source": "Reddit · r/ReverseEngineering",
-      "sourceType": "reddit",
-      "title": "/r/ReverseEngineering's Weekly Questions Thread",
-      "url": "https://www.reddit.com/r/ReverseEngineering/comments/1x9pwy1/rreverseengineerings_weekly_questions_thread/",
-      "publishedAt": "2026-10-19T07:00:16.000Z",
-      "publishedAtMs": 1792393216000,
-      "summary": "To reduce the amount of noise from questions, we have disabled self-posts in favor of a unified questions thread every week. Feel free to ask any question about…",
+      "source": "新浪财经",
+      "sourceType": "googleNews",
+      "title": "千亿估值说砍就砍，AI明星公司Anthropic这是要凉凉？",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1ZbXBES0NEcDFfbHJScGoyUG1iWFVMSU5DMFI1VzNXOGNxdFFjSUJudTZnZ3puOEdmR29zRUc3ZEIwRXVycDRvUFcwUDQxbl9MUTlhMFZoU05QZUVGRWpHUGgwSWlNam1HcjhoOUk1aw?oc=5",
+      "publishedAt": "2026-10-19T07:00:25.000Z",
+      "publishedAtMs": 1792393225000,
+      "summary": "千亿估值说砍就砍，AI明星公司Anthropic这是要凉凉？ 新浪财经",
       "tags": [
-        "Reddit",
-        "r/ReverseEngineering"
+        "明星",
+        "GoogleNews"
       ],
       "hot": false
     },
@@ -4644,9 +4627,9 @@
       "publishedAtMs": 1792393020000,
       "summary": "当1024个AI程序员一起写代码：微软让Agent数量成为新的智能维度 科技行者",
       "tags": [
-        "AI Agent",
+        "AI Agent 框架",
         "GoogleNews",
-        "AI Agent 框架"
+        "AI Agent"
       ],
       "hot": false
     },
@@ -4663,6 +4646,23 @@
       "summary": "大厂争霸AI办公：个人Agent和AI硬件哪个才是答案？ ThePaper.cn",
       "tags": [
         "AI Agent",
+        "GoogleNews"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n70499c17217c",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "搜狐",
+      "sourceType": "googleNews",
+      "title": "跟着《现在就出发4》，解锁明星同款四川之旅",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQTTV0Zjl0Yk5UVWlMTzlSbzY2cHQ4Z2dNRjFrcnIxSl9ISkRSTjV5QnlIZWZsUUx2S2NleDhOT2lPTkJ1bVFBSUNSYVJORi1EMVFDRU1FZnNLdVBtcGxzZFNOb2xsc2FSV0VILWxRYmhzTEcyNE93XzR3bmFzUk9qNFVFZzJSQTNE?oc=5",
+      "publishedAt": "2026-10-19T06:54:28.000Z",
+      "publishedAtMs": 1792392868000,
+      "summary": "跟着《现在就出发4》，解锁明星同款四川之旅 搜狐",
+      "tags": [
+        "明星",
         "GoogleNews"
       ],
       "hot": false
@@ -4876,6 +4876,23 @@
       "hot": false
     },
     {
+      "id": "ncd741a873555",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "新华网",
+      "sourceType": "googleNews",
+      "title": "第39届中国电影金鸡奖提名名单公布",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNcTV4VHNJVUpmemNIODhiMTNMUi15X2pFZWRndVd6cE5KNVlnMDF3UkhKbE9PN01TekJjU3RyaVJLdE5mMXZmWTRrenpFMWtfSlNHUEtRTGFNR2dfamZoTmdGZG1hYS0zYkhwY3dsaWlyY1VINS1CLURacUJQaFh4MGR6aw?oc=5",
+      "publishedAt": "2026-10-19T06:12:49.000Z",
+      "publishedAtMs": 1792390369000,
+      "summary": "第39届中国电影金鸡奖提名名单公布 新华网",
+      "tags": [
+        "电影",
+        "GoogleNews"
+      ],
+      "hot": false
+    },
+    {
       "id": "n50a9b444e595",
       "category": "ai",
       "extraCategories": [],
@@ -5083,23 +5100,6 @@
       "hot": false
     },
     {
-      "id": "n8269f6245716",
-      "category": "ent",
-      "extraCategories": [],
-      "source": "机核GCORES",
-      "sourceType": "googleNews",
-      "title": "19个游戏IP的旋律，同一个音乐现场｜GGG完整曲目与阵容公开",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBESHNpVXpyYlpneERfSVI3N09UeE9oM1ZkQlRWaEs5d2xIWnlWanFkZHptNVJub3FBX2pscFNmRGRGdURYcXFwS1pwMmc?oc=5",
-      "publishedAt": "2026-10-19T05:27:21.000Z",
-      "publishedAtMs": 1792387641000,
-      "summary": "19个游戏IP的旋律，同一个音乐现场｜GGG完整曲目与阵容公开 机核GCORES",
-      "tags": [
-        "音乐",
-        "GoogleNews"
-      ],
-      "hot": false
-    },
-    {
       "id": "ndb40f4813a27",
       "category": "ai",
       "extraCategories": [],
@@ -5149,6 +5149,23 @@
         "GitHub",
         "Commit",
         "rea"
+      ],
+      "hot": false
+    },
+    {
+      "id": "n11d533717e9c",
+      "category": "ent",
+      "extraCategories": [],
+      "source": "厦门大学新闻网",
+      "sourceType": "googleNews",
+      "title": "【致敬长征 奋楫向前】厦门大学《长征组歌》省内展演 共上“音乐大思政课”",
+      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9kWmZENUViemMxMFhJQU9YOHUxYXl0YWt4U2hpaC0zZS1mY1VRS0RzX0hjNm9CS0NDdWxVRHh5amtNNzV3TVpjQS1LaUppTkZjZWRLQkMyQQ?oc=5",
+      "publishedAt": "2026-10-19T05:06:02.000Z",
+      "publishedAtMs": 1792386362000,
+      "summary": "【致敬长征 奋楫向前】厦门大学《长征组歌》省内展演 共上“音乐大思政课” 厦门大学新闻网",
+      "tags": [
+        "音乐",
+        "GoogleNews"
       ],
       "hot": false
     },
@@ -5408,6 +5425,23 @@
       "hot": false
     },
     {
+      "id": "n34e745bb44ce",
+      "category": "ai",
+      "extraCategories": [],
+      "source": "山东新闻",
+      "sourceType": "googleNews",
+      "title": "中国联通亮相2026人工智能产业大会",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFA3Z2x3QTFNaWZWcDkwR25XTmM2SU5nQU9EZ3l2eVloaE5XUlFlUTVTd2t0UUF3b1FOMEcxRUNuS1pab2hjZnNFY29tcERvcGxhaGxsWExXaTV0UTM4bUFYRXNmWUc?oc=5",
+      "publishedAt": "2026-10-19T03:47:00.000Z",
+      "publishedAtMs": 1792381620000,
+      "summary": "中国联通亮相2026人工智能产业大会 山东新闻",
+      "tags": [
+        "人工智能",
+        "GoogleNews"
+      ],
+      "hot": false
+    },
+    {
       "id": "ne370de0d0ec7",
       "category": "ent",
       "extraCategories": [],
@@ -5486,40 +5520,6 @@
       "publishedAt": "2026-10-19T03:12:30.000Z",
       "publishedAtMs": 1792379550000,
       "summary": "兰香如故谭松韵刘学义，兰香为吕蕺儿赎身成功 新浪网",
-      "tags": [
-        "电视剧",
-        "GoogleNews"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nc46d12e6fc6a",
-      "category": "ent",
-      "extraCategories": [],
-      "source": "新浪网",
-      "sourceType": "googleNews",
-      "title": "60古早综艺他提8名字，距拍完安乐传已半年",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBUNUNVQTduc3M4RXpka2QxY3R1RXplRkxWcWhGM1lJbkh2RjNycENla01QdGN4djR6cXhHeXhKZVlVZy1MZFlhR1hPY0hZVVNqV3F1alFlS2VPQkZ6eTVMd20wTFlOZHh0WjNnanc2Zi00Zw?oc=5",
-      "publishedAt": "2026-10-19T03:12:29.000Z",
-      "publishedAtMs": 1792379549000,
-      "summary": "60古早综艺他提8名字，距拍完安乐传已半年 新浪网",
-      "tags": [
-        "综艺",
-        "GoogleNews"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nebd6e9a58071",
-      "category": "ent",
-      "extraCategories": [],
-      "source": "搜狐网",
-      "sourceType": "googleNews",
-      "title": "座谈会：《交锋》为特殊题材电视剧创作提供优质范本",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOVzlWX3BWRFhKTHFJTW9FQ1ptWDlkZXY4UC1sMlVNaXdpVU1vLTJaNkJjVFBrbEhyTmNCRk1vVW95RVRQZWlTTmk2MmpJNmVWNDg1NVg5QWtieDhpVEZ1ODFNRkZJZF9qS2lqVUJZZFE2eFBEdUFaWnBwSmgxamt6aEU4SEh2SzY2bG9Z?oc=5",
-      "publishedAt": "2026-10-19T03:11:41.000Z",
-      "publishedAtMs": 1792379501000,
-      "summary": "座谈会：《交锋》为特殊题材电视剧创作提供优质范本 搜狐网",
       "tags": [
         "电视剧",
         "GoogleNews"
@@ -5912,6 +5912,6 @@
         "url": "https://github.com/MoonshotAI/kimi-code"
       }
     ],
-    "fetchedAt": "2026-10-19T10:46:07.548Z"
+    "fetchedAt": "2026-10-19T10:49:51.326Z"
   }
 }
