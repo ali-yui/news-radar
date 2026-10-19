@@ -66,3 +66,9 @@ jobs:
           # 若远端有本端没有的提交（如手动推送），先合并再推；正常情况下直接快进
           git fetch gitee main && git merge --no-edit -X theirs gitee/main || true
           git push gitee main
+
+      - name: 刷新 jsDelivr CDN 缓存
+        run: |
+          # 让 App 09:00 后立即拿到新数据，不用等 jsDelivr 自动过期
+          curl -fsS "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/public/data/daily.json" || true
+          echo "jsDelivr 缓存已刷新"
