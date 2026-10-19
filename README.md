@@ -1,5 +1,12 @@
 # 资讯雷达 News Radar
 
+> **在线部署实例**：仓库 https://github.com/ali-yui/news-radar（已部署），Actions 每天北京时间 09:00 自动抓取。
+> App 已预填的远程数据地址：
+> - `https://cdn.jsdelivr.net/gh/ali-yui/news-radar@main/public/data/daily.json`（国内优先）
+> - `https://raw.githubusercontent.com/ali-yui/news-radar/main/public/data/daily.json`（备用）
+> 网页版：https://ali-yui.github.io/news-radar/
+
+
 一个零后端、零付费密钥的新闻检索 App。数据由 **GitHub Actions 定时抓取**公开 RSS/API 生成 `public/data/daily.json`，前端为原生 HTML/CSS/JS 单页应用，直接读取 JSON 渲染。
 
 四个 Tab：**今天**（军事 / 科技 / 民生 / 金融 热点）、**AI 圈**（GitHub 动态、AI Agent/MCP、Hacker News、Reddit、行业报道）、**娱乐圈**、**设置**。
