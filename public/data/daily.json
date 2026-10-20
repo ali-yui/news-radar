@@ -420,195 +420,6 @@
       "storyId": "sc40335b5d061"
     },
     {
-      "id": "nd539f589ecb3",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "The Next Web",
-      "sourceType": "googleNews",
-      "title": "Modal says Nvidia’s Vera CPU doubles throughput for its AI sandboxes",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE15cU81T2JQRTMxaUdIelV4WWkyWVBldWVpZlBZWEJHU0Q0aTNZcWp4UGNYN3ZGaVd5LUM0eDJiVDUxdjJyWkFFdHc1ajNoLXpQYUF0ZEVtcGxDZC1oemhfM09rQzlaUXJNSEE4?oc=5",
-      "publishedAt": "2026-10-19T18:11:54.000Z",
-      "publishedAtMs": 1792433514000,
-      "summary": "Modal says Nvidia’s Vera CPU doubles throughput for its AI sandboxes The Next Web",
-      "tags": [
-        "AI coding agent",
-        "GoogleNews"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nd40c9fb0f9f6",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "SD Times",
-      "sourceType": "googleNews",
-      "title": "Sonatype Unveils Nexus Repository Pro+ to Stop Malicious Components",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPRzdjOEdtUlVyakVmbTF3QlRmeXFOb1hBVzh2SkJ5c2tKd2tmall5bGhBYlc5SXA3cnZDbndsMklrNU44QzZtM3BFdXV5VEp1Q2JkU25weXRoVDRoaF9vOXpHSEZwbVY5SFJvaEFtZ3dUaEZUYTZMaC1xNFg5M3VzSi1FcmhGY05UX2VPS2Z4c3dPX2tuN1gtVmFtTXI4bVE?oc=5",
-      "publishedAt": "2026-10-19T18:07:18.000Z",
-      "publishedAtMs": 1792433238000,
-      "summary": "Sonatype Unveils Nexus Repository Pro+ to Stop Malicious Components SD Times",
-      "tags": [
-        "MCP model context protocol",
-        "GoogleNews"
-      ],
-      "hot": false
-    },
-    {
-      "id": "na215f81de23b",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "CyberSecurityNews",
-      "sourceType": "googleNews",
-      "title": "Microsoft Says AI Agents Cannot Be Trusted and Could Become Insider Security Threats",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1GeVpFYnR2YTRDRVJvM3huVFFES2toZ3ZCQ3V5eHhwZkVFN1VPNlZ5OHBPUUh4b2s2bW1VWHFXZEg5N01xTjhRYVR5MkRKRHR1RkZCdVJQdlZCZVZaZnA1YXNaOXZYd0dZYWVV0gFwQVVfeXFMTVZ1aVhuZ0hYbi1HYThJd2ZpYkhwTTlhOWF2T1pqcnpYUlR1Tk1mZ0NtNFNOZDJ4eTdvWENMYTlicXBmdllLcDdrWVZiMC1Kc2s2OWpNNlVjd0N2V2wtVnhvUnVyU0t4WVltYms0c1RqQg?oc=5",
-      "publishedAt": "2026-10-19T18:04:16.000Z",
-      "publishedAtMs": 1792433056000,
-      "summary": "Microsoft Says AI Agents Cannot Be Trusted and Could Become Insider Security Threats CyberSecurityNews",
-      "tags": [
-        "AI coding agent",
-        "GoogleNews"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n1cc2b5b8c219",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub · morluto/rea",
-      "sourceType": "github",
-      "title": "fix(process): settle native exit and repair ownership verification (#5249)",
-      "url": "https://github.com/morluto/rea/commit/1c2c2f1e78a74cdf5e4909ab8e775b090998a51f",
-      "publishedAt": "2026-10-19T18:01:00.000Z",
-      "publishedAtMs": 1792432860000,
-      "summary": "fix(process): settle native exit and repair ownership verification (#5249) * fix(process): classify baseline cleanup with current ownership facts Use the pre-la…",
-      "tags": [
-        "GitHub",
-        "Commit",
-        "rea"
-      ],
-      "hot": false
-    },
-    {
-      "id": "na2d2eff29ca6",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "Hacker News",
-      "sourceType": "hn",
-      "title": "Show HN: Open-source early-reading reader with phonics help",
-      "url": "https://github.com/finereli/yarareads",
-      "publishedAt": "2026-10-19T17:58:54.000Z",
-      "publishedAtMs": 1792432734000,
-      "summary": "My kid is 6 y/o and she is learning to read. She's moved through the basic phonics with Teach Your Monster to Read but was struggling with how repetitive it was…",
-      "tags": [
-        "Hacker News",
-        "MCP"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n7b471cfc22d6",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "Hacker News",
-      "sourceType": "hn",
-      "title": "AI agents are only as good as the personal information you share",
-      "url": "https://apnews.com/article/meta-muse-openai-dot-ai-privacy-449734d41d3750aad7038b761faa49c9",
-      "publishedAt": "2026-10-19T17:54:04.000Z",
-      "publishedAtMs": 1792432444000,
-      "summary": "AI agents are only as good as the personal information you share（来源：Hacker News）",
-      "tags": [
-        "Hacker News",
-        "AI agent"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nbb8d086e1531",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "Hacker News",
-      "sourceType": "hn",
-      "title": "Show HN: MCP for Ordering Assembled PCBs",
-      "url": "https://provenmetal.com/mcp",
-      "publishedAt": "2026-10-19T17:43:49.000Z",
-      "publishedAtMs": 1792431829000,
-      "summary": "Show HN: MCP for Ordering Assembled PCBs（来源：Hacker News）",
-      "tags": [
-        "Hacker News",
-        "MCP"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n750e23c2a378",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "GitHub · morluto/rea",
-      "sourceType": "github",
-      "title": "fix(rizin): bound recent history frames by UTF-8 byte budget (#5246)",
-      "url": "https://github.com/morluto/rea/commit/1b3ac94242882e0fbf9c717806646c729abd8b91",
-      "publishedAt": "2026-10-19T17:41:46.000Z",
-      "publishedAtMs": 1792431706000,
-      "summary": "fix(rizin): bound recent history frames by UTF-8 byte budget (#5246) Bound recent decoded history to complete UTF-8 prefixes and reuse the bounded capture imple…",
-      "tags": [
-        "GitHub",
-        "Commit",
-        "rea"
-      ],
-      "hot": false
-    },
-    {
-      "id": "necd74a730cdb",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "Hacker News",
-      "sourceType": "hn",
-      "title": "Dynamic MCP Server Discovery on Google Cloud",
-      "url": "https://leoy.blog/posts/dynamic-mcp-server-discovery/",
-      "publishedAt": "2026-10-19T17:41:38.000Z",
-      "publishedAtMs": 1792431698000,
-      "summary": "Dynamic MCP Server Discovery on Google Cloud（来源：Hacker News）",
-      "tags": [
-        "Hacker News",
-        "MCP"
-      ],
-      "hot": false
-    },
-    {
-      "id": "n365653acc3a8",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "Hacker News",
-      "sourceType": "hn",
-      "title": "Build a Basic AI Agent from Scratch: Session Management",
-      "url": "https://www.ruxu.dev/articles/ai/build-an-ai-agent-sessions/",
-      "publishedAt": "2026-10-19T17:40:47.000Z",
-      "publishedAtMs": 1792431647000,
-      "summary": "Build a Basic AI Agent from Scratch: Session Management（来源：Hacker News）",
-      "tags": [
-        "Hacker News",
-        "AI agent"
-      ],
-      "hot": false
-    },
-    {
-      "id": "nadfe2d9e4210",
-      "category": "ai",
-      "extraCategories": [],
-      "source": "Hacker News",
-      "sourceType": "hn",
-      "title": "Show HN: Senseplane open-source eyes and ears for AI agents, on your own cameras",
-      "url": "https://github.com/senseplane-ai/senseplane",
-      "publishedAt": "2026-10-19T17:25:01.000Z",
-      "publishedAtMs": 1792430701000,
-      "summary": "Show HN: Senseplane open-source eyes and ears for AI agents, on your own cameras（来源：Hacker News）",
-      "tags": [
-        "Hacker News",
-        "AI agent"
-      ],
-      "hot": false
-    },
-    {
       "id": "n08aaea553f41",
       "category": "ai",
       "extraCategories": [],
@@ -4479,19 +4290,19 @@
       "storyId": "sa8f6ca68922e"
     },
     {
-      "id": "na14056591117",
+      "id": "nca11f1b6f9dc",
       "category": "ent",
       "extraCategories": [],
       "source": "B站热门",
       "sourceType": "json",
-      "title": "王扁街头遇袭事件：前经纪人为何欲夺人性命？",
-      "url": "https://b23.tv/BV1fgJd6rEkq",
-      "publishedAt": "2026-10-19T12:41:12.000Z",
-      "publishedAtMs": 1792413672000,
-      "summary": "娱乐粉丝创作 · UP主 玉玉__：",
+      "title": "【NMIXX】\"긴 소원(Birthday Wish)\" M/V",
+      "url": "https://b23.tv/BV1Ben76vEwK",
+      "publishedAt": "2026-10-19T09:00:00.000Z",
+      "publishedAtMs": 1792400400000,
+      "summary": "音乐综合 · UP主 NMIXX：",
       "tags": [
         "B站",
-        "娱乐粉丝创作"
+        "音乐综合"
       ],
       "hot": true,
       "storyId": "sca11f1b6f9dc"
@@ -4569,8 +4380,8 @@
       "storyId": "sf3fa5debe196"
     },
     {
-      "id": "n522f5f786172",
-      "category": "ent",
+      "id": "n90cb9ff61c25",
+      "category": "ai",
       "extraCategories": [],
       "source": "Hacker News",
       "sourceType": "hn",
