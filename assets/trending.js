@@ -39,13 +39,15 @@ window.Trending = (function () {
     try { localStorage.setItem(CACHE_KEY, JSON.stringify(c)); } catch (e) { /* 忽略 */ }
   }
 
-  // 内置榜单条目 {rank,owner,repo,desc,url} 转成渲染用 {title,link,about}
+  // 内置榜单条目 {rank,owner,repo,desc,url,lang,stars} 转成渲染用 {title,link,about,lang,stars}
   function embeddedItems(period) {
     const list = (embedded && embedded[period]) || [];
     return list.slice(0, LIMITS[period]).map((t) => ({
       title: `${t.owner}/${t.repo}`,
       link: t.url,
       about: t.desc || '',
+      lang: t.lang || '',
+      stars: t.stars || 0,
     }));
   }
 
@@ -146,18 +148,33 @@ window.Trending = (function () {
     body().innerHTML = html;
   }
 
+  function fmtStars(n) {
+    if (!n || n < 1000) return String(n || 0);
+    if (n < 10000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    return (n / 1000).toFixed(0) + 'k';
+  }
+
   function renderItems(items) {
     if (!items.length) return '<div class="trend-empty">暂无数据</div>';
     return items.map((it, i) => {
       const rank = i + 1;
       const [owner, repo] = it.title.split('/');
-      return `<a class="trend-item" href="${esc(it.link)}" target="_blank" rel="noopener noreferrer">
+      const topCls = rank <= 3 ? ' top' + rank : '';
+      const meta = (it.lang || it.stars)
+        ? `<div class="trend-meta">
+            ${it.lang ? `<span class="lang-dot"></span><span>${esc(it.lang)}</span>` : ''}
+            ${it.stars ? `<span class="stars"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>${fmtStars(it.stars)}</span>` : ''}
+          </div>` : '';
+      return `<button class="trend-item${topCls}" type="button"
+        data-link="${esc(it.link)}" data-title="${esc(it.title)}"
+        data-about="${esc(it.about || '')}" data-lang="${esc(it.lang || '')}">
         <div class="trend-rank">${rank}</div>
         <div class="trend-info">
           <div class="trend-name"><span class="trend-owner">${esc(owner)}/</span>${esc(repo || it.title)}</div>
           ${it.about ? `<div class="trend-about">${esc(it.about)}</div>` : ''}
+          ${meta}
         </div>
-      </a>`;
+      </button>`;
     }).join('');
   }
 
@@ -196,6 +213,20 @@ window.Trending = (function () {
         + '<button class="btn-ghost trend-refresh" id="trendRefresh" type="button">刷新当前榜单</button>';
       const rb = document.getElementById('trendRefresh');
       if (rb) rb.addEventListener('click', () => show(currentPeriod, true));
+      // 榜单条目：App 内打开仓库详情（不跳外部浏览器）
+      body().querySelectorAll('.trend-item').forEach((el) => {
+        el.addEventListener('click', () => {
+          const link = el.dataset.link || '';
+          if (window.Detail && link) {
+            window.Detail.openRepo({
+              title: el.dataset.title || link,
+              link,
+              about: el.dataset.about || '',
+              lang: el.dataset.lang || '',
+            });
+          }
+        });
+      });
     } catch (e) {
       renderError(currentPeriod, e.name === 'AbortError' ? '请求超时' : (e.message || e));
     } finally {

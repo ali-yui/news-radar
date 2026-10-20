@@ -9,6 +9,8 @@
     cache: 'nr.cache.v1',
     logs: 'nr.logs.v1',
     auto: 'nr.autoDate.v1',
+    cardTrans: 'nr.cardTrans.v1',
+    digest: 'nr.digest.v1',
   };
 
   const TAB_NAMES = { today: '今天', ai: 'AI 圈', ent: '娱乐圈', settings: '设置' };
@@ -43,6 +45,8 @@
   let read = load(K.read, {});
   let favs = load(K.favs, {});
   let logs = load(K.logs, []);
+  let cardTrans = load(K.cardTrans, {}); // 列表卡片实时补翻缓存：id -> {title, summary}
+  let digestCache = load(K.digest, {});   // 一眼预览缓存：tab -> {date, text}
 
   /* ---------- 工具 ---------- */
   function load(key, fallback) {
@@ -120,6 +124,7 @@
     state.data = payload;
     save(K.cache, payload);
     if (window.Trending && window.Trending.setEmbedded) window.Trending.setEmbedded(payload.trending || null);
+    if (window.Detail && window.Detail.isOpen()) window.Detail.refresh();
     renderUpdated();
     renderList();
     renderSourceStatus();
@@ -256,7 +261,9 @@
       const q = state.query.toLowerCase();
       items = items.filter((x) =>
         x.title.toLowerCase().includes(q)
+        || (x.titleZh || '').toLowerCase().includes(q)
         || (x.summary || '').toLowerCase().includes(q)
+        || (x.summaryZh || '').toLowerCase().includes(q)
         || x.source.toLowerCase().includes(q)
         || (x.tags || []).some((t) => t.toLowerCase().includes(q)));
     }
@@ -264,18 +271,44 @@
     if (state.onlyUnread) items = items.filter((x) => !read[x.id]);
     if (state.onlyFav) items = items.filter((x) => favs[x.id]);
 
-    const groups = { hot: [], fresh: [], old: [] };
-    for (const it of items) {
-      if (it.hot) groups.hot.push(it);
-      else if (Date.now() - it.publishedAtMs <= DAY) groups.fresh.push(it);
-      else groups.old.push(it);
-    }
     const byMs = (a, b) => b.publishedAtMs - a.publishedAtMs;
-    groups.hot.sort(byMs); groups.fresh.sort(byMs); groups.old.sort(byMs);
+
+    // 事件聚类：同一 storyId 且当前筛选结果内 ≥2 条 → 合并为一张专题卡
+    const byStory = new Map();
+    for (const it of items) {
+      if (!it.storyId) continue;
+      if (!byStory.has(it.storyId)) byStory.set(it.storyId, []);
+      byStory.get(it.storyId).push(it);
+    }
+    const units = [];
+    const usedStories = new Set();
+    for (const it of items) {
+      const members = it.storyId ? byStory.get(it.storyId) : null;
+      if (members && members.length >= 2) {
+        if (usedStories.has(it.storyId)) continue;
+        usedStories.add(it.storyId);
+        units.push({ type: 'cluster', storyId: it.storyId, members: members.slice().sort(byMs) });
+      } else {
+        units.push({ type: 'item', item: it });
+      }
+    }
+
+    const groups = { hot: [], fresh: [], old: [] };
+    for (const u of units) {
+      const ms = u.type === 'cluster' ? u.members[0].publishedAtMs : u.item.publishedAtMs;
+      const hot = u.type === 'cluster' ? u.members.some((m) => m.hot) : u.item.hot;
+      if (hot) groups.hot.push(u);
+      else if (Date.now() - ms <= DAY) groups.fresh.push(u);
+      else groups.old.push(u);
+    }
+    const unitMs = (u) => (u.type === 'cluster' ? u.members[0].publishedAtMs : u.item.publishedAtMs);
+    groups.hot.sort((a, b) => unitMs(b) - unitMs(a));
+    groups.fresh.sort((a, b) => unitMs(b) - unitMs(a));
+    groups.old.sort((a, b) => unitMs(b) - unitMs(a));
 
     updateSourceFilter(cat, state.data);
 
-    if (!items.length) {
+    if (!units.length) {
       list.innerHTML = `<div class="empty">
         <div class="big">${state.query || state.source || state.onlyFav ? '没有匹配的资讯' : '暂无数据'}</div>
         <div class="small">${state.query || state.source ? '试试更换关键词或来源' : '点击右上角刷新按钮，或等待每日 09:00 自动更新'}</div>
@@ -284,37 +317,124 @@
     }
 
     const labels = { hot: '实时热点', fresh: '近 24 小时', old: '更早' };
-    let html = '';
+    let html = digestCardHtml();
     for (const key of ['hot', 'fresh', 'old']) {
       if (!groups[key].length) continue;
       html += `<div class="group-label">${labels[key]} · ${groups[key].length}</div>`;
-      html += groups[key].map(cardHtml).join('');
+      html += groups[key].map((u) => (u.type === 'cluster' ? clusterCardHtml(u) : cardHtml(u.item))).join('');
     }
     list.innerHTML = html;
+  }
+
+  /* ---------- 一眼预览（板块级 AI 摘要） ---------- */
+  function digestCardHtml() {
+    const cached = digestCache[state.tab];
+    const fresh = cached && cached.date === beijingNow().date;
+    const bodyHtml = cached ? esc(cached.text) : '';
+    return `<div class="digest-card">
+      <div class="digest-head">
+        <div class="digest-title">一眼预览 · 本期重点${fresh ? '' : ''}</div>
+        <button class="digest-btn" data-act="digest" type="button">${cached ? '重新生成' : '生成摘要'}</button>
+      </div>
+      <div class="digest-hint">${window.DoubaoAI.enabled(settings)
+        ? '基于本屏资讯由 AI 提炼，点击按钮生成'
+        : '在「设置」中配置 AI 接口后可生成'}</div>
+      <div class="digest-body ${cached ? '' : 'hidden'}" id="digestBody">${bodyHtml}</div>
+    </div>`;
+  }
+
+  async function generateDigest() {
+    if (!state.data) return;
+    if (!window.DoubaoAI.enabled(settings)) {
+      toast('请先在「设置」中开启并配置 AI 接口');
+      return;
+    }
+    const btn = document.querySelector('#list [data-act="digest"]');
+    const body = $('#digestBody');
+    if (btn) { btn.disabled = true; btn.textContent = '生成中…'; }
+    if (body) { body.classList.remove('hidden'); body.textContent = '正在生成本期重点…'; }
+    try {
+      const cat = state.tab;
+      const items = state.data.items
+        .filter((x) => x.category === cat || (x.extraCategories || []).includes(cat))
+        .sort((a, b) => b.publishedAtMs - a.publishedAtMs);
+      const text = await window.DoubaoAI.digest(cat, items, settings);
+      digestCache[cat] = { date: beijingNow().date, text };
+      save(K.digest, digestCache);
+      if (body) body.textContent = text;
+      addLog('一眼预览生成成功（' + cat + '）');
+      toast('已生成本期重点');
+    } catch (e) {
+      if (body) body.textContent = '生成失败：' + (e.message || e);
+      addLog('一眼预览失败：' + (e.message || e));
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = digestCache[state.tab] ? '重新生成' : '生成摘要';
+      }
+    }
+  }
+
+  // 事件聚类卡：代表条目 + 「N 家报道」展开
+  function clusterCardHtml(u) {
+    const rep = u.members[0];
+    const title = rep.titleZh || cardTrans[rep.id]?.title || rep.title;
+    const summary = rep.summaryZh || cardTrans[rep.id]?.summary || rep.summary || '';
+    const members = u.members.map((m) => `
+      <button class="story-row" data-act="open" data-id="${m.id}" type="button">
+        <span class="story-row-src">${esc(m.source)}</span>
+        <span class="story-row-title">${esc(m.titleZh || cardTrans[m.id]?.title || m.title)}</span>
+        <span class="story-row-time">${esc(relTime(m.publishedAtMs))}</span>
+      </button>`).join('');
+    return `<article class="item cluster" data-story="${esc(u.storyId)}">
+      <div class="item-main">
+        <div class="item-meta">
+          <span class="src">${esc(rep.source)}</span><span>·</span>
+          <span>${esc(relTime(rep.publishedAtMs))}</span>
+          <span class="story-badge">${u.members.length} 家报道</span>
+        </div>
+        <div class="item-title" data-act="open" data-id="${rep.id}" role="button" tabindex="0">${esc(title)}</div>
+        ${summary ? `<p class="item-summary">${esc(summary)}</p>` : ''}
+        <button class="cluster-toggle" data-act="cluster-toggle" type="button">
+          展开全部 ${u.members.length} 家报道
+        </button>
+        <div class="cluster-members hidden">${members}</div>
+      </div>
+    </article>`;
   }
 
   function cardHtml(it) {
     const isRead = !!read[it.id];
     const isFav = !!favs[it.id];
+    const tr = cardTrans[it.id] || {};
     const starFill = isFav
       ? '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>'
       : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>';
     const tags = (it.tags || []).slice(0, 4).map((t) => `<span class="tag">${esc(t)}</span>`).join('');
     const aiBtn = window.DoubaoAI.enabled(settings)
       ? `<button class="ai-btn" data-act="ai" data-id="${it.id}" type="button">AI 摘要</button>` : '';
-    // 非中文标题（多为英文原文）提供整页翻译
+    // 中文优先：预翻译 titleZh > 实时补翻缓存 > 原文
+    const title = it.titleZh || tr.title || it.title;
+    const summary = it.summaryZh || tr.summary || it.summary || '';
+    // 非中文标题且无预翻译时提供「译」按钮（App 内实时翻译，不跳外部）
     const isCjk = /[\u4e00-\u9fff]/.test(it.title || '');
-    const transBtn = (!isCjk && it.url)
-      ? `<button class="ai-btn trans-btn" data-act="trans" data-id="${it.id}" type="button">译</button>` : '';
+    const transBtn = (!isCjk && !it.titleZh && it.url && window.Translator)
+      ? `<button class="ai-btn trans-btn" data-act="trans" data-id="${it.id}" type="button">${tr.title ? '已译' : '译'}</button>` : '';
+    // 同事件多源报道标记
+    const storyCount = it.storyId
+      ? (state.data.items.filter((x) => x.storyId === it.storyId).length) : 0;
+    const storyBadge = storyCount >= 2
+      ? `<span class="story-badge" data-act="story" data-id="${it.id}" title="同一事件的多源报道">${storyCount} 家报道</span>` : '';
     return `<article class="item ${isRead ? 'read' : ''}" data-id="${it.id}">
       <div class="item-main">
         <div class="item-meta">
           <span class="src">${esc(it.source)}</span><span>·</span>
           <span>${esc(relTime(it.publishedAtMs))}</span>
+          ${storyBadge}
           <span class="unread-dot"></span>
         </div>
-        <a class="item-title" href="${esc(it.url || '#')}" target="_blank" rel="noopener noreferrer">${esc(it.title)}</a>
-        ${it.summary ? `<p class="item-summary">${esc(it.summary)}</p>` : ''}
+        <a class="item-title" href="${esc(it.url || '#')}" target="_blank" rel="noopener noreferrer">${esc(title)}</a>
+        ${summary ? `<p class="item-summary">${esc(summary)}</p>` : ''}
         ${tags ? `<div class="item-tags">${tags}</div>` : ''}
         <div class="ai-result hidden" data-ai-box="${it.id}"></div>
       </div>
@@ -346,6 +466,25 @@
     if (btn) {
       e.preventDefault();
       const id = btn.dataset.id;
+      if (btn.dataset.act === 'open') {
+        // 聚类卡标题/成员行：App 内打开详情
+        if (window.Detail) window.Detail.open(id);
+        return;
+      }
+      if (btn.dataset.act === 'digest') {
+        generateDigest();
+        return;
+      }
+      if (btn.dataset.act === 'cluster-toggle') {
+        const card = btn.closest('.cluster');
+        const box = card && card.querySelector('.cluster-members');
+        if (box) {
+          box.classList.toggle('hidden');
+          const n = card.querySelectorAll('.story-row').length;
+          btn.textContent = box.classList.contains('hidden') ? `展开全部 ${n} 家报道` : '收起报道';
+        }
+        return;
+      }
       if (btn.dataset.act === 'fav') {
         if (favs[id]) {
           delete favs[id];
@@ -388,25 +527,51 @@
         }
       }
       if (btn.dataset.act === 'trans') {
+        // App 内实时翻译（免费 API 多源回退 + 本地缓存），不跳外部浏览器
         const it = state.data.items.find((x) => x.id === id);
-        if (!it?.url) { toast('该条没有原文链接'); return; }
-        // 百度整页翻译：国内可直接访问。外壳/浏览器会把外部链接放到系统浏览器打开。
-        const u = 'https://fanyi.baidu.com/transpage?query=' + encodeURIComponent(it.url)
-          + '&source=url&from=en&to=zh';
-        location.href = u;
+        if (!it) return;
+        if (cardTrans[id]?.title) { toast('已显示译文'); return; }
+        btn.disabled = true; btn.textContent = '译中';
+        try {
+          const [t, s] = await Promise.all([
+            window.Translator.translate(it.title),
+            it.summary ? window.Translator.translate(it.summary.slice(0, 500)) : Promise.resolve(null),
+          ]);
+          if (t) {
+            cardTrans[id] = { title: t, summary: s };
+            save(K.cardTrans, cardTrans);
+            const card = btn.closest('.item');
+            const titleEl = card && card.querySelector('.item-title');
+            const sumEl = card && card.querySelector('.item-summary');
+            if (titleEl) titleEl.textContent = t;
+            if (sumEl && s) sumEl.textContent = s;
+            btn.textContent = '已译';
+            toast('已翻译为中文');
+          } else {
+            btn.textContent = '译';
+            toast('翻译服务暂不可用，请稍后重试');
+          }
+        } catch (e) {
+          btn.textContent = '译';
+          toast('翻译失败：' + (e.message || e));
+        } finally {
+          btn.disabled = false;
+        }
+      }
+      if (btn.dataset.act === 'story') {
+        // 打开该事件的详情（详情页内含其他报道列表）
+        if (window.Detail) window.Detail.open(id);
+        return;
       }
       return;
     }
-    // 点击标题/卡片：标记已读
+    // 点击标题/卡片：在 App 内打开详情（不跳外部浏览器）
     const titleLink = e.target.closest('.item-title');
     if (titleLink) {
+      e.preventDefault();
       const article = titleLink.closest('.item');
       const id = article?.dataset.id;
-      if (id && !read[id]) {
-        read[id] = Date.now();
-        save(K.read, read);
-        article.classList.add('read');
-      }
+      if (id && window.Detail) window.Detail.open(id);
     }
   });
 
@@ -585,9 +750,46 @@
   });
 
   /* ---------- 启动 ---------- */
+  // 暴露给详情页/其他模块的最小接口
+  window.NRApp = {
+    getItem: (id) => (state.data ? state.data.items.find((x) => x.id === id) || null : null),
+    isFav: (id) => !!favs[id],
+    toggleFav: (id) => {
+      const it = state.data ? state.data.items.find((x) => x.id === id) : null;
+      if (favs[id]) {
+        delete favs[id];
+        save(K.favs, favs);
+        return false;
+      }
+      favs[id] = {
+        title: it?.title, url: it?.url, source: it?.source,
+        publishedAt: it?.publishedAt, savedAt: new Date().toISOString(),
+      };
+      save(K.favs, favs);
+      return true;
+    },
+    isRead: (id) => !!read[id],
+    markRead: (id) => {
+      if (read[id]) return;
+      read[id] = Date.now();
+      save(K.read, read);
+      const card = document.querySelector(`.item[data-id="${id}"]`);
+      if (card) card.classList.add('read');
+    },
+    // 同一事件（storyId）的其他报道
+    getStoryItems: (storyId) => {
+      if (!storyId || !state.data) return [];
+      return state.data.items.filter((x) => x.storyId === storyId && x.storyId);
+    },
+    getSettings: () => settings,
+    toast,
+    addLog,
+  };
+
   async function boot() {
     fillSettings();
     if (window.Trending) window.Trending.init();
+    if (window.Detail) window.Detail.init(window.NRApp);
     // 1. 内联引导数据
     const boot = window.__NEWS_RADAR_BOOTSTRAP__;
     const cache = load(K.cache, null);

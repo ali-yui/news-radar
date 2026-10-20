@@ -2,3 +2,11 @@ _shots/
 node_modules/
 .DS_Store
 *.log
+
+# APK 构建产物与本地签名文件（签名文件不进仓库）
+android/.gradle/
+android/build/
+android/app/build/
+android/app/src/main/assets/
+android/*.jks
+dist/

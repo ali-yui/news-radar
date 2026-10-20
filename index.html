@@ -61,6 +61,7 @@
   <!-- Trending 榜单浮层 -->
   <div class="sheet-mask hidden" id="trendingSheet" aria-hidden="true">
     <div class="sheet" role="dialog" aria-label="GitHub Trending 榜单">
+      <div class="sheet-grip"></div>
       <div class="sheet-head">
         <div class="sheet-title">GitHub Trending 开源热榜</div>
         <button class="icon-btn" id="trendingClose" type="button" aria-label="关闭">
@@ -78,6 +79,26 @@
 
   <main id="list" class="list" aria-live="polite"></main>
 
+  <!-- 资讯详情页（App 内阅读，不跳外部浏览器） -->
+  <div id="page-detail" class="detail-page hidden" role="dialog" aria-label="资讯详情">
+    <header class="detail-topbar">
+      <button id="detailBack" class="icon-btn" type="button" aria-label="返回">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="detail-top-title" id="detailTopTitle">详情</div>
+      <button id="detailFav" class="icon-btn" type="button" aria-label="收藏">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>
+      </button>
+    </header>
+    <div class="detail-scroll" id="detailScroll"></div>
+    <div class="reader-bar" id="readerBar">
+      <span class="reader-bar-label">字号</span>
+      <button class="reader-btn" data-font="dec" type="button">A−</button>
+      <span class="reader-size" id="readerSizeLabel">标准</span>
+      <button class="reader-btn" data-font="inc" type="button">A+</button>
+    </div>
+  </div>
+
   <main id="page-settings" class="page-settings hidden">
     <section class="set-card">
       <h2>外观</h2>
@@ -94,7 +115,7 @@
       <label class="field-label" for="ghToken">GitHub Token</label>
       <input class="field" id="ghToken" type="password" placeholder="可选，提高手动刷新时 GitHub API 限流（60→1000/小时）" autocomplete="off">
       <div class="row-between">
-        <label class="field-label" for="doubaoEnabled">豆包 AI 摘要（默认关闭，开启后才调用）</label>
+        <label class="field-label" for="doubaoEnabled">AI 摘要 / 一眼预览（默认关闭，开启后按需生成）</label>
         <label class="switch">
           <input type="checkbox" id="doubaoEnabled">
           <span class="slider"></span>
@@ -102,7 +123,7 @@
       </div>
       <div id="doubaoFields" class="doubao-fields hidden">
         <input class="field" id="doubaoEndpoint" type="text" placeholder="接口地址，默认 https://ark.cn-beijing.volces.com/api/v3" autocomplete="off">
-        <input class="field" id="doubaoKey" type="password" placeholder="豆包 / 火山方舟 API Key" autocomplete="off">
+        <input class="field" id="doubaoKey" type="password" placeholder="豆包 / 火山方舟 API Key（或任意 OpenAI 兼容 Key）" autocomplete="off">
         <input class="field" id="doubaoModel" type="text" placeholder="推理接入点 ID（如 ep-2026xxxx）或模型名" autocomplete="off">
       </div>
       <button class="btn-primary" id="saveSettings" type="button">保存设置</button>
@@ -129,7 +150,7 @@
 
     <section class="set-card">
       <h2>关于</h2>
-      <p class="hint">资讯雷达 v1.1 · 数据来自公开 RSS / API（GitHub 动态、Hacker News、GitHub Trending、Reddit、Google/Bing News 及 36氪、量子位、InfoQ、IT之家、中新网、百度热搜/电影榜、B站等公开源）。英文文章点「译」可通过百度整页翻译阅读；同链接、同标题或高度相似内容已自动去重；已读与收藏仅存于本机。</p>
+      <p class="hint">资讯雷达 v2.0 · 数据来自公开 RSS / API（GitHub 动态、Hacker News、GitHub Trending、Reddit、Google/Bing News 及 36氪、量子位、InfoQ、IT之家、中新网、百度热搜/电影榜、B站等公开源）。所有资讯均在 App 内阅读，不跳转外部浏览器；英文内容自动预翻译为中文，未预翻译的可点「译」实时翻译；同一事件的多源报道会自动聚合；AI 一眼预览与单条摘要由你配置的接口按需生成；已读与收藏仅存于本机。</p>
     </section>
   </main>
 
@@ -158,8 +179,10 @@
 <script src="assets/data-bundle.js"></script>
 <script src="assets/dedup.js"></script>
 <script src="assets/doubao.js"></script>
+<script src="assets/translator.js"></script>
 <script src="assets/live.js"></script>
 <script src="assets/trending.js"></script>
+<script src="assets/detail.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

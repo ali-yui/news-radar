@@ -12,14 +12,28 @@
  * 可选环境变量：
  *   GITHUB_TOKEN   GitHub PAT / Actions GITHUB_TOKEN，提高 REST 限流上限
  *   SKIP_*         例如 SKIP_REDDIT=1 跳过某源（调试用）
+ *   SKIP_TRANSLATE=1   跳过英文标题/摘要预翻译
+ *   SKIP_CONTENT=1     跳过原文正文抓取
+ *   TRANSLATE_MAX=200  单次运行翻译总量上限
+ *   CONTENT_LIMIT=80   单次运行正文抓取条数上限
+ *
+ * 产出增强（v2）：
+ *   - item.titleZh / item.summaryZh   英文标题/摘要的中文预翻译
+ *   - item.content                    原文正文（readability-lite 抽取，App 内读全文）
+ *   - item.storyId                    事件聚类标识（多源报道合并为专题）
  *
  * 设计原则：单源失败不影响其他源；错误全部记录到 daily.json 的 errors。
+ * 依赖：仅 Node 内置 API + scripts/lib/ 下零依赖模块（translate/content/cluster/extract）。
  */
 
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { createTranslator, isEnglish } from './lib/translate.mjs';
+import { enrichContent } from './lib/content.mjs';
+import { assignStories } from './lib/cluster.mjs';
+import { httpGet } from './lib/http.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_JSON = join(ROOT, 'public', 'data', 'daily.json');
@@ -35,6 +49,12 @@ const KEEP_WINDOW_MS = 7 * DAY; // 主展示 24h，归档保留 7 天
 
 const errors = [];
 const sourceStatus = [];
+
+// 兜底：抓取是批处理任务，任何漏网的异步拒绝都不应该让整个进程崩掉
+// （历史上 Node 22 undici 的中断 bug 就这样静默杀死过进程）
+process.on('unhandledRejection', (e) => {
+  log('unhandledRejection（已忽略）:', e && e.message ? e.message : e);
+});
 
 function log(...a) { console.log('[fetch]', ...a); }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -60,27 +80,15 @@ function recordError(source, stage, message) {
 async function fetchWithRetry(url, opts = {}, label = '', retries = 1) {
   let lastErr = null;
   for (let attempt = 0; attempt <= retries; attempt++) {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), opts.timeout ?? 10000);
-    try {
-      const res = await fetch(url, {
-        ...opts,
-        signal: ctrl.signal,
-        headers: { 'User-Agent': opts.ua ?? UA, ...(opts.headers || {}) },
-      });
-      clearTimeout(timer);
-      const body = await res.text();
-      if (!res.ok) {
-        lastErr = new Error(`HTTP ${res.status} ${res.statusText}`);
-        if (res.status === 404 || res.status === 400) {
-          return { ok: false, status: res.status, body, error: lastErr };
-        }
-      } else {
-        return { ok: true, status: res.status, body };
-      }
-    } catch (e) {
-      clearTimeout(timer);
-      lastErr = e;
+    // 统一走 node:http/https（避开 Node 22 undici 中断崩溃 bug）
+    const r = await httpGet(url, {
+      timeout: opts.timeout ?? 10000,
+      headers: { 'User-Agent': opts.ua ?? UA, ...(opts.headers || {}) },
+    });
+    if (r.ok) return r;
+    lastErr = r.error || new Error(`HTTP ${r.status}`);
+    if (r.status === 404 || r.status === 400) {
+      return { ok: false, status: r.status, body: r.body, error: lastErr };
     }
     if (attempt < retries) await sleep(400 * (attempt + 1));
   }
@@ -614,13 +622,20 @@ const TRENDING_MIRRORS = [
   (p) => `https://mshibanami.github.io/GitHubTrendingRSS/${p}/all.xml`,
 ];
 
+// RSS description 是转义后的整页 README，取第一个 <p> 作为仓库简介
+function firstParagraphOf(html) {
+  const decoded = decodeEntities(html || '');
+  const m = decoded.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+  return stripHtml(m ? m[1] : decoded).replace(/\s+/g, ' ').trim();
+}
+
 function parseTrendingList(xml, cap) {
   const out = [];
   for (const e of parseFeed(xml)) {
     const name = (e.title || '').trim();
     if (!/^[\w.-]+\/[\w.-]+$/.test(name)) continue;
     const [owner, repo] = name.split('/');
-    const desc = (e.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160);
+    const desc = firstParagraphOf(e.content).slice(0, 160);
     out.push({ rank: out.length + 1, owner, repo, desc,
       url: e.link || `https://github.com/${name}` });
     if (out.length >= cap) break;
@@ -647,6 +662,31 @@ async function fetchTrendingFeed(period) {
   return { list: [], mode: null, error: lastErr };
 }
 
+// 用 GitHub REST 补充榜单条目的语言/星数（Actions 内置 token，限流 1000 次/小时）
+// 注意：用 fetchWithRetry 而非 getJson，避免限流时每条都记一条错误日志
+async function enrichTrendingMeta(list) {
+  const token = process.env.GITHUB_TOKEN;
+  const headers = {
+    Accept: 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+  let ok = 0;
+  await mapLimit(list, 5, async (t) => {
+    if (!t.owner || !t.repo) return;
+    const r = await fetchWithRetry(`https://api.github.com/repos/${t.owner}/${t.repo}`,
+      { headers, timeout: 10000 }, 'trending-meta');
+    if (!r.ok) return;
+    try {
+      const d = JSON.parse(r.body);
+      t.lang = d.language || '';
+      t.stars = typeof d.stargazers_count === 'number' ? d.stargazers_count : 0;
+      ok++;
+    } catch { /* 忽略单条解析失败 */ }
+  });
+  return ok;
+}
+
 async function fetchTrending() {
   if (skipped('TRENDING')) return;
   const [d, w, m] = await Promise.all(TRENDING_PERIODS.map(fetchTrendingFeed));
@@ -654,6 +694,19 @@ async function fetchTrending() {
   trendingLists.weekly = w.list;
   trendingLists.monthly = m.list;
   trendingLists.fetchedAt = new Date().toISOString();
+
+  // 补充语言/星数元信息（失败不影响榜单本身）
+  if (!skipped('TRENDING_META')) {
+    const uniq = new Map();
+    for (const period of TRENDING_PERIODS) {
+      for (const t of trendingLists[period]) {
+        if (t.url && !uniq.has(t.url)) uniq.set(t.url, t);
+      }
+    }
+    await enrichTrendingMeta([...uniq.values()]);
+    const withMeta = TRENDING_PERIODS.reduce((n, p) => n + trendingLists[p].filter((t) => t.lang || t.stars).length, 0);
+    trackSource('trending:meta', withMeta > 0, 'github-rest', withMeta);
+  }
 
   let count = 0;
   for (const t of d.list.slice(0, 25)) {
@@ -679,6 +732,39 @@ async function fetchTrending() {
       count++;
     }
     trackSource('trending', count > 0, 'github-search-fallback', count, count ? null : '全部降级失败');
+  }
+}
+
+/* ============================ 6.5 国外科技源（服务端抓取 + 镜像分发） ============================ */
+
+// 国外源全部由 Actions 服务端抓取进入 daily.json，经 Gitee/jsDelivr 镜像分发，
+// 国内用户不直连外网；正文抓取 + 标题/摘要预翻译保证 App 内可读。
+const FOREIGN_TECH_FEEDS = [
+  { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml', tags: ['国外科技'] },
+  { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index', tags: ['国外科技'] },
+  { name: 'MIT Technology Review', url: 'https://www.technologyreview.com/feed/', tags: ['国外科技', 'AI'] },
+  // OpenAI 官网国内直连不了，但由 Actions 服务端抓取 + 镜像分发，App 内可读
+  { name: 'OpenAI', url: 'https://openai.com/news/rss.xml/', tags: ['国外AI', 'OpenAI'], force: 'ai' },
+];
+
+async function fetchForeignTech() {
+  if (skipped('FOREIGN')) return;
+  for (const f of FOREIGN_TECH_FEEDS) {
+    const r = await fetchWithRetry(f.url, { ua: BROWSER_UA, timeout: 12000 }, f.name);
+    let count = 0;
+    if (r.ok && /<rss|<feed|<rdf/i.test(r.body)) {
+      for (const e of parseFeed(r.body).slice(0, 20)) {
+        const isAi = f.force === 'ai' || AI_RE.test(e.title) || AI_RE.test(stripHtml(e.content));
+        add({ category: isAi ? 'ai' : 'today', source: f.name, sourceType: 'rss',
+          title: e.title, url: e.link, date: e.date, excerpt: e.content,
+          tags: isAi ? [...f.tags, 'AI'] : [...f.tags] });
+        count++;
+      }
+    } else {
+      recordError(f.name, 'rss', r.error?.message || '非 RSS 返回');
+    }
+    trackSource(f.name, count > 0, 'rss', count);
+    await sleep(200);
   }
 }
 
@@ -845,6 +931,128 @@ async function fetchChineseSupplements() {
     }
     trackSource('B站热门', count > 0, 'json', count, count ? null : '热门榜无娱乐分区条目');
   }
+  // 新增国内可达源（RSS，国内直连无墙）
+  if (!skipped('OSCHINA')) {
+    // 开源中国·资讯：AI 相关入 AI 圈，其余入今天
+    const r = await fetchWithRetry('https://www.oschina.net/news/rss', { ua: BROWSER_UA, timeout: 12000 }, '开源中国');
+    let count = 0;
+    if (r.ok && /<rss|<feed|<rdf/i.test(r.body)) {
+      for (const e of parseFeed(r.body).slice(0, 25)) {
+        const isAi = AI_RE.test(e.title) || AI_RE.test(stripHtml(e.content));
+        add({ category: isAi ? 'ai' : 'today', source: '开源中国', sourceType: 'rss',
+          title: e.title, url: e.link, date: e.date, excerpt: e.content,
+          tags: isAi ? ['开发社区', '开源', 'AI'] : ['开发社区', '开源'] });
+        count++;
+      }
+    } else {
+      recordError('开源中国', 'rss', r.error?.message || '非 RSS 返回');
+    }
+    trackSource('开源中国', count > 0, 'rss', count);
+  }
+  if (!skipped('GEEKPARK')) {
+    // 极客公园：AI 相关入 AI 圈，其余入今天
+    const r = await fetchWithRetry('https://www.geekpark.net/rss', { ua: BROWSER_UA, timeout: 12000 }, '极客公园');
+    let count = 0;
+    if (r.ok && /<rss|<feed|<rdf/i.test(r.body)) {
+      for (const e of parseFeed(r.body).slice(0, 20)) {
+        const isAi = AI_RE.test(e.title) || AI_RE.test(stripHtml(e.content));
+        add({ category: isAi ? 'ai' : 'today', source: '极客公园', sourceType: 'rss',
+          title: e.title, url: e.link, date: e.date, excerpt: e.content,
+          tags: isAi ? ['科技', 'AI'] : ['科技'] });
+        count++;
+      }
+    } else {
+      recordError('极客公园', 'rss', r.error?.message || '非 RSS 返回');
+    }
+    trackSource('极客公园', count > 0, 'rss', count);
+  }
+  if (!skipped('LEIPHONE')) {
+    await rssSource('雷锋网', 'https://www.leiphone.com/feed', 'ai', ['AI', '科技'], 15);
+  }
+  if (!skipped('V2EX')) {
+    // V2EX 深度/技术节点：AI 相关入 AI 圈
+    const r = await fetchWithRetry('https://www.v2ex.com/index.xml', { ua: BROWSER_UA, timeout: 12000 }, 'V2EX');
+    let count = 0;
+    if (r.ok && /<rss|<feed|<rdf/i.test(r.body)) {
+      for (const e of parseFeed(r.body).slice(0, 25)) {
+        const isAi = AI_RE.test(e.title) || AI_RE.test(stripHtml(e.content));
+        add({ category: isAi ? 'ai' : 'today', source: 'V2EX', sourceType: 'rss',
+          title: e.title, url: e.link, date: e.date, excerpt: e.content,
+          tags: isAi ? ['开发者社区', 'AI'] : ['开发者社区'] });
+        count++;
+      }
+    } else {
+      recordError('V2EX', 'rss', r.error?.message || '非 RSS 返回');
+    }
+    trackSource('V2EX', count > 0, 'rss', count);
+  }
+  if (!skipped('LINUXDO')) {
+    await rssSource('Linux.do', 'https://linux.do/latest.rss', 'ai', ['社区', '技术'], 15);
+  }
+}
+
+/* ============================ 后处理：翻译 / 正文 / 聚类 ============================ */
+
+// 1. 英文标题/摘要预翻译（服务端 nightly，写入 titleZh/summaryZh）
+async function preTranslate(list) {
+  if (skipped('TRANSLATE')) {
+    trackSource('translate', false, 'skipped', 0, 'SKIP_TRANSLATE=1，跳过预翻译');
+    return;
+  }
+  const maxPerRun = Number(process.env.TRANSLATE_MAX || 200);
+  // deadlineMs：翻译阶段总时限，超时放弃剩余条目（保留原文），保证 Actions 15 分钟内完成
+  const translator = createTranslator({ maxPerRun, deadlineMs: 180000 });
+  const zhTitles = await translator.translateAll(list.map((it) => it.title));
+  let nTitle = 0;
+  for (let i = 0; i < list.length; i++) {
+    if (zhTitles[i] && zhTitles[i] !== list[i].title) {
+      list[i].titleZh = zhTitles[i];
+      nTitle++;
+    }
+  }
+  // 摘要仅翻译英文条目（标题已中文化的）
+  const sumIdx = [];
+  const sumTexts = [];
+  list.forEach((it, i) => {
+    if (it.titleZh && isEnglish(it.summary)) {
+      sumIdx.push(i);
+      sumTexts.push((it.summary || '').slice(0, 300));
+    }
+  });
+  const zhSums = sumTexts.length ? await translator.translateAll(sumTexts) : [];
+  let nSum = 0;
+  sumIdx.forEach((idx, j) => {
+    if (zhSums[j]) { list[idx].summaryZh = zhSums[j]; nSum++; }
+  });
+  trackSource('translate', true, 'google+mymemory', nTitle,
+    `标题 ${nTitle}/${list.length}，摘要 ${nSum}/${sumIdx.length}（ok=${translator.stats.ok} fail=${translator.stats.fail} skip=${translator.stats.skipped}）`);
+  log(`预翻译完成：标题 ${nTitle} 条，摘要 ${nSum} 条`);
+}
+
+// 2. 原文正文抓取（readability-lite 抽取，App 内读全文）
+async function enrichAllContent(list) {
+  if (skipped('CONTENT')) {
+    trackSource('content', false, 'skipped', 0, 'SKIP_CONTENT=1，跳过正文抓取');
+    return;
+  }
+  const limit = Number(process.env.CONTENT_LIMIT || 80);
+  const fails = [];
+  const r = await enrichContent(list, { limit, concurrency: 4 }, (src) => fails.push(src));
+  if (fails.length) {
+    recordError('content', 'extract', fails.length + ' 条正文抓取失败（App 内显示摘要）');
+  }
+  trackSource('content', r.ok > 0, 'readability', r.ok, r.ok ? null : '全部失败，App 内仅显示摘要');
+  log(`正文抓取完成：${r.ok}/${r.total} 条`);
+}
+
+// 3. 事件聚类（多源报道 → storyId）
+function buildStories(list) {
+  const storyMap = assignStories(list);
+  let multi = 0;
+  for (const ids of storyMap.values()) if (ids.length >= 2) multi++;
+  trackSource('story', true, 'cluster', multi, `共 ${storyMap.size} 个事件组，其中 ${multi} 组含多源报道`);
+  log(`事件聚类完成：${storyMap.size} 组，${multi} 组多源报道`);
+  return { multi };
 }
 
 /* ============================ 主流程 ============================ */
@@ -857,6 +1065,7 @@ async function main() {
     fetchReddit(),
     fetchNews(),
     fetchTrending(),
+    fetchForeignTech(),
     fetchChineseSupplements(),
   ]);
 
@@ -872,6 +1081,12 @@ async function main() {
     used[it.category]++;
     final.push(it);
   }
+
+  // 后处理：预翻译 → 正文抓取 → 事件聚类
+  await preTranslate(final);
+  await enrichAllContent(final);
+  const storyInfo = buildStories(final);
+
   const counts = { today: 0, ai: 0, ent: 0 };
   for (const it of final) {
     counts[it.category]++;
@@ -882,11 +1097,11 @@ async function main() {
   for (const it of final) bySource[it.source] = (bySource[it.source] || 0) + 1;
 
   const payload = {
-    version: 1,
+    version: 2,
     generatedAt: new Date().toISOString(),
     generatedAtBeijing: new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false }),
     window: '主展示近24小时，归档保留近7天；热榜数据无精确时间戳',
-    stats: { total: final.length, byCategory: counts, bySource },
+    stats: { total: final.length, byCategory: counts, bySource, stories: storyInfo.multi },
     sourceStatus,
     errors,
     items: final,
