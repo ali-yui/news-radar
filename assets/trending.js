@@ -39,13 +39,14 @@ window.Trending = (function () {
     try { localStorage.setItem(CACHE_KEY, JSON.stringify(c)); } catch (e) { /* 忽略 */ }
   }
 
-  // 内置榜单条目 {rank,owner,repo,desc,url,lang,stars} 转成渲染用 {title,link,about,lang,stars}
+  // 内置榜单条目 {rank,owner,repo,desc,descZh,url,lang,stars} 转成渲染用
+  // about 优先用服务端预翻译的 descZh（浏览器端实时翻译在国内不可用）
   function embeddedItems(period) {
     const list = (embedded && embedded[period]) || [];
     return list.slice(0, LIMITS[period]).map((t) => ({
       title: `${t.owner}/${t.repo}`,
       link: t.url,
-      about: t.desc || '',
+      about: t.descZh || t.desc || '',
       lang: t.lang || '',
       stars: t.stars || 0,
     }));

@@ -549,11 +549,11 @@
             toast('已翻译为中文');
           } else {
             btn.textContent = '译';
-            toast('翻译服务暂不可用，请稍后重试');
+            toast('实时翻译不可用（国内网络无法访问翻译接口），英文内容会在每晚预翻译后自动显示中文');
           }
         } catch (e) {
           btn.textContent = '译';
-          toast('翻译失败：' + (e.message || e));
+          toast('实时翻译不可用：' + (e.message || e) + '；可等每晚预翻译');
         } finally {
           btn.disabled = false;
         }
@@ -753,6 +753,17 @@
   });
 
   /* ---------- 启动 ---------- */
+  // 防御：浮层都关闭时若 body.overflow 仍是 hidden，滚动与 fixed 定位会异常
+  function resetOverlays() {
+    const detailOpen = window.Detail && window.Detail.isOpen();
+    const trendingOpen = window.Trending && window.Trending.isOpen();
+    if (!detailOpen && !trendingOpen) document.body.style.overflow = '';
+    if (!detailOpen) {
+      const d = $('#page-detail');
+      if (d && !d.classList.contains('hidden')) d.classList.add('hidden');
+    }
+  }
+
   // 暴露给详情页/其他模块的最小接口
   window.NRApp = {
     getItem: (id) => (state.data ? state.data.items.find((x) => x.id === id) || null : null),
@@ -793,6 +804,9 @@
     fillSettings();
     if (window.Trending) window.Trending.init();
     if (window.Detail) window.Detail.init(window.NRApp);
+    resetOverlays();
+    window.addEventListener('pageshow', resetOverlays);
+    window.addEventListener('focus', resetOverlays);
     // 1. 内联引导数据
     const boot = window.__NEWS_RADAR_BOOTSTRAP__;
     const cache = load(K.cache, null);

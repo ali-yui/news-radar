@@ -140,7 +140,10 @@ window.Detail = (function () {
       render();
     } catch (e) {
       const box = $('#detailTransProgress');
-      if (box) box.textContent = '翻译失败：' + (e.message || e) + '（已显示可读内容）';
+      if (box) {
+        box.textContent = '实时翻译不可用（国内网络访问不到翻译接口），'
+          + '英文内容会在每晚预翻译后自动显示中文：' + (e.message || e);
+      }
     } finally {
       transBusy = false;
       const b2 = $('#detailTransBtn');

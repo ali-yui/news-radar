@@ -30,7 +30,7 @@ import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
-import { createTranslator, isEnglish } from './lib/translate.mjs';
+import { createTranslator, isEnglish, isChinese } from './lib/translate.mjs';
 import { enrichContent } from './lib/content.mjs';
 import { assignStories } from './lib/cluster.mjs';
 import { httpGet } from './lib/http.mjs';
@@ -1076,6 +1076,30 @@ async function preTranslate(list) {
   log(`预翻译完成：标题 ${nTitle} 条，摘要 ${nSum} 条`);
 }
 
+// 1b. Trending 榜单简介预翻译（英文仓库简介 → 中文，App 内直接显示）
+//     浏览器端实时翻译在国内不可用（MyMemory / Google gtx / Lingva 全部不可达），
+//     所以榜单与资讯的中文一律依赖服务端预翻译。
+async function preTranslateTrending(trending) {
+  if (skipped('TRANSLATE') || skipped('TRENDING_TRANSLATE')) return;
+  const perPeriod = Number(process.env.TRENDING_TRANSLATE_N || 12);
+  const texts = [];
+  const refs = [];
+  for (const period of TRENDING_PERIODS) {
+    for (const t of (trending[period] || []).slice(0, perPeriod)) {
+      if (!t.desc || isChinese(t.desc)) continue;
+      texts.push(t.desc.slice(0, 200));
+      refs.push(t);
+    }
+  }
+  if (!texts.length) return;
+  const translator = createTranslator({ maxPerRun: texts.length, deadlineMs: 120000 });
+  const zh = await translator.translateAll(texts);
+  let n = 0;
+  refs.forEach((t, i) => { if (zh[i]) { t.descZh = zh[i]; n++; } });
+  trackSource('translate:trending', n > 0, 'google+mymemory', n, `榜单简介 ${n}/${refs.length}`);
+  log(`榜单简介预翻译：${n}/${refs.length} 条`);
+}
+
 // 2. 原文正文抓取（readability-lite 抽取，App 内读全文）
 async function enrichAllContent(list) {
   if (skipped('CONTENT')) {
@@ -1136,8 +1160,9 @@ async function main() {
     final.push(it);
   }
 
-  // 后处理：预翻译 → 正文抓取 → 事件聚类
+  // 后处理：预翻译（资讯 + 榜单）→ 正文抓取 → 事件聚类
   await preTranslate(final);
+  await preTranslateTrending(trendingLists);
   await enrichAllContent(final);
   const storyInfo = buildStories(final);
 

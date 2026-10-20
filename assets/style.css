@@ -66,8 +66,7 @@ svg { display: block; }
   position: sticky; top: 0; z-index: 30;
   display: flex; align-items: center; justify-content: space-between;
   padding: 12px 16px 10px;
-  background: var(--bar);
-  backdrop-filter: saturate(1.4) blur(12px);
+  background: var(--surface);
   border-bottom: 1px solid var(--hairline);
 }
 .topbar-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
@@ -104,8 +103,7 @@ svg { display: block; }
 .filters {
   position: sticky; top: 57px; z-index: 20;
   padding: 10px 16px 8px;
-  background: var(--bar);
-  backdrop-filter: saturate(1.4) blur(12px);
+  background: var(--surface);
   border-bottom: 1px solid var(--hairline);
 }
 .search-box {
@@ -347,13 +345,17 @@ textarea.field {
 .status-meta { color: var(--faint); }
 
 /* ============ 底部 Tab ============ */
+/* 底部导航：不要用 backdrop-filter，也不要用 transform 居中。
+   实测（Android WebView / 2.1 APK）：fixed + translateX(-50%) + backdrop-filter
+   三者叠加会让它掉出合成层——进入列表最长的 AI 圈后底部导航不渲染，
+   快速下滑触发重绘才出现，且只渲染出 3 个（第 4 个被裁掉）。
+   改为「left/right 归零 + margin 自动居中 + 近实色背景」后稳定。 */
 .tabbar {
-  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  position: fixed; bottom: 0; left: 0; right: 0; margin: 0 auto;
   width: 100%; max-width: 680px;
   z-index: 40;
   display: flex;
-  background: var(--bar);
-  backdrop-filter: saturate(1.4) blur(12px);
+  background: var(--surface);
   border-top: 1px solid var(--hairline);
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -485,7 +487,7 @@ textarea.field {
 .detail-topbar {
   display: flex; align-items: center; gap: 8px;
   padding: 10px 12px; border-bottom: 1px solid var(--hairline);
-  background: var(--bar); backdrop-filter: saturate(1.4) blur(12px);
+  background: var(--surface);
   flex: none;
 }
 .detail-top-title {
@@ -570,7 +572,7 @@ textarea.field {
   flex: none; display: flex; align-items: center; justify-content: center; gap: 12px;
   padding: 7px 12px calc(7px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--hairline);
-  background: var(--bar); backdrop-filter: saturate(1.4) blur(12px);
+  background: var(--surface);
 }
 .reader-bar-label { font-size: 12px; color: var(--faint); }
 .reader-btn {
