@@ -1,6 +1,13 @@
 name: daily-news
 
 # 北京时间每天 09:00 自动更新（UTC 01:00）；也可在 Actions 页面手动触发
+#
+# 仓库角色（唯一真源 + 严格镜像，杜绝合并污染）：
+#   1. GitHub ali-yui/news-radar  —— 唯一真源：代码 + 抓取脚本 + 数据 + Pages
+#   2. Gitee  yuihl/news-radar    —— 数据镜像：由本工作流严格对齐 GitHub，请勿手推
+#   3. Gitee  yuihl/news          —— 开发仓库：由本地开发自由推送
+# 说明：镜像采用「以 GitHub 为准」的强推策略，历史一旦分歧会被覆盖，
+#       这正是镜像语义；如需保守模式，把变量 GITEE_FORCE_SYNC 设为 false。
 on:
   schedule:
     - cron: '0 1 * * *'
@@ -16,7 +23,8 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # 抓取 + 预翻译 + 正文（每板块 30 条）需要更长的时间窗
+    timeout-minutes: 25
     steps:
       - name: 检出仓库
         uses: actions/checkout@v4
@@ -34,8 +42,12 @@ jobs:
         env:
           # 内置 GITHUB_TOKEN，可把 GitHub REST 限流从 60 次/小时提升到 1000 次/小时
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 显式限额：默认值变更也不会让任务超时
+          TRANSLATE_MAX: ${{ vars.TRANSLATE_MAX || 80 }}
+          CONTENT_PER_CATEGORY: ${{ vars.CONTENT_PER_CATEGORY || 30 }}
+          CONTENT_LIMIT: ${{ vars.CONTENT_LIMIT || 100 }}
 
-      - name: 提交并推送数据
+      - name: 提交数据并推送到 GitHub（唯一真源）
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -47,25 +59,56 @@ jobs:
             git push
           fi
 
-      # 可选：配置 Gitee 私人令牌 secret 后自动同步，供国内网络直接拉取 daily.json
-      # 1. Gitee 新建同名仓库（建议“导入已有仓库”，保持 main 分支一致）
-      # 2. Gitee 头像 → 设置 → 私人令牌，生成勾选 projects 权限的令牌
-      # 3. GitHub 仓库 Settings → Secrets and variables → Actions 新增：
-      #    GITEE_TOKEN（必填）；若仓库路径不是 yuihl/news-radar，再新增 Variables：GITEE_REPO=用户名/仓库名
-      - name: 同步到 Gitee（国内网络，可选）
+      # 严格镜像：Gitee news-radar 永远等于 GitHub，不做 merge（避免数据被合并污染）
+      # 依赖 secret：GITEE_TOKEN；可选 variable：GITEE_REPO、GITEE_FORCE_SYNC
+      - name: 同步到 Gitee 数据镜像
+        continue-on-error: true
         env:
           GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
           GITEE_REPO: ${{ vars.GITEE_REPO }}
+          GITEE_FORCE_SYNC: ${{ vars.GITEE_FORCE_SYNC }}
         run: |
           if [ -z "$GITEE_TOKEN" ]; then
-            echo "未配置 GITEE_TOKEN，跳过 Gitee 同步"
+            echo "未配置 GITEE_TOKEN，跳过 Gitee 镜像同步"
             exit 0
           fi
           REPO="${GITEE_REPO:-yuihl/news-radar}"
+          FORCE="${GITEE_FORCE_SYNC:-true}"
           git remote add gitee "https://oauth2:${GITEE_TOKEN}@gitee.com/${REPO}.git"
-          # 若远端有本端没有的提交（如手动推送），先合并再推；正常情况下直接快进
-          git fetch gitee main && git merge --no-edit -X theirs gitee/main || true
-          git push gitee main
+          git fetch gitee main
+
+          if git rev-parse --verify gitee/main >/dev/null 2>&1; then
+            AHEAD=$(git rev-list --count gitee/main..HEAD)
+            BEHIND=$(git rev-list --count HEAD..gitee/main)
+          else
+            AHEAD=0
+            BEHIND=0
+            echo "Gitee 仓库为空，执行首次推送"
+          fi
+          echo "镜像状态：GitHub 领先 $AHEAD 个提交，Gitee 领先 $BEHIND 个提交"
+
+          if [ "$BEHIND" != "0" ]; then
+            echo "::warning::Gitee 领先 $BEHIND 个提交（疑似有人直接推送），镜像以 GitHub 为准"
+          fi
+          if [ "$BEHIND" != "0" ] && [ "$FORCE" != "true" ]; then
+            echo "::warning::GITEE_FORCE_SYNC=false，跳过强推，等待人工处理"
+            exit 0
+          fi
+
+          for i in 1 2 3; do
+            if [ "$BEHIND" = "0" ]; then
+              git push gitee main
+            else
+              git push gitee main --force-with-lease
+            fi
+            if [ $? -eq 0 ]; then
+              echo "Gitee 镜像同步完成"
+              exit 0
+            fi
+            echo "第 $i 次同步失败，3 秒后重试"
+            sleep 3
+          done
+          echo "::error::Gitee 镜像同步连续 3 次失败（GitHub 数据不受影响）"
 
       - name: 刷新 jsDelivr CDN 缓存
         run: |

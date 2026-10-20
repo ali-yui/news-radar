@@ -398,11 +398,14 @@ textarea.field {
 }
 
 /* ============ 底部浮层（Trending 榜单） ============ */
-/* 关键修复：mask 用 absolute 相对 .app（position:relative）定位，
-   而不是 fixed 相对视口——否则在桌面端/外壳 WebView 里浮层会宽于
-   App 窗口（.app 是 max-width:680px 居中），导致两侧露出、内容被裁切。 */
+/* 必须用 fixed（视口锚定）。切勿改回 absolute：
+   absolute 的包含块是 .app（内容多高它就有多高，列表页可达数千像素），
+   榜单会被渲染到视口之外（表现为「榜单不显示」），
+   而遮罩 inset:0 + z-index 50 又会盖住 z-index 40 的 .tabbar
+   （表现为「底部 tab 消失且关不掉」）。
+   「不宽于 App 窗口」由 trending.js 在 show() 里按 .app 实际宽度设 max-width 保证。 */
 .sheet-mask {
-  position: absolute; inset: 0; z-index: 50;
+  position: fixed; inset: 0; z-index: 50;
   background: rgba(0, 0, 0, 0.46);
   display: flex; align-items: flex-end; justify-content: center;
 }
@@ -536,6 +539,13 @@ textarea.field {
   background: var(--surface-2); border-radius: 8px; padding: 12px;
   margin-bottom: 14px;
 }
+.detail-nofull {
+  background: var(--surface-2); border: 1px dashed var(--hairline);
+  border-radius: 10px; padding: 14px; margin-bottom: 14px; text-align: center;
+}
+.detail-nofull-title { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+.detail-nofull-desc { font-size: 12.5px; color: var(--sub); line-height: 1.6; margin: 4px 0 10px; }
+.d-btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 .detail-content { font-size: var(--reader-font); line-height: 1.85; color: var(--ink); }
 .detail-content p { margin-bottom: 1.1em; text-align: justify; }
 .detail-trans-progress { font-size: 12px; color: var(--faint); margin: 4px 0 10px; min-height: 16px; }

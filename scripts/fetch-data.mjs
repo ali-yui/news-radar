@@ -34,6 +34,7 @@ import { createTranslator, isEnglish } from './lib/translate.mjs';
 import { enrichContent } from './lib/content.mjs';
 import { assignStories } from './lib/cluster.mjs';
 import { httpGet } from './lib/http.mjs';
+import { parseWeiboHot, parseToutiaoHot, parseDouyinHot } from './lib/hotsearch.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_JSON = join(ROOT, 'public', 'data', 'daily.json');
@@ -792,6 +793,9 @@ async function rssSource(name, url, category, tags, cap, mapper) {
 // AI/科技关键词：用于把综合源中的 AI 条目归入 AI 圈
 const AI_RE = /AI|人工智能|大模型|智能体|agent|mcp|llm|gpt|deepseek|gemini|claude|具身|机器人|算力|开源|github|机器之心|自动驾驶|推理模型|微调|多模态|神经网络|aigc|copilot|cursor|langchain|vibe coding/i;
 
+// 娱乐关键词：热搜/热榜条目命中后自动跨挂到「娱乐圈」
+const ENT_RE = /明星|演员|歌手|导演|电影|电视剧|综艺|票房|演唱会|官宣|恋情|离婚|结婚|偶像|男团|女团|跑男|春晚|影帝|影后|热播|新剧|开机|杀青|女主|男主|主演|颁奖|红毯|塌房|粉丝|爱豆|出道|专辑|浪姐|披荆斩棘|剧集|网剧|番剧|动漫|游戏改编|网红|主播|直播|带货|选秀|脱口秀|相声|小品|模特|选美|男星|女星|艺人|剧组|片场|预告片|定档|杀青|票房|歌坛|乐坛|新歌|单曲|MV|演唱会|巡演|综艺节目/i;
+
 async function fetchChineseSupplements() {
   if (!skipped('ITHOME')) {
     await rssSource('IT之家', 'https://www.ithome.com/rss/', 'today', ['科技'], 30);
@@ -877,10 +881,9 @@ async function fetchChineseSupplements() {
       { ua: BROWSER_UA, headers: { Referer: 'https://www.baidu.com/' }, timeout: 12000 }, '百度热搜');
     let count = 0;
     const list = d?.data?.cards?.[0]?.content || [];
-    const entRe = /明星|演员|歌手|导演|电影|电视剧|综艺|票房|演唱会|官宣|恋情|离婚|结婚|偶像|男团|女团|跑男|春晚|影帝|影后|热播|新剧|开机|杀青|女主|男主|主演|颁奖|红毯|塌房|粉丝|爱豆|出道|专辑|浪姐|披荆斩棘|剧集|网剧|番剧|动漫|游戏改编/;
     for (const it of list.slice(0, 30)) {
       const title = it.query || it.word;
-      const isEnt = entRe.test(title) || entRe.test(it.desc || '');
+      const isEnt = ENT_RE.test(title) || ENT_RE.test(it.desc || '');
       add({ category: 'today', source: '百度热搜', sourceType: 'json',
         title, url: it.rawUrl || it.url, date: null,
         excerpt: it.desc, tags: isEnt ? ['热点', '娱乐'] : ['热点', '民生'],
@@ -917,11 +920,11 @@ async function fetchChineseSupplements() {
     // B站热门视频（仅保留娱乐相关分区）
     const d = await getJson('https://api.bilibili.com/x/web-interface/popular?ps=50&pn=1',
       { ua: BROWSER_UA, headers: { Referer: 'https://www.bilibili.com/' }, timeout: 12000 }, 'B站热门');
-    const entRe = /影视|娱乐|明星|音乐|舞蹈|综艺|动画|舞台|鬼畜|特摄|影视剧/;
+    const bilibiliEntRe = /影视|娱乐|明星|音乐|舞蹈|综艺|动画|舞台|鬼畜|特摄|影视剧/;
     let count = 0;
     for (const x of d?.data?.list || []) {
       const tname = x.tname || '';
-      if (!entRe.test(tname)) continue;
+      if (!bilibiliEntRe.test(tname)) continue;
       add({ category: 'ent', source: 'B站热门', sourceType: 'json',
         title: x.title, url: x.short_link_v2 || x.short_link,
         date: new Date((x.pubdate || 0) * 1000),
@@ -989,6 +992,50 @@ async function fetchChineseSupplements() {
   if (!skipped('LINUXDO')) {
     await rssSource('Linux.do', 'https://linux.do/latest.rss', 'ai', ['社区', '技术'], 15);
   }
+
+  /* ---- 国内三大热搜：微博 / 今日头条 / 抖音（公开 JSON，免登录免签名，已实测） ---- */
+  if (!skipped('WEIBO')) {
+    const d = await getJson('https://weibo.com/ajax/side/hotSearch',
+      { ua: BROWSER_UA, headers: { Referer: 'https://weibo.com/' }, timeout: 12000 }, '微博热搜');
+    let count = 0;
+    for (const h of parseWeiboHot(d).slice(0, 30)) {
+      add({ category: 'today', source: '微博热搜', sourceType: 'json',
+        title: h.title, url: h.url, date: null,
+        excerpt: h.hot ? `微博热度 ${h.hot}` : '',
+        tags: ['热搜', '微博'], hot: true,
+        extraCategories: ENT_RE.test(h.title) ? ['ent'] : [] });
+      count++;
+    }
+    trackSource('微博热搜', count > 0, 'json', count);
+  }
+  if (!skipped('TOUTIAO')) {
+    const d = await getJson('https://www.toutiao.com/hot-event/hot-board/?origin=toutiao_pc',
+      { ua: BROWSER_UA, timeout: 12000 }, '今日头条');
+    let count = 0;
+    for (const h of parseToutiaoHot(d).slice(0, 30)) {
+      add({ category: 'today', source: '今日头条', sourceType: 'json',
+        title: h.title, url: h.url, date: null,
+        excerpt: h.hot ? `头条热度 ${h.hot}` : '',
+        tags: ['热搜', '头条'], hot: true,
+        extraCategories: ENT_RE.test(h.title) ? ['ent'] : [] });
+      count++;
+    }
+    trackSource('今日头条', count > 0, 'json', count);
+  }
+  if (!skipped('DOUYIN')) {
+    const d = await getJson('https://www.douyin.com/aweme/v1/web/hot/search/list/?device_platform=webapp&aid=6383&channel=channel_pc_web&detail_list=1',
+      { ua: BROWSER_UA, headers: { Referer: 'https://www.douyin.com/' }, timeout: 12000 }, '抖音热点');
+    let count = 0;
+    for (const h of parseDouyinHot(d).slice(0, 30)) {
+      add({ category: 'today', source: '抖音热点', sourceType: 'json',
+        title: h.title, url: h.url, date: null,
+        excerpt: h.hot ? `抖音热度 ${h.hot}` : '',
+        tags: ['热搜', '抖音'], hot: true,
+        extraCategories: ENT_RE.test(h.title) ? ['ent'] : [] });
+      count++;
+    }
+    trackSource('抖音热点', count > 0, 'json', count);
+  }
 }
 
 /* ============================ 后处理：翻译 / 正文 / 聚类 ============================ */
@@ -1035,14 +1082,20 @@ async function enrichAllContent(list) {
     trackSource('content', false, 'skipped', 0, 'SKIP_CONTENT=1，跳过正文抓取');
     return;
   }
-  const limit = Number(process.env.CONTENT_LIMIT || 80);
+  // 每板块取最新 N 条（当日热点优先），总量再兜底；控制 Actions 耗时
+  const perCategory = Number(process.env.CONTENT_PER_CATEGORY || 30);
+  const limit = Number(process.env.CONTENT_LIMIT || 100);
   const fails = [];
-  const r = await enrichContent(list, { limit, concurrency: 4 }, (src) => fails.push(src));
+  const r = await enrichContent(list, {
+    limit, perCategory, categories: ['today', 'ai', 'ent'], concurrency: 4,
+  }, (src) => fails.push(src));
   if (fails.length) {
     recordError('content', 'extract', fails.length + ' 条正文抓取失败（App 内显示摘要）');
   }
+  const byCat = Object.entries(r.byCategory || {})
+    .map(([k, v]) => `${k} ${v.ok}/${v.tried}`).join('，');
   trackSource('content', r.ok > 0, 'readability', r.ok, r.ok ? null : '全部失败，App 内仅显示摘要');
-  log(`正文抓取完成：${r.ok}/${r.total} 条`);
+  log(`正文抓取完成：${r.ok}/${r.total} 条（每板块 ${perCategory} 条；${byCat}）`);
 }
 
 // 3. 事件聚类（多源报道 → storyId）
@@ -1073,7 +1126,8 @@ async function main() {
   // 排序：时间倒序；hot 条目以抓取时间参与
   deduped.sort((a, b) => b.publishedAtMs - a.publishedAtMs);
   // 每个分类按主分类保留上限（extraCategories 跨分类展示不计数截断）
-  const CAPS = { today: 100, ai: 120, ent: 80 };
+  // 热搜源（微博/头条/抖音）无时间戳、进入「实时热点」分组，故今天配额相应放大
+  const CAPS = { today: 160, ai: 120, ent: 80 };
   const used = { today: 0, ai: 0, ent: 0 };
   const final = [];
   for (const it of deduped) {

@@ -195,12 +195,39 @@ window.Trending = (function () {
     return '';
   }
 
+  // 榜单条目点击 → App 内打开仓库详情（不跳外部浏览器）
+  function bindItemClicks() {
+    body().querySelectorAll('.trend-item').forEach((el) => {
+      el.addEventListener('click', () => {
+        const link = el.dataset.link || '';
+        if (window.Detail && link) {
+          window.Detail.openRepo({
+            title: el.dataset.title || link,
+            link,
+            about: el.dataset.about || '',
+            lang: el.dataset.lang || '',
+          });
+        }
+      });
+    });
+  }
+
+  // 浮层宽度锁死为 App 容器实际宽度：桌面端 / WebView / 外壳都不会宽于 App 窗口
+  function fitWidth() {
+    const s = sheet() && sheet().querySelector('.sheet');
+    if (!s) return;
+    const app = document.querySelector('.app');
+    const w = (app && app.clientWidth) || window.innerWidth;
+    if (w) s.style.maxWidth = w + 'px';
+  }
+
   async function show(period, force) {
     currentPeriod = period || currentPeriod;
     document.querySelectorAll('#trendingSeg button').forEach((b) =>
       b.classList.toggle('active', b.dataset.period === currentPeriod));
     document.querySelectorAll('#trendingBar .trend-btn').forEach((b) =>
       b.classList.toggle('active', b.dataset.period === currentPeriod));
+    fitWidth();
     sheet().classList.remove('hidden');
     document.body.style.overflow = 'hidden';
     if (loading) return;
@@ -213,22 +240,10 @@ window.Trending = (function () {
         + '<button class="btn-ghost trend-refresh" id="trendRefresh" type="button">刷新当前榜单</button>';
       const rb = document.getElementById('trendRefresh');
       if (rb) rb.addEventListener('click', () => show(currentPeriod, true));
-      // 榜单条目：App 内打开仓库详情（不跳外部浏览器）
-      body().querySelectorAll('.trend-item').forEach((el) => {
-        el.addEventListener('click', () => {
-          const link = el.dataset.link || '';
-          if (window.Detail && link) {
-            window.Detail.openRepo({
-              title: el.dataset.title || link,
-              link,
-              about: el.dataset.about || '',
-              lang: el.dataset.lang || '',
-            });
-          }
-        });
-      });
+      bindItemClicks();
     } catch (e) {
       renderError(currentPeriod, e.name === 'AbortError' ? '请求超时' : (e.message || e));
+      bindItemClicks(); // 缓存条目也要能点开
     } finally {
       loading = false;
     }
@@ -239,6 +254,8 @@ window.Trending = (function () {
     document.body.style.overflow = '';
   }
 
+  function isOpen() { return !sheet().classList.contains('hidden'); }
+
   function init() {
     document.querySelectorAll('#trendingBar .trend-btn, #trendingSeg button').forEach((b) => {
       b.addEventListener('click', () => show(b.dataset.period));
@@ -246,7 +263,10 @@ window.Trending = (function () {
     document.getElementById('trendingClose').addEventListener('click', hide);
     sheet().addEventListener('click', (e) => { if (e.target === sheet()) hide(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !sheet().classList.contains('hidden')) hide(); });
+    window.addEventListener('resize', () => {
+      if (!sheet().classList.contains('hidden')) fitWidth();
+    });
   }
 
-  return { init, show, hide, setEmbedded };
+  return { init, show, hide, isOpen, setEmbedded };
 })();

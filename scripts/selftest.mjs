@@ -3,11 +3,13 @@
  * 零依赖自测（不发起网络请求）
  *   node scripts/selftest.mjs
  * 覆盖：translate Provider 解析、extract 正文抽取、cluster 事件聚类、
- *       dedup / normalizeUrl（与浏览器端同规则）。
+ *       hotsearch 三大热搜解析、dedup / normalizeUrl（与浏览器端同规则）。
  */
 import { PROVIDERS, isChinese, isEnglish } from './lib/translate.mjs';
 import { extractContent, extractTitle, extractMetaDescription } from './lib/extract.mjs';
 import { assignStories } from './lib/cluster.mjs';
+import { parseWeiboHot, parseToutiaoHot, parseDouyinHot } from './lib/hotsearch.mjs';
+import { pickContentTargets } from './lib/content.mjs';
 
 let pass = 0;
 let fail = 0;
@@ -97,6 +99,57 @@ const en2 = [
 ];
 assignStories(en2);
 check('英文同事件（均有译文）合并', en2[0].storyId === en2[1].storyId);
+
+/* ---------- 4. 三大热搜解析（微博 / 头条 / 抖音） ---------- */
+console.log('[hotsearch] 三大热搜解析');
+const w = parseWeiboHot({ data: { realtime: [
+  { word_scheme: '#测试热搜话题#', num: 1234567 },
+  { word_scheme: '#短#', num: 10 },
+  { word_scheme: '#某明星官宣恋情#', num: 888 },
+] } });
+check('微博：去井号且过滤过短', w.length === 2 && w[0].title === '测试热搜话题');
+check('微博：链接指向话题搜索页', w[0].url.startsWith('https://s.weibo.com/weibo?q=%23'));
+check('微博：热度值解析', w[0].hot === 1234567);
+
+const t = parseToutiaoHot({ data: [
+  { Title: '测试头条新闻标题', Url: 'https://www.toutiao.com/article/123/', HotValue: 987654 },
+  { Title: '完全没有链接的条目', HotValue: 100 },
+  { Title: '只有 ClusterId 的条目', ClusterId: '7698609753362026022' },
+] });
+check('头条：标题与热度解析', t.length === 2 && t[0].title === '测试头条新闻标题' && t[0].hot === 987654);
+check('头条：缺 Url 时用 trending 兜底', t[1].url.includes('toutiao.com/trending/'));
+
+const dy = parseDouyinHot({ data: { word_list: [
+  { word: '抖音热点词条', hot_value: 12001581, sentence_id: '2704161' },
+  { word: '无 sentence_id 的词条', hot_value: 5 },
+  { word: 'ab' },
+] } });
+check('抖音：带 sentence_id 走 hot 链接',
+  dy.length === 2 && dy[0].url === 'https://www.douyin.com/hot/'
+    + encodeURIComponent('抖音热点词条') + '/2704161');
+check('抖音：无 sentence_id 走搜索链接',
+  dy[1].url === 'https://www.douyin.com/search/' + encodeURIComponent('无 sentence_id 的词条'));
+check('热搜：空 payload 返回空数组',
+  parseWeiboHot(null).length === 0 && parseToutiaoHot({}).length === 0
+  && parseDouyinHot({ data: {} }).length === 0);
+
+/* ---------- 5. 正文按板块选样 ---------- */
+console.log('[content] 正文按板块选样');
+const mit = (id, cat, ms) => ({ id, category: cat, url: 'https://example.com/' + id, publishedAtMs: ms, content: '' });
+const pool = [
+  mit('t1', 'today', 300), mit('t2', 'today', 200), mit('t3', 'today', 100),
+  mit('a1', 'ai', 300), mit('a2', 'ai', 200),
+  mit('e1', 'ent', 300),
+  { id: 'no-url', category: 'today', url: '', publishedAtMs: 400, content: '' },
+  { id: 'has-content', category: 'today', url: 'https://example.com/x', publishedAtMs: 400, content: '已有正文' },
+];
+const picked = pickContentTargets(pool, { perCategory: 2, limit: 100 });
+check('每板块各取 2 条（today2+ai2+ent1=5）', picked.length === 5);
+check('板块内按时间倒序', picked[0].id === 't1' && picked[1].id === 't2');
+check('跳过无链接与已有正文的条目',
+  !picked.some((x) => x.id === 'no-url' || x.id === 'has-content'));
+check('perCategory=0 时退化为总量上限',
+  pickContentTargets(pool, { perCategory: 0, limit: 3 }).length === 3);
 
 console.log(`\n结果：${pass} 通过，${fail} 失败`);
 process.exit(fail ? 1 : 0);

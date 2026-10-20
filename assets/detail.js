@@ -214,8 +214,12 @@ window.Detail = (function () {
     const tr = transOf(it.id) || {};
     const paras = (it.content || '').split(/\n+/).filter(Boolean);
     if (!paras.length) {
-      zone.innerHTML = `<div class="detail-hint">这篇内容未能抓到全文（可能原站拒绝访问），已显示摘要。
-        ${it.url ? '可点上方「打开原文」到原站阅读。' : ''}</div>`;
+      // 无正文时的降级：突出摘要 + 提供 App 内打开原文（不跳外部浏览器）
+      zone.innerHTML = `<div class="detail-nofull">
+        <div class="detail-nofull-title">暂无全文</div>
+        <div class="detail-nofull-desc">该站点暂不支持全文抽取（每晚自动重试）。可先看上方摘要，或在 App 内打开原文阅读。</div>
+        ${it.url ? '<button class="d-btn primary" data-act="open-url" type="button">在 App 内打开原文</button>' : ''}
+      </div>`;
       return;
     }
     const shown = tr.paras || paras;

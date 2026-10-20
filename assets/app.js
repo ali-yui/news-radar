@@ -577,6 +577,9 @@
 
   /* ---------- Tab 与筛选 ---------- */
   function switchTab(tab) {
+    // 先收掉可能盖住 tabbar 的浮层（Trending 榜单 / 详情页），避免残留
+    if (window.Trending && window.Trending.isOpen && window.Trending.isOpen()) window.Trending.hide();
+    if (window.Detail && window.Detail.isOpen()) window.Detail.close();
     state.tab = tab;
     $all('.tab').forEach((t) => t.classList.toggle('active', t.dataset.tab === tab));
     const isSettings = tab === 'settings';
