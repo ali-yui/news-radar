@@ -10,7 +10,8 @@ name: daily-news
 #       这正是镜像语义；如需保守模式，把变量 GITEE_FORCE_SYNC 设为 false。
 on:
   schedule:
-    - cron: '0 1 * * *'
+    # 每小时一次（国外数据准实时）；国内数据由本机计划任务每小时产出 cn.json
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -37,11 +38,13 @@ jobs:
         with:
           node-version: 20
 
-      - name: 抓取全部数据源并生成数据
+      - name: 抓取国外数据源并生成数据
         run: node scripts/fetch-data.mjs
         env:
           # 内置 GITHUB_TOKEN，可把 GitHub REST 限流从 60 次/小时提升到 1000 次/小时
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 只跑国外源：国内源由本机计划任务处理（国内网络抓取更快更完整）
+          SOURCES: foreign
           # 显式限额：默认值变更也不会让任务超时
           TRANSLATE_MAX: ${{ vars.TRANSLATE_MAX || 80 }}
           CONTENT_PER_CATEGORY: ${{ vars.CONTENT_PER_CATEGORY || 30 }}
@@ -54,10 +57,25 @@ jobs:
           git add public/data/daily.json assets/data-bundle.js
           if git diff --cached --quiet; then
             echo "本次抓取数据无变化，跳过提交"
-          else
-            git commit -m "chore(data): daily news $(date -u +%Y-%m-%d)"
-            git push
+            exit 0
           fi
+          TODAY=$(date -u +%Y-%m-%d)
+          MSG="chore(data): foreign news $TODAY $(date -u +%H):00 UTC"
+          LAST=$(git log -1 --pretty=%s)
+          # 每小时一次会产生 24 个提交/天，当天的数据提交用 amend 覆盖，
+          # 把仓库增量压到「每天一个数据提交」，避免历史与体积失控
+          case "$LAST" in
+            "chore(data): foreign news $TODAY"*)
+              git commit --amend -m "$MSG"
+              git push --force-with-lease
+              echo "已覆盖当天数据提交：$MSG"
+              ;;
+            *)
+              git commit -m "$MSG"
+              git push
+              echo "已新建数据提交：$MSG"
+              ;;
+          esac
 
       # 严格镜像：Gitee news-radar 永远等于 GitHub，不做 merge（避免数据被合并污染）
       # 依赖 secret：GITEE_TOKEN；可选 variable：GITEE_REPO、GITEE_FORCE_SYNC

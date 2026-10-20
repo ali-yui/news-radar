@@ -11,3 +11,8 @@ android/app/build/
 android/app/src/main/assets/
 android/*.jks
 dist/
+# 本机正文缓存（跨次运行复用，不进仓库）
+.cache/
+# 国内数据产物（发布在 data-cn 分支，不进 main）
+public/data/cn.json
+logs/

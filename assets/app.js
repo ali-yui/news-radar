@@ -9,15 +9,20 @@
     cache: 'nr.cache.v1',
     logs: 'nr.logs.v1',
     auto: 'nr.autoDate.v1',
+    lastFetch: 'nr.lastFetch.v1',
     cardTrans: 'nr.cardTrans.v1',
     digest: 'nr.digest.v1',
   };
 
   const TAB_NAMES = { today: '今天', ai: 'AI 圈', ent: '娱乐圈', settings: '设置' };
   const DAY = 86400000;
-  // 内置默认远程数据地址（每行一个，按顺序尝试）：Gitee 国内最快 → jsDelivr → raw.githubusercontent
+  // 内置默认远程数据地址（每行一个；多个会全部拉取后合并去重）
+  //   1) Gitee raw 的 daily.json：国外数据（仓库公开后国内最快）
+  //   2) jsDelivr 的 cn.json：国内数据（本机每小时抓取，data-cn 分支）
+  //   3) jsDelivr / 4) raw.githubusercontent：国外数据备用
   const DEFAULT_REMOTE_URLS = [
     'https://gitee.com/yuihl/news-radar/raw/main/public/data/daily.json',
+    'https://cdn.jsdelivr.net/gh/ali-yui/news-radar@data-cn/public/data/cn.json',
     'https://cdn.jsdelivr.net/gh/ali-yui/news-radar@main/public/data/daily.json',
     'https://raw.githubusercontent.com/ali-yui/news-radar/main/public/data/daily.json',
   ].join('\n');
@@ -123,6 +128,7 @@
     if (!validPayload(payload)) return false;
     state.data = payload;
     save(K.cache, payload);
+    save(K.lastFetch, Date.now());
     if (window.Trending && window.Trending.setEmbedded) window.Trending.setEmbedded(payload.trending || null);
     if (window.Detail && window.Detail.isOpen()) window.Detail.refresh();
     renderUpdated();
@@ -149,7 +155,7 @@
     return u + (u.includes('?') ? '&' : '?') + 't=' + Date.now();
   }
 
-  // 数据来源顺序：远程地址（可多个，每行一个，按顺序尝试） → 同目录 daily.json（网页部署） → 内置数据
+  // 数据来源：远程地址（可多个，全部并行拉取后合并）→ 同目录 daily.json（网页部署）→ 内置数据
   async function fetchDaily(opts = {}) {
     const remote = (settings.remoteUrl || '').split(/[\s,，]+/).filter(Boolean);
     const isFile = location.protocol === 'file:';
@@ -157,7 +163,7 @@
     if (!isFile) urls.push('public/data/daily.json');
     if (!urls.length) return null; // 无远程地址：静默使用内置数据，不刷错误
     const failures = [];
-    for (const u of urls) {
+    const results = await Promise.all(urls.map(async (u) => {
       try {
         const p = await fetchOne(cacheBust(u));
         if (p) return p;
@@ -165,11 +171,42 @@
       } catch (e) {
         failures.push(u + '：' + (e.name === 'AbortError' ? '超时' : (e.message || e)));
       }
+      return null;
+    }));
+    const payloads = results.filter(Boolean);
+    if (!payloads.length) {
+      if (opts.silent !== true) {
+        for (const f of failures) addLog('数据拉取失败（' + f + '）');
+      }
+      return null;
     }
-    if (opts.silent !== true) {
-      for (const f of failures) addLog('数据拉取失败（' + f + '）');
+    if (opts.silent !== true && failures.length) {
+      for (const f of failures) addLog('部分数据源拉取失败（' + f + '）');
     }
-    return null;
+    return mergePayloads(payloads);
+  }
+
+  // 多源合并：以生成时间最新的为主，items 全部合并去重，trending / 状态 / 错误聚合
+  function mergePayloads(payloads) {
+    if (payloads.length === 1) return payloads[0];
+    const sorted = payloads.slice().sort((a, b) =>
+      new Date(b.generatedAt || 0).getTime() - new Date(a.generatedAt || 0).getTime());
+    const base = sorted[0];
+    const items = window.Dedup.dedup(sorted.flatMap((p) => p.items || []))
+      .sort((a, b) => b.publishedAtMs - a.publishedAtMs);
+    const trending = (base.trending && Object.keys(base.trending).length)
+      ? base.trending
+      : (sorted.find((p) => p.trending && Object.keys(p.trending).length) || {}).trending || null;
+    return {
+      version: Math.max(...sorted.map((p) => p.version || 1)),
+      generatedAt: base.generatedAt,
+      generatedAtBeijing: base.generatedAtBeijing,
+      stats: statsOf(items),
+      sourceStatus: sorted.flatMap((p) => p.sourceStatus || []),
+      errors: sorted.flatMap((p) => p.errors || []),
+      items,
+      ...(trending ? { trending } : {}),
+    };
   }
 
   function statsOf(items) {
@@ -828,16 +865,15 @@
       renderUpdated();
     }
 
-    // 3. 北京时间 09:00 后首次打开自动更新
-    const bj = beijingNow();
-    const lastAuto = localStorage.getItem(K.auto);
-    if (bj.hour >= 9 && lastAuto !== bj.date) {
+    // 3. 打开时若距上次更新超过 50 分钟就自动刷新；前台每小时再拉一次
+    //    （数据由两条流水线每小时更新：国外 Actions + 国内本机）
+    const lastFetch = Number(localStorage.getItem(K.lastFetch) || 0);
+    if (!lastFetch || Date.now() - lastFetch > 50 * 60 * 1000) {
       doRefresh(false);
     }
     setInterval(() => {
-      const b = beijingNow();
-      const last = localStorage.getItem(K.auto);
-      if (b.hour >= 9 && last !== b.date) doRefresh(false);
+      const last = Number(localStorage.getItem(K.lastFetch) || 0);
+      if (!last || Date.now() - last > 60 * 60 * 1000) doRefresh(false);
     }, 60000);
 
     // 4. 初始异常提示

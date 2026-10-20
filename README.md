@@ -10,26 +10,77 @@
 
 四个 Tab：**今天**（军事 / 科技 / 民生 / 金融 热点 + **微博/头条/抖音热搜**）、**AI 圈**（GitHub 动态、AI Agent/MCP、Hacker News、Reddit、行业报道）、**娱乐圈**、**设置**。
 
-## 仓库架构与同步规则
+## 数据流水线（每小时更新，国内外分两路）
+
+抓取脚本用 `SOURCES` 分路，两路各跑各的、互不阻塞，App 端合并去重：
+
+| 数据 | 谁跑 | 频率 | 产出 | 分发 |
+| --- | --- | --- | --- | --- |
+| **国外**（GitHub / HN / Reddit / Google-Bing News / Trending / The Verge·Ars·MIT·OpenAI） | GitHub Actions | 每小时 | `public/data/daily.json` | Gitee `news-radar` raw（需仓库公开）→ jsDelivr 备用 |
+| **国内**（微博·头条·抖音热搜 + 各 RSS/JSON） | **本机计划任务**（或云函数） | 每小时 | `public/data/cn.json` | GitHub `data-cn` 分支 → jsDelivr + purge |
+
+```bash
+# 分路跑法
+SOURCES=foreign node scripts/fetch-data.mjs                       # 只跑国外（Actions）
+SOURCES=cn DATA_FILE=cn.json node scripts/fetch-data.mjs          # 只跑国内（本机/云函数）
+```
+
+- App 会**并行拉取所有远程地址再合并去重**，不再"取第一个成功就停"
+- 默认地址：Gitee `news-radar` 的 `daily.json` → jsDelivr `data-cn` 的 `cn.json` → jsDelivr `main` 的 `daily.json` → raw.githubusercontent
+- App 打开时若距上次更新 > 50 分钟自动刷新，前台停留每小时再拉一次
+- **注意**：Gitee 仓库若为**私有**，其 raw 链接一律 403（带 token 也不行），此时国内数据走 jsDelivr；把镜像仓库设为公开即可让 Gitee raw 生效
+
+### 本机计划任务（国内路，已可开箱使用）
+
+```powershell
+# 注册（已内置脚本，执行一次即可）
+$action  = New-ScheduledTaskAction -Execute "e:\news\news-radar\scripts\run-sync-cn.cmd" -WorkingDirectory "e:\news\news-radar"
+$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date "00:10") -RepetitionInterval (New-TimeSpan -Hours 1)
+Register-ScheduledTask -TaskName "NewsRadarCnSync" -Action $action -Trigger $trigger -Force
+```
+
+`scripts/sync-cn.ps1` 做的事：抓国内源 → 本地正文缓存（`.cache/content.json`，跨次复用，每小时只抓新条目）→ 用 git 管道把 `cn.json` 发布为**单 commit 的 `data-cn` 分支**（仓库体积不随小时数增长）→ 推 GitHub → purge jsDelivr。日志在 `logs/sync-cn-YYYYMMDD.log`。
+
+### 云函数（可选，接口已留好）
+
+`scripts/serverless/handler.mjs` 是腾讯云 SCF / 阿里云 FC 通用入口（云函数没有 git 工作区，改用平台 API 写文件）：
+
+| 环境变量 | 说明 |
+| --- | --- |
+| `PLATFORM` | `github`（默认）或 `gitee` |
+| `REPO_OWNER` / `REPO_NAME` | 默认 `ali-yui` / `news-radar` |
+| `DATA_BRANCH` | 默认 `data-cn` |
+| `DATA_TOKEN` | GitHub PAT（repo）或 Gitee 私人令牌（projects） |
+| `CONTENT_PER_CATEGORY` | 正文配额，默认 50 |
+| `PURGE_JSDELIVR` | `1` 时写完后刷新 CDN |
+
+建议云函数超时 300s、内存 512MB，定时触发器设 `0 * * * *`。
+
+## 仓库与同步规则
 
 **单一真源 + 严格镜像**，避免任何一端领先造成合并污染（历史上曾导致每日数据被合并成新旧混合体）：
 
 | 仓库 | 角色 | 内容 | 谁可以写 |
 | --- | --- | --- | --- |
-| GitHub `ali-yui/news-radar` | **唯一真源**：收集 + 代码 + 数据 + Pages | 全站 | 本地开发推送（`gh` 授权或 PAT） |
+| GitHub `ali-yui/news-radar` | **唯一真源**：代码 + 国外数据 + `data-cn` 国内数据 + Pages | 全站 | 本地开发推送 / Actions 数据提交 |
 | Gitee `yuihl/news-radar` | **数据镜像**：分发 daily.json 给 App / APK | 与 GitHub 严格一致 | **仅 Actions**，请勿手推 |
 | Gitee `yuihl/news` | **开发仓库**：国内代码备份与 Pages 备选 | 全站 | 自由推送 |
 
 ```mermaid
 flowchart LR
   A[本地开发] -->|推送| G[(GitHub ali-yui/news-radar<br/>唯一真源)]
-  G -->|Actions 01:00 UTC 抓取| D[(daily.json v2)]
-  D -->|commit & push| G
-  D -->|force-with-lease 强推| M[(Gitee yuihl/news-radar<br/>数据镜像)]
+  G -->|Actions 每小时<br/>SOURCES=foreign| D1[(daily.json 国外)]
+  D1 -->|commit/amend + push| G
+  G -->|force-with-lease 强推| M[(Gitee yuihl/news-radar<br/>数据镜像)]
   A -->|推送| N[(Gitee yuihl/news<br/>开发仓库)]
-  G -->|purge| CDN[jsDelivr]
+  PC[本机计划任务 每小时] -->|SOURCES=cn| D2[(cn.json 国内)]
+  CF[云函数 可选] -->|SOURCES=cn| D2
+  D2 -->|data-cn 分支 + purge| CDN[jsDelivr CDN]
+  D2 -->|推 GitHub| G
+  G -->|purge| CDN
   M -->|Gitee raw| APP[APK / 网页]
   CDN --> APP
+  APP -->|拉取全部地址并合并去重| LIST[统一列表]
 ```
 
 规则要点：
@@ -282,17 +333,17 @@ The Verge、Ars Technica、MIT Technology Review、OpenAI News 四个英文源�
 - 密钥仅保存在本地浏览器 localStorage，随请求发送，不经任何第三方
 - 不开启时完全使用本地规则摘要，不产生任何费用
 
-## 打包 APK（当前版本 2.1）
+## 打包 APK（当前版本 2.3）
 
 本机环境要求：JDK 17、Android SDK 34（platforms/android-34 + build-tools 34.0.0）、Gradle 8.7。
 
 ```
 cd android
 D:\yui\gradle-8.7\bin\gradle.bat assembleRelease
-copy app\build\outputs\apk\release\app-release.apk  ..\dist\news-radar-2.1.apk
+copy app\build\outputs\apk\release\app-release.apk  ..\dist\news-radar-2.3.apk
 ```
 
-- 包名 `com.yuihl.newsradar`，`versionCode 3` / `versionName "2.1"`，minSdk 26（Android 8+），targetSdk 34
+- 包名 `com.yuihl.newsradar`，`versionCode 5` / `versionName "2.3"`，minSdk 26（Android 8+），targetSdk 34
 - 签名：`android/news-radar.jks`（别名 `newsradar`，口令 `nr2026v2`）。该 jks **不进仓库**（已在 .gitignore），请自行备份；缺失时构建会自动退回 debug 签名
 - 打网页资源在构建时由 `copyWebAssets` 任务从仓库根目录复制进 `app/src/main/assets/`
 - WebView 外壳行为：所有 http/https 链接都在 App 内打开；`window.open` / `target=_blank` 在 App 内全屏对话框打开；返回键先关详情页 / Trending 浮层，再退历史，最后才退出；已开启 DOM Storage 与 file 域跨域（用于读取 Gitee / jsDelivr 的 daily.json）

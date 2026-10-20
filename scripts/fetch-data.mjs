@@ -16,6 +16,10 @@
  *   SKIP_CONTENT=1     跳过原文正文抓取
  *   TRANSLATE_MAX=200  单次运行翻译总量上限
  *   CONTENT_LIMIT=80   单次运行正文抓取条数上限
+ *   SOURCES=foreign|cn|all   分路：foreign 只跑国外源（Actions 每小时），
+ *                            cn 只跑国内源（本机/云函数每小时），默认 all
+ *   DATA_FILE=cn.json  输出文件名（默认 daily.json；非 daily.json 时不再生成离线 bundle）
+ *   CONTENT_CACHE=1    复用本地正文缓存（.cache/content.json），跨次运行复用已抓正文
  *
  * 产出增强（v2）：
  *   - item.titleZh / item.summaryZh   英文标题/摘要的中文预翻译
@@ -27,6 +31,7 @@
  */
 
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
@@ -37,8 +42,15 @@ import { httpGet } from './lib/http.mjs';
 import { parseWeiboHot, parseToutiaoHot, parseDouyinHot } from './lib/hotsearch.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const OUT_JSON = join(ROOT, 'public', 'data', 'daily.json');
+// 分路产出：国外路写 daily.json（并生成离线 bundle），国内路写 cn.json
+const DATA_FILE = (process.env.DATA_FILE || 'daily.json').replace(/[^\w.-]/g, '');
+const WRITE_BUNDLE = DATA_FILE === 'daily.json';
+const OUT_JSON = join(ROOT, 'public', 'data', DATA_FILE);
 const OUT_BUNDLE = join(ROOT, 'assets', 'data-bundle.js');
+// SOURCES=foreign 只跑国外源（GitHub Actions），=cn 只跑国内源（本机/云函数），=all 全跑
+const SOURCES = (process.env.SOURCES || 'all').toLowerCase();
+const RUN_FOREIGN = SOURCES !== 'cn';
+const RUN_CN = SOURCES !== 'foreign';
 
 const UA = 'news-radar/1.0 (+https://github.com/; public RSS/API aggregator)';
 const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
@@ -1100,6 +1112,31 @@ async function preTranslateTrending(trending) {
   log(`榜单简介预翻译：${n}/${refs.length} 条`);
 }
 
+/* ---------- 正文缓存（跨次运行复用，让每小时运行只需抓新条目） ---------- */
+const CONTENT_CACHE = process.env.CONTENT_CACHE === '1';
+const CACHE_PATH = process.env.CONTENT_CACHE_FILE
+  ? join(ROOT, process.env.CONTENT_CACHE_FILE)
+  : join(ROOT, '.cache', 'content.json');
+const CONTENT_CACHE_TTL = Number(process.env.CONTENT_CACHE_TTL || 7 * 24 * 3600 * 1000); // 默认 7 天
+
+function cacheKeyOf(url) {
+  return createHash('sha1').update(url || '').digest('hex').slice(0, 16);
+}
+function loadContentCache() {
+  if (!CONTENT_CACHE) return null;
+  try { return JSON.parse(readFileSync(CACHE_PATH, 'utf8')); }
+  catch { return {}; }
+}
+async function saveContentCache(cache) {
+  if (!CONTENT_CACHE || !cache) return;
+  try {
+    await mkdir(dirname(CACHE_PATH), { recursive: true });
+    await writeFile(CACHE_PATH, JSON.stringify(cache), 'utf8');
+  } catch (e) {
+    log('正文缓存写入失败（忽略）：', e.message);
+  }
+}
+
 // 2. 原文正文抓取（readability-lite 抽取，App 内读全文）
 async function enrichAllContent(list) {
   if (skipped('CONTENT')) {
@@ -1109,6 +1146,23 @@ async function enrichAllContent(list) {
   // 每板块取最新 N 条（当日热点优先），总量再兜底；控制 Actions 耗时
   const perCategory = Number(process.env.CONTENT_PER_CATEGORY || 30);
   const limit = Number(process.env.CONTENT_LIMIT || 100);
+
+  // 先用缓存补齐已有正文，让本次只抓真正的新条目
+  const cache = loadContentCache();
+  let fromCache = 0;
+  if (cache) {
+    for (const it of list) {
+      if (it.content || !it.url) continue;
+      const hit = cache[cacheKeyOf(it.url)];
+      if (hit && hit.text && Date.now() - hit.at < CONTENT_CACHE_TTL) {
+        it.content = hit.text;
+        it.contentSource = 'cache';
+        fromCache++;
+      }
+    }
+    if (fromCache) log(`正文缓存命中 ${fromCache} 条，本次只需抓新条目`);
+  }
+
   const fails = [];
   const r = await enrichContent(list, {
     limit, perCategory, categories: ['today', 'ai', 'ent'], concurrency: 4,
@@ -1116,10 +1170,25 @@ async function enrichAllContent(list) {
   if (fails.length) {
     recordError('content', 'extract', fails.length + ' 条正文抓取失败（App 内显示摘要）');
   }
+  // 回写缓存（含本次抓到的与已有的），并做体积上限保护
+  if (cache) {
+    const now = Date.now();
+    for (const it of list) {
+      if (it.content && it.url) cache[cacheKeyOf(it.url)] = { text: it.content, at: now };
+    }
+    const keys = Object.keys(cache);
+    if (keys.length > 2000) {
+      for (const k of keys.sort((a, b) => cache[a].at - cache[b].at).slice(0, keys.length - 2000)) {
+        delete cache[k];
+      }
+    }
+    await saveContentCache(cache);
+  }
   const byCat = Object.entries(r.byCategory || {})
     .map(([k, v]) => `${k} ${v.ok}/${v.tried}`).join('，');
-  trackSource('content', r.ok > 0, 'readability', r.ok, r.ok ? null : '全部失败，App 内仅显示摘要');
-  log(`正文抓取完成：${r.ok}/${r.total} 条（每板块 ${perCategory} 条；${byCat}）`);
+  trackSource('content', r.ok > 0 || fromCache > 0, 'readability', r.ok + fromCache,
+    r.ok || fromCache ? `新增 ${r.ok}，缓存 ${fromCache}` : '全部失败，App 内仅显示摘要');
+  log(`正文抓取完成：新增 ${r.ok}/${r.total} 条，缓存 ${fromCache} 条（每板块 ${perCategory} 条；${byCat}）`);
 }
 
 // 3. 事件聚类（多源报道 → storyId）
@@ -1135,16 +1204,15 @@ function buildStories(list) {
 /* ============================ 主流程 ============================ */
 
 async function main() {
-  log('开始抓取，时间：', NOW.toISOString());
-  await Promise.allSettled([
-    fetchGithub(),
-    fetchHn(),
-    fetchReddit(),
-    fetchNews(),
-    fetchTrending(),
-    fetchForeignTech(),
-    fetchChineseSupplements(),
-  ]);
+  log(`开始抓取，时间：${NOW.toISOString()}（SOURCES=${SOURCES}，输出 ${DATA_FILE}）`);
+  const jobs = [];
+  // 国外源：GitHub / HN / Reddit / Google-Bing News / Trending / 国外科技
+  if (RUN_FOREIGN) {
+    jobs.push(fetchGithub(), fetchHn(), fetchReddit(), fetchNews(), fetchTrending(), fetchForeignTech());
+  }
+  // 国内源：RSS 与公开 JSON（微博/头条/抖音热搜等）
+  if (RUN_CN) jobs.push(fetchChineseSupplements());
+  await Promise.allSettled(jobs);
 
   const deduped = dedup(items);
   // 排序：时间倒序；hot 条目以抓取时间参与
@@ -1188,14 +1256,16 @@ async function main() {
   };
 
   await mkdir(dirname(OUT_JSON), { recursive: true });
-  await mkdir(dirname(OUT_BUNDLE), { recursive: true });
   await writeFile(OUT_JSON, JSON.stringify(payload, null, 2), 'utf8');
-  await writeFile(
-    OUT_BUNDLE,
-    '// 由 scripts/fetch-data.mjs 自动生成，请勿手改\n'
-    + 'window.__NEWS_RADAR_BOOTSTRAP__ = ' + JSON.stringify(payload) + ';\n',
-    'utf8'
-  );
+  if (WRITE_BUNDLE) {
+    await mkdir(dirname(OUT_BUNDLE), { recursive: true });
+    await writeFile(
+      OUT_BUNDLE,
+      '// 由 scripts/fetch-data.mjs 自动生成，请勿手改\n'
+      + 'window.__NEWS_RADAR_BOOTSTRAP__ = ' + JSON.stringify(payload) + ';\n',
+      'utf8'
+    );
+  }
 
   log(`完成：共 ${final.length} 条（今天 ${counts.today} / AI圈 ${counts.ai} / 娱乐圈 ${counts.ent}）`);
   log(`源状态：${sourceStatus.map((s) => `${s.source}:${s.ok ? 'OK' : 'FAIL'}(${s.items})`).join('  ')}`);
