@@ -6,8 +6,10 @@
  *   node scripts/upload-cos.mjs public/data/daily.json data/daily.json
  *   node scripts/upload-cos.mjs public/data/daily.json        # key 默认 data/<文件名>
  *
- * 环境变量：COS_BUCKET / COS_REGION / COS_SECRET_ID / COS_SECRET_KEY
- *   （不能用 TENCENTCLOUD_ 前缀：那是腾讯云 SCF 的保留字，云函数里存不进去）
+ * 环境变量：COS_BUCKET / COS_REGION，密钥二选一：
+ *   长期密钥  COS_SECRET_ID / COS_SECRET_KEY
+ *   临时凭证  平台注入的 TENCENTCLOUD_SECRETID / TENCENTCLOUD_SECRETKEY / TENCENTCLOUD_SESSIONTOKEN
+ *   （TENCENTCLOUD_ 前缀是腾讯云 SCF 的保留字，自定义变量不能再用，但平台注入的临时凭证正是这个名字）
  *
  * 退出码：0 成功或「未配置而跳过」；1 上传失败。
  *   未配置时按 0 退出，是为了让 COS 成为可选项——数据照常提交到 GitHub，
@@ -27,7 +29,7 @@ if (!file) {
 
 const cfg = cosConfigFromEnv();
 if (!isCosConfigured(cfg)) {
-  console.log('[cos] 未配置 COS_BUCKET / COS_REGION / TENCENTCLOUD_SECRET_ID / TENCENTCLOUD_SECRET_KEY，跳过上传');
+  console.log('[cos] 未配置 COS_BUCKET / COS_REGION 或密钥（长期密钥或运行角色临时凭证），跳过上传');
   process.exit(0);
 }
 

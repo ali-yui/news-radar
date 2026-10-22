@@ -18,10 +18,15 @@
  *   —— 发布到 COS（默认，推荐）时必填 ——
  *   COS_BUCKET                 桶名（含 APPID，如 news-radar-1251234567）
  *   COS_REGION                 地域（如 ap-guangzhou）
- *   COS_SECRET_ID              密钥 SecretId（不能用 TENCENTCLOUD_ 前缀，SCF 保留）
- *   COS_SECRET_KEY             密钥 SecretKey
  *   COS_KEY=data/cn.json       对象路径（默认 data/cn.json）
  *   COS_ENDPOINT               可选，上传走内网域名时填写
+ *
+ *   凭证二选一（推荐用运行角色，彻底零长期密钥）：
+ *     ① 运行角色：给函数绑定 CAM 角色（只授该桶 cos:PutObject），
+ *        平台自动注入 TENCENTCLOUD_SECRETID / SECRETKEY / SESSIONTOKEN 临时凭证，
+ *        无需再配任何密钥变量。
+ *     ② 长期密钥：COS_SECRET_ID / COS_SECRET_KEY
+ *        （不能用 TENCENTCLOUD_ 前缀，那是 SCF 保留字，自定义变量存不进去）
  *
  *   —— 发布到 git 仓库（可选：用作 jsDelivr 兜底地址）时必填 ——
  *   PLATFORM=github|gitee      默认 github
@@ -132,7 +137,7 @@ export async function handler(event, context) {
   if (stores.includes('cos')) {
     const cfg = cosConfigFromEnv();
     if (!isCosConfigured(cfg)) {
-      published.cos = 'skipped: 未配置 COS_BUCKET / COS_REGION / TENCENTCLOUD_SECRET_ID / TENCENTCLOUD_SECRET_KEY';
+      published.cos = 'skipped: 未配置 COS_BUCKET / COS_REGION，且没有运行角色注入的临时凭证';
     } else {
       const up = await putObject({
         ...cfg,

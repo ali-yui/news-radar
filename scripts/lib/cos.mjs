@@ -11,12 +11,17 @@
  * 环境变量（Actions 存 Secrets，云函数存环境变量）：
  *   COS_BUCKET                 桶名（含 APPID，如 news-radar-1251234567）
  *   COS_REGION                 地域（如 ap-guangzhou）
- *   COS_SECRET_ID              密钥 SecretId
- *   COS_SECRET_KEY             密钥 SecretKey
+ *   COS_SECRET_ID              密钥 SecretId（长期密钥，可选）
+ *   COS_SECRET_KEY             密钥 SecretKey（长期密钥，可选）
  *   COS_ENDPOINT               可选：自定义接入域名
  *
+ * 零长期密钥方案（推荐）：给 SCF 函数绑定 CAM「运行角色」后，平台会自动注入
+ *   临时凭证 TENCENTCLOUD_SECRETID / TENCENTCLOUD_SECRETKEY / TENCENTCLOUD_SESSIONTOKEN，
+ *   本模块优先使用它们，且签名会自动带上 x-cos-security-token。
+ *   此时 COS_SECRET_ID / COS_SECRET_KEY 不用再配置。
+ *
  * 变量名说明：腾讯云 SCF 把 SCF_ / QCLOUD_ / TENCENTCLOUD_ 三个前缀列为保留字，
- *            自定义环境变量不能再用它们打头，所以密钥统一用 COS_ 前缀。
+ *            自定义环境变量不能再用它们打头，所以长期密钥统一用 COS_ 前缀。
  *
  * 签名算法：https://cloud.tencent.com/document/product/436/7778
  *
@@ -92,14 +97,23 @@ export function buildAuthorization(p) {
 
 /** 从环境变量读取 COS 配置 */
 export function cosConfigFromEnv() {
+  // SCF 绑定「运行角色」后，平台会注入短期临时凭证（无需用户配置、会自动轮转）。
+  // 注入的变量名是 TENCENTCLOUD_ 前缀（这正是它们被列为保留字的原因）。
+  // 不同腾讯云产品的拼写略有差异，这里做兼容：
+  const platformId = process.env.TENCENTCLOUD_SECRETID || process.env.TENCENTCLOUD_SECRET_ID || '';
+  const platformKey = process.env.TENCENTCLOUD_SECRETKEY || process.env.TENCENTCLOUD_SECRET_KEY || '';
+  const platformToken = process.env.TENCENTCLOUD_SESSIONTOKEN || process.env.TENCENTCLOUD_SESSION_TOKEN || '';
+
   return {
     bucket: process.env.COS_BUCKET || '',
     region: process.env.COS_REGION || '',
-    // 变量名只能用 COS_ 前缀：腾讯云 SCF 把 SCF_ / QCLOUD_ / TENCENTCLOUD_
-    // 三个前缀列为保留字，自定义环境变量不允许再用它们打头（会直接保存失败）。
-    // 兼容旧名：GitHub Actions 没有这个限制，已配 TENCENTCLOUD_* 的仓库继续可用。
-    secretId: process.env.COS_SECRET_ID || process.env.TENCENTCLOUD_SECRET_ID || '',
-    secretKey: process.env.COS_SECRET_KEY || process.env.TENCENTCLOUD_SECRET_KEY || '',
+    // 优先用平台注入的临时凭证（运行角色），否则回退到用户配置的长期密钥。
+    // 长期密钥变量用 COS_ 前缀：腾讯云 SCF 保留 SCF_ / QCLOUD_ / TENCENTCLOUD_，
+    // 自定义环境变量不允许再用它们打头（会直接保存失败）。
+    secretId: platformId || process.env.COS_SECRET_ID || '',
+    secretKey: platformKey || process.env.COS_SECRET_KEY || '',
+    // 临时凭证的 sessionToken：有了它，签名要额外带上 x-cos-security-token 头
+    sessionToken: platformToken || process.env.COS_SESSION_TOKEN || '',
     // 自定义接入域名：云函数若部署在无公网的 VPC 内，可改为 COS 内网域名
     // 例如 news-radar-1251234567.cos-internal.ap-guangzhou.tencentcos.cn
     endpoint: process.env.COS_ENDPOINT || '',
@@ -131,6 +145,8 @@ export async function putObject(p) {
     timeout = DEFAULT_TIMEOUT,
     // 上传通道可自定义（如走 COS 内网域名），但对外公开的 URL 始终用标准公网域名
     endpoint = '',
+    // 临时凭证的 sessionToken：SCF 运行角色注入，签名与请求都要带上
+    sessionToken = '',
   } = p;
 
   const keyPath = String(key || '').replace(/^\/+/, '');
@@ -147,6 +163,8 @@ export async function putObject(p) {
     'content-type': contentType,
     'content-length': String(buf.length),
   };
+  // 临时凭证：x-cos-security-token 既参与签名，也要随请求发送
+  if (sessionToken) signHeaders['x-cos-security-token'] = sessionToken;
   const authorization = buildAuthorization({
     secretId, secretKey, method: 'PUT', keyPath, headers: signHeaders,
   });
@@ -168,6 +186,7 @@ export async function putObject(p) {
         Authorization: authorization,
         'Content-Type': contentType,
         'Content-Length': buf.length,
+        ...(sessionToken ? { 'x-cos-security-token': sessionToken } : {}),
       },
     }, (res) => {
       // 响应体只在失败时有意义（COS 返回 XML 错误），最多读 2KB

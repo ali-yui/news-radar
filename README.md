@@ -53,7 +53,7 @@ SOURCES=cn DATA_FILE=cn.json node scripts/fetch-data.mjs          # 只跑国内
 | `STORE` | `cos` / `git` / `cos,git`，默认 `cos` |
 | `COS_BUCKET` | 桶名（含 APPID，如 `news-radar-1251234567`） |
 | `COS_REGION` | 地域，如 `ap-guangzhou` |
-| `COS_SECRET_ID` / `COS_SECRET_KEY` | 腾讯云密钥（不能用 `TENCENTCLOUD_` 前缀，SCF 保留） |
+| `COS_SECRET_ID` / `COS_SECRET_KEY` | 长期密钥（可选）。**推荐改用运行角色注入临时凭证**：给函数绑定只授该桶 `cos:PutObject` 的 CAM 角色后，平台自动注入 `TENCENTCLOUD_SECRETID/KEY/SESSIONTOKEN`，代码优先读它们，无需再配密钥 |
 | `COS_KEY` | 对象路径，默认 `data/cn.json` |
 | `COS_ENDPOINT` | 可选：函数部署在无公网 VPC 时改填 COS 内网域名 |
 | `CONTENT_PER_CATEGORY` | 正文配额，默认 50 |
@@ -61,6 +61,31 @@ SOURCES=cn DATA_FILE=cn.json node scripts/fetch-data.mjs          # 只跑国内
 
 建议云函数超时 300s、内存 512MB、定时触发器 `0 * * * *`。
 云函数的代码目录是只读的，脚本会自动把产物与缓存写到 `/tmp`（云函数环境自动识别；本地不设则照旧写仓库）。
+
+### 零长期密钥：给云函数绑定运行角色（推荐）
+
+与其在环境变量里放长期密钥，不如让平台注入临时凭证——这样任何地方都不存长期密钥：
+
+1. 控制台 → 访问管理 CAM → 角色 → 新建角色，载体选「腾讯云产品服务」→「云函数 SCF」
+2. 给角色绑定策略，**只允许写这一个桶**（最小权限）：
+
+```json
+{
+  "version": "2.0",
+  "statement": [
+    {
+      "effect": "allow",
+      "action": ["cos:PutObject"],
+      "resource": "qcs::cos:ap-guangzhou:uid/1301107017:jinrixtiao-1301107017/*"
+    }
+  ]
+}
+```
+
+3. 回到 SCF 函数 → 函数配置 → 运行角色，选中刚建的角色
+4. 保存后平台自动注入 `TENCENTCLOUD_SECRETID` / `TENCENTCLOUD_SECRETKEY` / `TENCENTCLOUD_SESSIONTOKEN`，代码会优先读取，环境变量里就无需再配任何密钥
+
+> 腾讯云 SCF 保留 `TENCENTCLOUD_` 前缀，正是为了注入这些平台凭证——所以自定义变量不能用这个前缀，但平台注入的临时凭证正是这个名字。
 
 部署前可先单独验证密钥与桶权限（不抓数据）：
 
