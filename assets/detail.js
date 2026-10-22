@@ -26,6 +26,8 @@ window.Detail = (function () {
   let fontStep = 1;
   let transCache = {};   // id -> {title, summary, paras, at}
   let transBusy = false;
+  let aiBusy = false;        // AI 摘要请求中
+  const aiCache = new Map(); // id -> { text, error, at }
 
   function currentItem() {
     return currentOverride || (currentId ? app.getItem(currentId) : null);
@@ -254,6 +256,38 @@ window.Detail = (function () {
   }
 
   /* ---------- AI 摘要 ---------- */
+  // 结构化的 AI 文本：支持「· 要点」列表与 **粗体**
+  function aiInline(s) {
+    return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  }
+  function aiFormat(text) {
+    const lines = String(text || '').split(/\n+/).map((s) => s.trim()).filter(Boolean);
+    let html = '';
+    let inList = false;
+    for (const line of lines) {
+      const m = line.match(/^[·•\-*]\s*(.+)$/);
+      if (m) {
+        if (!inList) { html += '<ul class="ai-list">'; inList = true; }
+        html += '<li>' + aiInline(m[1]) + '</li>';
+      } else {
+        if (inList) { html += '</ul>'; inList = false; }
+        html += '<p>' + aiInline(line) + '</p>';
+      }
+    }
+    if (inList) html += '</ul>';
+    return html;
+  }
+  function aiBoxHtml(text, message, isError) {
+    const head = '<div class="ai-head">AI 摘要</div>';
+    if (text) return head + '<div class="ai-text">' + aiFormat(text) + '</div>';
+    if (!isError) {
+      return head + '<div class="ai-loading"><i></i><i></i><i></i>'
+        + '<span>' + esc(message || '生成中…') + '</span></div>';
+    }
+    return head + '<div class="ai-error">' + esc(message || '生成失败')
+      + '<button class="ai-retry" data-act="ai-retry" type="button">重试</button></div>';
+  }
+
   async function aiSummarize() {
     const it = currentItem();
     const box = $('#detailAiBox');
@@ -262,14 +296,30 @@ window.Detail = (function () {
       app.toast('请先在「设置」中开启并配置 AI 接口');
       return;
     }
+    const cached = aiCache.get(it.id);
+    if (cached && cached.text) {
+      box.classList.remove('hidden');
+      box.innerHTML = aiBoxHtml(cached.text);
+      return;
+    }
+    if (aiBusy) return;
+    aiBusy = true;
+    const btn = $('#detailScroll [data-act="ai"]');
+    if (btn) { btn.disabled = true; btn.textContent = '生成中…'; }
     box.classList.remove('hidden');
-    box.innerHTML = '<div class="ai-head">AI 摘要</div>生成中…';
+    box.innerHTML = aiBoxHtml(null, 'AI 正在阅读全文并生成摘要…', false);
     try {
       const text = await window.DoubaoAI.summarize(it, app.getSettings());
-      box.innerHTML = `<div class="ai-head">AI 摘要</div>${esc(text)}`;
+      aiCache.set(it.id, { text, at: Date.now() });
+      box.innerHTML = aiBoxHtml(text);
     } catch (e) {
-      box.innerHTML = `<div class="ai-head">AI 摘要</div>失败：${esc(e.message || e)}`;
-      app.addLog('AI 摘要失败：' + (e.message || e));
+      const msg = e.message || String(e);
+      aiCache.set(it.id, { error: msg, at: Date.now() });
+      box.innerHTML = aiBoxHtml(null, msg, true);
+      app.addLog('AI 摘要失败：' + msg);
+    } finally {
+      aiBusy = false;
+      if (btn) { btn.disabled = false; btn.textContent = 'AI 摘要'; }
     }
   }
 
@@ -296,7 +346,7 @@ window.Detail = (function () {
       const act = btn.dataset.act;
       const it = currentItem();
       if (act === 'fav') { $('#detailFav').click(); return; }
-      if (act === 'ai') { aiSummarize(); return; }
+      if (act === 'ai' || act === 'ai-retry') { aiSummarize(); return; }
       if (act === 'trans') {
         const cur = currentItem();
         if (cur && transOf(cur.id)) {

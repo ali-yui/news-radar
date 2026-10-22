@@ -367,7 +367,7 @@
   function digestCardHtml() {
     const cached = digestCache[state.tab];
     const fresh = cached && cached.date === beijingNow().date;
-    const bodyHtml = cached ? esc(cached.text) : '';
+    const bodyHtml = cached ? fmtAiHtml(cached.text) : '';
     return `<div class="digest-card">
       <div class="digest-head">
         <div class="digest-title">一眼预览 · 本期重点${fresh ? '' : ''}</div>
@@ -380,6 +380,32 @@
     </div>`;
   }
 
+  /* ---------- AI 文本渲染（列表卡片 / 一眼预览共用） ---------- */
+  function aiInline(s) {
+    return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  }
+  function fmtAiHtml(text) {
+    const lines = String(text || '').split(/\n+/).map((s) => s.trim()).filter(Boolean);
+    let html = '';
+    let inList = false;
+    for (const line of lines) {
+      const m = line.match(/^[·•\-*]\s*(.+)$/);
+      if (m) {
+        if (!inList) { html += '<ul class="ai-list">'; inList = true; }
+        html += '<li>' + aiInline(m[1]) + '</li>';
+      } else {
+        if (inList) { html += '</ul>'; inList = false; }
+        html += '<p>' + aiInline(line) + '</p>';
+      }
+    }
+    if (inList) html += '</ul>';
+    return html;
+  }
+  function aiLoadingHtml(msg) {
+    return '<div class="ai-loading"><i></i><i></i><i></i><span>'
+      + esc(msg || '生成中…') + '</span></div>';
+  }
+
   async function generateDigest() {
     if (!state.data) return;
     if (!window.DoubaoAI.enabled(settings)) {
@@ -389,7 +415,7 @@
     const btn = document.querySelector('#list [data-act="digest"]');
     const body = $('#digestBody');
     if (btn) { btn.disabled = true; btn.textContent = '生成中…'; }
-    if (body) { body.classList.remove('hidden'); body.textContent = '正在生成本期重点…'; }
+    if (body) { body.classList.remove('hidden'); body.innerHTML = aiLoadingHtml('AI 正在通读本期资讯…'); }
     try {
       const cat = state.tab;
       const items = state.data.items
@@ -398,12 +424,16 @@
       const text = await window.DoubaoAI.digest(cat, items, settings);
       digestCache[cat] = { date: beijingNow().date, text };
       save(K.digest, digestCache);
-      if (body) body.textContent = text;
+      if (body) body.innerHTML = fmtAiHtml(text);
       addLog('一眼预览生成成功（' + cat + '）');
       toast('已生成本期重点');
     } catch (e) {
-      if (body) body.textContent = '生成失败：' + (e.message || e);
-      addLog('一眼预览失败：' + (e.message || e));
+      const msg = e.message || String(e);
+      if (body) {
+        body.innerHTML = '<div class="ai-error">' + esc(msg)
+          + '<button class="ai-retry" data-act="digest" type="button">重试</button></div>';
+      }
+      addLog('一眼预览失败：' + msg);
     } finally {
       if (btn) {
         btn.disabled = false;
@@ -543,22 +573,27 @@
         if (state.onlyFav && !favs[id]) card.remove();
         return;
       }
-      if (btn.dataset.act === 'ai') {
+      if (btn.dataset.act === 'ai' || btn.dataset.act === 'ai-retry') {
         const it = state.data.items.find((x) => x.id === id);
         const box = document.querySelector(`[data-ai-box="${id}"]`);
         if (!it || !box) return;
         if (!window.DoubaoAI.enabled(settings)) {
-          toast('请先在「设置」中开启并配置豆包 API');
+          toast('请先在「设置」中开启并配置 AI 接口');
           return;
         }
         btn.disabled = true; btn.textContent = '生成中…';
+        box.classList.remove('hidden');
+        box.innerHTML = aiLoadingHtml('AI 正在生成摘要…');
         try {
           const text = await window.DoubaoAI.summarize(it, settings);
-          box.innerHTML = `<div class="ai-head">豆包 AI 摘要</div>${esc(text)}`;
-          box.classList.remove('hidden');
+          box.innerHTML = '<div class="ai-head">AI 摘要</div>'
+            + '<div class="ai-text">' + fmtAiHtml(text) + '</div>';
         } catch (err) {
-          toast('AI 摘要失败：' + (err.message || err));
-          addLog('豆包摘要失败：' + (err.message || err));
+          const msg = err.message || String(err);
+          box.innerHTML = '<div class="ai-head">AI 摘要</div><div class="ai-error">' + esc(msg)
+            + '<button class="ai-retry" data-act="ai-retry" data-id="' + id + '" type="button">重试</button></div>';
+          toast('AI 摘要失败：' + msg);
+          addLog('AI 摘要失败：' + msg);
         } finally {
           btn.disabled = false; btn.textContent = 'AI 摘要';
         }
