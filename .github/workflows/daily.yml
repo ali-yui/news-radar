@@ -1,0 +1,95 @@
+name: daily-news
+
+# 国外数据：本工作流每小时抓取（境外 IP 抓国外源最稳）
+# 国内数据：由腾讯云 SCF 每小时抓取，两者各自发布到 COS，App 合并去重
+#
+# 仓库角色：
+#   1. GitHub ali-yui/news-radar  —— 唯一真源：代码 + 抓取脚本 + 数据 + Pages
+#   2. Gitee  yuihl/news          —— 开发仓库：由本地开发自由推送
+#
+# 数据分发不经过任何 git 仓库：daily.json 与 cn.json 都发布到腾讯云 COS，
+# App 直接读 COS 的公开 URL。因此仓库可自由设为私有，也不需要 Gitee 镜像，
+# 更不需要公开仓库换 raw / jsDelivr 链接。
+on:
+  schedule:
+    # 每小时一次（国外数据准实时）
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-news
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    # 抓取 + 预翻译 + 正文（每板块 30 条）需要更长的时间窗
+    timeout-minutes: 25
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 抓取国外数据源并生成数据
+        run: node scripts/fetch-data.mjs
+        env:
+          # 内置 GITHUB_TOKEN，可把 GitHub REST 限流从 60 次/小时提升到 1000 次/小时
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 只跑国外源：国内源由腾讯云 SCF 处理（境内 IP 抓国内热搜最快最完整）
+          SOURCES: foreign
+          # 显式限额：默认值变更也不会让任务超时
+          # 标题与摘要各自独立计数（见 fetch-data.mjs），所以这里是各自的额度
+          TRANSLATE_MAX: ${{ vars.TRANSLATE_MAX || 200 }}
+          CONTENT_PER_CATEGORY: ${{ vars.CONTENT_PER_CATEGORY || 30 }}
+          CONTENT_LIMIT: ${{ vars.CONTENT_LIMIT || 100 }}
+
+      - name: 提交数据并推送到 GitHub（唯一真源）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/daily.json assets/data-bundle.js
+          if git diff --cached --quiet; then
+            echo "本次抓取数据无变化，跳过提交"
+            exit 0
+          fi
+          TODAY=$(date -u +%Y-%m-%d)
+          MSG="chore(data): foreign news $TODAY $(date -u +%H):00 UTC"
+          LAST=$(git log -1 --pretty=%s)
+          # 每小时一次会产生 24 个提交/天，当天的数据提交用 amend 覆盖，
+          # 把仓库增量压到「每天一个数据提交」，避免历史与体积失控
+          case "$LAST" in
+            "chore(data): foreign news $TODAY"*)
+              git commit --amend -m "$MSG"
+              git push --force-with-lease
+              echo "已覆盖当天数据提交：$MSG"
+              ;;
+            *)
+              git commit -m "$MSG"
+              git push
+              echo "已新建数据提交：$MSG"
+              ;;
+          esac
+
+      # 主用分发：上传到 COS，App 与 APK 直接读它，不依赖任何 git 仓库的公开性
+      - name: 发布到腾讯云 COS
+        continue-on-error: true
+        env:
+          COS_BUCKET: ${{ vars.COS_BUCKET }}
+          COS_REGION: ${{ vars.COS_REGION }}
+          COS_SECRET_ID: ${{ secrets.COS_SECRET_ID }}
+          COS_SECRET_KEY: ${{ secrets.COS_SECRET_KEY }}
+        run: node scripts/upload-cos.mjs public/data/daily.json data/daily.json
+
+      # 备用分发：仓库保持公开时，jsDelivr 可作为 COS 之外的回退地址
+      - name: 刷新 jsDelivr CDN 缓存
+        continue-on-error: true
+        run: |
+          curl -fsS "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/public/data/daily.json" || true
+          echo "jsDelivr 缓存已刷新"

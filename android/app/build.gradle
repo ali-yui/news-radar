@@ -1,0 +1,65 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.yuihl.newsradar'
+    compileSdk 34
+    buildToolsVersion '34.0.0'
+
+    defaultConfig {
+        applicationId "com.yuihl.newsradar"
+        minSdk 26
+        targetSdk 34
+        versionCode 6
+        versionName "2.4"
+        resourceConfigurations += ['zh']
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../news-radar.jks')
+            storePassword 'nr2026v2'
+            keyAlias 'newsradar'
+            keyPassword 'nr2026v2'
+        }
+    }
+
+    // 签名文件未随仓库分发时自动退回 debug 签名，保证任何人都能构建
+    def releaseSigning = file('../news-radar.jks').exists()
+            ? signingConfigs.release : signingConfigs.debug
+
+    buildTypes {
+        release {
+            signingConfig releaseSigning
+            minifyEnabled false
+        }
+        debug {
+            signingConfig releaseSigning
+        }
+    }
+
+    // 打包前把网页源码复制进 assets（不在仓库里重复存一份）
+    tasks.register('copyWebAssets', Copy) {
+        from('../../index.html')
+        from('../../assets') {
+            into 'assets'
+        }
+        into 'src/main/assets'
+    }
+    tasks.named('preBuild').configure { dependsOn 'copyWebAssets' }
+
+    packagingOptions {
+        exclude 'META-INF/*'
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}

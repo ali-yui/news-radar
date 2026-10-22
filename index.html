@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>资讯雷达 · 新闻检索</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c1352b'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23ffffff' stroke-opacity='.35' stroke-width='1.6'/%3E%3Cpath d='M16 16 L16 5 A11 11 0 0 1 26.6 21.4 Z' fill='%23ffffff'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='%23ffffff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="var(--accent)"/>
+        <circle cx="16" cy="16" r="11" fill="none" stroke="var(--on-accent)" stroke-opacity=".35" stroke-width="1.6"/>
+        <path d="M16 16 L16 5 A11 11 0 0 1 26.6 21.4 Z" fill="var(--on-accent)"/>
+        <circle cx="16" cy="16" r="2.4" fill="var(--on-accent)"/>
+      </svg>
+      <div class="topbar-titles">
+        <h1 id="tabTitle">今天</h1>
+        <div class="updated" id="updatedAt">正在加载…</div>
+      </div>
+    </div>
+    <button id="refreshBtn" class="icon-btn" title="手动刷新" aria-label="手动刷新">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/>
+      </svg>
+    </button>
+  </header>
+
+  <div id="banner" class="banner hidden"></div>
+
+  <div class="filters" id="filtersBar">
+    <div class="search-box">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="searchInput" type="search" placeholder="搜索标题、摘要、标签…" autocomplete="off">
+      <button id="clearSearch" class="clear-btn hidden" aria-label="清空">×</button>
+    </div>
+    <div class="filter-row">
+      <select id="sourceFilter" aria-label="来源筛选"></select>
+      <div class="chips">
+        <button class="chip" data-filter="unread" type="button">
+          <span class="chip-dot"></span>只看未读
+        </button>
+        <button class="chip" data-filter="fav" type="button">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>
+          收藏
+        </button>
+      </div>
+    </div>
+    <div class="trending-bar" id="trendingBar" hidden>
+      <span class="trending-label">GitHub Trending</span>
+      <button class="trend-btn" data-period="daily" type="button">日榜</button>
+      <button class="trend-btn" data-period="weekly" type="button">周榜</button>
+      <button class="trend-btn" data-period="monthly" type="button">月榜</button>
+    </div>
+  </div>
+
+  <!-- Trending 榜单浮层 -->
+  <div class="sheet-mask hidden" id="trendingSheet" aria-hidden="true">
+    <div class="sheet" role="dialog" aria-label="GitHub Trending 榜单">
+      <div class="sheet-grip"></div>
+      <div class="sheet-head">
+        <div class="sheet-title">GitHub Trending 开源热榜</div>
+        <button class="icon-btn" id="trendingClose" type="button" aria-label="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="seg trend-seg" id="trendingSeg">
+        <button type="button" data-period="daily">日榜</button>
+        <button type="button" data-period="weekly">周榜</button>
+        <button type="button" data-period="monthly">月榜</button>
+      </div>
+      <div class="sheet-body" id="trendingBody"></div>
+    </div>
+  </div>
+
+  <main id="list" class="list" aria-live="polite"></main>
+
+  <!-- 资讯详情页（App 内阅读，不跳外部浏览器） -->
+  <div id="page-detail" class="detail-page hidden" role="dialog" aria-label="资讯详情">
+    <header class="detail-topbar">
+      <button id="detailBack" class="icon-btn" type="button" aria-label="返回">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="detail-top-title" id="detailTopTitle">详情</div>
+      <button id="detailFav" class="icon-btn" type="button" aria-label="收藏">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>
+      </button>
+    </header>
+    <div class="detail-scroll" id="detailScroll"></div>
+    <div class="reader-bar" id="readerBar">
+      <span class="reader-bar-label">字号</span>
+      <button class="reader-btn" data-font="dec" type="button">A−</button>
+      <span class="reader-size" id="readerSizeLabel">标准</span>
+      <button class="reader-btn" data-font="inc" type="button">A+</button>
+    </div>
+  </div>
+
+  <main id="page-settings" class="page-settings hidden">
+    <section class="set-card">
+      <h2>外观</h2>
+      <div class="seg" id="themeSeg">
+        <button type="button" data-theme="light">浅色</button>
+        <button type="button" data-theme="dark">暗色</button>
+        <button type="button" data-theme="system">跟随系统</button>
+      </div>
+    </section>
+
+    <section class="set-card">
+      <h2>接口设置（可选）</h2>
+      <p class="hint">所有密钥仅保存在本机浏览器 localStorage，不会上传任何服务器；留空不影响正常使用。</p>
+      <label class="field-label" for="ghToken">GitHub Token</label>
+      <input class="field" id="ghToken" type="password" placeholder="可选，提高手动刷新时 GitHub API 限流（60→1000/小时）" autocomplete="off">
+      <div class="row-between">
+        <label class="field-label" for="doubaoEnabled">AI 摘要 / 一眼预览（默认关闭，开启后按需生成）</label>
+        <label class="switch">
+          <input type="checkbox" id="doubaoEnabled">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div id="doubaoFields" class="doubao-fields hidden">
+        <input class="field" id="doubaoEndpoint" type="text" placeholder="接口地址，默认 https://ark.cn-beijing.volces.com/api/v3" autocomplete="off">
+        <input class="field" id="doubaoKey" type="password" placeholder="豆包 / 火山方舟 API Key（或任意 OpenAI 兼容 Key）" autocomplete="off">
+        <input class="field" id="doubaoModel" type="text" placeholder="推理接入点 ID（如 ep-2026xxxx）或模型名" autocomplete="off">
+      </div>
+      <button class="btn-primary" id="saveSettings" type="button">保存设置</button>
+    </section>
+
+    <section class="set-card">
+      <h2>数据更新</h2>
+      <p class="hint">国外数据由 GitHub Actions 每小时抓取，国内数据由云函数每小时抓取，两者都发布到腾讯云 COS。下方为远程数据地址，每行一个，全部并行拉取后合并去重（COS 主用 → jsDelivr 备用 → raw.githubusercontent）；清空则只用内置数据。</p>
+      <label class="field-label" for="remoteUrl">远程数据地址（daily.json，每行一个）</label>
+      <textarea class="field" id="remoteUrl" rows="4" autocomplete="off"></textarea>
+      <p class="hint" style="margin-top:6px">改完点「保存设置」。COS 地址格式：https://你的桶名.cos.ap-guangzhou.myqcloud.com/data/daily.json</p>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn-ghost" id="refreshNow" type="button">立即刷新</button>
+        <button class="btn-ghost" id="exportFavs" type="button">导出收藏</button>
+        <button class="btn-ghost danger" id="clearCache" type="button">清除缓存</button>
+      </div>
+    </section>
+
+    <section class="set-card">
+      <h2>诊断</h2>
+      <button class="btn-primary" id="copyError" type="button">一键复制报错</button>
+      <div id="sourceStatus" class="status-grid"></div>
+    </section>
+
+    <section class="set-card">
+      <h2>关于</h2>
+      <p class="hint">资讯雷达 v2.0 · 数据来自公开 RSS / API（GitHub 动态、Hacker News、GitHub Trending、Reddit、Google/Bing News 及 36氪、量子位、InfoQ、IT之家、中新网、百度热搜/电影榜、B站等公开源）。所有资讯均在 App 内阅读，不跳转外部浏览器；英文内容自动预翻译为中文，未预翻译的可点「译」实时翻译；同一事件的多源报道会自动聚合；AI 一眼预览与单条摘要由你配置的接口按需生成；已读与收藏仅存于本机。</p>
+    </section>
+  </main>
+
+  <nav class="tabbar">
+    <button class="tab" data-tab="today" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+      <span>今天</span>
+    </button>
+    <button class="tab" data-tab="ai" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/><rect x="10" y="10" width="4" height="4" rx="1"/></svg>
+      <span>AI 圈</span>
+    </button>
+    <button class="tab" data-tab="ent" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5M12 13l2 2 3-4"/></svg>
+      <span>娱乐圈</span>
+    </button>
+    <button class="tab" data-tab="settings" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.11-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.56-1.11 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H9a1.7 1.7 0 0 0 1-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V9a1.7 1.7 0 0 0 1.56 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.56 1z"/></svg>
+      <span>设置</span>
+    </button>
+  </nav>
+
+  <div id="toast" class="toast" role="status"></div>
+</div>
+
+<script src="assets/data-bundle.js"></script>
+<script src="assets/dedup.js"></script>
+<script src="assets/doubao.js"></script>
+<script src="assets/translator.js"></script>
+<script src="assets/live.js"></script>
+<script src="assets/trending.js"></script>
+<script src="assets/detail.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

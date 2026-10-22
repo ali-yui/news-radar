@@ -1,0 +1,19 @@
+_shots/
+node_modules/
+.codebuddy/
+.DS_Store
+*.log
+
+# APK 构建产物与本地签名文件（签名文件不进仓库）
+android/.gradle/
+android/build/
+android/app/build/
+android/app/src/main/assets/
+android/*.jks
+dist/
+# 本机正文缓存（跨次运行复用，不进仓库）
+.cache/
+# 国内数据产物（发布在 data-cn 分支，不进 main）
+public/data/cn.json
+logs/
+scf-newsradar.zip
