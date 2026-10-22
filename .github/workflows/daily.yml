@@ -31,6 +31,11 @@ jobs:
     steps:
       - name: 检出仓库
         uses: actions/checkout@v4
+        with:
+          # 必须拉完整历史：提交数据用的是 commit --amend + force-with-lease，
+          # 若用默认浅克隆（depth=1），amend 会丢掉父提交引用、把数据提交变成根提交，
+          # 强推后仓库历史就被一层层截断（表现为 git log 只剩个位数提交）
+          fetch-depth: 0
 
       - name: 安装 Node
         uses: actions/setup-node@v4
