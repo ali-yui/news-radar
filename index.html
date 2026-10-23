@@ -133,9 +133,11 @@
 
     <section class="set-card">
       <h2>翻译（国内源）</h2>
-      <p class="hint">配置百度翻译官方 API 后，App 内「译」按钮优先走百度（国内免费、每月 200 万字符）。未配置则回退到 AI 接口或免费源。密钥仅存本机。</p>
+      <p class="hint">配置百度翻译官方 API 后，App 内「译」按钮走百度（国内免费、每月 200 万字符，密钥仅存本机）。填好后点「测试」验证；未配置则回退到免费翻译源。</p>
       <input class="field" id="baiduAppId" type="text" placeholder="百度翻译 AppID（fanyi-api.baidu.com 免费申请）" autocomplete="off">
-      <input class="field" id="baiduKey" type="password" placeholder="百度翻译密钥（API Key）" autocomplete="off">
+      <input class="field" id="baiduKey" type="password" placeholder="百度翻译密钥（开放平台「密钥」项，非 API Key 管理的 Bearer Key）" autocomplete="off">
+      <button class="btn-primary ghost" id="testBaiduBtn" type="button">测试</button>
+      <p class="hint">密钥填开放平台「开发者信息」页的「密钥」（用于签名），不是「API Key 管理」创建的 Bearer Key。保存设置后密钥存入本机 localStorage。</p>
     </section>
 
     <section class="set-card">

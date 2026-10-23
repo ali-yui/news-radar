@@ -1,8 +1,9 @@
 /* ============ 资讯雷达 · 浏览器端翻译（App 内实时补翻） ============
  * 用途：daily.json 里没有预翻译（titleZh/summaryZh）的条目，
  *       在 App 内点「译」时实时翻译，全程不跳出 App。
- * 数据优先级：本地缓存 → 百度官方翻译(若配置) → 用户 AI 接口(若配置) → 免费公开源兜底。
- * 百度翻译经 JSONP 调用（绕过 CORS），国内免费、稳定；未配置则回退到 AI 接口或免费源。
+ * 数据优先级：本地缓存 → 百度官方翻译(若配置) → 免费公开源兜底。
+ * 百度翻译经 JSONP 调用（绕过 CORS），国内免费、稳定，为默认翻译源；未配置则回退到免费源。
+ * 豆包/方舟 AI 接口仅用于「AI 摘要」「一眼预览」，不再参与翻译（避免消耗 token）。
  * 免费源（MyMemory / Lingva / Google gtx）多为境外地址，国内可能不可达，仅作最后兜底。
  */
 window.Translator = (function () {
@@ -201,17 +202,10 @@ window.Translator = (function () {
     const cache = readCache();
     if (cache[k]) return cache[k];
 
-    // 1) 百度官方翻译（国内免费、JSONP 绕过 CORS），优先级最高
+    // 百度官方翻译（国内免费、JSONP 绕过 CORS），默认翻译源
     if (_settings && _settings.baiduAppId && _settings.baiduKey) {
       try {
         const r = await baiduTranslate(t, _settings.baiduAppId, _settings.baiduKey, from, to);
-        if (r) { cache[k] = r; writeCache(cache); return r; }
-      } catch { /* 回退到 AI 接口 / 免费源 */ }
-    }
-    // 2) 用户已配置的 AI 接口（火山方舟 / 豆包，消耗 token）
-    if (_settings && window.DoubaoAI && window.DoubaoAI.enabled(_settings)) {
-      try {
-        const r = await window.DoubaoAI.translate(t, _settings);
         if (r) { cache[k] = r; writeCache(cache); return r; }
       } catch { /* 回退到免费源 */ }
     }
@@ -260,7 +254,20 @@ window.Translator = (function () {
     return latin >= 8 && cjk === 0;
   }
 
+  /** 配置自检：用最小请求验证百度 AppID / 密钥 / 签名是否正确 */
+  async function testBaidu(cfg) {
+    if (!cfg || !cfg.baiduAppId || !cfg.baiduKey) {
+      return { ok: false, msg: '请先在上方填写百度翻译 AppID 和密钥' };
+    }
+    try {
+      const r = await baiduTranslate('Hello, world! 这是连接测试。', cfg.baiduAppId, cfg.baiduKey, 'auto', 'zh');
+      return { ok: true, msg: '连接成功：' + (r || '').slice(0, 40) };
+    } catch (e) {
+      return { ok: false, msg: '连接失败：' + (e.message || e) };
+    }
+  }
+
   function setSettings(s) { _settings = s || null; }
 
-  return { translate, translateParagraphs, isEnglish, setSettings };
+  return { translate, translateParagraphs, isEnglish, setSettings, test: testBaidu };
 })();

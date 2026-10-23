@@ -154,7 +154,7 @@ window.Detail = (function () {
       // 翻译未产出任何译文（AI 接口未返回 / 免费源不可达）时给出明确提示
       const ok = entry.title || entry.summary || (entry.paras && entry.paras.some((x) => x));
       if (!ok) {
-        app.toast('翻译未成功：AI 接口未返回译文，且免费翻译源不可达。可在设置页配置「百度翻译」作为国内翻译源。');
+        app.toast('翻译未成功：百度翻译未返回译文，且免费翻译源不可达。请检查设置页百度翻译 AppID / 密钥是否正确。');
       }
     } catch (e) {
       const box = $('#detailTransProgress');
