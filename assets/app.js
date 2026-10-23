@@ -15,7 +15,7 @@
   };
 
   const TAB_NAMES = { today: '今天', ai: 'AI 圈', ent: '娱乐圈', settings: '设置' };
-  const APP_VERSION = '2.5'; // 与 android/app/build.gradle 的 versionName 同步
+  const APP_VERSION = '2.6'; // 与 android/app/build.gradle 的 versionName 同步
   const DAY = 86400000;
   // 内置默认远程数据地址（每行一个；会全部并行拉取后合并去重）
   //   主用 COS：腾讯云对象存储，国内最快，且不依赖「仓库必须公开」的分发方式
@@ -701,6 +701,8 @@
     $('#doubaoEndpoint').value = settings.doubaoEndpoint || '';
     $('#doubaoKey').value = settings.doubaoKey || '';
     $('#doubaoModel').value = settings.doubaoModel || '';
+    $('#baiduAppId').value = settings.baiduAppId || '';
+    $('#baiduKey').value = settings.baiduKey || '';
     $('#doubaoFields').classList.toggle('hidden', !settings.doubaoEnabled);
     const av = document.getElementById('appVer');
     if (av) av.textContent = APP_VERSION;
@@ -724,10 +726,32 @@
     settings.doubaoEndpoint = $('#doubaoEndpoint').value.trim();
     settings.doubaoKey = $('#doubaoKey').value.trim();
     settings.doubaoModel = $('#doubaoModel').value.trim();
+    settings.baiduAppId = $('#baiduAppId').value.trim();
+    settings.baiduKey = $('#baiduKey').value.trim();
     save(K.settings, settings);
     addLog('设置已保存');
     toast('设置已保存');
     renderList();
+  });
+
+  $('#testAiBtn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true; btn.textContent = '测试中…';
+    const cfg = {
+      doubaoEnabled: $('#doubaoEnabled').checked,
+      doubaoEndpoint: $('#doubaoEndpoint').value.trim(),
+      doubaoKey: $('#doubaoKey').value.trim(),
+      doubaoModel: $('#doubaoModel').value.trim(),
+    };
+    try {
+      const r = await window.DoubaoAI.test(cfg);
+      toast(r.msg);
+      addLog('AI 连接测试：' + r.msg);
+    } catch (err) {
+      toast('测试出错：' + (err.message || err));
+    } finally {
+      btn.disabled = false; btn.textContent = '测试连接';
+    }
   });
 
   $('#refreshNow').addEventListener('click', () => doRefresh(true));
@@ -877,6 +901,7 @@
 
   async function boot() {
     fillSettings();
+    if (window.Translator) window.Translator.setSettings(settings); // 翻译首选复用已配置的 AI 接口
     if (window.Trending) window.Trending.init();
     if (window.Detail) window.Detail.init(window.NRApp);
     resetOverlays();

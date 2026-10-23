@@ -348,6 +348,15 @@ textarea.field {
   background: var(--surface-2); color: var(--ink); font-size: 13.5px;
 }
 .btn-ghost.danger { color: var(--accent); }
+/* 设置页：AI 接口「测试连接」按钮（ghost 变体，accent 描边、自适应宽） */
+.btn-primary.ghost {
+  width: auto; align-self: flex-start;
+  height: 38px; margin-top: 4px; padding: 0 16px;
+  background: transparent; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 9px;
+  font-size: 13.5px; font-weight: 600;
+}
+.btn-primary.ghost:active { background: var(--accent-soft); }
 .seg {
   display: flex; background: var(--surface-2);
   border: 1px solid var(--hairline); border-radius: 9px;

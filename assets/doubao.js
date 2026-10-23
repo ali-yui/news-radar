@@ -131,5 +131,31 @@ window.DoubaoAI = (function () {
     ], settings);
   }
 
-  return { enabled, summarize, digest, DEFAULT_ENDPOINT };
+  /** 用 AI 接口做翻译（供「译」按钮复用，方舟/豆包国内可达） */
+  async function aiTranslate(text, settings) {
+    if (!enabled(settings)) return null;
+    return chat([
+      { role: 'system', content: '你是翻译引擎。把用户给出的文本准确翻译成中文（专有名词可保留英文括注）。只输出译文，不要解释、不要添加任何额外内容。' },
+      { role: 'user', content: String(text || '') },
+    ], settings);
+  }
+
+  /** 配置自检：发最小请求验证 endpoint/key/model 是否可用 */
+  async function test(cfg) {
+    if (!cfg) return { ok: false, msg: '无配置' };
+    if (!cfg.doubaoEnabled) return { ok: false, msg: '未开启 AI 接口' };
+    if (!cfg.doubaoKey) return { ok: false, msg: '缺少 API Key' };
+    if (!cfg.doubaoModel) return { ok: false, msg: '缺少模型 / 推理接入点 ID' };
+    try {
+      const r = await chat([
+        { role: 'system', content: '你是测试助手。' },
+        { role: 'user', content: '只回复一个字：好' },
+      ], cfg, 20000);
+      return { ok: true, msg: '连接成功：' + clip(r, 40) };
+    } catch (e) {
+      return { ok: false, msg: '连接失败：' + (e.message || e) };
+    }
+  }
+
+  return { enabled, summarize, digest, test, translate: aiTranslate, DEFAULT_ENDPOINT };
 })();
