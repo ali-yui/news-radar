@@ -14,8 +14,9 @@ window.DoubaoAI = (function () {
   // 单条摘要送入正文的上限（字符，约 2400 字 ≈ 1500 tokens），既保证信息量又不超预算
   const CONTENT_LIMIT = 2400;
   // 板块「一眼预览」：参与提炼的条数与每条摘要字数
-  const DIGEST_ITEMS = 40;
-  const DIGEST_SNIPPET = 90;
+  // 注：40 条 + 90 字摘要曾在慢模型下方舟 75s 超时；降到 25/60 缩短输入以保证可用
+  const DIGEST_ITEMS = 25;
+  const DIGEST_SNIPPET = 60;
   // 默认超时：AI 生成通常 10-30s，给到 75s 容忍后端排队
   const DEFAULT_TIMEOUT = 75000;
 
@@ -137,7 +138,7 @@ window.DoubaoAI = (function () {
     return chat([
       { role: 'system', content: '你是翻译引擎。把用户给出的文本准确翻译成中文（专有名词可保留英文括注）。只输出译文，不要解释、不要添加任何额外内容。' },
       { role: 'user', content: String(text || '') },
-    ], settings);
+    ], settings, 45000); // 翻译单段较短，给 45s 足矣，避免 75s 干等
   }
 
   /** 配置自检：发最小请求验证 endpoint/key/model 是否可用 */

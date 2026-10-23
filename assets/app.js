@@ -15,7 +15,7 @@
   };
 
   const TAB_NAMES = { today: '今天', ai: 'AI 圈', ent: '娱乐圈', settings: '设置' };
-  const APP_VERSION = '2.6'; // 与 android/app/build.gradle 的 versionName 同步
+  const APP_VERSION = '2.6.1'; // 与 android/app/build.gradle 的 versionName 同步
   const DAY = 86400000;
   // 内置默认远程数据地址（每行一个；会全部并行拉取后合并去重）
   //   主用 COS：腾讯云对象存储，国内最快，且不依赖「仓库必须公开」的分发方式

@@ -109,6 +109,16 @@ window.Detail = (function () {
   async function translateCurrent() {
     const it = currentItem();
     if (!it || transBusy) return;
+    const T = window.Translator;
+    const paras = (it.content || '').split(/\n+/).filter(Boolean).slice(0, MAX_TRANS_PARAS);
+    // 仅当标题/摘要/正文任一处含英文时才翻译，避免中文内容空耗 token 且无视觉变化
+    const needs = T.isEnglish(it.title || '')
+      || (it.summary && T.isEnglish(it.summary))
+      || paras.some((p) => T.isEnglish(p));
+    if (!needs) {
+      app.toast('当前内容已是中文，无需翻译');
+      return;
+    }
     transBusy = true;
     const btn = $('#detailTransBtn');
     if (btn) { btn.disabled = true; btn.textContent = '翻译中…'; }
@@ -117,8 +127,8 @@ window.Detail = (function () {
     try {
       // 标题与摘要（较短，先行）
       const [t, s] = await Promise.all([
-        window.Translator.translate(it.title),
-        it.summary ? window.Translator.translate(it.summary.slice(0, 500)) : Promise.resolve(null),
+        T.translate(it.title),
+        it.summary ? T.translate(it.summary.slice(0, 500)) : Promise.resolve(null),
       ]);
       entry.title = t;
       entry.summary = s;
@@ -126,10 +136,9 @@ window.Detail = (function () {
       render(); // 先刷新标题/摘要区
 
       // 正文段落（较长，带进度）
-      const paras = (it.content || '').split(/\n+/).filter(Boolean).slice(0, MAX_TRANS_PARAS);
       if (paras.length) {
         entry.paras = new Array(paras.length).fill(null);
-        const zhParas = await window.Translator.translateParagraphs(paras, (done, total) => {
+        const zhParas = await T.translateParagraphs(paras, (done, total) => {
           const p = $('#detailTransProgress');
           if (p) p.textContent = `正文翻译中 ${done}/${total}`;
           // 渐进渲染：翻完一段显示一段
@@ -137,15 +146,23 @@ window.Detail = (function () {
           renderContent();
         });
         entry.paras = zhParas.map((x, i) => (x != null ? x : paras[i]));
+        const box = $('#detailTransProgress');
+        if (box) box.textContent = '';
       }
       save(K.trans, transCache);
       render();
+      // 翻译未产出任何译文（AI 接口未返回 / 免费源不可达）时给出明确提示
+      const ok = entry.title || entry.summary || (entry.paras && entry.paras.some((x) => x));
+      if (!ok) {
+        app.toast('翻译未成功：AI 接口未返回译文，且免费翻译源不可达。可在设置页配置「百度翻译」作为国内翻译源。');
+      }
     } catch (e) {
       const box = $('#detailTransProgress');
       if (box) {
         box.textContent = '实时翻译不可用（国内网络访问不到翻译接口），'
           + '英文内容会在每晚预翻译后自动显示中文：' + (e.message || e);
       }
+      app.toast('翻译出错：' + (e.message || e));
     } finally {
       transBusy = false;
       const b2 = $('#detailTransBtn');
