@@ -293,6 +293,9 @@ svg { display: block; }
 .digest-body { white-space: normal; }
 .digest-body .ai-loading { margin-top: 2px; }
 
+/* 设置页：关于卡片底部版本号 */
+.set-card .ver { margin-top: 8px; font-size: 12px; color: var(--faint); text-align: right; }
+
 .empty {
   padding: 80px 24px; text-align: center; color: var(--sub);
 }
