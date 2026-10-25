@@ -81,7 +81,7 @@ function sharedEnough(aTitle, bTitle, ga, gb) {
   if (ca.size && cb.size) {
     let cjkShared = 0;
     for (const x of ca) if (cb.has(x)) cjkShared++;
-    return cjkShared >= Math.min(4, Math.min(ca.size, cb.size));
+    return cjkShared >= Math.min(3, Math.min(ca.size, cb.size));
   }
 
   let wbShared = 0;
@@ -89,7 +89,7 @@ function sharedEnough(aTitle, bTitle, ga, gb) {
     if (x.startsWith('w:')) continue;
     if (gb.has(x)) wbShared++;
   }
-  return wbShared >= 3;
+  return wbShared >= 2;
 }
 
 /**
