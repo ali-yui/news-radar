@@ -323,7 +323,7 @@ function dedup(items) {
 const items = [];
 const seenSources = new Set();
 
-function add({ category, source, sourceType, title, url, date, excerpt, tags = [], hot = false, extraCategories = [] }) {
+function add({ category, source, sourceType, title, url, date, excerpt, tags = [], hot = false, extraCategories = [], hotScore = 0 }) {
   title = (title || '').replace(/\s+/g, ' ').trim();
   if (!title || title.length < 4) return;
   if (url && !/^https?:\/\//.test(url)) return;
@@ -346,6 +346,8 @@ function add({ category, source, sourceType, title, url, date, excerpt, tags = [
     summary,
     tags: [...new Set(tags)].slice(0, 6),
     hot,
+    // 热榜热度值（前端排序用；缺失时前端会从摘要文本回退解析）
+    ...(Number(hotScore) > 0 ? { hotScore: Number(hotScore) } : {}),
   });
 }
 
@@ -1019,7 +1021,7 @@ async function fetchChineseSupplements() {
       add({ category: 'today', source: '微博热搜', sourceType: 'json',
         title: h.title, url: h.url, date: null,
         excerpt: h.hot ? `微博热度 ${h.hot}` : '',
-        tags: ['热搜', '微博'], hot: true,
+        tags: ['热搜', '微博'], hot: true, hotScore: h.hot || 0,
         extraCategories: ENT_RE.test(h.title) ? ['ent'] : [] });
       count++;
     }
@@ -1033,7 +1035,7 @@ async function fetchChineseSupplements() {
       add({ category: 'today', source: '今日头条', sourceType: 'json',
         title: h.title, url: h.url, date: null,
         excerpt: h.hot ? `头条热度 ${h.hot}` : '',
-        tags: ['热搜', '头条'], hot: true,
+        tags: ['热搜', '头条'], hot: true, hotScore: h.hot || 0,
         extraCategories: ENT_RE.test(h.title) ? ['ent'] : [] });
       count++;
     }
@@ -1047,7 +1049,7 @@ async function fetchChineseSupplements() {
       add({ category: 'today', source: '抖音热点', sourceType: 'json',
         title: h.title, url: h.url, date: null,
         excerpt: h.hot ? `抖音热度 ${h.hot}` : '',
-        tags: ['热搜', '抖音'], hot: true,
+        tags: ['热搜', '抖音'], hot: true, hotScore: h.hot || 0,
         extraCategories: ENT_RE.test(h.title) ? ['ent'] : [] });
       count++;
     }

@@ -15,7 +15,7 @@
   };
 
   const TAB_NAMES = { today: '今天', ai: 'AI 圈', ent: '娱乐圈', settings: '设置' };
-  const APP_VERSION = '2.6.2'; // 与 android/app/build.gradle 的 versionName 同步
+  const APP_VERSION = '2.7'; // 与 android/app/build.gradle 的 versionName 同步
   const DAY = 86400000;
   // 内置默认远程数据地址（每行一个；会全部并行拉取后合并去重）
   //   主用 COS：腾讯云对象存储，国内最快，且不依赖「仓库必须公开」的分发方式
@@ -28,6 +28,8 @@
     'https://raw.githubusercontent.com/ali-yui/news-radar/main/public/data/daily.json',
   ].join('\n');
 
+  const PAGE_SIZE = 30; // 列表分批渲染每批条数
+
   const state = {
     tab: 'today',
     data: null,
@@ -36,6 +38,10 @@
     onlyUnread: false,
     onlyFav: false,
     refreshing: false,
+    storyCount: new Map(), // storyId -> 报道条数（预计算，避免卡片内全表过滤）
+    blocks: [],            // 当前视图待渲染的 HTML 块
+    offset: 0,             // 已渲染到第几个块
+    viewKey: '',           // 当前渲染结果对应的筛选指纹（命中则不重算）
   };
 
   const defaultSettings = {
@@ -46,6 +52,9 @@
     doubaoEndpoint: '',
     doubaoKey: '',
     doubaoModel: '',
+    baiduAppId: '',
+    baiduKey: '',
+    sort: 'smart',         // smart = 推荐排序，time = 最新优先
   };
   let settings = load(K.settings, defaultSettings);
   let read = load(K.read, {});
@@ -125,10 +134,40 @@
     return p && Array.isArray(p.items) && p.items.length;
   }
 
+  // storyId -> 条数，一次 O(n) 建表，替代每张卡片一次全表 filter（原 O(n²)）
+  function buildStoryCount(items) {
+    const m = new Map();
+    for (const it of items) {
+      if (!it.storyId) continue;
+      m.set(it.storyId, (m.get(it.storyId) || 0) + 1);
+    }
+    return m;
+  }
+
+  // 缓存落盘：剥离正文（体积降一个数量级）+ 延迟到空闲时机，避免同步写 1MB 卡住主线程
+  let cacheTimer = 0;
+  function saveCacheLazy(payload) {
+    clearTimeout(cacheTimer);
+    cacheTimer = setTimeout(() => {
+      try {
+        const items = payload.items.map((it) => {
+          if (!it.content && !it.contentSource) return it;
+          const c = Object.assign({}, it);
+          delete c.content;
+          delete c.contentSource;
+          return c;
+        });
+        localStorage.setItem(K.cache, JSON.stringify(Object.assign({}, payload, { items })));
+      } catch (e) { console.warn('缓存写入失败', e); }
+    }, 1200);
+  }
+
   function applyData(payload, source) {
     if (!validPayload(payload)) return false;
     state.data = payload;
-    save(K.cache, payload);
+    state.storyCount = buildStoryCount(payload.items);
+    state.viewKey = '';
+    saveCacheLazy(payload);
     save(K.lastFetch, Date.now());
     if (window.Trending && window.Trending.setEmbedded) window.Trending.setEmbedded(payload.trending || null);
     if (window.Detail && window.Detail.isOpen()) window.Detail.refresh();
@@ -266,11 +305,16 @@
     }
   }
 
+  // 细提示条：自动收起，不再长期占用内容区
+  let bannerTimer = 0;
   function showBanner(text, ok) {
     const el = $('#banner');
-    el.textContent = text;
+    const txt = $('#bannerText');
+    if (txt) txt.textContent = text;
     el.classList.remove('hidden', 'ok');
     if (ok) el.classList.add('ok');
+    clearTimeout(bannerTimer);
+    bannerTimer = setTimeout(() => el.classList.add('hidden'), ok ? 3000 : 6000);
   }
 
   /* ---------- 渲染 ---------- */
@@ -288,9 +332,29 @@
     return m;
   }
 
-  function renderList() {
-    const list = $('#list');
-    if (state.tab === 'settings') return;
+  function emptyHtml() {
+    return `<div class="empty">
+        <div class="big">${state.query || state.source || state.onlyFav ? '没有匹配的资讯' : '暂无数据'}</div>
+        <div class="small">${state.query || state.source ? '试试更换关键词或来源' : '点击右上角刷新按钮，或等待每小时自动更新'}</div>
+      </div>`;
+  }
+
+  function unitMs(u) {
+    return u.type === 'cluster' ? u.members[0].publishedAtMs : u.item.publishedAtMs;
+  }
+  function unitHtml(u) {
+    return u.type === 'cluster' ? clusterCardHtml(u) : cardHtml(u.item);
+  }
+
+  // 当前筛选指纹：命中则直接复用已排序的渲染块，避免重复过滤/排序
+  function viewKey() {
+    return [state.tab, state.query, state.source, state.onlyUnread ? 1 : 0,
+      state.onlyFav ? 1 : 0, settings.sort || 'smart',
+      (state.data && state.data.generatedAt) || ''].join('|');
+  }
+
+  // 筛选 + 事件聚类，产出渲染单元（不排序）
+  function buildUnits() {
     const cat = state.tab;
     let items = state.data ? state.data.items.filter(
       (x) => x.category === cat || (x.extraCategories || []).includes(cat)) : [];
@@ -310,7 +374,6 @@
     if (state.onlyFav) items = items.filter((x) => favs[x.id]);
 
     const byMs = (a, b) => b.publishedAtMs - a.publishedAtMs;
-
     // 事件聚类：同一 storyId 且当前筛选结果内 ≥2 条 → 合并为一张专题卡
     const byStory = new Map();
     for (const it of items) {
@@ -325,43 +388,143 @@
       if (members && members.length >= 2) {
         if (usedStories.has(it.storyId)) continue;
         usedStories.add(it.storyId);
-        units.push({ type: 'cluster', storyId: it.storyId, members: members.slice().sort(byMs) });
+        const ms = members.slice().sort(byMs);
+        units.push({ type: 'cluster', storyId: it.storyId, members: ms, source: ms[0].source });
       } else {
-        units.push({ type: 'item', item: it });
+        units.push({ type: 'item', item: it, source: it.source });
       }
     }
+    return units;
+  }
 
-    const groups = { hot: [], fresh: [], old: [] };
-    for (const u of units) {
-      const ms = u.type === 'cluster' ? u.members[0].publishedAtMs : u.item.publishedAtMs;
-      const hot = u.type === 'cluster' ? u.members.some((m) => m.hot) : u.item.hot;
-      if (hot) groups.hot.push(u);
-      else if (Date.now() - ms <= DAY) groups.fresh.push(u);
-      else groups.old.push(u);
+  // 排序：smart = 多维融合打分 + 同源打散；time = 纯时间倒序
+  function orderUnits(units) {
+    if ((settings.sort || 'smart') === 'time' || !window.Ranking) {
+      return units.slice().sort((a, b) => unitMs(b) - unitMs(a));
     }
-    const unitMs = (u) => (u.type === 'cluster' ? u.members[0].publishedAtMs : u.item.publishedAtMs);
-    groups.hot.sort((a, b) => unitMs(b) - unitMs(a));
-    groups.fresh.sort((a, b) => unitMs(b) - unitMs(a));
-    groups.old.sort((a, b) => unitMs(b) - unitMs(a));
+    const ctx = { now: Date.now(), storyCount: state.storyCount, read };
+    const scored = units.map((u) => ({
+      u, s: window.Ranking.scoreItem(u.type === 'cluster' ? u.members[0] : u.item, ctx).score,
+    }));
+    scored.sort((a, b) => (b.s - a.s) || (unitMs(b.u) - unitMs(a.u)));
+    return window.Ranking.diversify(scored.map((x) => x.u), window.Ranking.CFG);
+  }
 
-    updateSourceFilter(cat, state.data);
+  function buildBlocks() {
+    const units = buildUnits();
+    if (!units.length) return [emptyHtml()];
+    const blocks = [];
+    // 未开启 AI 时不渲染「一眼预览」卡，保持列表干净
+    if (window.DoubaoAI && window.DoubaoAI.enabled(settings)) blocks.push(digestCardHtml());
+    const ordered = orderUnits(units);
+    if ((settings.sort || 'smart') === 'time') {
+      const groups = { hot: [], fresh: [], old: [] };
+      for (const u of ordered) {
+        const ms = unitMs(u);
+        const hot = u.type === 'cluster' ? u.members.some((m) => m.hot) : u.item.hot;
+        if (hot) groups.hot.push(u);
+        else if (Date.now() - ms <= DAY) groups.fresh.push(u);
+        else groups.old.push(u);
+      }
+      const labels = { hot: '实时热点', fresh: '近 24 小时', old: '更早' };
+      for (const key of ['hot', 'fresh', 'old']) {
+        if (!groups[key].length) continue;
+        blocks.push(`<div class="group-label">${labels[key]} · ${groups[key].length}</div>`);
+        for (const u of groups[key]) blocks.push(unitHtml(u));
+      }
+    } else {
+      for (const u of ordered) blocks.push(unitHtml(u));
+    }
+    return blocks;
+  }
 
-    if (!units.length) {
-      list.innerHTML = `<div class="empty">
-        <div class="big">${state.query || state.source || state.onlyFav ? '没有匹配的资讯' : '暂无数据'}</div>
-        <div class="small">${state.query || state.source ? '试试更换关键词或来源' : '点击右上角刷新按钮，或等待每日 09:00 自动更新'}</div>
-      </div>`;
+  function renderList() {
+    if (state.tab === 'settings') return;
+    const list = $('#list');
+    const key = viewKey();
+    if (key !== state.viewKey) {
+      state.blocks = buildBlocks();
+      state.offset = 0;
+      state.viewKey = key;
+      list.innerHTML = '';
+      list.classList.remove('fade-in');
+      void list.offsetWidth; // 强制重排以重启动画
+      list.classList.add('fade-in');
+      updateSourceFilter(state.tab, state.data);
+    }
+    appendChunk();
+  }
+
+  // 分批渲染：每批 PAGE_SIZE 块，追加而非全量重建
+  function appendChunk() {
+    const list = $('#list');
+    const blocks = state.blocks;
+    if (state.offset >= blocks.length) { setSentinel(false); return false; }
+    const slice = blocks.slice(state.offset, state.offset + PAGE_SIZE);
+    state.offset += slice.length;
+    const tmp = document.createElement('div');
+    tmp.innerHTML = slice.join('');
+    const frag = document.createDocumentFragment();
+    while (tmp.firstChild) frag.appendChild(tmp.firstChild);
+    list.appendChild(frag);
+    setSentinel(state.offset < blocks.length);
+    return true;
+  }
+
+  // 哨兵：支持 IntersectionObserver 则自动续渲，否则给「加载更多」按钮
+  let io = null;
+  function setSentinel(more) {
+    const s = $('#listSentinel');
+    if (!s) return;
+    if (!more) {
+      s.classList.add('hidden');
+      s.innerHTML = '';
+      if (io) io.unobserve(s);
       return;
     }
+    s.classList.remove('hidden');
+    if (io) { s.innerHTML = ''; io.unobserve(s); io.observe(s); }
+    else s.innerHTML = '<button class="list-more" type="button" data-act="more">加载更多</button>';
+  }
 
-    const labels = { hot: '实时热点', fresh: '近 24 小时', old: '更早' };
-    let html = digestCardHtml();
-    for (const key of ['hot', 'fresh', 'old']) {
-      if (!groups[key].length) continue;
-      html += `<div class="group-label">${labels[key]} · ${groups[key].length}</div>`;
-      html += groups[key].map((u) => (u.type === 'cluster' ? clusterCardHtml(u) : cardHtml(u.item))).join('');
+  function initSentinel() {
+    const s = $('#listSentinel');
+    if (!s) return;
+    if (window.IntersectionObserver) {
+      io = new IntersectionObserver((entries) => {
+        for (const e of entries) if (e.isIntersecting) appendChunk();
+      }, { rootMargin: '500px 0px' });
     }
-    list.innerHTML = html;
+    s.addEventListener('click', (e) => {
+      if (e.target.closest('[data-act="more"]')) appendChunk();
+    });
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      const top = $('#topbar');
+      if (top) top.classList.toggle('scrolled', window.scrollY > 60);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        if (!io && state.offset < state.blocks.length) {
+          const r = s.getBoundingClientRect();
+          if (r.top < window.innerHeight + 500) appendChunk();
+        }
+      });
+    }, { passive: true });
+  }
+
+  // 顶栏实测高度写入 CSS 变量，驱动工具行 sticky 偏移（替代原硬编码 57px）
+  function measureTopbar() {
+    const el = $('#topbar');
+    if (!el) return;
+    const set = () => {
+      const h = el.offsetHeight;
+      if (h) document.documentElement.style.setProperty('--topbar-h', h + 'px');
+    };
+    set();
+    if (window.ResizeObserver) new ResizeObserver(set).observe(el);
+    else window.addEventListener('resize', set);
   }
 
   /* ---------- 一眼预览（板块级 AI 摘要） ---------- */
@@ -471,14 +634,14 @@
     </article>`;
   }
 
+  const STAR_ON = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>';
+  const STAR_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>';
+
   function cardHtml(it) {
     const isRead = !!read[it.id];
     const isFav = !!favs[it.id];
     const tr = cardTrans[it.id] || {};
-    const starFill = isFav
-      ? '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>'
-      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>';
-    const tags = (it.tags || []).slice(0, 4).map((t) => `<span class="tag">${esc(t)}</span>`).join('');
+    const tags = (it.tags || []).slice(0, 3).map((t) => `<span class="tag">${esc(t)}</span>`).join('');
     const aiBtn = window.DoubaoAI.enabled(settings)
       ? `<button class="ai-btn" data-act="ai" data-id="${it.id}" type="button">AI 摘要</button>` : '';
     // 中文优先：预翻译 titleZh > 实时补翻缓存 > 原文
@@ -488,11 +651,11 @@
     const isCjk = /[\u4e00-\u9fff]/.test(it.title || '');
     const transBtn = (!isCjk && !it.titleZh && it.url && window.Translator)
       ? `<button class="ai-btn trans-btn" data-act="trans" data-id="${it.id}" type="button">${tr.title ? '已译' : '译'}</button>` : '';
-    // 同事件多源报道标记
-    const storyCount = it.storyId
-      ? (state.data.items.filter((x) => x.storyId === it.storyId).length) : 0;
+    // 同事件多源报道标记（查预计算表，原实现为每张卡全表过滤）
+    const storyCount = it.storyId ? (state.storyCount.get(it.storyId) || 0) : 0;
     const storyBadge = storyCount >= 2
       ? `<span class="story-badge" data-act="story" data-id="${it.id}" title="同一事件的多源报道">${storyCount} 家报道</span>` : '';
+    const actions = (transBtn || aiBtn) ? `<div class="item-actions">${transBtn}${aiBtn}</div>` : '';
     return `<article class="item ${isRead ? 'read' : ''}" data-id="${it.id}">
       <div class="item-main">
         <div class="item-meta">
@@ -500,16 +663,14 @@
           <span>${esc(relTime(it.publishedAtMs))}</span>
           ${storyBadge}
           <span class="unread-dot"></span>
+          <span class="meta-spacer"></span>
+          <button class="fav-btn ${isFav ? 'on' : ''}" data-act="fav" data-id="${it.id}" aria-label="收藏">${isFav ? STAR_ON : STAR_OFF}</button>
         </div>
         <a class="item-title" href="${esc(it.url || '#')}" target="_blank" rel="noopener noreferrer">${esc(title)}</a>
         ${summary ? `<p class="item-summary">${esc(summary)}</p>` : ''}
         ${tags ? `<div class="item-tags">${tags}</div>` : ''}
+        ${actions}
         <div class="ai-result hidden" data-ai-box="${it.id}"></div>
-      </div>
-      <div class="item-side">
-        <button class="fav-btn ${isFav ? 'on' : ''}" data-act="fav" data-id="${it.id}" aria-label="收藏">${starFill}</button>
-        ${transBtn}
-        ${aiBtn}
       </div>
     </article>`;
   }
@@ -568,9 +729,7 @@
         save(K.favs, favs);
         const card = btn.closest('.item');
         btn.classList.toggle('on', !!favs[id]);
-        btn.innerHTML = favs[id]
-          ? '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>'
-          : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 17.3 6.2 20.6l1.6-6.7L2.5 9.3l6.8-.6L12 2.5l2.7 6.2 6.8.6-5.3 4.6 1.6 6.7z"/></svg>';
+        btn.innerHTML = favs[id] ? STAR_ON : STAR_OFF;
         if (state.onlyFav && !favs[id]) card.remove();
         return;
       }
@@ -658,7 +817,8 @@
     const isSettings = tab === 'settings';
     $('#list').classList.toggle('hidden', isSettings);
     $('#filtersBar').classList.toggle('hidden', isSettings);
-    $('#trendingBar').hidden = isSettings || tab !== 'ai';
+    $('#listSentinel').classList.toggle('hidden', isSettings);
+    $('#trendingEntry').classList.toggle('hidden', isSettings || tab !== 'ai');
     $('#page-settings').classList.toggle('hidden', !isSettings);
     $('#tabTitle').textContent = TAB_NAMES[tab];
     if (!isSettings) {
@@ -666,32 +826,67 @@
       state.query = $('#searchInput').value = '';
       $('#clearSearch').classList.add('hidden');
       $all('.chip').forEach((c) => c.classList.remove('active'));
+      collapseFilter();
       renderList();
     } else {
       renderSourceStatus();
     }
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
   $all('.tab').forEach((t) => t.addEventListener('click', () => switchTab(t.dataset.tab)));
 
+  // 搜索防抖：避免每敲一个字就全量重排重绘
+  let searchTimer = 0;
   $('#searchInput').addEventListener('input', (e) => {
     state.query = e.target.value.trim();
     $('#clearSearch').classList.toggle('hidden', !state.query);
-    renderList();
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => renderList(), 150);
   });
   $('#clearSearch').addEventListener('click', () => {
     $('#searchInput').value = ''; state.query = '';
     $('#clearSearch').classList.add('hidden');
     renderList();
   });
-  $('#sourceFilter').addEventListener('change', (e) => { state.source = e.target.value; renderList(); });
+  $('#sourceFilter').addEventListener('change', (e) => { state.source = e.target.value; syncFilterBtn(); renderList(); });
   $all('.chip').forEach((chip) => chip.addEventListener('click', () => {
     const key = chip.dataset.filter === 'unread' ? 'onlyUnread' : 'onlyFav';
     state[key] = !state[key];
     chip.classList.toggle('active', state[key]);
+    syncFilterBtn();
     renderList();
   }));
   $('#refreshBtn').addEventListener('click', () => doRefresh(true));
+
+  /* ---------- 折叠筛选面板 / 排序 / 热榜入口 ---------- */
+  function collapseFilter() {
+    $('#filterPanel').classList.add('hidden');
+    $('#filterToggle').setAttribute('aria-expanded', 'false');
+  }
+  function syncFilterBtn() {
+    const on = !!(state.source || state.onlyUnread || state.onlyFav);
+    $('#filterToggle').classList.toggle('filter-on', on);
+  }
+  $('#filterToggle').addEventListener('click', () => {
+    const p = $('#filterPanel');
+    const open = p.classList.toggle('hidden');
+    $('#filterToggle').setAttribute('aria-expanded', open ? 'false' : 'true');
+  });
+  $('#filterClose').addEventListener('click', collapseFilter);
+  $all('#sortSeg button').forEach((b) => b.addEventListener('click', () => {
+    settings.sort = b.dataset.sort;
+    save(K.settings, settings);
+    syncSortSeg();
+    renderList();
+  }));
+  function syncSortSeg() {
+    const cur = settings.sort || 'smart';
+    $all('#sortSeg button').forEach((b) => b.classList.toggle('active', b.dataset.sort === cur));
+  }
+  $('#trendingEntry').addEventListener('click', () => {
+    if (window.Trending) window.Trending.show('daily');
+  });
+  $('#bannerClose').addEventListener('click', () => $('#banner').classList.add('hidden'));
 
   /* ---------- 设置 ---------- */
   function fillSettings() {
@@ -706,6 +901,7 @@
     $('#doubaoFields').classList.toggle('hidden', !settings.doubaoEnabled);
     const av = document.getElementById('appVer');
     if (av) av.textContent = APP_VERSION;
+    syncSortSeg();
     applyTheme();
   }
 
@@ -780,7 +976,11 @@
     localStorage.removeItem(K.logs);
     logs = [];
     const boot = window.__NEWS_RADAR_BOOTSTRAP__;
-    if (validPayload(boot)) state.data = boot;
+    if (validPayload(boot)) {
+      state.data = boot;
+      state.storyCount = buildStoryCount(boot.items);
+      state.viewKey = '';
+    }
     renderUpdated(); renderList(); renderSourceStatus();
     toast('缓存已清除');
   });
@@ -919,6 +1119,9 @@
 
   async function boot() {
     fillSettings();
+    measureTopbar();
+    initSentinel();
+    collapseFilter();
     if (window.Translator) window.Translator.setSettings(settings); // 翻译首选复用已配置的 AI 接口
     if (window.Trending) window.Trending.init();
     if (window.Detail) window.Detail.init(window.NRApp);

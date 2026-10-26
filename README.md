@@ -95,12 +95,12 @@ node scripts/upload-cos.mjs public/data/daily.json data/test.json
 
 ## 仓库与分发
 
-**GitHub 是唯一真源**。分发走对象存储而不是 git 仓库，所以仓库可以私有，也不需要 Gitee 镜像。
+**代码主线在 Gitee `yuihl/news`；GitHub `ali-yui/news-radar` 负责国外源抓取（Actions）与 Pages 展示。** 分发走对象存储而不是 git 仓库，所以仓库可以私有，也不需要任何镜像仓：原 Gitee `yuihl/news-radar` 镜像仓是私有仓库、国内同样取不到，已停止同步，仅作历史存档。
 
 | 仓库 | 角色 | 内容 | 谁可以写 |
 | --- | --- | --- | --- |
-| GitHub `ali-yui/news-radar` | **唯一真源**：代码 + 国外数据 + 可选 `data-cn` 分支 + Pages | 全站 | 本地开发推送 / Actions 数据提交 |
-| Gitee `yuihl/news` | **开发仓库**：国内代码备份 | 全站 | 自由推送 |
+| Gitee `yuihl/news` | **开发主线**：代码 + 前端 + 抓取脚本 | 全站 | 本地开发自由推送 |
+| GitHub `ali-yui/news-radar` | 国外源抓取（Actions 每小时）+ Pages 展示 + 可选 `data-cn` 分支 | 全站 | 由开发主线同步推送 / Actions 数据提交 |
 
 ```mermaid
 flowchart LR
@@ -122,14 +122,16 @@ flowchart LR
 2. **分发不经过 git 仓库**：国外路由 Actions、国内路由云函数，各自上传到 COS，App 直读 COS
 3. **仓库可私有**：COS 分发不要求仓库公开。若改为私有，注意 Actions 额度是 2000 分钟/月，需相应降低抓取频率
 4. **上传失败不影响数据**：COS 上传是独立 step 且 `continue-on-error: true`，失败时自动回退到 jsDelivr 与内置数据
-5. **本地推送**：`git push origin main`（GitHub）→ 可选 `git push gitee-news main`（Gitee news 开发仓库）
+5. **本地推送**：`git push gitee-news main`（Gitee 开发主线）→ 同步 `git push origin main`（GitHub：Pages 与国外源 Actions 用；推前先 `git pull --rebase`，因为 Actions 每小时会用 amend 重写数据提交）
 6. 限额由 `vars.TRANSLATE_MAX`（默认 200）、`vars.CONTENT_PER_CATEGORY`（默认 30）、`vars.CONTENT_LIMIT`（默认 100）控制，任务超时 25 分钟
 
 ## 功能清单
 
 - **App 内完整阅读**：点卡片在 App 内打开详情页（摘要 / 全文 / 只看摘要切换），不跳转外部浏览器；正文由 Actions 每晚抓取入库，「打开原文」仅为可选次要操作
 - **英文一键中文化**：英文标题 / 摘要由服务端每晚预翻译入库，列表与详情优先展示中文；未预翻译的条目点「译」在 App 内实时补翻（免费翻译 API 多源回退 + 本地缓存）
-- 今日更新：按时间倒序展示，默认近 24 小时，更早内容归入「更早」分组
+- 今日更新：默认按**智能排序**展示（新鲜度 + 热度 + 来源权重 + 多源报道 + 已读降权融合打分，并做同源打散，避免同一来源连刷十几条），可在筛选面板切「最新优先」（纯时间倒序 + 实时热点 / 近 24 小时 / 更早分组）
+- **顶部精简**：单行顶栏 + 单行工具行；来源下拉、未读 / 收藏、排序方式收进折叠筛选面板，热榜改为工具行内的「热榜」按钮，提示条细化且可关闭
+- **流畅度**：列表首屏只渲染 30 条、滚动哨兵续渲，搜索防抖 150ms，长列表 `content-visibility` 跳过视口外绘制，本地缓存剥离正文后延迟写入
 - **国内三大热搜**：微博热搜、今日头条热点、抖音热点，进入「实时热点」分组；娱乐相关自动跨挂「娱乐圈」
 - 关键词搜索（标题 / 译文 / 摘要 / 标签 / 来源）与来源筛选
 - 每条资讯：标题、来源、发布时间、摘要、原文链接、标签、已读状态
@@ -158,6 +160,7 @@ news-radar/
 │   ├── trending.js          # GitHub Trending 日/周/月榜浮层
 │   ├── doubao.js            # AI 摘要 / 一眼预览（OpenAI 兼容，可选）
 │   ├── dedup.js             # 去重（与脚本同一套规则）
+│   ├── ranking.js           # 智能排序内核（融合打分 + 同源打散，浏览器与 Node 双端可用）
 │   └── data-bundle.js       # 抓取脚本生成的内联数据（离线/直开兜底）
 ├── public/data/
 │   └── daily.json           # GitHub Actions 定时生成的数据
@@ -381,17 +384,17 @@ The Verge、Ars Technica、MIT Technology Review、OpenAI News 四个英文源�
 - 密钥仅保存在本地浏览器 localStorage，随请求发送，不经任何第三方
 - 不开启时完全使用本地规则摘要，不产生任何费用
 
-## 打包 APK（当前版本 2.3）
+## 打包 APK（当前版本 2.7）
 
 本机环境要求：JDK 17、Android SDK 34（platforms/android-34 + build-tools 34.0.0）、Gradle 8.7。
 
 ```
 cd android
 D:\yui\gradle-8.7\bin\gradle.bat assembleRelease
-copy app\build\outputs\apk\release\app-release.apk  ..\dist\news-radar-2.3.apk
+copy app\build\outputs\apk\release\app-release.apk  ..\dist\news-radar-2.7.apk
 ```
 
-- 包名 `com.yuihl.newsradar`，`versionCode 5` / `versionName "2.3"`，minSdk 26（Android 8+），targetSdk 34
+- 包名 `com.yuihl.newsradar`，`versionCode 7` / `versionName "2.7"`，minSdk 26（Android 8+），targetSdk 34
 - 签名：`android/news-radar.jks`（别名 `newsradar`，口令 `nr2026v2`）。该 jks **不进仓库**（已在 .gitignore），请自行备份；缺失时构建会自动退回 debug 签名
 - 打网页资源在构建时由 `copyWebAssets` 任务从仓库根目录复制进 `app/src/main/assets/`
 - WebView 外壳行为：所有 http/https 链接都在 App 内打开；`window.open` / `target=_blank` 在 App 内全屏对话框打开；返回键先关详情页 / Trending 浮层，再退历史，最后才退出；已开启 DOM Storage 与 file 域跨域（用于读取 COS / jsDelivr 的 daily.json）
