@@ -15,6 +15,7 @@
   };
 
   const TAB_NAMES = { today: '今天', ai: 'AI 圈', ent: '娱乐圈', settings: '设置' };
+  const APP_VERSION = '2.7'; // 与 android/app/build.gradle 的 versionName 同步
   const DAY = 86400000;
   // 内置默认远程数据地址（每行一个；会全部并行拉取后合并去重）
   //   主用 COS：腾讯云对象存储，国内最快，且不依赖「仓库必须公开」的分发方式
@@ -51,6 +52,8 @@
     doubaoEndpoint: '',
     doubaoKey: '',
     doubaoModel: '',
+    baiduAppId: '',
+    baiduKey: '',
     sort: 'smart',         // smart = 推荐排序，time = 最新优先
   };
   let settings = load(K.settings, defaultSettings);
@@ -332,7 +335,7 @@
   function emptyHtml() {
     return `<div class="empty">
         <div class="big">${state.query || state.source || state.onlyFav ? '没有匹配的资讯' : '暂无数据'}</div>
-        <div class="small">${state.query || state.source ? '试试更换关键词或来源' : '点击右上角刷新按钮，或等待每日 09:00 自动更新'}</div>
+        <div class="small">${state.query || state.source ? '试试更换关键词或来源' : '点击右上角刷新按钮，或等待每小时自动更新'}</div>
       </div>`;
   }
 
@@ -528,7 +531,7 @@
   function digestCardHtml() {
     const cached = digestCache[state.tab];
     const fresh = cached && cached.date === beijingNow().date;
-    const bodyHtml = cached ? esc(cached.text) : '';
+    const bodyHtml = cached ? fmtAiHtml(cached.text) : '';
     return `<div class="digest-card">
       <div class="digest-head">
         <div class="digest-title">一眼预览 · 本期重点${fresh ? '' : ''}</div>
@@ -541,6 +544,32 @@
     </div>`;
   }
 
+  /* ---------- AI 文本渲染（列表卡片 / 一眼预览共用） ---------- */
+  function aiInline(s) {
+    return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  }
+  function fmtAiHtml(text) {
+    const lines = String(text || '').split(/\n+/).map((s) => s.trim()).filter(Boolean);
+    let html = '';
+    let inList = false;
+    for (const line of lines) {
+      const m = line.match(/^[·•\-*]\s*(.+)$/);
+      if (m) {
+        if (!inList) { html += '<ul class="ai-list">'; inList = true; }
+        html += '<li>' + aiInline(m[1]) + '</li>';
+      } else {
+        if (inList) { html += '</ul>'; inList = false; }
+        html += '<p>' + aiInline(line) + '</p>';
+      }
+    }
+    if (inList) html += '</ul>';
+    return html;
+  }
+  function aiLoadingHtml(msg) {
+    return '<div class="ai-loading"><i></i><i></i><i></i><span>'
+      + esc(msg || '生成中…') + '</span></div>';
+  }
+
   async function generateDigest() {
     if (!state.data) return;
     if (!window.DoubaoAI.enabled(settings)) {
@@ -550,7 +579,7 @@
     const btn = document.querySelector('#list [data-act="digest"]');
     const body = $('#digestBody');
     if (btn) { btn.disabled = true; btn.textContent = '生成中…'; }
-    if (body) { body.classList.remove('hidden'); body.textContent = '正在生成本期重点…'; }
+    if (body) { body.classList.remove('hidden'); body.innerHTML = aiLoadingHtml('AI 正在通读本期资讯…'); }
     try {
       const cat = state.tab;
       const items = state.data.items
@@ -559,12 +588,16 @@
       const text = await window.DoubaoAI.digest(cat, items, settings);
       digestCache[cat] = { date: beijingNow().date, text };
       save(K.digest, digestCache);
-      if (body) body.textContent = text;
+      if (body) body.innerHTML = fmtAiHtml(text);
       addLog('一眼预览生成成功（' + cat + '）');
       toast('已生成本期重点');
     } catch (e) {
-      if (body) body.textContent = '生成失败：' + (e.message || e);
-      addLog('一眼预览失败：' + (e.message || e));
+      const msg = e.message || String(e);
+      if (body) {
+        body.innerHTML = '<div class="ai-error">' + esc(msg)
+          + '<button class="ai-retry" data-act="digest" type="button">重试</button></div>';
+      }
+      addLog('一眼预览失败：' + msg);
     } finally {
       if (btn) {
         btn.disabled = false;
@@ -700,22 +733,27 @@
         if (state.onlyFav && !favs[id]) card.remove();
         return;
       }
-      if (btn.dataset.act === 'ai') {
+      if (btn.dataset.act === 'ai' || btn.dataset.act === 'ai-retry') {
         const it = state.data.items.find((x) => x.id === id);
         const box = document.querySelector(`[data-ai-box="${id}"]`);
         if (!it || !box) return;
         if (!window.DoubaoAI.enabled(settings)) {
-          toast('请先在「设置」中开启并配置豆包 API');
+          toast('请先在「设置」中开启并配置 AI 接口');
           return;
         }
         btn.disabled = true; btn.textContent = '生成中…';
+        box.classList.remove('hidden');
+        box.innerHTML = aiLoadingHtml('AI 正在生成摘要…');
         try {
           const text = await window.DoubaoAI.summarize(it, settings);
-          box.innerHTML = `<div class="ai-head">豆包 AI 摘要</div>${esc(text)}`;
-          box.classList.remove('hidden');
+          box.innerHTML = '<div class="ai-head">AI 摘要</div>'
+            + '<div class="ai-text">' + fmtAiHtml(text) + '</div>';
         } catch (err) {
-          toast('AI 摘要失败：' + (err.message || err));
-          addLog('豆包摘要失败：' + (err.message || err));
+          const msg = err.message || String(err);
+          box.innerHTML = '<div class="ai-head">AI 摘要</div><div class="ai-error">' + esc(msg)
+            + '<button class="ai-retry" data-act="ai-retry" data-id="' + id + '" type="button">重试</button></div>';
+          toast('AI 摘要失败：' + msg);
+          addLog('AI 摘要失败：' + msg);
         } finally {
           btn.disabled = false; btn.textContent = 'AI 摘要';
         }
@@ -780,6 +818,7 @@
     $('#list').classList.toggle('hidden', isSettings);
     $('#listSentinel').classList.toggle('hidden', isSettings);
     $('#filtersBar').classList.toggle('hidden', isSettings);
+    $('#listSentinel').classList.toggle('hidden', isSettings);
     $('#trendingEntry').classList.toggle('hidden', isSettings || tab !== 'ai');
     $('#page-settings').classList.toggle('hidden', !isSettings);
     $('#tabTitle').textContent = TAB_NAMES[tab];
@@ -858,7 +897,11 @@
     $('#doubaoEndpoint').value = settings.doubaoEndpoint || '';
     $('#doubaoKey').value = settings.doubaoKey || '';
     $('#doubaoModel').value = settings.doubaoModel || '';
+    $('#baiduAppId').value = settings.baiduAppId || '';
+    $('#baiduKey').value = settings.baiduKey || '';
     $('#doubaoFields').classList.toggle('hidden', !settings.doubaoEnabled);
+    const av = document.getElementById('appVer');
+    if (av) av.textContent = APP_VERSION;
     syncSortSeg();
     applyTheme();
   }
@@ -880,10 +923,50 @@
     settings.doubaoEndpoint = $('#doubaoEndpoint').value.trim();
     settings.doubaoKey = $('#doubaoKey').value.trim();
     settings.doubaoModel = $('#doubaoModel').value.trim();
+    settings.baiduAppId = $('#baiduAppId').value.trim();
+    settings.baiduKey = $('#baiduKey').value.trim();
     save(K.settings, settings);
     addLog('设置已保存');
     toast('设置已保存');
     renderList();
+  });
+
+  $('#testAiBtn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true; btn.textContent = '测试中…';
+    const cfg = {
+      doubaoEnabled: $('#doubaoEnabled').checked,
+      doubaoEndpoint: $('#doubaoEndpoint').value.trim(),
+      doubaoKey: $('#doubaoKey').value.trim(),
+      doubaoModel: $('#doubaoModel').value.trim(),
+    };
+    try {
+      const r = await window.DoubaoAI.test(cfg);
+      toast(r.msg);
+      addLog('AI 连接测试：' + r.msg);
+    } catch (err) {
+      toast('测试出错：' + (err.message || err));
+    } finally {
+      btn.disabled = false; btn.textContent = '测试连接';
+    }
+  });
+
+  $('#testBaiduBtn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true; btn.textContent = '测试中…';
+    const cfg = {
+      baiduAppId: $('#baiduAppId').value.trim(),
+      baiduKey: $('#baiduKey').value.trim(),
+    };
+    try {
+      const r = await window.Translator.test(cfg);
+      toast(r.msg);
+      addLog('百度翻译测试：' + r.msg);
+    } catch (err) {
+      toast('测试出错：' + (err.message || err));
+    } finally {
+      btn.disabled = false; btn.textContent = '测试';
+    }
   });
 
   $('#refreshNow').addEventListener('click', () => doRefresh(true));
@@ -1040,6 +1123,7 @@
     measureTopbar();
     initSentinel();
     collapseFilter();
+    if (window.Translator) window.Translator.setSettings(settings); // 翻译首选复用已配置的 AI 接口
     if (window.Trending) window.Trending.init();
     if (window.Detail) window.Detail.init(window.NRApp);
     resetOverlays();

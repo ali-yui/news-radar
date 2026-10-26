@@ -26,6 +26,8 @@ window.Detail = (function () {
   let fontStep = 1;
   let transCache = {};   // id -> {title, summary, paras, at}
   let transBusy = false;
+  let aiBusy = false;        // AI 摘要请求中
+  const aiCache = new Map(); // id -> { text, error, at }
 
   function currentItem() {
     return currentOverride || (currentId ? app.getItem(currentId) : null);
@@ -107,6 +109,16 @@ window.Detail = (function () {
   async function translateCurrent() {
     const it = currentItem();
     if (!it || transBusy) return;
+    const T = window.Translator;
+    const paras = (it.content || '').split(/\n+/).filter(Boolean).slice(0, MAX_TRANS_PARAS);
+    // 仅当标题/摘要/正文任一处含英文时才翻译，避免中文内容空耗 token 且无视觉变化
+    const needs = T.isEnglish(it.title || '')
+      || (it.summary && T.isEnglish(it.summary))
+      || paras.some((p) => T.isEnglish(p));
+    if (!needs) {
+      app.toast('当前内容已是中文，无需翻译');
+      return;
+    }
     transBusy = true;
     const btn = $('#detailTransBtn');
     if (btn) { btn.disabled = true; btn.textContent = '翻译中…'; }
@@ -115,8 +127,8 @@ window.Detail = (function () {
     try {
       // 标题与摘要（较短，先行）
       const [t, s] = await Promise.all([
-        window.Translator.translate(it.title),
-        it.summary ? window.Translator.translate(it.summary.slice(0, 500)) : Promise.resolve(null),
+        T.translate(it.title),
+        it.summary ? T.translate(it.summary.slice(0, 500)) : Promise.resolve(null),
       ]);
       entry.title = t;
       entry.summary = s;
@@ -124,10 +136,9 @@ window.Detail = (function () {
       render(); // 先刷新标题/摘要区
 
       // 正文段落（较长，带进度）
-      const paras = (it.content || '').split(/\n+/).filter(Boolean).slice(0, MAX_TRANS_PARAS);
       if (paras.length) {
         entry.paras = new Array(paras.length).fill(null);
-        const zhParas = await window.Translator.translateParagraphs(paras, (done, total) => {
+        const zhParas = await T.translateParagraphs(paras, (done, total) => {
           const p = $('#detailTransProgress');
           if (p) p.textContent = `正文翻译中 ${done}/${total}`;
           // 渐进渲染：翻完一段显示一段
@@ -135,15 +146,23 @@ window.Detail = (function () {
           renderContent();
         });
         entry.paras = zhParas.map((x, i) => (x != null ? x : paras[i]));
+        const box = $('#detailTransProgress');
+        if (box) box.textContent = '';
       }
       save(K.trans, transCache);
       render();
+      // 翻译未产出任何译文（AI 接口未返回 / 免费源不可达）时给出明确提示
+      const ok = entry.title || entry.summary || (entry.paras && entry.paras.some((x) => x));
+      if (!ok) {
+        app.toast('翻译未成功：百度翻译未返回译文，且免费翻译源不可达。请检查设置页百度翻译 AppID / 密钥是否正确。');
+      }
     } catch (e) {
       const box = $('#detailTransProgress');
       if (box) {
         box.textContent = '实时翻译不可用（国内网络访问不到翻译接口），'
           + '英文内容会在每晚预翻译后自动显示中文：' + (e.message || e);
       }
+      app.toast('翻译出错：' + (e.message || e));
     } finally {
       transBusy = false;
       const b2 = $('#detailTransBtn');
@@ -254,6 +273,38 @@ window.Detail = (function () {
   }
 
   /* ---------- AI 摘要 ---------- */
+  // 结构化的 AI 文本：支持「· 要点」列表与 **粗体**
+  function aiInline(s) {
+    return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  }
+  function aiFormat(text) {
+    const lines = String(text || '').split(/\n+/).map((s) => s.trim()).filter(Boolean);
+    let html = '';
+    let inList = false;
+    for (const line of lines) {
+      const m = line.match(/^[·•\-*]\s*(.+)$/);
+      if (m) {
+        if (!inList) { html += '<ul class="ai-list">'; inList = true; }
+        html += '<li>' + aiInline(m[1]) + '</li>';
+      } else {
+        if (inList) { html += '</ul>'; inList = false; }
+        html += '<p>' + aiInline(line) + '</p>';
+      }
+    }
+    if (inList) html += '</ul>';
+    return html;
+  }
+  function aiBoxHtml(text, message, isError) {
+    const head = '<div class="ai-head">AI 摘要</div>';
+    if (text) return head + '<div class="ai-text">' + aiFormat(text) + '</div>';
+    if (!isError) {
+      return head + '<div class="ai-loading"><i></i><i></i><i></i>'
+        + '<span>' + esc(message || '生成中…') + '</span></div>';
+    }
+    return head + '<div class="ai-error">' + esc(message || '生成失败')
+      + '<button class="ai-retry" data-act="ai-retry" type="button">重试</button></div>';
+  }
+
   async function aiSummarize() {
     const it = currentItem();
     const box = $('#detailAiBox');
@@ -262,14 +313,30 @@ window.Detail = (function () {
       app.toast('请先在「设置」中开启并配置 AI 接口');
       return;
     }
+    const cached = aiCache.get(it.id);
+    if (cached && cached.text) {
+      box.classList.remove('hidden');
+      box.innerHTML = aiBoxHtml(cached.text);
+      return;
+    }
+    if (aiBusy) return;
+    aiBusy = true;
+    const btn = $('#detailScroll [data-act="ai"]');
+    if (btn) { btn.disabled = true; btn.textContent = '生成中…'; }
     box.classList.remove('hidden');
-    box.innerHTML = '<div class="ai-head">AI 摘要</div>生成中…';
+    box.innerHTML = aiBoxHtml(null, 'AI 正在阅读全文并生成摘要…', false);
     try {
       const text = await window.DoubaoAI.summarize(it, app.getSettings());
-      box.innerHTML = `<div class="ai-head">AI 摘要</div>${esc(text)}`;
+      aiCache.set(it.id, { text, at: Date.now() });
+      box.innerHTML = aiBoxHtml(text);
     } catch (e) {
-      box.innerHTML = `<div class="ai-head">AI 摘要</div>失败：${esc(e.message || e)}`;
-      app.addLog('AI 摘要失败：' + (e.message || e));
+      const msg = e.message || String(e);
+      aiCache.set(it.id, { error: msg, at: Date.now() });
+      box.innerHTML = aiBoxHtml(null, msg, true);
+      app.addLog('AI 摘要失败：' + msg);
+    } finally {
+      aiBusy = false;
+      if (btn) { btn.disabled = false; btn.textContent = 'AI 摘要'; }
     }
   }
 
@@ -296,7 +363,7 @@ window.Detail = (function () {
       const act = btn.dataset.act;
       const it = currentItem();
       if (act === 'fav') { $('#detailFav').click(); return; }
-      if (act === 'ai') { aiSummarize(); return; }
+      if (act === 'ai' || act === 'ai-retry') { aiSummarize(); return; }
       if (act === 'trans') {
         const cur = currentItem();
         if (cur && transOf(cur.id)) {
